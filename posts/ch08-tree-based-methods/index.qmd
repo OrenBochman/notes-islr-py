@@ -1,0 +1,305 @@
+---
+title: "Chapter 8: Trees"
+description: "About the book, datasets and notation"
+categories: [notes,edx]
+keywords: ["Trees", "Decision Trees", "Classification and Regression Trees", "CART", "Bagging", "Boosting", "Random Forests", "BART", "Bayesian Additive Regression Trees"]
+---
+
+:::: {.callout-note collapse="false"}
+## Tree based methods Video {.unnumbered}
+
+::: {#fig-8.1 .column-margin}
+{{< video https://youtu.be/QNnayf--_yk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+Tree based methods
+:::
+
+Outline of [first video](#fig-8.1)
+
+1.  Introduction
+    -   Tree-based methods are supervised learning algorithms that stratify the predictor space to make predictions.
+    -   They are called decision trees because of their branching structure.
+    -   The CART (Classification and Regression Trees) algorithm is a popular example of a tree-based method.
+    -   Trees are simple to interpret but may not be as competitive as other methods in terms of prediction accuracy.
+    -   Ensembles of trees, such as bagging, boosting, and random forests, can improve prediction performance.
+2.  Decision Trees
+    -   Example: Predicting baseball player salary based on years in the league and hits per season.
+    -   Process:
+    -   The data is split into regions based on predictor values.
+    -   Each region is assigned a prediction, typically the average response value for observations in that region.
+    -   Splits are chosen to minimize the variation of observations within each region.
+    -   Terminology:
+    -   Internal nodes: Nodes that are further split.
+    -   Terminal nodes (leaves): Nodes that are not further split.
+    -   Interpretation: The tree structure itself represents the model.
+3.  Tree Growing Algorithm
+    -   Greedy approach:
+        -   Starts with the full dataset.
+        -   Finds the best split (predictor and split point) to minimize the variation within each resulting region.
+        -   Repeats the process for each resulting region until a stopping criterion is met.
+    -   Stopping criteria:
+        -   Predefined number of nodes.
+        -   Minimum number of observations in a node.
+        -   Other criteria based on model complexity or performance.
+4.  Challenges and Limitations
+    -   Overfitting: Trees can be prone to overfitting the training data, leading to poor generalization performance.
+    -   Instability: Small changes in the training data can lead to large changes in the tree structure.
+    -   Limited flexibility: Trees can struggle to capture complex relationships between predictors and the response.
+5.  Ensembles of Trees
+    -   Bagging: Creates multiple trees using bootstrap samples of the training data and averages their predictions.
+    -   Boosting: Creates a sequence of trees, where each tree focuses on correcting the errors of the previous trees.
+    -   Random forests: Creates multiple trees using random subsets of predictors at each split.
+6.  Conclusion
+    -   Tree-based methods are versatile and interpretable tools for supervised learning.
+    -   Ensembles of trees can significantly improve prediction accuracy.
+    -   Further research is ongoing to develop more robust and efficient tree-based methods.
+::::
+
+:::: {.callout-note collapse="false"}
+## More details on Trees {.unnumbered}
+
+::: {#fig-8.2 .column-margin}
+{{< video https://youtu.be/JaoTOfTNOVk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+More details on Trees
+:::
+
+Outline of [second video](#fig-8.2)
+
+-   The process of building a tree and making predictions
+-   The question of how large should the tree be
+-   The cost complexity pruning
+-   The summary of the tree growing algorithm
+-   The result of cross validation
+::::
+
+:::: {.callout-note collapse="false"}
+## Classification Trees {.unnumbered}
+
+::: {#fig-8.3 .column-margin}
+{{< video https://youtu.be/gLcfKSMKOb0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+Classification Trees
+:::
+
+Outline of [third video](#fig-8.3)
+
+-   Introduction
+    -   Regression trees are used when the response is quantitative.
+    -   Classification trees are used when the response is a categorical variable.
+    -   The technology is very similar, but the loss function and how to measure good performance are different.
+-   Classification Trees
+    -   Each observation is classified to the most commonly occurring class in the terminal node.
+    -   The tree is grown in the same way as for regression trees.
+    -   The criterion for making the splits is different.
+    -   One criterion is the classification error rate.
+    -   Another criterion is the Gini index, which is a measure of variability across the classes.
+    -   The deviance or cross-entropy is another criterion that is similar to the Gini index.
+-   Example: Heart Data
+    -   The heart data has a binary response called HD.
+    -   There are 303 patients.
+    -   There are 13 predictors.
+    -   A tree was grown using cross-validation.
+    -   The full tree is quite bushy.
+    -   The pruned tree has a size of 6.
+    -   The classification performance of the pruned tree is 25%.
+-   Comparison of Trees and Linear Models
+    -   Trees are not always the best method.
+    -   Linear models are better for some problems.
+    -   Trees are better for other problems.
+    -   Advantages and Disadvantages of Trees
+-   Advantages:
+    -   Simple to understand.
+    -   Can handle qualitative predictors.
+-   Disadvantages:
+    -   Do not predict as well as more state-of-the-art methods.
+-   Ensemble Methods
+    -   Ensemble methods combine trees to improve prediction accuracy.
+    -   One example of an ensemble method is random forests.
+::::
+
+:::: {.callout-note collapse="false"}
+## Bagging {.unnumbered}
+
+::: {#fig-8.4 .column-margin}
+{{< video https://youtu.be/_cKAxjnInfA?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+Bagging
+:::
+
+Outline of [fourth video](#fig-8.4)
+
+-   Introduction
+    -   Bagging is a method of using trees to improve their prediction error.
+    -   It involves creating multiple trees and averaging their predictions.
+    -   The idea was proposed by Leo Breiman.
+-   Bagging Process
+    -   Bootstrap samples are drawn from the training set with replacement.
+    -   A tree is grown on each bootstrap sample.
+    -   The predictions of all trees are averaged to obtain the final prediction.
+-   Advantages of Bagging
+    -   Reduces variance by averaging multiple trees.
+    -   Can be applied to both regression and classification problems.
+    -   No need to prune trees.
+-   Out-of-Bag Error
+    -   A free method for estimating the test error.
+    -   Uses observations not included in the bootstrap sample to predict their values.
+    -   Provides an estimate of leave-one-out cross-validation.
+-   Random Forests
+    -   An extension of bagging that further reduces correlation between trees.
+    -   At each split, only a random subset of predictors is considered.
+    -   Improves prediction accuracy over bagging.
+-   Example: Heart Data
+    -   Compares the performance of bagging and random forests on the heart data.
+    -   Shows that random forests can slightly improve prediction accuracy over bagging.
+-   Example: Gene Expression Data
+    -   Applies random forests to a high-dimensional gene expression dataset.
+    -   Demonstrates the effectiveness of random forests in classifying cancer types.
+    -   Highlights the importance of pre-screening genes using variance.
+-   Conclusion
+    -   Bagging and random forests are powerful methods for improving tree-based predictions.
+    -   They are widely used in various applications.
+    -   Out-of-bag error provides a convenient way to estimate test error.
+::::
+
+:::: {.callout-note collapse="false"}
+## Boosting {.unnumbered}
+
+::: {#fig-8.5 .column-margin}
+{{< video https://youtu.be/cdl4C2eCOHk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+Boosting
+:::
+
+Outline of [fifth video](#fig-8.5)
+
+Statistical Learning: 8.5 Boosting
+
+-   Boosting
+    -   Sequential method
+    -   Builds on previous trees to improve performance
+    -   Fits trees to residuals
+    -   Shrinks trees to avoid overfitting
+    -   Effective with smaller trees
+-   Tuning Parameters
+    -   Depth of the tree (d)
+        -   d=1: stump (single split)
+        -   Larger d: allows interactions between predictors
+    -   Number of trees (B)
+        -   Typically not a critical parameter
+    -   Shrinkage parameter (lambda)
+        -   Controls the amount each tree is added to the model
+-   Variable Importance
+    -   Measures the total drop in RSS for a given predictor over all splits in the tree
+    -   Provides a qualitative ranking of variable importance
+-   Summary
+    -   Ensembles of trees can improve prediction accuracy
+    -   Random forests and boosting are state-of-the-art techniques for supervised learning
+    -   Interpretation can be more challenging with ensembles
+::::
+
+:::: {.callout-note collapse="false"}
+## BART - Bayesian Additive Regression Trees {.unnumbered}
+
+::: {#fig-8.6 .column-margin}
+{{< video https://youtu.be/xWhPwHZF4c0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+BART: Bayesian Additive Regression Trees
+:::
+
+Outline of [sixth video](#fig-8.6)
+
+-   Introduction
+
+    -   What is BART?
+    -   Ensemble method using decision trees as building blocks
+    -   Similar to random forests and boosting
+
+-   BART Algorithm:
+
+    -   Number of Trees (k): Determines the number of trees in the ensemble.
+
+    -   Number of Iterations (b): Controls the number of times each tree is perturbed.
+
+    -   Perturbations:
+
+        -   Adding branches
+
+        -   Deleting branches
+
+        -   Changing predicted values at terminal nodes
+
+    -   Prediction: Averaging predictions from all trees and iterations after a burn-in period.
+
+-   Comparison with Other Methods
+
+    -   Bagging and Random Forests: Similar in using random samples to build trees.
+    -   Boosting: Similar in using residuals to guide tree construction.
+    -   Differences: BART uses perturbations to modify existing trees instead of building new trees from scratch.
+    -   Chain Monte Carlo (MCMC) method
+
+-   Example: Heart Data
+
+    -   Compare BART with boosting and random forest
+    -   BART shows slower training error but competitive test error
+    -   Less prone to overfitting than boosting
+    -   Choosing Parameters
+        -   Number of trees (k)
+        -   Number of iterations (b)
+        -   Burn-in period (l)
+    -   Reasonable choices: k = 200, b = 1000, l = 100
+
+-   Advantages of BART
+
+    -   Works well out-of-the-box without much tuning
+    -   Provides uncertainty estimates (quantiles)
+
+-   Conclusion
+
+    -   BART is a powerful ensemble method for regression
+    -   Combines features of random forests and boosting
+    -   Provides a flexible and robust approach to regression problems
+::::
+
+:::: {.callout-note collapse="false"}
+## Python lab on Tree-Based Methods {.unnumbered}
+
+::: {#fig-8.7 .column-margin}
+{{< video https://youtu.be/AVTfC5WnDTo?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
+
+Python lab on Tree-Based Methods
+:::
+
+Outline of [seventh video](#fig-8.7)
+
+-   Introduction:
+    -   Overview of tree-based methods
+    -   Focus on random forest and boosting
+    -   Introduction of single tree-based method
+-   Imports:
+    -   Import necessary libraries
+-   Decision Tree Regression
+    -   Fitting a regression decision tree
+    -   Data set: Boston data set
+    -   Pre-processing: feature selection
+    -   Validation: split data into training and test sets
+    -   Visualizing the decision tree
+    -   Evaluating accuracy: mean squared error
+-   Ensemble Methods:
+    -   Bagging and Random Forest
+    -   Difference between bagging and random forest
+    -   Fitting a random forest regressor
+    -   Evaluating accuracy
+    -   Increasing the number of trees
+    -   Feature importance
+-   Boosting:
+    -   Difference between boosting and random forest
+    -   Fitting a boosting regressor
+    -   Evaluating accuracy
+    -   Plotting training and test error
+    -   Tuning parameters
+-   Conclusion:
+    -   Summary of tree-based methods
+    -   Comparison of random forest and boosting
+::::
+

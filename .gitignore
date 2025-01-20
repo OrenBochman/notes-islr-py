@@ -1,0 +1,13 @@
+/.quarto/
+/_site/
+/.venv/
+/posts/labs/data/
+/posts/labs/_jupyter_notebooks/
+/posts/labs/*_cache/
+/posts/labs/.[dg]*
+/_freeze/
+lightning_logs/
+logs/
+data/
+.jupyter_cache
+*_cache

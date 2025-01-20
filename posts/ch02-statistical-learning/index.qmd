@@ -1,0 +1,246 @@
+---
+title: "Chapter 2: Statistical Learning"
+description: "What is this books about!?"
+categories: [notes,edx]
+keywords: [statistical learning, prediction, inference, parametric, non-parametric, overfitting, bias-variance trade-off, Bayes classifier, K-nearest neighbors classifier]
+---
+
+::: {#fig-v2.1 .column-margin}
+{{< video https://youtu.be/ox0cKk7h4o0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Introduction to Regression Models
+:::
+
+::: {#fig-v2.2 .column-margin}
+{{< video https://youtu.be/uFwbrdvrAJs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Dimensionality and Structured Models
+:::
+
+::: {#fig-v2.3 .column-margin}
+{{< video https://youtu.be/pvcEQfcO3pk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Introduction to Regression Models
+:::
+
+::: {#fig-v2.4 .column-margin}
+{{< video https://youtu.be/BMJQ3LQ_QKU?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Classification
+:::
+
+::: {#fig-v2.5 .column-margin}
+{{< video https://youtu.be/L03A81OgLlk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Lab: Introduction to R
+:::
+
+::: {.callout-tip}  
+
+## TL;DR - Statistical Learning in a Nutshell {.unnumbered}
+
+![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
+
+Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+:::
+
+The chapter is 53 pages long and covers the following topics:
+
+- What Is Statistical Learning?
+- Why Estimate $f$ ?
+- How Do We Estimate $f$ ?
+- The Prediction Accuracy Trade-Off 
+- Model Interpretability
+- Supervised Versus Unsupervised Learning
+- Regression Versus Classification Problems 
+- Assessing Model Accuracy 
+  - Measuring the Quality of Fit 
+  - The Bias-Variance Trade-Off 
+- The Classification Setting
+- [Lab: Introduction to Python](Ch02-statlearn-lab.qmd)
+
+
+##  Key Terms in Statistical Learning and Machine Learning
+
+Statistical Learning
+: A set of tools for understanding data and building models that can be used for prediction or inference.
+
+Input Variables
+: Predictors or features, denoted by X, used to predict the output variable.
+
+Output Variable
+: The response or dependent variable, denoted by Y, being predicted.
+
+Error Term
+: Represents the random variation in the output variable not explained by the input variables. Denoted by ε.
+
+Prediction
+: Using a statistical learning model to accurately predict the output variable for new observations based on their input values.
+
+Inference
+: Understanding the relationship between input and output variables, identifying important predictors, and quantifying their effects.
+
+Parametric Methods
+: Model-based approaches that assume a specific functional form for f and estimate its parameters using training data. Examples include linear regression and logistic regression.
+
+Non-parametric Methods
+: Flexible approaches that do not pre-specify a functional form for f and estimate it directly from the data. Examples include K-nearest neighbors and splines.
+
+Overfitting
+: Occurs when a model is too flexible and fits the training data too closely, leading to poor generalization to new data.
+
+Bias
+: Error resulting from incorrect assumptions about the true functional form of f.
+
+Variance
+: The amount by which the estimated function f̂ changes when trained on different training datasets.
+
+Bias-Variance Trade-off
+: The balance between model bias and variance, where more flexible models have higher variance but lower bias, and vice versa.
+
+Cross-validation
+: A technique for evaluating a model's performance by splitting the data into multiple folds and using each fold for training and testing, providing a more robust estimate of test error.
+
+Bayes Classifier
+: A theoretical classifier that assigns each observation to the class with the highest conditional probability given its predictor values, achieving the lowest possible test error rate (Bayes error rate).
+
+K-nearest Neighbors (KNN)
+: A non-parametric classification method that finds the K nearest neighbors to a test observation in the training data and estimates the conditional probability for each class based on the proportion of neighbors belonging to that class.
+
+
+## Chapter summary
+
+1. What is Statistical Learning?
+
+**Statistical learning** uses data to learn about relationships between input variables (predictors) and an output variable (response). This relationship can be expressed as:
+
+$$
+Y = f(X) + ε
+$$
+
+where:
+
+   - $Y$ is the response variable.
+   - $X$ represents the predictors $(X_1, X_2,..., X_p)$.
+   - $f(X)$ is the unknown function capturing the systematic relationship between X and Y.
+   - $ε$ is a random error term with a mean of zero, independent of $X$.
+
+Statistical learning aims to estimate the function $f(X)$ from observed data, enabling:
+
+   - **Prediction**: Using the estimated function $(f̂)$ to predict $Y$ for new values of $X$:
+
+$$
+Ŷ = f̂(X)
+$$
+
+   - The accuracy of prediction is influenced by reducible error (due to imperfections in estimating f) and irreducible error (due to the inherent randomness represented by $ε$).
+
+   - **Inference**: Understanding the relationship between predictors and response. This involves determining which predictors are most important, quantifying the strength of the relationship, and exploring the nature of the association.
+
+2. Estimating $f(X)$
+
+There are two main approaches to estimating the function $f(X)$:
+
+   - **Parametric Methods**: Assume a specific functional form for $f(X)$, like a linear model:
+$$
+f(X) = β_0 + β_1X_1 + β_2X_2 + ... + β_pX_p
+$$
+
+   - This simplifies the problem to estimating the model's parameters ($β$s). However, parametric methods may be inaccurate if the assumed form doesn't match the true relationship.
+   
+   - **Non-Parametric Methods**: Don't assume a specific form for $f(X)$, allowing for more flexibility. They try to fit the data as closely as possible while maintaining smoothness. Examples include thin-plate splines. These methods require careful tuning to prevent overfitting, where the model fits the training data perfectly but performs poorly on new data.
+
+3. Assessing Model Accuracy
+The choice of a suitable statistical learning method and its flexibility depends on the bias-variance trade-off:
+
+   - **Bias**: Measures how much the estimated function $(f̂)$ deviates from the true function $(f)$ on average. Inflexible methods tend to have higher bias.
+
+   - **Variance**: Quantifies the sensitivity of $f̂$ to changes in the training data. More flexible methods typically exhibit higher variance.
+   - The goal is to find the balance between bias and variance that minimizes the expected test error.
+
+4. Supervised vs. Unsupervised Learning
+
+   - **Supervised Learning**: Uses labeled data, where the response variable $(Y)$ is known for each observation. Examples include regression and classification problems.
+
+   - **Unsupervised Learning**: Deals with unlabeled data, where the response variable is unknown. Techniques like clustering aim to identify groups or patterns in the data.
+
+5. Classification
+
+Classification problems involve predicting a qualitative (categorical) response variable. One common metric to assess the performance of classifiers is the error rate, which measures the proportion of incorrect predictions.
+
+   - **Bayes Classifier**: A theoretical classifier that assigns each observation to the most likely class based on its predictors. It achieves the lowest possible error rate (Bayes error rate). However, the Bayes classifier is typically unattainable in practice, as it requires knowing the true conditional distribution of Y given X.
+
+   - **K-Nearest Neighbors** (KNN): A non-parametric classification method that estimates the conditional probability for each class by considering the closest K training observations to a test point. KNN requires selecting an appropriate value for K, balancing flexibility and overfitting.
+
+6. Python for Statistical Learning
+
+The chapter introduces basic Python commands and data manipulation techniques using libraries like NumPy and Pandas. It covers:
+
+   - Importing libraries, defining arrays and matrices, computing basic statistics, and generating random data.
+   - Creating various plots (scatter plots, contour plots, heatmaps) using Matplotlib.
+   - Subsetting and indexing data frames, handling missing values, using for loops and lambdas for data manipulation.
+
+These tools provide a foundation for applying statistical learning methods in practice.
+
+
+## Statistical Learning - Test Your Understanding!
+
+1. What is the fundamental goal of statistical learning?
+1. Differentiate between the input and output variables in a statistical learning model.
+1. What is the role of the error term in the general form of the statistical learning model?
+1. Explain the difference between prediction and inference in the context of statistical learning.
+1. Describe the two main steps involved in parametric methods for estimating f.
+1. What is a key advantage and a key disadvantage of non-parametric methods compared to parametric methods?
+1. How does the concept of overfitting relate to the choice of flexibility in a statistical learning method?
+1. Explain the bias-variance trade-off and its impact on model selection.
+1. What is the Bayes classifier and why is it considered a gold standard in classification problems?
+1. How does the K-nearest neighbors (KNN) classifier work?
+
+### Answer Key
+
+1. The fundamental goal of statistical learning is to use a set of data to learn a function (f) that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used for prediction or inference.
+
+1. Input variables, also known as predictors or features, are the variables used to predict the output variable. They are denoted by X. The output variable, also known as the response, is the variable being predicted, denoted by Y.
+
+1. The error term (ε) represents the random variation in the output variable that cannot be explained by the input variables. It accounts for the inherent uncertainty and noise in the data.
+
+1. Prediction focuses on accurately predicting the output variable (Y) for new observations based on their input values (X), often treating the model as a black box. Inference aims to understand the relationship between the input variables and the output variable, focusing on identifying important predictors and their effects on the response.
+
+1. First, parametric methods assume a specific functional form for f, such as linear. Second, they estimate the parameters of the assumed function using the training data. For example, in a linear model, the parameters are the coefficients.
+
+1. Non-parametric methods are more flexible and can capture complex relationships in the data without pre-specifying a functional form for f. However, this flexibility can lead to overfitting, where the model fits the training data too closely and performs poorly on new data.
+
+1. Overfitting occurs when a model is too flexible and captures noise in the training data instead of the underlying signal. This results in high training accuracy but poor generalization to new data. Choosing an appropriate level of flexibility helps avoid overfitting.
+
+1. The bias-variance trade-off refers to the balance between model bias (error from wrong assumptions about f) and variance (sensitivity to fluctuations in the training data). More flexible models have higher variance but lower bias, while less flexible models have lower variance but higher bias. Finding the optimal balance minimizes test error.
+
+1. The Bayes classifier assigns each observation to the class with the highest conditional probability given its predictor values. It achieves the lowest possible test error rate (Bayes error rate) but is unattainable in practice because the true conditional probability distribution is unknown.
+
+1. The KNN classifier finds the K nearest neighbors to a test observation in the training data based on a distance metric. It then estimates the conditional probability for each class based on the proportion of neighbors belonging to that class and classifies the test observation to the class with the highest estimated probability.
+
+## Essay Questions
+
+1. Discuss the differences between supervised and unsupervised learning, providing real-world examples of each.
+
+   **Supervised learning** is the problem setting in which we have labels on the data. The label are not so much can be a category, a number.  
+    Our model will be shooting an arrow at a know target so it is easier to evaluate the model. This type of problems are broken into regression, classification, survival analysis, and time series analysis, and when learning from exprerience it becomes reinforcement learning. 
+
+   In unsupervised learning we don't have labels. Although we don't have a target, this data is much easier to collect as labeling the data requires a significant effort and is often error prone. Typical problems are clustering, dimensionality reduction, and association rule learning. However many problems in natural language processing are unsupervised. 
+
+   Another point is that the distinction isn't so clear today we have **semi-supervised learning** where we have a small amount of labeled data and a large amount of unlabeled data. For example, LLM are pretrained on unsupervised data and then fine-tuned on supervised data. 
+
+1. Explain the concepts of reducible and irreducible error in statistical learning. How do these errors relate to the concept of the Bayes error rate?
+
+1. Compare and contrast parametric and non-parametric methods for estimating f. What are the advantages and disadvantages of each approach? Provide specific examples of methods from each category.
+
+1. Describe the concept of cross-validation. Why is it important, and how can it be used to improve model selection and assessment?
+
+1. Discuss the challenges and considerations in choosing an appropriate level of flexibility for a statistical learning method. How does the bias-variance trade-off guide this decision? Explain the consequences of choosing a model that is too flexible or not flexible enough.
+
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch02.pdf.pdf){.col-page width="800px" height="1000px"}

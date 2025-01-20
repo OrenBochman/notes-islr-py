@@ -1,0 +1,29 @@
+# options specified here will apply to all posts in this folder
+author: "Oren Bochman"
+page-layout: article
+bibliography: ../references.bib
+lightbox: true
+image: ../images/nlp-brain-wordcloud.jpg
+image-placeholder: {{< placeholder 400 200 format=svg >}}
+title-block-banner: ../images/banner_black_3.jpg
+license: "CC SA BY-NC-ND"
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+freeze: true
+# Enable banner style title blocks
+# Table of content settings
+toc: true
+toc-depth: 3
+toc-title: Table of contents
+toc-location: left
+code-annotations: hover
+reference-location: document
+citation-location: document
+citation: true
+## render errors (i.e. don't stop on error)
+execute:
+  error: true
+comments: 
+  utterances: 
+    repo:  OrenBochman/blogComments 
+

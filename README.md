@@ -1,1 +1,1 @@
-# notes-islr-py
+# notes-isl-py

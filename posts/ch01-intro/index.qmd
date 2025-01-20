@@ -1,0 +1,46 @@
+---
+title: "Chapter 1: Introduction"
+description: "About the book, datasets and notation"
+categories: [notes,edx]
+keywords: ["Introduction", "Statistical Learning", "ISL", "ESL", "Statistical Learning vs Machine Learning"]
+---
+
+::: {#fig-v1.1 .column-margin}
+{{< video https://youtu.be/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Opening Remarks
+:::
+
+::: {#fig-v1.2 .column-margin}
+{{< video https://youtu.be/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Examples and Framework
+:::
+
+1. This chapter doen't have a lab and is a bit dull. 
+1. The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.
+1. IBM's Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.
+1. A second story they mention is **Nate Silver**'s Five Thirty Eight site for prediction of the  presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a "rock star". It's worth mentioning though that predicing elections is isn't hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980.  And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.
+
+1. **Spam Detection** - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn't somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.
+1. It covers the three of the datasets used in the book.
+    1. Wage data
+    2. Stock market data
+    3. Gene Expression Data
+1. ISL [@ISL] is an introduction text. [@ESL] is the more comprehensive text.
+1. Statistical learning is the author's preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.
+
+
+## Premises:
+
+- Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.
+- While it is important to know what job is performed by each cog, it is
+not necessary to have the skills to construct the machine inside the
+box!
+- The readers are interested in applying the methods to real-world problems.
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch01.pdf){.col-page width="800px" height="1000px"}

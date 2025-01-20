@@ -1,0 +1,20 @@
+---
+title: "Chapter 10: Deep Learning"
+description: "Deep learning is a subfield of machine learning that is concerned with algorithms inspired by the structure and function of the brain called artificial neural networks."
+keywords: ["Deep Learning", "Neural Networks", "Deep Learning with Python", "Keras", "TensorFlow", "Deep Learning for Computer Vision", "Deep Learning for Natural Language Processing"]
+categories: [notes,edx]
+---
+
+
+::: {#fig-v1.1 .column-margin}
+{{< video https://youtu.be/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Opening Remarks
+:::
+
+::: {#fig-v1.2 .column-margin}
+{{< video https://youtu.be/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Examples and Framework
+:::
+

@@ -1,0 +1,34 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/ch13-multiple-testing/Ch13-multiple-lab.html",
+      "/posts/ch06-model-selection-and-regularization/Ch06-varselect-lab.html",
+      "/posts/ch01-intro/index.html",
+      "/posts/ch11-survival-analysis-and-censored-data/index.html",
+      "/posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab.html",
+      "/posts/ch07-beyond-linearity/Ch07-nonlin-lab.html",
+      "/posts/ch12-unsupervised-learning/index.html",
+      "/posts/ch12-unsupervised-learning/Ch12-unsup-lab.html",
+      "/posts/ch10-deep-learning/index.html",
+      "/posts/ch10-deep-learning/Ch10-deeplearning-lab.html",
+      "/posts/ch09-svm/index.html",
+      "/posts/ch09-svm/Ch09-svm-lab.html",
+      "/posts/ch08-tree-based-methods/Ch08-baggboost-lab.html",
+      "/posts/ch08-tree-based-methods/index.html",
+      "/posts/ch03-linear-regression/index.html",
+      "/posts/ch06-model-selection-and-regularization/index.html",
+      "/posts/ch07-beyond-linearity/index.html",
+      "/posts/ch05-resampling-methods/index.html",
+      "/posts/ch04-classification/index.html",
+      "/posts/ch02-statistical-learning/Ch02-statlearn-lab.html",
+      "/posts/ch02-statistical-learning/index.html",
+      "/posts/ch04-classification/Ch04-classification-lab.html",
+      "/posts/ch03-linear-regression/Ch03-linreg-lab.html",
+      "/posts/ch05-resampling-methods/Ch05-resample-lab.html",
+      "/posts/ch13-multiple-testing/index.html",
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html"
+    ]
+  }
+]

@@ -1,0 +1,124 @@
+---
+title: "Chapter 4: Classification"
+description: "When the labels are categorical, we are faced with a classification problem. In this chapter, we discuss the tools and techniques used to solve classification problems."
+categories: [notes,edx]
+keywords: [statistical learning, classification, logistic regression, discriminant analysis, naive bayes, generalized linear models, model assessment, model selection]
+---
+
+
+::: {#fig-v4.1 .column-margin}
+{{< video https://youtu.be/ju3J7iRy6xI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Introduction to Classification Problems
+:::
+
+
+::: {#fig-v4.2 .column-margin}
+{{< video https://youtu.be/kr_Be9NVXOM?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Logistic Regression
+:::
+
+
+::: {#fig-v4.3 .column-margin}
+{{< video https://youtu.be/1uJVE8bkabc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Multivariate Logistic Regression
+:::
+
+
+::: {#fig-v4.4 .column-margin}
+{{< video https://youtu.be/sYDDk6R-be0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Logistic Regression Case Control Sampling and Multiclass
+:::
+
+
+::: {#fig-v4.5 .column-margin}
+{{< video https://youtu.be/oJc2r246VoQ?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Discriminant Analysis
+:::
+
+
+::: {#fig-v4.6 .column-margin}
+{{< video https://youtu.be/14JVlzWHKgk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Gaussian Discriminant Analysis (One Variable)
+:::
+
+
+::: {#fig-v4.7 .column-margin}
+{{< video https://youtu.be/aUlTqhDtpnw?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Gaussian Discriminant Analysis (Many Variables)
+:::
+
+
+::: {#fig-v4.8 .column-margin}
+{{< video https://youtu.be/n8Nj64FyjSo?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Generalized Linear Models
+:::
+
+
+::: {#fig-v4.9 .column-margin}
+{{< video https://youtu.be/giCZkipHEmA?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Quadratic Discriminant Analysis and Naive Bayes
+:::
+
+
+::: {#fig-v4.10 .column-margin}
+{{< video https://youtu.be/QEUtuHSipNE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+R Lab: Logistic Regression 
+:::
+
+
+::: {#fig-v4.11 .column-margin}
+{{< video https://youtu.be/WXhku-ISml8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+R Lab: Linear Discriminant Analysis 
+:::
+
+::: {#fig-v4.11 .column-margin}
+{{< video https://youtu.be/JRxKBj5ArgU?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+R Lab: Nearest Neighbor Classification
+:::
+
+The chapter is 65 pages long and covers the following topics:
+
+- Classification 
+    - An Overview of Classification
+    - Why Not Linear Regression?
+    - Logistic Regression
+        - The Logistic Model
+        - Estimating the Regression Coefficients
+        - Making Predictions
+        - Multiple Logistic Regression 
+        - Multinomial Logistic Regression 
+    - Generative Models for Classification 
+        - Linear Discriminant Analysis 
+        - Quadratic Discriminant Analysis 
+        - Naive Bayes
+    - A Comparison of Classification Methods 
+        - An Analytical Comparison 
+        - An Empirical Comparison 
+    - Generalized Linear Models
+        - Linear Regression on the Bikeshare Data 
+        - Poisson Regression on the Bikeshare Data 
+        - Generalized Linear Models in Greater Generality
+    - Lab: Logistic Regression, LDA, QDA, and KNN 
+
+::: {.callout-tip}  
+
+## TL;DR - Statistical Learning in a Nutshell {.unnumbered}
+
+![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
+
+Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+:::
+
+{{< lipsum >}}

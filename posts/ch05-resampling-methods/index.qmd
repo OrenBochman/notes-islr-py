@@ -1,0 +1,102 @@
+---
+title: "Chapter 5: Resampling Methods"
+description: "Resampling methods are an indispensable in the age of big data statistics"
+keywords: [statistical learning, resampling methods, cross-validation, bootstrap, permutation tests, jackknife]
+categories: [notes,edx]
+---
+
+
+::: {#fig-v5.1 .column-margin}
+{{< video https://youtu.be/6eWODQJrMKs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Cross Validation
+:::
+
+::: {#fig-v5.2 .column-margin}
+{{< video https://youtu.be/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+K-fold Cross Validation
+:::
+
+::: {#fig-v5.3 .column-margin}
+{{< video https://youtu.be/jgoa28FR__Y?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Cross Validation the wrong and right way
+:::
+
+::: {#fig-5.4 .column-margin}
+{{< video https://youtu.be/h_LweqiIotE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+K-fold Cross Validation
+:::
+
+::: {#fig-5.5 .column-margin}
+{{< video https://youtu.be/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+More on the Bootstrap
+:::
+
+::: {#fig-5.6 .column-margin}
+{{< video https://youtu.be/nwD-03ncOZ8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Lab: Cross Validation
+:::
+
+::: {#fig-5.7 .column-margin}
+{{< video https://youtu.be/sM_Gve1K4II?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Lab: Bootstrap
+:::
+
+## Summary of Resampling Methods
+
+In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.
+
+Central Theme: Resampling methods offer robust techniques to estimate the performance of statistical learning methods and quantify uncertainty associated with estimations. This is achieved by repeatedly drawing samples from the training data and refitting models on these samples.
+
+Key Concepts and Methods
+
+1. **Validation Set Approach**: This approach involves splitting the dataset into a training set and a validation set. The model is trained on the training set, and its performance (e.g., using MSE for regression problems) is evaluated on the validation set.
+- Drawbacks:
+    - High variability in test error estimates depending on the random split.
+    - Reduced sample size for training as only the training set is used.
+    - Example: Using the Auto dataset, the sources demonstrate that a quadratic fit performs better than a linear fit for predicting 'mpg' based on 'horsepower'.
+1. **Cross-Validation**: addresses the limitations of the validation set approach. It involves dividing the data into 'K' folds and iteratively using one fold for validation and the rest for training. This provides more stable performance estimates.
+    - Leave-One-Out Cross-Validation (LOOCV): A special case where K equals the number of observations. Each observation is held out once for validation.
+        - Benefits: Less bias in test error estimates.
+        - Drawbacks: High variance due to high correlation between the training sets.
+    - k-Fold Cross-Validation: A more general approach where K is typically 5 or 10, balancing bias and variance.
+        - Example: Using the Auto dataset, k-fold cross-validation confirms the superiority of the quadratic fit over the linear fit.
+1. **The Bootstrap**: is used to quantify uncertainty in an estimator. It involves generating multiple 'bootstrap' datasets by sampling with replacement from the original data. The statistic of interest is calculated for each bootstrap dataset, creating a distribution from which standard errors and confidence intervals can be derived.
+    - Example: Simulating investment returns for assets X and Y, the sources illustrate how the bootstrap can be used to estimate the standard error of the optimal investment allocation (α).
+
+1. **Bootstrap Applications**:
+    - **Estimating Standard Errors**: The bootstrap provides an alternative way to calculate standard errors for complex estimators where analytical formulas may not be available.
+    - **Confidence Intervals**: Approximate confidence intervals can be derived from the distribution of bootstrap estimates.
+    - **Prediction Error Estimation**: While the bootstrap is mainly used for standard error and confidence interval calculations, it's not ideal for directly estimating prediction error due to the overlap in training data between bootstrap samples.
+
+## Important Considerations
+
+- Cross-validation for classification: When dealing with classification problems, the metric used for evaluating performance is typically the misclassification rate instead of MSE.
+- Choosing K: The choice of K in k-fold cross-validation involves a bias-variance trade-off. K = 5 or K = 10 generally provides a good balance.
+- Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a 'fairer' version of the adaptive predictor that hasn't 'seen' the response variable.
+- Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.
+
+## Illustrative Quotes
+
+> "The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method."
+
+
+> "LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance."
+
+
+> "In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success."
+
+
+Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.
+
+
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch05.pdf){.col-page width="800px" height="1000px"}

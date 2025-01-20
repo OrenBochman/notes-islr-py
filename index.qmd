@@ -1,0 +1,19 @@
+---
+title: "An Introduction to Statistical Learning"
+image: images/nlp-brain-wordcloud.jpg
+image-placeholder: {{< placeholder 400 200 format=svg >}}
+title-block-banner: images/banner_black_3.jpg
+page-layout: full
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed:
+    categories: [notes, lab, podcast]
+
+---
+
+

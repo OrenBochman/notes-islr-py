@@ -1,0 +1,1924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>An Introduction to Statistical Learning</title>
+<link>https://orenbochman.github.io/notes-islr/#category=notes</link>
+<atom:link href="https://orenbochman.github.io/notes-islr/index-notes.xml" rel="self" type="application/rss+xml"/>
+<description>Personal website, portfolio and blog</description>
+<image>
+<url>https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg</url>
+<title>An Introduction to Statistical Learning</title>
+<link>https://orenbochman.github.io/notes-islr/#category=notes</link>
+</image>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Mon, 20 Jan 2025 23:40:23 GMT</lastBuildDate>
+<item>
+  <title>Chapter 1: Introduction</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch01-intro/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+<ol type="1">
+<li><p>This chapter doen’t have a lab and is a bit dull.</p></li>
+<li><p>The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.</p></li>
+<li><p>IBM’s Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.</p></li>
+<li><p>A second story they mention is <strong>Nate Silver</strong>’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a “rock star”. It’s worth mentioning though that predicing elections is isn’t hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
+<ol type="1">
+<li>Wage data</li>
+<li>Stock market data</li>
+<li>Gene Expression Data</li>
+</ol></li>
+<li><p>ISL <span class="citation" data-cites="ISL">(James et al. 2013)</span> is an introduction text. <span class="citation" data-cites="ESL">(Hastie, Tibshirani, and Friedman 2009)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ol>
+<section id="premises" class="level2">
+<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<ul>
+<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
+<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
+<li>The readers are interested in applying the methods to real-world problems.</li>
+</ul>
+</section>
+<section id="slides-and-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch01.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter"><embed src="ch01.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ESL" class="csl-entry">
+Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
+</div>
+<div id="ref-ISL" class="csl-entry">
+James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 1: {Introduction}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch01-intro/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 1: Introduction.”</span> January 21,
+2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch01-intro/">https://orenbochman.github.io/notes-islr/posts/ch01-intro/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch01-intro/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:40:23 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 11: Survival Analysis</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+<ol type="1">
+<li><p>This chapter doen’t have a lab and is a bit dull.</p></li>
+<li><p>The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.</p></li>
+<li><p>IBM’s Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.</p></li>
+<li><p>A second story they mention is <strong>Nate Silver</strong>’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a “rock star”. It’s worth mentioning though that predicing elections is isn’t hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
+<ol type="1">
+<li>Wage data</li>
+<li>Stock market data</li>
+<li>Gene Expression Data</li>
+</ol></li>
+<li><p>ISL <span class="citation" data-cites="ISL">(James et al. 2013)</span> is an introduction text. <span class="citation" data-cites="ESL">(Hastie, Tibshirani, and Friedman 2009)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ol>
+<section id="premises" class="level2">
+<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<ul>
+<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
+<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
+<li>The readers are interested in applying the methods to real-world problems.</li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ESL" class="csl-entry">
+Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
+</div>
+<div id="ref-ISL" class="csl-entry">
+James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 11: {Survival} {Analysis}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 11: Survival Analysis.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/">https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:40:01 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 12: Unsupervised Learning</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+<ol type="1">
+<li><p>This chapter doen’t have a lab and is a bit dull.</p></li>
+<li><p>The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.</p></li>
+<li><p>IBM’s Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.</p></li>
+<li><p>A second story they mention is <strong>Nate Silver</strong>’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a “rock star”. It’s worth mentioning though that predicing elections is isn’t hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
+<ol type="1">
+<li>Wage data</li>
+<li>Stock market data</li>
+<li>Gene Expression Data</li>
+</ol></li>
+<li><p>ISL <span class="citation" data-cites="ISL">(James et al. 2013)</span> is an introduction text. <span class="citation" data-cites="ESL">(Hastie, Tibshirani, and Friedman 2009)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ol>
+<section id="premises" class="level2">
+<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<ul>
+<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
+<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
+<li>The readers are interested in applying the methods to real-world problems.</li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ESL" class="csl-entry">
+Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
+</div>
+<div id="ref-ISL" class="csl-entry">
+James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 12: {Unsupervised} {Learning}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 12: Unsupervised Learning.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/">https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:35:14 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 10: Deep Learning</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 10: {Deep} {Learning}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 10: Deep Learning.”</span> January
+21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/">https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:32:11 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 9: Support Vector Machines</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch09-svm/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 9: {Support} {Vector} {Machines}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch09-svm/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 9: Support Vector Machines.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch09-svm/">https://orenbochman.github.io/notes-islr/posts/ch09-svm/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch09-svm/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:31:24 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 8: Trees</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tree based methods Video
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of first video</p>
+<ol type="1">
+<li>Introduction
+<ul>
+<li>Tree-based methods are supervised learning algorithms that stratify the predictor space to make predictions.</li>
+<li>They are called decision trees because of their branching structure.</li>
+<li>The CART (Classification and Regression Trees) algorithm is a popular example of a tree-based method.</li>
+<li>Trees are simple to interpret but may not be as competitive as other methods in terms of prediction accuracy.</li>
+<li>Ensembles of trees, such as bagging, boosting, and random forests, can improve prediction performance.</li>
+</ul></li>
+<li>Decision Trees
+<ul>
+<li>Example: Predicting baseball player salary based on years in the league and hits per season.</li>
+<li>Process:</li>
+<li>The data is split into regions based on predictor values.</li>
+<li>Each region is assigned a prediction, typically the average response value for observations in that region.</li>
+<li>Splits are chosen to minimize the variation of observations within each region.</li>
+<li>Terminology:</li>
+<li>Internal nodes: Nodes that are further split.</li>
+<li>Terminal nodes (leaves): Nodes that are not further split.</li>
+<li>Interpretation: The tree structure itself represents the model.</li>
+</ul></li>
+<li>Tree Growing Algorithm
+<ul>
+<li>Greedy approach:
+<ul>
+<li>Starts with the full dataset.</li>
+<li>Finds the best split (predictor and split point) to minimize the variation within each resulting region.</li>
+<li>Repeats the process for each resulting region until a stopping criterion is met.</li>
+</ul></li>
+<li>Stopping criteria:
+<ul>
+<li>Predefined number of nodes.</li>
+<li>Minimum number of observations in a node.</li>
+<li>Other criteria based on model complexity or performance.</li>
+</ul></li>
+</ul></li>
+<li>Challenges and Limitations
+<ul>
+<li>Overfitting: Trees can be prone to overfitting the training data, leading to poor generalization performance.</li>
+<li>Instability: Small changes in the training data can lead to large changes in the tree structure.</li>
+<li>Limited flexibility: Trees can struggle to capture complex relationships between predictors and the response.</li>
+</ul></li>
+<li>Ensembles of Trees
+<ul>
+<li>Bagging: Creates multiple trees using bootstrap samples of the training data and averages their predictions.</li>
+<li>Boosting: Creates a sequence of trees, where each tree focuses on correcting the errors of the previous trees.</li>
+<li>Random forests: Creates multiple trees using random subsets of predictors at each split.</li>
+</ul></li>
+<li>Conclusion
+<ul>
+<li>Tree-based methods are versatile and interpretable tools for supervised learning.</li>
+<li>Ensembles of trees can significantly improve prediction accuracy.</li>
+<li>Further research is ongoing to develop more robust and efficient tree-based methods.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.1" class="quarto-float quarto-figure quarto-figure-center anchored callout-1-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QNnayf--_yk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Tree based methods
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+More details on Trees
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of second video</p>
+<ul>
+<li>The process of building a tree and making predictions</li>
+<li>The question of how large should the tree be</li>
+<li>The cost complexity pruning</li>
+<li>The summary of the tree growing algorithm</li>
+<li>The result of cross validation</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.2" class="quarto-float quarto-figure quarto-figure-center anchored callout-2-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JaoTOfTNOVk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: More details on Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Classification Trees
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of third video</p>
+<ul>
+<li>Introduction
+<ul>
+<li>Regression trees are used when the response is quantitative.</li>
+<li>Classification trees are used when the response is a categorical variable.</li>
+<li>The technology is very similar, but the loss function and how to measure good performance are different.</li>
+</ul></li>
+<li>Classification Trees
+<ul>
+<li>Each observation is classified to the most commonly occurring class in the terminal node.</li>
+<li>The tree is grown in the same way as for regression trees.</li>
+<li>The criterion for making the splits is different.</li>
+<li>One criterion is the classification error rate.</li>
+<li>Another criterion is the Gini index, which is a measure of variability across the classes.</li>
+<li>The deviance or cross-entropy is another criterion that is similar to the Gini index.</li>
+</ul></li>
+<li>Example: Heart Data
+<ul>
+<li>The heart data has a binary response called HD.</li>
+<li>There are 303 patients.</li>
+<li>There are 13 predictors.</li>
+<li>A tree was grown using cross-validation.</li>
+<li>The full tree is quite bushy.</li>
+<li>The pruned tree has a size of 6.</li>
+<li>The classification performance of the pruned tree is 25%.</li>
+</ul></li>
+<li>Comparison of Trees and Linear Models
+<ul>
+<li>Trees are not always the best method.</li>
+<li>Linear models are better for some problems.</li>
+<li>Trees are better for other problems.</li>
+<li>Advantages and Disadvantages of Trees</li>
+</ul></li>
+<li>Advantages:
+<ul>
+<li>Simple to understand.</li>
+<li>Can handle qualitative predictors.</li>
+</ul></li>
+<li>Disadvantages:
+<ul>
+<li>Do not predict as well as more state-of-the-art methods.</li>
+</ul></li>
+<li>Ensemble Methods
+<ul>
+<li>Ensemble methods combine trees to improve prediction accuracy.</li>
+<li>One example of an ensemble method is random forests.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.3" class="quarto-float quarto-figure quarto-figure-center anchored callout-3-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gLcfKSMKOb0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Classification Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Bagging
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of fourth video</p>
+<ul>
+<li>Introduction
+<ul>
+<li>Bagging is a method of using trees to improve their prediction error.</li>
+<li>It involves creating multiple trees and averaging their predictions.</li>
+<li>The idea was proposed by Leo Breiman.</li>
+</ul></li>
+<li>Bagging Process
+<ul>
+<li>Bootstrap samples are drawn from the training set with replacement.</li>
+<li>A tree is grown on each bootstrap sample.</li>
+<li>The predictions of all trees are averaged to obtain the final prediction.</li>
+</ul></li>
+<li>Advantages of Bagging
+<ul>
+<li>Reduces variance by averaging multiple trees.</li>
+<li>Can be applied to both regression and classification problems.</li>
+<li>No need to prune trees.</li>
+</ul></li>
+<li>Out-of-Bag Error
+<ul>
+<li>A free method for estimating the test error.</li>
+<li>Uses observations not included in the bootstrap sample to predict their values.</li>
+<li>Provides an estimate of leave-one-out cross-validation.</li>
+</ul></li>
+<li>Random Forests
+<ul>
+<li>An extension of bagging that further reduces correlation between trees.</li>
+<li>At each split, only a random subset of predictors is considered.</li>
+<li>Improves prediction accuracy over bagging.</li>
+</ul></li>
+<li>Example: Heart Data
+<ul>
+<li>Compares the performance of bagging and random forests on the heart data.</li>
+<li>Shows that random forests can slightly improve prediction accuracy over bagging.</li>
+</ul></li>
+<li>Example: Gene Expression Data
+<ul>
+<li>Applies random forests to a high-dimensional gene expression dataset.</li>
+<li>Demonstrates the effectiveness of random forests in classifying cancer types.</li>
+<li>Highlights the importance of pre-screening genes using variance.</li>
+</ul></li>
+<li>Conclusion
+<ul>
+<li>Bagging and random forests are powerful methods for improving tree-based predictions.</li>
+<li>They are widely used in various applications.</li>
+<li>Out-of-bag error provides a convenient way to estimate test error.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.4" class="quarto-float quarto-figure quarto-figure-center anchored callout-4-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/_cKAxjnInfA?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Bagging
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Boosting
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of fifth video</p>
+<p>Statistical Learning: 8.5 Boosting</p>
+<ul>
+<li>Boosting
+<ul>
+<li>Sequential method</li>
+<li>Builds on previous trees to improve performance</li>
+<li>Fits trees to residuals</li>
+<li>Shrinks trees to avoid overfitting</li>
+<li>Effective with smaller trees</li>
+</ul></li>
+<li>Tuning Parameters
+<ul>
+<li>Depth of the tree (d)
+<ul>
+<li>d=1: stump (single split)</li>
+<li>Larger d: allows interactions between predictors</li>
+</ul></li>
+<li>Number of trees (B)
+<ul>
+<li>Typically not a critical parameter</li>
+</ul></li>
+<li>Shrinkage parameter (lambda)
+<ul>
+<li>Controls the amount each tree is added to the model</li>
+</ul></li>
+</ul></li>
+<li>Variable Importance
+<ul>
+<li>Measures the total drop in RSS for a given predictor over all splits in the tree</li>
+<li>Provides a qualitative ranking of variable importance</li>
+</ul></li>
+<li>Summary
+<ul>
+<li>Ensembles of trees can improve prediction accuracy</li>
+<li>Random forests and boosting are state-of-the-art techniques for supervised learning</li>
+<li>Interpretation can be more challenging with ensembles</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.5" class="quarto-float quarto-figure quarto-figure-center anchored callout-5-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/cdl4C2eCOHk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Boosting
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+BART - Bayesian Additive Regression Trees
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of sixth video</p>
+<ul>
+<li><p>Introduction</p>
+<ul>
+<li>What is BART?</li>
+<li>Ensemble method using decision trees as building blocks</li>
+<li>Similar to random forests and boosting</li>
+</ul></li>
+<li><p>BART Algorithm:</p>
+<ul>
+<li><p>Number of Trees (k): Determines the number of trees in the ensemble.</p></li>
+<li><p>Number of Iterations (b): Controls the number of times each tree is perturbed.</p></li>
+<li><p>Perturbations:</p>
+<ul>
+<li><p>Adding branches</p></li>
+<li><p>Deleting branches</p></li>
+<li><p>Changing predicted values at terminal nodes</p></li>
+</ul></li>
+<li><p>Prediction: Averaging predictions from all trees and iterations after a burn-in period.</p></li>
+</ul></li>
+<li><p>Comparison with Other Methods</p>
+<ul>
+<li>Bagging and Random Forests: Similar in using random samples to build trees.</li>
+<li>Boosting: Similar in using residuals to guide tree construction.</li>
+<li>Differences: BART uses perturbations to modify existing trees instead of building new trees from scratch.</li>
+<li>Chain Monte Carlo (MCMC) method</li>
+</ul></li>
+<li><p>Example: Heart Data</p>
+<ul>
+<li>Compare BART with boosting and random forest</li>
+<li>BART shows slower training error but competitive test error</li>
+<li>Less prone to overfitting than boosting</li>
+<li>Choosing Parameters
+<ul>
+<li>Number of trees (k)</li>
+<li>Number of iterations (b)</li>
+<li>Burn-in period (l)</li>
+</ul></li>
+<li>Reasonable choices: k = 200, b = 1000, l = 100</li>
+</ul></li>
+<li><p>Advantages of BART</p>
+<ul>
+<li>Works well out-of-the-box without much tuning</li>
+<li>Provides uncertainty estimates (quantiles)</li>
+</ul></li>
+<li><p>Conclusion</p>
+<ul>
+<li>BART is a powerful ensemble method for regression</li>
+<li>Combines features of random forests and boosting</li>
+<li>Provides a flexible and robust approach to regression problems</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fig-8.6" class="quarto-float quarto-figure quarto-figure-center anchored callout-6-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/xWhPwHZF4c0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: BART: Bayesian Additive Regression Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Python lab on Tree-Based Methods
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+
+<p>Outline of seventh video</p>
+<ul>
+<li>Introduction:
+<ul>
+<li>Overview of tree-based methods</li>
+<li>Focus on random forest and boosting</li>
+<li>Introduction of single tree-based method</li>
+</ul></li>
+<li>Imports:
+<ul>
+<li>Import necessary libraries</li>
+</ul></li>
+<li>Decision Tree Regression
+<ul>
+<li>Fitting a regression decision tree</li>
+<li>Data set: Boston data set</li>
+<li>Pre-processing: feature selection</li>
+<li>Validation: split data into training and test sets</li>
+<li>Visualizing the decision tree</li>
+<li>Evaluating accuracy: mean squared error</li>
+</ul></li>
+<li>Ensemble Methods:
+<ul>
+<li>Bagging and Random Forest</li>
+<li>Difference between bagging and random forest</li>
+<li>Fitting a random forest regressor</li>
+<li>Evaluating accuracy</li>
+<li>Increasing the number of trees</li>
+<li>Feature importance</li>
+</ul></li>
+<li>Boosting:
+<ul>
+<li>Difference between boosting and random forest</li>
+<li>Fitting a boosting regressor</li>
+<li>Evaluating accuracy</li>
+<li>Plotting training and test error</li>
+<li>Tuning parameters</li>
+</ul></li>
+<li>Conclusion:
+<ul>
+<li>Summary of tree-based methods</li>
+<li>Comparison of random forest and boosting</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-8.7" class="quarto-float quarto-figure quarto-figure-center anchored callout-7-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AVTfC5WnDTo?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Python lab on Tree-Based Methods
+</figcaption>
+</figure>
+</div></div><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 8: {Trees}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 8: Trees.”</span> January 21, 2025.
+<a href="https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/">https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:28:58 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 3: Linear Regression</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>The lab for this chapter is at <a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">lab</a> The chapter is 64 pages long and covers the following topics:</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vCHtY6Me5FI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Simple linear regression
+</figcaption>
+</figure>
+</div><div id="fig-v3.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/3GiWpRfkSjc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Hypothesis Testing and Confidence Intervals
+</figcaption>
+</figure>
+</div><div id="fig-v3.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kr_Be9NVXOM&amp;list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Multiple Linear Regression
+</figcaption>
+</figure>
+</div><div id="fig-v3.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/50sv4UTjE90?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Some important questions
+</figcaption>
+</figure>
+</div><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/dEBQmiXv9fk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Extensions of the Linear Model
+</figcaption>
+</figure>
+</div><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gNZfqHhq_B4?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Regression in R
+</figcaption>
+</figure>
+</div></div>
+
+
+
+
+<ul>
+<li>Linear Regression
+<ul>
+<li>Simple Linear Regression
+<ul>
+<li>Estimating the Coefficients</li>
+<li>Assessing the Accuracy of the Coefficient Estimates</li>
+<li>Assessing the Accuracy of the Model</li>
+</ul></li>
+<li>Multiple Linear Regression
+<ul>
+<li>Estimating the Regression Coefficients</li>
+<li>Some Important Questions</li>
+</ul></li>
+<li>Other Considerations in the Regression Model
+<ul>
+<li>Qualitative Predictors</li>
+<li>Extensions of the Linear Model</li>
+<li>Potential Problems</li>
+</ul></li>
+<li>The Marketing Plan</li>
+<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
+<li>Lab: Linear Regression</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Linear Regression in a Nutshell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
+<figcaption>Linear Regression in a nutshell</figcaption>
+</figure>
+</div>
+<p>Linear regression is a fundamental statistical technique for modeling the relationship between a single predictor variable and a response variable. The model assumes a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values. The accuracy of the model is assessed using metrics like the <strong>Residual Standard Error</strong> (RSE), adjusted <img src="https://latex.codecogs.com/png.latex?R%5E2">, <strong>F-statistic</strong>, and <strong>p-values</strong>. The coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant. Qualitative predictors are incorporated using dummy variables, and interactions between predictors can capture complex relationships. Model diagnostics help identify potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</p>
+</div>
+</div>
+<section id="linear-regression-summary" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-summary">Linear Regression Summary</h2>
+<ol type="1">
+<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single predictor variable and a response variable using a straight line.</li>
+<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple predictor variables.</li>
+<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><img src="https://latex.codecogs.com/png.latex?R%5E2"></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
+<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
+<li><strong>Qualitative Predictors</strong>: Incorporating categorical variables into regression models using dummy variables.</li>
+<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
+<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
+<li><strong>Model Diagnostics</strong>: Identifying and addressing potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
+</ol>
+</section>
+<section id="simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple Linear Regression:</h2>
+<ul>
+<li><p><strong>Model</strong>: The relationship between response <img src="https://latex.codecogs.com/png.latex?(Y)"> and predictor <img src="https://latex.codecogs.com/png.latex?(X)"> is represented as <img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%CE%B2_0%20+%20%CE%B2_1%20X%20+%20%5Cepsilon%0A"></p></li>
+<li><p>where</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%CE%B2_0"> is the intercept,</li>
+<li><img src="https://latex.codecogs.com/png.latex?%CE%B2_1"> is the slope, and</li>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cepsilon"> is the error term.</li>
+</ul></li>
+<li><p><strong>Least Squares Estimation</strong>: The coefficients <img src="https://latex.codecogs.com/png.latex?%CE%B2_0"> and <img src="https://latex.codecogs.com/png.latex?%CE%B2_1"> are estimated by minimizing the <strong>Residual Sum of Squares (RSS)</strong>, which quantifies the difference between observed and predicted values.</p></li>
+<li><p><strong>Assessing Accuracy</strong>: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between <img src="https://latex.codecogs.com/png.latex?X"> and <img src="https://latex.codecogs.com/png.latex?Y">.</p></li>
+<li><p><strong><img src="https://latex.codecogs.com/png.latex?R%5E2"></strong>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</p></li>
+</ul>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression:</h2>
+<ul>
+<li><p><strong>Model</strong>: The model extends to multiple predictors: <img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%CE%B2_0%20+%20%CE%B2_1%20X_1%20+%20%CE%B2_2%20X_2%20+%20%5Cldots%20+%20%CE%B2_p%20X_p%20+%20%5Cepsilon%0A"></p></li>
+<li><p><strong>Interpretation</strong>: Each coefficient <img src="https://latex.codecogs.com/png.latex?%CE%B2_j"> represents the average change in <img src="https://latex.codecogs.com/png.latex?Y"> for a one-unit increase in <img src="https://latex.codecogs.com/png.latex?X_j">, holding all other predictors constant.</p></li>
+<li><p><strong>F-statistic</strong>: This statistic tests the overall significance of the model, determining whether at least one predictor is useful in predicting the response.</p></li>
+<li><p><strong>Variable Selection</strong>: Techniques like <strong>Mallow’s Cp</strong>, <strong>AIC</strong>, <strong>BIC</strong>, and <strong>adjusted <img src="https://latex.codecogs.com/png.latex?R%5E2"></strong> are employed to choose the best subset of predictors for the model.</p></li>
+</ul>
+</section>
+<section id="qualitative-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-predictors">Qualitative Predictors:</h2>
+<ul>
+<li><strong>Dummy Variables</strong>: Categorical variables are incorporated by creating dummy variables, which take on values of 0 or 1 to represent different categories.</li>
+<li><strong>Baseline Category</strong>: One category is chosen as the baseline, and its coefficient represents the average response for that category. Other dummy variable coefficients represent differences from the baseline.</li>
+</ul>
+</section>
+<section id="interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions">Interactions:</h2>
+<ul>
+<li><strong>Interaction Terms</strong>: Including interaction terms like <img src="https://latex.codecogs.com/png.latex?X_1%20X_2"> in the model allows the relationship between one predictor and the response to vary depending on the value of another predictor.</li>
+<li><strong>Synergy Effect</strong>: Interactions can capture synergistic effects where the combined impact of two predictors is greater than the sum of their individual impacts.</li>
+</ul>
+</section>
+<section id="polynomial-regression" class="level2">
+<h2 class="anchored" data-anchor-id="polynomial-regression">Polynomial Regression:</h2>
+<ul>
+<li><strong>Non-linear Relationships</strong>: Polynomial terms like <img src="https://latex.codecogs.com/png.latex?X%5E2"> are used to model non-linear relationships between predictors and the response.</li>
+<li><strong>Overfitting</strong>: Higher-degree polynomials can lead to overfitting, where the model fits the training data too closely but generalizes poorly to new data.</li>
+</ul>
+</section>
+<section id="model-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-diagnostics">Model Diagnostics:</h2>
+<ul>
+<li><strong>Residual Plots</strong>: Visualizing residuals against fitted values helps assess linearity, homoscedasticity, and the presence of outliers.</li>
+<li><strong>High Leverage Points</strong>: Observations with extreme predictor values can have a disproportionate impact on the model and should be investigated.</li>
+<li><strong>Collinearity</strong>: High correlation among predictors can lead to unstable coefficient estimates and inflated standard errors. <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</li>
+</ul>
+</section>
+<section id="key-quotes" class="level2">
+<h2 class="anchored" data-anchor-id="key-quotes">Key Quotes:</h2>
+<blockquote class="blockquote">
+<p>“The least squares approach chooses <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Cbeta%7D_0"> and <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Cbeta%7D_1"> to minimize the RSS.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“We interpret <img src="https://latex.codecogs.com/png.latex?%CE%B2_j"> as the average effect on <img src="https://latex.codecogs.com/png.latex?Y"> of a one unit increase in <img src="https://latex.codecogs.com/png.latex?X_j"> , holding all other predictors fixed.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“The woes of (interpreting) regression coefficients: … a regression coefficient <img src="https://latex.codecogs.com/png.latex?%CE%B2_j"> estimates the expected change in <img src="https://latex.codecogs.com/png.latex?Y"> per unit change in <img src="https://latex.codecogs.com/png.latex?X_j"> , with all other predictors held fixed. But predictors usually change together!”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“A 95% confidence interval is defined as a range of values such that with 95% probability, the range will contain the true unknown value of the parameter.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“There will always be one fewer dummy variable than the number of levels. The level with no dummy variable — African American in this example — is known as the baseline.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“When levels of either TV or radio are low, then the true sales are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate sales.”</p>
+</blockquote>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 3: {Linear} {Regression}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 3: Linear Regression.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/">https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:25:31 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 6: Linear Model Selection and Regularization</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+<ol type="1">
+<li><p>This chapter doen’t have a lab and is a bit dull.</p></li>
+<li><p>The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.</p></li>
+<li><p>IBM’s Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.</p></li>
+<li><p>A second story they mention is <strong>Nate Silver</strong>’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a “rock star”. It’s worth mentioning though that predicing elections is isn’t hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
+<ol type="1">
+<li>Wage data</li>
+<li>Stock market data</li>
+<li>Gene Expression Data</li>
+</ol></li>
+<li><p>ISL <span class="citation" data-cites="ISL">(James et al. 2013)</span> is an introduction text. <span class="citation" data-cites="ESL">(Hastie, Tibshirani, and Friedman 2009)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ol>
+<section id="premises" class="level2">
+<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<ul>
+<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
+<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
+<li>The readers are interested in applying the methods to real-world problems.</li>
+</ul>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-ESL" class="csl-entry">
+Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
+</div>
+<div id="ref-ISL" class="csl-entry">
+James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 6: {Linear} {Model} {Selection} and {Regularization}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 6: Linear Model Selection and
+Regularization.”</span> January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/">https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:24:51 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 7: Moving Beyond Linearity</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 7: {Moving} {Beyond} {Linearity}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 7: Moving Beyond Linearity.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/">https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:22:49 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 5: Resampling Methods</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v5.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/6eWODQJrMKs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-v5.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: K-fold Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-v5.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/jgoa28FR__Y?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Cross Validation the wrong and right way
+</figcaption>
+</figure>
+</div><div id="fig-5.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/h_LweqiIotE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: K-fold Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-5.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: More on the Bootstrap
+</figcaption>
+</figure>
+</div><div id="fig-5.6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/nwD-03ncOZ8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Lab: Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-5.7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sM_Gve1K4II?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Lab: Bootstrap
+</figcaption>
+</figure>
+</div></div>
+
+
+
+
+
+<section id="summary-of-resampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="summary-of-resampling-methods">Summary of Resampling Methods</h2>
+<p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>
+<p>Central Theme: Resampling methods offer robust techniques to estimate the performance of statistical learning methods and quantify uncertainty associated with estimations. This is achieved by repeatedly drawing samples from the training data and refitting models on these samples.</p>
+<p>Key Concepts and Methods</p>
+<ol type="1">
+<li><strong>Validation Set Approach</strong>: This approach involves splitting the dataset into a training set and a validation set. The model is trained on the training set, and its performance (e.g., using MSE for regression problems) is evaluated on the validation set.</li>
+</ol>
+<ul>
+<li>Drawbacks:
+<ul>
+<li>High variability in test error estimates depending on the random split.</li>
+<li>Reduced sample size for training as only the training set is used.</li>
+<li>Example: Using the Auto dataset, the sources demonstrate that a quadratic fit performs better than a linear fit for predicting ‘mpg’ based on ‘horsepower’.</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li><strong>Cross-Validation</strong>: addresses the limitations of the validation set approach. It involves dividing the data into ‘K’ folds and iteratively using one fold for validation and the rest for training. This provides more stable performance estimates.
+<ul>
+<li>Leave-One-Out Cross-Validation (LOOCV): A special case where K equals the number of observations. Each observation is held out once for validation.
+<ul>
+<li>Benefits: Less bias in test error estimates.</li>
+<li>Drawbacks: High variance due to high correlation between the training sets.</li>
+</ul></li>
+<li>k-Fold Cross-Validation: A more general approach where K is typically 5 or 10, balancing bias and variance.
+<ul>
+<li>Example: Using the Auto dataset, k-fold cross-validation confirms the superiority of the quadratic fit over the linear fit.</li>
+</ul></li>
+</ul></li>
+<li><strong>The Bootstrap</strong>: is used to quantify uncertainty in an estimator. It involves generating multiple ‘bootstrap’ datasets by sampling with replacement from the original data. The statistic of interest is calculated for each bootstrap dataset, creating a distribution from which standard errors and confidence intervals can be derived.
+<ul>
+<li>Example: Simulating investment returns for assets X and Y, the sources illustrate how the bootstrap can be used to estimate the standard error of the optimal investment allocation (α).</li>
+</ul></li>
+<li><strong>Bootstrap Applications</strong>:
+<ul>
+<li><strong>Estimating Standard Errors</strong>: The bootstrap provides an alternative way to calculate standard errors for complex estimators where analytical formulas may not be available.</li>
+<li><strong>Confidence Intervals</strong>: Approximate confidence intervals can be derived from the distribution of bootstrap estimates.</li>
+<li><strong>Prediction Error Estimation</strong>: While the bootstrap is mainly used for standard error and confidence interval calculations, it’s not ideal for directly estimating prediction error due to the overlap in training data between bootstrap samples.</li>
+</ul></li>
+</ol>
+</section>
+<section id="important-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="important-considerations">Important Considerations</h2>
+<ul>
+<li>Cross-validation for classification: When dealing with classification problems, the metric used for evaluating performance is typically the misclassification rate instead of MSE.</li>
+<li>Choosing K: The choice of K in k-fold cross-validation involves a bias-variance trade-off. K = 5 or K = 10 generally provides a good balance.</li>
+<li>Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a ‘fairer’ version of the adaptive predictor that hasn’t ‘seen’ the response variable.</li>
+<li>Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.</li>
+</ul>
+</section>
+<section id="illustrative-quotes" class="level2">
+<h2 class="anchored" data-anchor-id="illustrative-quotes">Illustrative Quotes</h2>
+<blockquote class="blockquote">
+<p>“The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success.”</p>
+</blockquote>
+<p>Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch05.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter"><embed src="ch05.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 5: {Resampling} {Methods}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 5: Resampling Methods.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/">https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:22:21 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 4: Classification</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch04-classification/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v4.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ju3J7iRy6xI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Introduction to Classification Problems
+</figcaption>
+</figure>
+</div><div id="fig-v4.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kr_Be9NVXOM?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Logistic Regression
+</figcaption>
+</figure>
+</div><div id="fig-v4.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1uJVE8bkabc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Multivariate Logistic Regression
+</figcaption>
+</figure>
+</div><div id="fig-v4.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sYDDk6R-be0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Logistic Regression Case Control Sampling and Multiclass
+</figcaption>
+</figure>
+</div><div id="fig-v4.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/oJc2r246VoQ?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Discriminant Analysis
+</figcaption>
+</figure>
+</div><div id="fig-v4.6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/14JVlzWHKgk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Gaussian Discriminant Analysis (One Variable)
+</figcaption>
+</figure>
+</div><div id="fig-v4.7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/aUlTqhDtpnw?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Gaussian Discriminant Analysis (Many Variables)
+</figcaption>
+</figure>
+</div><div id="fig-v4.8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/n8Nj64FyjSo?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Generalized Linear Models
+</figcaption>
+</figure>
+</div><div id="fig-v4.9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/giCZkipHEmA?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Quadratic Discriminant Analysis and Naive Bayes
+</figcaption>
+</figure>
+</div><div id="fig-v4.10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QEUtuHSipNE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: R Lab: Logistic Regression
+</figcaption>
+</figure>
+</div><div id="fig-v4.11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/WXhku-ISml8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: R Lab: Linear Discriminant Analysis
+</figcaption>
+</figure>
+</div><div id="fig-v4.11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v4.11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JRxKBj5ArgU?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v4.11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: R Lab: Nearest Neighbor Classification
+</figcaption>
+</figure>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+<p>The chapter is 65 pages long and covers the following topics:</p>
+<ul>
+<li>Classification
+<ul>
+<li>An Overview of Classification</li>
+<li>Why Not Linear Regression?</li>
+<li>Logistic Regression
+<ul>
+<li>The Logistic Model</li>
+<li>Estimating the Regression Coefficients</li>
+<li>Making Predictions</li>
+<li>Multiple Logistic Regression</li>
+<li>Multinomial Logistic Regression</li>
+</ul></li>
+<li>Generative Models for Classification
+<ul>
+<li>Linear Discriminant Analysis</li>
+<li>Quadratic Discriminant Analysis</li>
+<li>Naive Bayes</li>
+</ul></li>
+<li>A Comparison of Classification Methods
+<ul>
+<li>An Analytical Comparison</li>
+<li>An Empirical Comparison</li>
+</ul></li>
+<li>Generalized Linear Models
+<ul>
+<li>Linear Regression on the Bikeshare Data</li>
+<li>Poisson Regression on the Bikeshare Data</li>
+<li>Generalized Linear Models in Greater Generality</li>
+</ul></li>
+<li>Lab: Logistic Regression, LDA, QDA, and KNN</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Statistical Learning in a Nutshell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Statistical Learning in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Statistical Learning in a nutshell"></a></p>
+<figcaption>Statistical Learning in a nutshell</figcaption>
+</figure>
+</div>
+<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <img src="https://latex.codecogs.com/png.latex?(f)"> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+</div>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 4: {Classification}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch04-classification/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 4: Classification.”</span> January
+21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch04-classification/">https://orenbochman.github.io/notes-islr/posts/ch04-classification/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch04-classification/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:22:00 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Chapter 2: Statistical Learning</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v2.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v2.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ox0cKk7h4o0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v2.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Introduction to Regression Models
+</figcaption>
+</figure>
+</div><div id="fig-v2.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v2.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/uFwbrdvrAJs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v2.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Dimensionality and Structured Models
+</figcaption>
+</figure>
+</div><div id="fig-v2.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v2.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/pvcEQfcO3pk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v2.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Introduction to Regression Models
+</figcaption>
+</figure>
+</div><div id="fig-v2.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v2.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/BMJQ3LQ_QKU?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v2.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Classification
+</figcaption>
+</figure>
+</div><div id="fig-v2.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v2.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/L03A81OgLlk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v2.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Lab: Introduction to R
+</figcaption>
+</figure>
+</div></div>
+
+
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Statistical Learning in a Nutshell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Statistical Learning in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Statistical Learning in a nutshell"></a></p>
+<figcaption>Statistical Learning in a nutshell</figcaption>
+</figure>
+</div>
+<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <img src="https://latex.codecogs.com/png.latex?(f)"> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+</div>
+</div>
+<p>The chapter is 53 pages long and covers the following topics:</p>
+<ul>
+<li>What Is Statistical Learning?</li>
+<li>Why Estimate <img src="https://latex.codecogs.com/png.latex?f"> ?</li>
+<li>How Do We Estimate <img src="https://latex.codecogs.com/png.latex?f"> ?</li>
+<li>The Prediction Accuracy Trade-Off</li>
+<li>Model Interpretability</li>
+<li>Supervised Versus Unsupervised Learning</li>
+<li>Regression Versus Classification Problems</li>
+<li>Assessing Model Accuracy
+<ul>
+<li>Measuring the Quality of Fit</li>
+<li>The Bias-Variance Trade-Off</li>
+</ul></li>
+<li>The Classification Setting</li>
+<li><a href="../../posts/ch02-statistical-learning/Ch02-statlearn-lab.html">Lab: Introduction to Python</a></li>
+</ul>
+<section id="key-terms-in-statistical-learning-and-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="key-terms-in-statistical-learning-and-machine-learning">Key Terms in Statistical Learning and Machine Learning</h2>
+<dl>
+<dt>Statistical Learning</dt>
+<dd>
+A set of tools for understanding data and building models that can be used for prediction or inference.
+</dd>
+<dt>Input Variables</dt>
+<dd>
+Predictors or features, denoted by X, used to predict the output variable.
+</dd>
+<dt>Output Variable</dt>
+<dd>
+The response or dependent variable, denoted by Y, being predicted.
+</dd>
+<dt>Error Term</dt>
+<dd>
+Represents the random variation in the output variable not explained by the input variables. Denoted by ε.
+</dd>
+<dt>Prediction</dt>
+<dd>
+Using a statistical learning model to accurately predict the output variable for new observations based on their input values.
+</dd>
+<dt>Inference</dt>
+<dd>
+Understanding the relationship between input and output variables, identifying important predictors, and quantifying their effects.
+</dd>
+<dt>Parametric Methods</dt>
+<dd>
+Model-based approaches that assume a specific functional form for f and estimate its parameters using training data. Examples include linear regression and logistic regression.
+</dd>
+<dt>Non-parametric Methods</dt>
+<dd>
+Flexible approaches that do not pre-specify a functional form for f and estimate it directly from the data. Examples include K-nearest neighbors and splines.
+</dd>
+<dt>Overfitting</dt>
+<dd>
+Occurs when a model is too flexible and fits the training data too closely, leading to poor generalization to new data.
+</dd>
+<dt>Bias</dt>
+<dd>
+Error resulting from incorrect assumptions about the true functional form of f.
+</dd>
+<dt>Variance</dt>
+<dd>
+The amount by which the estimated function f̂ changes when trained on different training datasets.
+</dd>
+<dt>Bias-Variance Trade-off</dt>
+<dd>
+The balance between model bias and variance, where more flexible models have higher variance but lower bias, and vice versa.
+</dd>
+<dt>Cross-validation</dt>
+<dd>
+A technique for evaluating a model’s performance by splitting the data into multiple folds and using each fold for training and testing, providing a more robust estimate of test error.
+</dd>
+<dt>Bayes Classifier</dt>
+<dd>
+A theoretical classifier that assigns each observation to the class with the highest conditional probability given its predictor values, achieving the lowest possible test error rate (Bayes error rate).
+</dd>
+<dt>K-nearest Neighbors (KNN)</dt>
+<dd>
+A non-parametric classification method that finds the K nearest neighbors to a test observation in the training data and estimates the conditional probability for each class based on the proportion of neighbors belonging to that class.
+</dd>
+</dl>
+</section>
+<section id="chapter-summary" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-summary">Chapter summary</h2>
+<ol type="1">
+<li>What is Statistical Learning?</li>
+</ol>
+<p><strong>Statistical learning</strong> uses data to learn about relationships between input variables (predictors) and an output variable (response). This relationship can be expressed as:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AY%20=%20f(X)%20+%20%CE%B5%0A"></p>
+<p>where:</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?Y"> is the response variable.</li>
+<li><img src="https://latex.codecogs.com/png.latex?X"> represents the predictors <img src="https://latex.codecogs.com/png.latex?(X_1,%20X_2,...,%20X_p)">.</li>
+<li><img src="https://latex.codecogs.com/png.latex?f(X)"> is the unknown function capturing the systematic relationship between X and Y.</li>
+<li><img src="https://latex.codecogs.com/png.latex?%CE%B5"> is a random error term with a mean of zero, independent of <img src="https://latex.codecogs.com/png.latex?X">.</li>
+</ul>
+<p>Statistical learning aims to estimate the function <img src="https://latex.codecogs.com/png.latex?f(X)"> from observed data, enabling:</p>
+<ul>
+<li><strong>Prediction</strong>: Using the estimated function <img src="https://latex.codecogs.com/png.latex?(f%CC%82)"> to predict <img src="https://latex.codecogs.com/png.latex?Y"> for new values of <img src="https://latex.codecogs.com/png.latex?X">:</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%C5%B6%20=%20f%CC%82(X)%0A"></p>
+<ul>
+<li><p>The accuracy of prediction is influenced by reducible error (due to imperfections in estimating f) and irreducible error (due to the inherent randomness represented by <img src="https://latex.codecogs.com/png.latex?%CE%B5">).</p></li>
+<li><p><strong>Inference</strong>: Understanding the relationship between predictors and response. This involves determining which predictors are most important, quantifying the strength of the relationship, and exploring the nature of the association.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Estimating <img src="https://latex.codecogs.com/png.latex?f(X)"></li>
+</ol>
+<p>There are two main approaches to estimating the function <img src="https://latex.codecogs.com/png.latex?f(X)">:</p>
+<ul>
+<li><p><strong>Parametric Methods</strong>: Assume a specific functional form for <img src="https://latex.codecogs.com/png.latex?f(X)">, like a linear model: <img src="https://latex.codecogs.com/png.latex?%0Af(X)%20=%20%CE%B2_0%20+%20%CE%B2_1X_1%20+%20%CE%B2_2X_2%20+%20...%20+%20%CE%B2_pX_p%0A"></p></li>
+<li><p>This simplifies the problem to estimating the model’s parameters (<img src="https://latex.codecogs.com/png.latex?%CE%B2">s). However, parametric methods may be inaccurate if the assumed form doesn’t match the true relationship.</p></li>
+<li><p><strong>Non-Parametric Methods</strong>: Don’t assume a specific form for <img src="https://latex.codecogs.com/png.latex?f(X)">, allowing for more flexibility. They try to fit the data as closely as possible while maintaining smoothness. Examples include thin-plate splines. These methods require careful tuning to prevent overfitting, where the model fits the training data perfectly but performs poorly on new data.</p></li>
+</ul>
+<ol start="3" type="1">
+<li><p>Assessing Model Accuracy The choice of a suitable statistical learning method and its flexibility depends on the bias-variance trade-off:</p>
+<ul>
+<li><p><strong>Bias</strong>: Measures how much the estimated function <img src="https://latex.codecogs.com/png.latex?(f%CC%82)"> deviates from the true function <img src="https://latex.codecogs.com/png.latex?(f)"> on average. Inflexible methods tend to have higher bias.</p></li>
+<li><p><strong>Variance</strong>: Quantifies the sensitivity of <img src="https://latex.codecogs.com/png.latex?f%CC%82"> to changes in the training data. More flexible methods typically exhibit higher variance.</p></li>
+<li><p>The goal is to find the balance between bias and variance that minimizes the expected test error.</p></li>
+</ul></li>
+<li><p>Supervised vs.&nbsp;Unsupervised Learning</p>
+<ul>
+<li><p><strong>Supervised Learning</strong>: Uses labeled data, where the response variable <img src="https://latex.codecogs.com/png.latex?(Y)"> is known for each observation. Examples include regression and classification problems.</p></li>
+<li><p><strong>Unsupervised Learning</strong>: Deals with unlabeled data, where the response variable is unknown. Techniques like clustering aim to identify groups or patterns in the data.</p></li>
+</ul></li>
+<li><p>Classification</p></li>
+</ol>
+<p>Classification problems involve predicting a qualitative (categorical) response variable. One common metric to assess the performance of classifiers is the error rate, which measures the proportion of incorrect predictions.</p>
+<ul>
+<li><p><strong>Bayes Classifier</strong>: A theoretical classifier that assigns each observation to the most likely class based on its predictors. It achieves the lowest possible error rate (Bayes error rate). However, the Bayes classifier is typically unattainable in practice, as it requires knowing the true conditional distribution of Y given X.</p></li>
+<li><p><strong>K-Nearest Neighbors</strong> (KNN): A non-parametric classification method that estimates the conditional probability for each class by considering the closest K training observations to a test point. KNN requires selecting an appropriate value for K, balancing flexibility and overfitting.</p></li>
+</ul>
+<ol start="6" type="1">
+<li>Python for Statistical Learning</li>
+</ol>
+<p>The chapter introduces basic Python commands and data manipulation techniques using libraries like NumPy and Pandas. It covers:</p>
+<ul>
+<li>Importing libraries, defining arrays and matrices, computing basic statistics, and generating random data.</li>
+<li>Creating various plots (scatter plots, contour plots, heatmaps) using Matplotlib.</li>
+<li>Subsetting and indexing data frames, handling missing values, using for loops and lambdas for data manipulation.</li>
+</ul>
+<p>These tools provide a foundation for applying statistical learning methods in practice.</p>
+</section>
+<section id="statistical-learning---test-your-understanding" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-learning---test-your-understanding">Statistical Learning - Test Your Understanding!</h2>
+<ol type="1">
+<li>What is the fundamental goal of statistical learning?</li>
+<li>Differentiate between the input and output variables in a statistical learning model.</li>
+<li>What is the role of the error term in the general form of the statistical learning model?</li>
+<li>Explain the difference between prediction and inference in the context of statistical learning.</li>
+<li>Describe the two main steps involved in parametric methods for estimating f.</li>
+<li>What is a key advantage and a key disadvantage of non-parametric methods compared to parametric methods?</li>
+<li>How does the concept of overfitting relate to the choice of flexibility in a statistical learning method?</li>
+<li>Explain the bias-variance trade-off and its impact on model selection.</li>
+<li>What is the Bayes classifier and why is it considered a gold standard in classification problems?</li>
+<li>How does the K-nearest neighbors (KNN) classifier work?</li>
+</ol>
+<section id="answer-key" class="level3">
+<h3 class="anchored" data-anchor-id="answer-key">Answer Key</h3>
+<ol type="1">
+<li><p>The fundamental goal of statistical learning is to use a set of data to learn a function (f) that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used for prediction or inference.</p></li>
+<li><p>Input variables, also known as predictors or features, are the variables used to predict the output variable. They are denoted by X. The output variable, also known as the response, is the variable being predicted, denoted by Y.</p></li>
+<li><p>The error term (ε) represents the random variation in the output variable that cannot be explained by the input variables. It accounts for the inherent uncertainty and noise in the data.</p></li>
+<li><p>Prediction focuses on accurately predicting the output variable (Y) for new observations based on their input values (X), often treating the model as a black box. Inference aims to understand the relationship between the input variables and the output variable, focusing on identifying important predictors and their effects on the response.</p></li>
+<li><p>First, parametric methods assume a specific functional form for f, such as linear. Second, they estimate the parameters of the assumed function using the training data. For example, in a linear model, the parameters are the coefficients.</p></li>
+<li><p>Non-parametric methods are more flexible and can capture complex relationships in the data without pre-specifying a functional form for f.&nbsp;However, this flexibility can lead to overfitting, where the model fits the training data too closely and performs poorly on new data.</p></li>
+<li><p>Overfitting occurs when a model is too flexible and captures noise in the training data instead of the underlying signal. This results in high training accuracy but poor generalization to new data. Choosing an appropriate level of flexibility helps avoid overfitting.</p></li>
+<li><p>The bias-variance trade-off refers to the balance between model bias (error from wrong assumptions about f) and variance (sensitivity to fluctuations in the training data). More flexible models have higher variance but lower bias, while less flexible models have lower variance but higher bias. Finding the optimal balance minimizes test error.</p></li>
+<li><p>The Bayes classifier assigns each observation to the class with the highest conditional probability given its predictor values. It achieves the lowest possible test error rate (Bayes error rate) but is unattainable in practice because the true conditional probability distribution is unknown.</p></li>
+<li><p>The KNN classifier finds the K nearest neighbors to a test observation in the training data based on a distance metric. It then estimates the conditional probability for each class based on the proportion of neighbors belonging to that class and classifies the test observation to the class with the highest estimated probability.</p></li>
+</ol>
+</section>
+</section>
+<section id="essay-questions" class="level2">
+<h2 class="anchored" data-anchor-id="essay-questions">Essay Questions</h2>
+<ol type="1">
+<li><p>Discuss the differences between supervised and unsupervised learning, providing real-world examples of each.</p>
+<p><strong>Supervised learning</strong> is the problem setting in which we have labels on the data. The label are not so much can be a category, a number.<br>
+Our model will be shooting an arrow at a know target so it is easier to evaluate the model. This type of problems are broken into regression, classification, survival analysis, and time series analysis, and when learning from exprerience it becomes reinforcement learning.</p>
+<p>In unsupervised learning we don’t have labels. Although we don’t have a target, this data is much easier to collect as labeling the data requires a significant effort and is often error prone. Typical problems are clustering, dimensionality reduction, and association rule learning. However many problems in natural language processing are unsupervised.</p>
+<p>Another point is that the distinction isn’t so clear today we have <strong>semi-supervised learning</strong> where we have a small amount of labeled data and a large amount of unlabeled data. For example, LLM are pretrained on unsupervised data and then fine-tuned on supervised data.</p></li>
+<li><p>Explain the concepts of reducible and irreducible error in statistical learning. How do these errors relate to the concept of the Bayes error rate?</p></li>
+<li><p>Compare and contrast parametric and non-parametric methods for estimating f.&nbsp;What are the advantages and disadvantages of each approach? Provide specific examples of methods from each category.</p></li>
+<li><p>Describe the concept of cross-validation. Why is it important, and how can it be used to improve model selection and assessment?</p></li>
+<li><p>Discuss the challenges and considerations in choosing an appropriate level of flexibility for a statistical learning method. How does the bias-variance trade-off guide this decision? Explain the consequences of choosing a model that is too flexible or not flexible enough.</p></li>
+</ol>
+</section>
+<section id="slides-and-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch02.pdf.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch02.pdf.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 2: {Statistical} {Learning}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 2: Statistical Learning.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/">https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:18:11 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>
