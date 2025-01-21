@@ -52,7 +52,7 @@ Lab: Bootstrap
 
 ## TL;DR - Resampling Methods {.unnumbered}
 
-![Resampling Methods in a nutshell](/images/in_a_nutshell.jpg)
+![Resampling in a nutshell](/images/in_a_nutshell.jpg)
 
 Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.
 
@@ -70,8 +70,72 @@ Resampling methods are indispensable tools for data scientists. Cross-validation
 :::
 
 
+Model assessment 
+: the process of evaluating a model’s performance.
 
-## Summary of Resampling Methods
+Model selection 
+: the process of selecting the proper level of flexibility for a model. 
+
+
+Test error rate 
+: the average error that results from using a ml method to predict the response on a new observation— that is, a measurement that was not used in training the method.
+
+Training error rate 
+: the error calculated by applying the ml method to the observations used in its training. This is often dramaticaly less then the test error rate.
+
+
+Cross-validation 
+: a resampling method used to estimate the test error associated with a given ml method to evaluate its performance or to select the appropriate level of flexibility. 
+
+Validation set approach 
+: a method for estimating the test error associated with fitting a particular ml method on a set of observations that involves randomly dividing the available set of observations into two parts, a training set and a validation set. 
+
+Validation set error rate 
+: typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate. 
+
+Leave-one-out cross-validation (LOOCV) 
+: a method that attempts to address the validation set approach's drawbacks of high variability and overestimation of the test error rate; involves splitting the set of observations into two parts, but instead of creating two subsets of comparable size, a single observation is used for the validation set, and the remaining observations make up the training set. 
+
+Resampling methods 
+: involve repeatedly drawing samples from a training set and refitting a model on each sample to get more information about the fitted model.
+
+Bootstrap 
+: a resampling method used to provide a measure of accuracy of a parameter estimate or of a given statistical learning method. 
+
+Hold-out set 
+: the validation set.
+
+k-fold CV 
+: an alternative to LOOCV that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k - 1 folds.
+
+
+::: .callout-info 
+
+## rethinking test train and validation sets {.unnumbered}
+
+The definition I took away from this course were confused. I want to clarify things abit here.
+In the ML world, we have do a three way split as follows.
+
+1. training set - used to learn the papemeters.
+2. test set - used to evaluate the model capacity to generalize to new data.
+3. validation set - used to tune the hyperparameters of the model.
+
+Once we are finished tuning the hyperparameters we will train the model on all the data using our best hyperparameters and use that for production.
+
+In statitical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.
+
+The validation set approach is the simplest but can suffer from if the split underrepresents classes of the data.
+
+LOOCV is computationally expensive for any but the smallest datasets - unless you use a clever trick to estimate it using a single training run. Using such tricks is quite common for work for bayesian hierarchical models. However as the chapter suggests there is also problem of correlation in LOOCV that can lead to high variance in the test error estimate. 
+
+k-fold CV is the most common approach and is used in most ML libraries. It is a good balance between computational cost and accuracy. However it is still useful to consider how to pick the k-folds so that they faithfully represent all the classes in the data.
+
+:::
+
+
+
+
+## Outline of Resampling Methods
 
 In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.
 
@@ -105,13 +169,14 @@ Key Concepts and Methods
 - Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a 'fairer' version of the adaptive predictor that hasn't 'seen' the response variable.
 - Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.
 
+## Conclusion
 
+Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.
 
-
-Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.
-
-
+## Slides
 
 ![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+## The chapter
 
 ![Chapter](ch05.pdf){.col-page width="800px" height="1000px"}

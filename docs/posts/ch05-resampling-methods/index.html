@@ -186,8 +186,11 @@ background-size: cover;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#summary-of-resampling-methods" id="toc-summary-of-resampling-methods" class="nav-link active" data-scroll-target="#summary-of-resampling-methods">Summary of Resampling Methods</a></li>
+  <li><a href="#outline-of-resampling-methods" id="toc-outline-of-resampling-methods" class="nav-link active" data-scroll-target="#outline-of-resampling-methods">Outline of Resampling Methods</a></li>
   <li><a href="#important-considerations" id="toc-important-considerations" class="nav-link" data-scroll-target="#important-considerations">Important Considerations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#the-chapter" id="toc-the-chapter" class="nav-link" data-scroll-target="#the-chapter">The chapter</a></li>
   </ul>
 </nav>
 </nav>
@@ -284,8 +287,8 @@ TL;DR - Resampling Methods
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Resampling Methods in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Resampling Methods in a nutshell"></a></p>
-<figcaption>Resampling Methods in a nutshell</figcaption>
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Resampling in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Resampling in a nutshell"></a></p>
+<figcaption>Resampling in a nutshell</figcaption>
 </figure>
 </div>
 <p>Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
@@ -304,8 +307,58 @@ TL;DR - Resampling Methods
 </audio>
 </div>
 </div>
-<section id="summary-of-resampling-methods" class="level2">
-<h2 class="anchored" data-anchor-id="summary-of-resampling-methods">Summary of Resampling Methods</h2>
+<dl>
+<dt>Model assessment</dt>
+<dd>
+the process of evaluating a model’s performance.
+</dd>
+<dt>Model selection</dt>
+<dd>
+the process of selecting the proper level of flexibility for a model.
+</dd>
+<dt>Test error rate</dt>
+<dd>
+the average error that results from using a ml method to predict the response on a new observation— that is, a measurement that was not used in training the method.
+</dd>
+<dt>Training error rate</dt>
+<dd>
+the error calculated by applying the ml method to the observations used in its training. This is often dramaticaly less then the test error rate.
+</dd>
+<dt>Cross-validation</dt>
+<dd>
+a resampling method used to estimate the test error associated with a given ml method to evaluate its performance or to select the appropriate level of flexibility.
+</dd>
+<dt>Validation set approach</dt>
+<dd>
+a method for estimating the test error associated with fitting a particular ml method on a set of observations that involves randomly dividing the available set of observations into two parts, a training set and a validation set.
+</dd>
+<dt>Leave-one-out cross-validation (LOOCV)</dt>
+<dd>
+a method that attempts to address the validation set approach’s drawbacks of high variability and overestimation of the test error rate; involves splitting the set of observations into two parts, but instead of creating two subsets of comparable size, a single observation is used for the validation set, and the remaining observations make up the training set.
+</dd>
+<dt>Resampling methods</dt>
+<dd>
+involve repeatedly drawing samples from a training set and refitting a model on each sample to get more information about the fitted model.
+</dd>
+<dt>Bootstrap</dt>
+<dd>
+a resampling method used to provide a measure of accuracy of a parameter estimate or of a given statistical learning method.
+</dd>
+<dt>Hold-out set</dt>
+<dd>
+the validation set.
+</dd>
+<dt>Validation set error rate</dt>
+<dd>
+typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
+</dd>
+<dt>k-fold CV</dt>
+<dd>
+an alternative to LOOCV that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k - 1 folds.
+</dd>
+</dl>
+<section id="outline-of-resampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="outline-of-resampling-methods">Outline of Resampling Methods</h2>
 <p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>
 <p>Central Theme: Resampling methods offer robust techniques to estimate the performance of statistical learning methods and quantify uncertainty associated with estimations. This is achieved by repeatedly drawing samples from the training data and refitting models on these samples.</p>
 <p>Key Concepts and Methods</p>
@@ -353,13 +406,22 @@ TL;DR - Resampling Methods
 <li>Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a ‘fairer’ version of the adaptive predictor that hasn’t ‘seen’ the response variable.</li>
 <li>Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.</li>
 </ul>
-<p>Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
+</section>
+<section id="the-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="the-chapter">The chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="ch05.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch05.pdf" class="col-page" width="800" height="1000"></a></p>
