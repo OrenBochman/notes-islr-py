@@ -66,7 +66,11 @@ The chapter is 53 pages long and covers the following topics:
   - Measuring the Quality of Fit 
   - The Bias-Variance Trade-Off 
 - The Classification Setting
+
+There is also a lab which I split into two parts:
+
 - [Lab: Introduction to Python](Ch02-statlearn-lab.qmd)
+- [Lab: Graphics](Ch02-statlearn-lab-graphics.qmd)
 
 
 ##  Key Terms in Statistical Learning and Machine Learning

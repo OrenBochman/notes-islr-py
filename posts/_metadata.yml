@@ -26,4 +26,4 @@ execute:
 comments: 
   utterances: 
     repo:  OrenBochman/blogComments 
-
+from: markdown+emoji

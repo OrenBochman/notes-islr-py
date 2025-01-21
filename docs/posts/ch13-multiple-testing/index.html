@@ -178,7 +178,13 @@ background-size: cover;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#slides-and-chapter" id="toc-slides-and-chapter" class="nav-link active" data-scroll-target="#slides-and-chapter">Slides and Chapter</a></li>
+  <li><a href="#chapter-outline" id="toc-chapter-outline" class="nav-link active" data-scroll-target="#chapter-outline">Chapter Outline</a></li>
+  <li><a href="#key-quotes" id="toc-key-quotes" class="nav-link" data-scroll-target="#key-quotes">Key Quotes:</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion:</a></li>
+  <li><a href="#multiple-hypothesis-testing-study-guide" id="toc-multiple-hypothesis-testing-study-guide" class="nav-link" data-scroll-target="#multiple-hypothesis-testing-study-guide">Multiple Hypothesis Testing Study Guide</a></li>
+  <li><a href="#short-answer-key" id="toc-short-answer-key" class="nav-link" data-scroll-target="#short-answer-key">Short Answer Key</a></li>
+  <li><a href="#essay-questions" id="toc-essay-questions" class="nav-link" data-scroll-target="#essay-questions">Essay Questions</a></li>
+  <li><a href="#slides-and-chapter" id="toc-slides-and-chapter" class="nav-link" data-scroll-target="#slides-and-chapter">Slides and Chapter</a></li>
   </ul>
 </nav>
 </nav>
@@ -299,6 +305,80 @@ Techniques like permutation testing that use random sampling with replacement fr
 A re-sampling method where data points are randomly reassigned to different groups to create new datasets under the assumption of the null hypothesis. This allows for the estimation of the null distribution of the test statistic without relying on specific distributional assumptions.
 </dd>
 </dl>
+<section id="chapter-outline" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-outline">Chapter Outline</h2>
+<p><strong>Central Problem</strong>: When testing multiple hypotheses simultaneously, the probability of making at least one Type I error (false positive) increases dramatically. This necessitates the use of specific methods to control this error rate.</p>
+<ol type="1">
+<li>Key Concepts:</li>
+</ol>
+<p>Type I Error: Rejecting the null hypothesis when it is actually true (false positive). Type II Error: Failing to reject the null hypothesis when it is actually false (false negative). Family-Wise Error Rate (FWER): The probability of making at least one Type I error across all tested hypotheses. False Discovery Rate (FDR): The expected proportion of rejected null hypotheses that are actually false positives. Multiple Testing Correction: Adjusting p-values or rejection thresholds to account for the increased risk of Type I errors when testing multiple hypotheses.</p>
+<ol start="2" type="1">
+<li>Methods for Controlling FWER:</li>
+</ol>
+<p>Bonferroni Correction: The simplest and most conservative method. It divides the desired alpha level (the probability of making a Type I error) by the number of hypotheses being tested (m). This new, stricter alpha level is then used as the threshold for rejecting each individual hypothesis. Formula: Reject H0j if p-value &lt; α/m Advantages: Easy to implement. Disadvantages: Can be overly conservative, leading to higher Type II error rates, especially with a large number of hypotheses. Holm’s Method: A step-down procedure that offers more power than Bonferroni while still controlling the FWER. It orders the p-values from smallest to largest and compares each p-value to a sequentially adjusted alpha level. Formula: Reject H0j if p(j) &lt; α/(m + 1 - j), where p(j) is the jth smallest p-value. Advantages: More powerful than Bonferroni. Disadvantages: Still relatively conservative. Tukey’s and Scheffé’s Methods: Specialized methods tailored for specific types of multiple comparisons. Tukey’s method is designed for all pairwise comparisons of means, while Scheffé’s method is more general and allows for any linear combination of means to be tested.</p>
+<ol start="3" type="1">
+<li>Methods for Controlling FDR:</li>
+</ol>
+<p>Benjamini-Hochberg Procedure: A step-up procedure that controls the FDR at a desired level (q). It orders the p-values from smallest to largest and compares each p-value to a sequentially adjusted q-value threshold. Formula: Reject H0j if p(j) &lt; qj/m Advantages: Less conservative than FWER control methods, leading to higher power. Disadvantages: May lead to a higher proportion of false positives compared to FWER control methods. 4. Re-Sampling Approaches:</p>
+<p>When the theoretical null distribution of a test statistic is unknown, re-sampling methods (e.g., permutation tests) can be used to approximate the null distribution and calculate p-values. This is particularly useful for small sample sizes or complex test statistics.</p>
+<ol start="5" type="1">
+<li>Illustrations: There are many examples using simulated data and real datasets (Fund dataset, Khan dataset) to demonstrate the impact of multiple testing on error rates and the effectiveness of different correction methods.</li>
+</ol>
+</section>
+<section id="key-quotes" class="level2">
+<h2 class="anchored" data-anchor-id="key-quotes">Key Quotes:</h2>
+<blockquote class="blockquote">
+<p>“The Bonferroni correction gives us peace of mind that we have not falsely rejected too many null hypotheses, but for a price: we reject few null hypotheses, and thus will typically make quite a few Type II errors.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“If m = 10,000, then we expect to falsely reject 100 null hypotheses by chance! That’s a lot of Type I errors, i.e., false positives!”</p>
+</blockquote>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion:</h2>
+<p>Multiple hypothesis testing is a common challenge in data analysis, requiring careful consideration of error control methods. Choosing the appropriate method depends on the specific research question, desired level of error control, and available resources. Re-sampling approaches offer a flexible alternative when theoretical null distributions are unavailable.</p>
+</section>
+<section id="multiple-hypothesis-testing-study-guide" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-hypothesis-testing-study-guide">Multiple Hypothesis Testing Study Guide</h2>
+<p>Short Answer Questions Instructions: Answer the following questions in 2-3 sentences each.</p>
+<ol type="1">
+<li>What is the purpose of a test statistic in hypothesis testing?</li>
+<li>Explain the concept of a p-value and its role in hypothesis testing.</li>
+<li>What is the difference between a Type I error and a Type II error?</li>
+<li>Why is multiple hypothesis testing problematic, even if we control the Type I error rate for each individual test?</li>
+<li>What is the family-wise error rate (FWER), and how does it differ from the Type I error rate?</li>
+<li>Explain how the Bonferroni correction controls the FWER.</li>
+<li>What is the advantage of Holm’s method over the Bonferroni correction for controlling the FWER?</li>
+<li>Define the false discovery rate (FDR). How does it differ from the FWER?</li>
+<li>Describe the Benjamini-Hochberg procedure for controlling the FDR.</li>
+<li>When might a re-sampling approach be useful for multiple hypothesis testing? Provide an example.</li>
+</ol>
+</section>
+<section id="short-answer-key" class="level2">
+<h2 class="anchored" data-anchor-id="short-answer-key">Short Answer Key</h2>
+<ol type="1">
+<li>A test statistic summarizes the data’s compatibility with the null hypothesis. Its value helps determine the strength of evidence against the null hypothesis.</li>
+<li>The p-value is the probability of observing a test statistic as extreme as, or more extreme than, the one calculated from the data, assuming the null hypothesis is true. A smaller p-value indicates stronger evidence against the null hypothesis.</li>
+<li>A Type I error occurs when we reject a true null hypothesis, while a Type II error occurs when we fail to reject a false null hypothesis.</li>
+<li>When performing multiple hypothesis tests, the probability of making at least one Type I error increases, even if the individual Type I error rate for each test is controlled. This leads to an inflated overall false positive rate.</li>
+<li>The family-wise error rate (FWER) is the probability of making at least one Type I error among all hypotheses tested. Unlike the Type I error rate which focuses on a single test, the FWER considers the probability of making any false rejections across multiple tests.</li>
+<li>The Bonferroni correction controls the FWER by dividing the desired overall significance level (alpha) by the number of tests (m). This more stringent significance level for each individual test ensures that the FWER is maintained at or below alpha.</li>
+<li>Holm’s method is a step-down procedure that adjusts the p-value thresholds for each hypothesis sequentially, starting with the smallest p-value. This allows for potentially more rejections compared to the Bonferroni correction, which uses a fixed threshold for all tests, while still controlling the FWER.</li>
+<li>The false discovery rate (FDR) is the expected proportion of false rejections (Type I errors) among all rejected hypotheses. It focuses on controlling the rate of false positives among the discoveries made, rather than controlling the probability of making any Type I error like the FWER.</li>
+<li>The Benjamini-Hochberg procedure controls the FDR by ranking p-values and finding the largest p-value that satisfies a specific criterion. It then rejects all null hypotheses with p-values less than or equal to this identified p-value.</li>
+<li>Re-sampling approaches are useful when the theoretical null distribution of the test statistic is unknown, or when we want to avoid making strong assumptions about the data. For instance, in a two-sample t-test with small sample sizes, where the normality assumption might not hold, we can use permutation testing to approximate the null distribution and calculate p-values.</li>
+</ol>
+</section>
+<section id="essay-questions" class="level2">
+<h2 class="anchored" data-anchor-id="essay-questions">Essay Questions</h2>
+<ol type="1">
+<li>Discuss the trade-off between controlling the FWER and the power of multiple hypothesis tests. How do different correction methods impact this trade-off?</li>
+<li>In what situations might controlling the FDR be more appropriate than controlling the FWER? Explain your reasoning with examples.</li>
+<li>Compare and contrast the Bonferroni correction and Holm’s method for controlling the FWER. Discuss their strengths and weaknesses, and provide scenarios where one might be preferred over the other.</li>
+<li>Explain the concept of permutation testing and its use in multiple hypothesis testing when theoretical null distributions are unavailable. How does it help in estimating p-values?</li>
+<li>Describe a real-world example of multiple hypothesis testing and discuss the implications of choosing different error control methods (FWER, FDR) for the specific problem.</li>
+</ol>
+</section>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
 <div class="quarto-figure quarto-figure-center">

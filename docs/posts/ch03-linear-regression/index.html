@@ -8,7 +8,7 @@
 
 <meta name="author" content="Oren Bochman">
 <meta name="keywords" content="statistical learning, linear regression, least squares, model assessment, model interpretation, qualitative predictors, interactions, polynomial regression, model diagnostics">
-<meta name="description" content="When the labels are continuous, we are faced with a regression problem. This chapter introduces the fundamental concepts of linear regression, a powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.">
+<meta name="description" content="When the labels are continuous, we are faced with a regression problem. In this chapter we model tabular data using a straight line. THis is the linear regression model, a simple yet powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.">
 
 <title>Chapter 3: Linear Regression – An Introduction to Statistical Learning</title>
 <style>
@@ -183,7 +183,7 @@ window.Quarto = {
       <h1 class="title">Chapter 3: Linear Regression</h1>
                   <div>
         <div class="description">
-          When the labels are continuous, we are faced with a regression problem. This chapter introduces the fundamental concepts of linear regression, a powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.
+          When the labels are continuous, we are faced with a regression problem. In this chapter we model tabular data using a straight line. THis is the linear regression model, a simple yet powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -229,7 +229,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#linear-regression-summary" id="toc-linear-regression-summary" class="nav-link active" data-scroll-target="#linear-regression-summary">Linear Regression Summary</a></li>
+  <li><a href="#linear-regression-orientation" id="toc-linear-regression-orientation" class="nav-link active" data-scroll-target="#linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</a></li>
   <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple Linear Regression:</a></li>
   <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression:</a></li>
   <li><a href="#qualitative-predictors" id="toc-qualitative-predictors" class="nav-link" data-scroll-target="#qualitative-predictors">Qualitative Predictors:</a></li>
@@ -237,6 +237,9 @@ window.Quarto = {
   <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression">Polynomial Regression:</a></li>
   <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model Diagnostics:</a></li>
   <li><a href="#key-quotes" id="toc-key-quotes" class="nav-link" data-scroll-target="#key-quotes">Key Quotes:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#chapter" id="toc-chapter" class="nav-link" data-scroll-target="#chapter">Chapter</a></li>
   </ul>
 </nav>
 </nav>
@@ -251,7 +254,93 @@ window.Quarto = {
 
 
 
-<p>The lab for this chapter is at <a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">lab</a> The chapter is 64 pages long and covers the following topics:</p>
+<blockquote class="blockquote">
+<p>“Essentially, all models are wrong, but some are useful” — George Box</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_trend">📈</span> <span class="emoji" data-emoji="chart_with_downwards_trend">📉</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
+<figcaption>Linear Regression in a nutshell</figcaption>
+</figure>
+</div>
+<ul>
+<li>Linear regression is the fundamental statistical technique for modeling the relationship between a predictor variable and a response variable. <mark>In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.</mark></li>
+<li>The model’s accuracy is assessed <span class="emoji" data-emoji="see_no_evil">🙈</span> <span class="emoji" data-emoji="hear_no_evil">🙉</span> <span class="emoji" data-emoji="speak_no_evil">🙊</span> via metrics like:
+<ul>
+<li>the <strong>Residual Standard Error</strong> (RSE) <span class="emoji" data-emoji="broken_heart">💔</span></li>
+<li>the adjusted <span class="math inline">R^2</span> <span class="emoji" data-emoji="kiss">💋</span><br>
+</li>
+<li>the fantastic <strong>F-statistic</strong>, <span class="emoji" data-emoji="sparkling_heart">💖</span> and</li>
+<li>the black <span class="emoji" data-emoji="sheep">🐑</span> of statistics - <strong>p-values</strong>. <span class="emoji" data-emoji="scream">😱</span></li>
+</ul></li>
+</ul>
+<p>The <mark>coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant</mark> <span class="emoji" data-emoji="yawning_face">🥱</span> . Qualitative predictors are incorporated using <span class="emoji" data-emoji="dumpling">🥟</span> dummy variables, and interactions between predictors can capture complex relationships.</p>
+<p>Model diagnostics help identify potential issues like <strong>non-linearity</strong> <span class="emoji" data-emoji="vampire">🧛</span>, <strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span>, <strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span>, <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>, and <strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span>.</p>
+<p>Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. <span class="emoji" data-emoji="headphones">🎧</span></p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>“The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” — Fred Mosteller and John Tukey</p>
+</blockquote>
+<p>The chapter is 64 pages long and covers the following topics:</p>
+<ul>
+<li>Linear Regression
+<ul>
+<li>Simple Linear Regression
+<ul>
+<li>Estimating the Coefficients</li>
+<li>Assessing the Accuracy of the Coefficient Estimates</li>
+<li>Assessing the Accuracy of the Model</li>
+</ul></li>
+<li>Multiple Linear Regression
+<ul>
+<li>Estimating the Regression Coefficients</li>
+<li>Some Important Questions</li>
+</ul></li>
+<li>Other Considerations in the Regression Model
+<ul>
+<li>Qualitative Predictors</li>
+<li>Extensions of the Linear Model</li>
+<li>Potential Problems</li>
+</ul></li>
+<li>The Marketing Plan</li>
+<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
+</ul></li>
+<li>There is a lab:
+<ul>
+<li><a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
+</ul></li>
+</ul>
+<section id="linear-regression-orientation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</h2>
+<p>There are plenty of big words in this chapter, but don’t worry, we’ll <span class="emoji" data-emoji="muscle">💪</span> break them down together<span class="emoji" data-emoji="palms_up_together">🤲</span>! Here’s a quick overview of the key concepts covered in this chapter:</p>
+<ol type="1">
+<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.</li>
+<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple <em>predictor</em> variables.</li>
+<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><span class="math inline">R^2</span></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
+<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
+<li><strong>Qualitative Predictors</strong>: When we want to play with non0numerical predictors, e.g.&nbsp;representing color categoris, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.</li>
+<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
+<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
+<li><strong>Model Diagnostics</strong> <span class="emoji" data-emoji="thermometer">🌡️</span> : Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
+<li><strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span> - when the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.</li>
+<li><strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span> - observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.</li>
+<li><strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span> - when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</li>
+</ol>
 
 <div class="no-row-height column-margin column-container"><div id="fig-v3.1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -312,67 +401,11 @@ Figure&nbsp;6: Regression in R
 
 
 
-<ul>
-<li>Linear Regression
-<ul>
-<li>Simple Linear Regression
-<ul>
-<li>Estimating the Coefficients</li>
-<li>Assessing the Accuracy of the Coefficient Estimates</li>
-<li>Assessing the Accuracy of the Model</li>
-</ul></li>
-<li>Multiple Linear Regression
-<ul>
-<li>Estimating the Regression Coefficients</li>
-<li>Some Important Questions</li>
-</ul></li>
-<li>Other Considerations in the Regression Model
-<ul>
-<li>Qualitative Predictors</li>
-<li>Extensions of the Linear Model</li>
-<li>Potential Problems</li>
-</ul></li>
-<li>The Marketing Plan</li>
-<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
-<li>Lab: Linear Regression</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-TL;DR - Linear Regression in a Nutshell
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
-<figcaption>Linear Regression in a nutshell</figcaption>
-</figure>
-</div>
-<p>Linear regression is a fundamental statistical technique for modeling the relationship between a single predictor variable and a response variable. The model assumes a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values. The accuracy of the model is assessed using metrics like the <strong>Residual Standard Error</strong> (RSE), adjusted <span class="math inline">R^2</span>, <strong>F-statistic</strong>, and <strong>p-values</strong>. The coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant. Qualitative predictors are incorporated using dummy variables, and interactions between predictors can capture complex relationships. Model diagnostics help identify potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</p>
-</div>
-</div>
-<section id="linear-regression-summary" class="level2">
-<h2 class="anchored" data-anchor-id="linear-regression-summary">Linear Regression Summary</h2>
-<ol type="1">
-<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single predictor variable and a response variable using a straight line.</li>
-<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple predictor variables.</li>
-<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><span class="math inline">R^2</span></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
-<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
-<li><strong>Qualitative Predictors</strong>: Incorporating categorical variables into regression models using dummy variables.</li>
-<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
-<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
-<li><strong>Model Diagnostics</strong>: Identifying and addressing potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
-</ol>
 </section>
 <section id="simple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="simple-linear-regression">Simple Linear Regression:</h2>
 <ul>
-<li><p><strong>Model</strong>: The relationship between response <span class="math inline">(Y)</span> and predictor <span class="math inline">(X)</span> is represented as <span class="math display">
+<li><p><strong>Model</strong>: The relationship between <em>response</em> <span class="math inline">(Y)</span> and <em>predictor</em> <span class="math inline">(X)</span> is represented as <span class="math display">
 Y = β_0 + β_1 X + \epsilon
 </span></p></li>
 <li><p>where</p>
@@ -399,6 +432,7 @@ Y = β_0 + β_1 X_1 + β_2 X_2 + \ldots + β_p X_p + \epsilon
 </section>
 <section id="qualitative-predictors" class="level2">
 <h2 class="anchored" data-anchor-id="qualitative-predictors">Qualitative Predictors:</h2>
+<p>When we have categorical predictors</p>
 <ul>
 <li><strong>Dummy Variables</strong>: Categorical variables are incorporated by creating dummy variables, which take on values of 0 or 1 to represent different categories.</li>
 <li><strong>Baseline Category</strong>: One category is chosen as the baseline, and its coefficient represents the average response for that category. Other dummy variable coefficients represent differences from the baseline.</li>
@@ -446,11 +480,27 @@ Y = β_0 + β_1 X_1 + β_2 X_2 + \ldots + β_p X_p + \epsilon
 <blockquote class="blockquote">
 <p>“When levels of either TV or radio are low, then the true sales are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate sales.”</p>
 </blockquote>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
-<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
-<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
-<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch03.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch03.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
 
 
 </section>

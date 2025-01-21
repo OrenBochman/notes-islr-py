@@ -12,7 +12,7 @@ listing:
   sort-ui: false
   filter-ui: false
   feed:
-    categories: [notes, lab, podcast]
+    categories: [podcast]
 
 ---
 

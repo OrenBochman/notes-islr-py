@@ -132,6 +132,80 @@ Techniques like permutation testing that use random sampling with replacement fr
 A re-sampling method where data points are randomly reassigned to different groups to create new datasets under the assumption of the null hypothesis. This allows for the estimation of the null distribution of the test statistic without relying on specific distributional assumptions.
 </dd>
 </dl>
+<section id="chapter-outline" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-outline">Chapter Outline</h2>
+<p><strong>Central Problem</strong>: When testing multiple hypotheses simultaneously, the probability of making at least one Type I error (false positive) increases dramatically. This necessitates the use of specific methods to control this error rate.</p>
+<ol type="1">
+<li>Key Concepts:</li>
+</ol>
+<p>Type I Error: Rejecting the null hypothesis when it is actually true (false positive). Type II Error: Failing to reject the null hypothesis when it is actually false (false negative). Family-Wise Error Rate (FWER): The probability of making at least one Type I error across all tested hypotheses. False Discovery Rate (FDR): The expected proportion of rejected null hypotheses that are actually false positives. Multiple Testing Correction: Adjusting p-values or rejection thresholds to account for the increased risk of Type I errors when testing multiple hypotheses.</p>
+<ol start="2" type="1">
+<li>Methods for Controlling FWER:</li>
+</ol>
+<p>Bonferroni Correction: The simplest and most conservative method. It divides the desired alpha level (the probability of making a Type I error) by the number of hypotheses being tested (m). This new, stricter alpha level is then used as the threshold for rejecting each individual hypothesis. Formula: Reject H0j if p-value &lt; α/m Advantages: Easy to implement. Disadvantages: Can be overly conservative, leading to higher Type II error rates, especially with a large number of hypotheses. Holm’s Method: A step-down procedure that offers more power than Bonferroni while still controlling the FWER. It orders the p-values from smallest to largest and compares each p-value to a sequentially adjusted alpha level. Formula: Reject H0j if p(j) &lt; α/(m + 1 - j), where p(j) is the jth smallest p-value. Advantages: More powerful than Bonferroni. Disadvantages: Still relatively conservative. Tukey’s and Scheffé’s Methods: Specialized methods tailored for specific types of multiple comparisons. Tukey’s method is designed for all pairwise comparisons of means, while Scheffé’s method is more general and allows for any linear combination of means to be tested.</p>
+<ol start="3" type="1">
+<li>Methods for Controlling FDR:</li>
+</ol>
+<p>Benjamini-Hochberg Procedure: A step-up procedure that controls the FDR at a desired level (q). It orders the p-values from smallest to largest and compares each p-value to a sequentially adjusted q-value threshold. Formula: Reject H0j if p(j) &lt; qj/m Advantages: Less conservative than FWER control methods, leading to higher power. Disadvantages: May lead to a higher proportion of false positives compared to FWER control methods. 4. Re-Sampling Approaches:</p>
+<p>When the theoretical null distribution of a test statistic is unknown, re-sampling methods (e.g., permutation tests) can be used to approximate the null distribution and calculate p-values. This is particularly useful for small sample sizes or complex test statistics.</p>
+<ol start="5" type="1">
+<li>Illustrations: There are many examples using simulated data and real datasets (Fund dataset, Khan dataset) to demonstrate the impact of multiple testing on error rates and the effectiveness of different correction methods.</li>
+</ol>
+</section>
+<section id="key-quotes" class="level2">
+<h2 class="anchored" data-anchor-id="key-quotes">Key Quotes:</h2>
+<blockquote class="blockquote">
+<p>“The Bonferroni correction gives us peace of mind that we have not falsely rejected too many null hypotheses, but for a price: we reject few null hypotheses, and thus will typically make quite a few Type II errors.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“If m = 10,000, then we expect to falsely reject 100 null hypotheses by chance! That’s a lot of Type I errors, i.e., false positives!”</p>
+</blockquote>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion:</h2>
+<p>Multiple hypothesis testing is a common challenge in data analysis, requiring careful consideration of error control methods. Choosing the appropriate method depends on the specific research question, desired level of error control, and available resources. Re-sampling approaches offer a flexible alternative when theoretical null distributions are unavailable.</p>
+</section>
+<section id="multiple-hypothesis-testing-study-guide" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-hypothesis-testing-study-guide">Multiple Hypothesis Testing Study Guide</h2>
+<p>Short Answer Questions Instructions: Answer the following questions in 2-3 sentences each.</p>
+<ol type="1">
+<li>What is the purpose of a test statistic in hypothesis testing?</li>
+<li>Explain the concept of a p-value and its role in hypothesis testing.</li>
+<li>What is the difference between a Type I error and a Type II error?</li>
+<li>Why is multiple hypothesis testing problematic, even if we control the Type I error rate for each individual test?</li>
+<li>What is the family-wise error rate (FWER), and how does it differ from the Type I error rate?</li>
+<li>Explain how the Bonferroni correction controls the FWER.</li>
+<li>What is the advantage of Holm’s method over the Bonferroni correction for controlling the FWER?</li>
+<li>Define the false discovery rate (FDR). How does it differ from the FWER?</li>
+<li>Describe the Benjamini-Hochberg procedure for controlling the FDR.</li>
+<li>When might a re-sampling approach be useful for multiple hypothesis testing? Provide an example.</li>
+</ol>
+</section>
+<section id="short-answer-key" class="level2">
+<h2 class="anchored" data-anchor-id="short-answer-key">Short Answer Key</h2>
+<ol type="1">
+<li>A test statistic summarizes the data’s compatibility with the null hypothesis. Its value helps determine the strength of evidence against the null hypothesis.</li>
+<li>The p-value is the probability of observing a test statistic as extreme as, or more extreme than, the one calculated from the data, assuming the null hypothesis is true. A smaller p-value indicates stronger evidence against the null hypothesis.</li>
+<li>A Type I error occurs when we reject a true null hypothesis, while a Type II error occurs when we fail to reject a false null hypothesis.</li>
+<li>When performing multiple hypothesis tests, the probability of making at least one Type I error increases, even if the individual Type I error rate for each test is controlled. This leads to an inflated overall false positive rate.</li>
+<li>The family-wise error rate (FWER) is the probability of making at least one Type I error among all hypotheses tested. Unlike the Type I error rate which focuses on a single test, the FWER considers the probability of making any false rejections across multiple tests.</li>
+<li>The Bonferroni correction controls the FWER by dividing the desired overall significance level (alpha) by the number of tests (m). This more stringent significance level for each individual test ensures that the FWER is maintained at or below alpha.</li>
+<li>Holm’s method is a step-down procedure that adjusts the p-value thresholds for each hypothesis sequentially, starting with the smallest p-value. This allows for potentially more rejections compared to the Bonferroni correction, which uses a fixed threshold for all tests, while still controlling the FWER.</li>
+<li>The false discovery rate (FDR) is the expected proportion of false rejections (Type I errors) among all rejected hypotheses. It focuses on controlling the rate of false positives among the discoveries made, rather than controlling the probability of making any Type I error like the FWER.</li>
+<li>The Benjamini-Hochberg procedure controls the FDR by ranking p-values and finding the largest p-value that satisfies a specific criterion. It then rejects all null hypotheses with p-values less than or equal to this identified p-value.</li>
+<li>Re-sampling approaches are useful when the theoretical null distribution of the test statistic is unknown, or when we want to avoid making strong assumptions about the data. For instance, in a two-sample t-test with small sample sizes, where the normality assumption might not hold, we can use permutation testing to approximate the null distribution and calculate p-values.</li>
+</ol>
+</section>
+<section id="essay-questions" class="level2">
+<h2 class="anchored" data-anchor-id="essay-questions">Essay Questions</h2>
+<ol type="1">
+<li>Discuss the trade-off between controlling the FWER and the power of multiple hypothesis tests. How do different correction methods impact this trade-off?</li>
+<li>In what situations might controlling the FDR be more appropriate than controlling the FWER? Explain your reasoning with examples.</li>
+<li>Compare and contrast the Bonferroni correction and Holm’s method for controlling the FWER. Discuss their strengths and weaknesses, and provide scenarios where one might be preferred over the other.</li>
+<li>Explain the concept of permutation testing and its use in multiple hypothesis testing when theoretical null distributions are unavailable. How does it help in estimating p-values?</li>
+<li>Describe a real-world example of multiple hypothesis testing and discuss the implications of choosing different error control methods (FWER, FDR) for the specific problem.</li>
+</ol>
+</section>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -1192,7 +1266,93 @@ Bochman, Oren. 2024. <span>“Chapter 4: Classification.”</span> July 1,
 
 
 
-<p>The lab for this chapter is at <a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">lab</a> The chapter is 64 pages long and covers the following topics:</p>
+<blockquote class="blockquote">
+<p>“Essentially, all models are wrong, but some are useful” — George Box</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_trend">📈</span> <span class="emoji" data-emoji="chart_with_downwards_trend">📉</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
+<figcaption>Linear Regression in a nutshell</figcaption>
+</figure>
+</div>
+<ul>
+<li>Linear regression is the fundamental statistical technique for modeling the relationship between a predictor variable and a response variable. <mark>In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.</mark></li>
+<li>The model’s accuracy is assessed <span class="emoji" data-emoji="see_no_evil">🙈</span> <span class="emoji" data-emoji="hear_no_evil">🙉</span> <span class="emoji" data-emoji="speak_no_evil">🙊</span> via metrics like:
+<ul>
+<li>the <strong>Residual Standard Error</strong> (RSE) <span class="emoji" data-emoji="broken_heart">💔</span></li>
+<li>the adjusted <img src="https://latex.codecogs.com/png.latex?R%5E2"> <span class="emoji" data-emoji="kiss">💋</span><br>
+</li>
+<li>the fantastic <strong>F-statistic</strong>, <span class="emoji" data-emoji="sparkling_heart">💖</span> and</li>
+<li>the black <span class="emoji" data-emoji="sheep">🐑</span> of statistics - <strong>p-values</strong>. <span class="emoji" data-emoji="scream">😱</span></li>
+</ul></li>
+</ul>
+<p>The <mark>coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant</mark> <span class="emoji" data-emoji="yawning_face">🥱</span> . Qualitative predictors are incorporated using <span class="emoji" data-emoji="dumpling">🥟</span> dummy variables, and interactions between predictors can capture complex relationships.</p>
+<p>Model diagnostics help identify potential issues like <strong>non-linearity</strong> <span class="emoji" data-emoji="vampire">🧛</span>, <strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span>, <strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span>, <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>, and <strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span>.</p>
+<p>Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. <span class="emoji" data-emoji="headphones">🎧</span></p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>“The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” — Fred Mosteller and John Tukey</p>
+</blockquote>
+<p>The chapter is 64 pages long and covers the following topics:</p>
+<ul>
+<li>Linear Regression
+<ul>
+<li>Simple Linear Regression
+<ul>
+<li>Estimating the Coefficients</li>
+<li>Assessing the Accuracy of the Coefficient Estimates</li>
+<li>Assessing the Accuracy of the Model</li>
+</ul></li>
+<li>Multiple Linear Regression
+<ul>
+<li>Estimating the Regression Coefficients</li>
+<li>Some Important Questions</li>
+</ul></li>
+<li>Other Considerations in the Regression Model
+<ul>
+<li>Qualitative Predictors</li>
+<li>Extensions of the Linear Model</li>
+<li>Potential Problems</li>
+</ul></li>
+<li>The Marketing Plan</li>
+<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
+</ul></li>
+<li>There is a lab:
+<ul>
+<li><a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
+</ul></li>
+</ul>
+<section id="linear-regression-orientation" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</h2>
+<p>There are plenty of big words in this chapter, but don’t worry, we’ll <span class="emoji" data-emoji="muscle">💪</span> break them down together<span class="emoji" data-emoji="palms_up_together">🤲</span>! Here’s a quick overview of the key concepts covered in this chapter:</p>
+<ol type="1">
+<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.</li>
+<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple <em>predictor</em> variables.</li>
+<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><img src="https://latex.codecogs.com/png.latex?R%5E2"></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
+<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
+<li><strong>Qualitative Predictors</strong>: When we want to play with non0numerical predictors, e.g.&nbsp;representing color categoris, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.</li>
+<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
+<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
+<li><strong>Model Diagnostics</strong> <span class="emoji" data-emoji="thermometer">🌡️</span> : Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
+<li><strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span> - when the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.</li>
+<li><strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span> - observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.</li>
+<li><strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span> - when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</li>
+</ol>
 
 <div class="no-row-height column-margin column-container"><div id="fig-v3.1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1253,67 +1413,11 @@ Figure&nbsp;6: Regression in R
 
 
 
-<ul>
-<li>Linear Regression
-<ul>
-<li>Simple Linear Regression
-<ul>
-<li>Estimating the Coefficients</li>
-<li>Assessing the Accuracy of the Coefficient Estimates</li>
-<li>Assessing the Accuracy of the Model</li>
-</ul></li>
-<li>Multiple Linear Regression
-<ul>
-<li>Estimating the Regression Coefficients</li>
-<li>Some Important Questions</li>
-</ul></li>
-<li>Other Considerations in the Regression Model
-<ul>
-<li>Qualitative Predictors</li>
-<li>Extensions of the Linear Model</li>
-<li>Potential Problems</li>
-</ul></li>
-<li>The Marketing Plan</li>
-<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
-<li>Lab: Linear Regression</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-TL;DR - Linear Regression in a Nutshell
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
-<figcaption>Linear Regression in a nutshell</figcaption>
-</figure>
-</div>
-<p>Linear regression is a fundamental statistical technique for modeling the relationship between a single predictor variable and a response variable. The model assumes a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values. The accuracy of the model is assessed using metrics like the <strong>Residual Standard Error</strong> (RSE), adjusted <img src="https://latex.codecogs.com/png.latex?R%5E2">, <strong>F-statistic</strong>, and <strong>p-values</strong>. The coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant. Qualitative predictors are incorporated using dummy variables, and interactions between predictors can capture complex relationships. Model diagnostics help identify potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</p>
-</div>
-</div>
-<section id="linear-regression-summary" class="level2">
-<h2 class="anchored" data-anchor-id="linear-regression-summary">Linear Regression Summary</h2>
-<ol type="1">
-<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single predictor variable and a response variable using a straight line.</li>
-<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple predictor variables.</li>
-<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><img src="https://latex.codecogs.com/png.latex?R%5E2"></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
-<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
-<li><strong>Qualitative Predictors</strong>: Incorporating categorical variables into regression models using dummy variables.</li>
-<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
-<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
-<li><strong>Model Diagnostics</strong>: Identifying and addressing potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
-</ol>
 </section>
 <section id="simple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="simple-linear-regression">Simple Linear Regression:</h2>
 <ul>
-<li><p><strong>Model</strong>: The relationship between response <img src="https://latex.codecogs.com/png.latex?(Y)"> and predictor <img src="https://latex.codecogs.com/png.latex?(X)"> is represented as <img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%CE%B2_0%20+%20%CE%B2_1%20X%20+%20%5Cepsilon%0A"></p></li>
+<li><p><strong>Model</strong>: The relationship between <em>response</em> <img src="https://latex.codecogs.com/png.latex?(Y)"> and <em>predictor</em> <img src="https://latex.codecogs.com/png.latex?(X)"> is represented as <img src="https://latex.codecogs.com/png.latex?%0AY%20=%20%CE%B2_0%20+%20%CE%B2_1%20X%20+%20%5Cepsilon%0A"></p></li>
 <li><p>where</p>
 <ul>
 <li><img src="https://latex.codecogs.com/png.latex?%CE%B2_0"> is the intercept,</li>
@@ -1336,6 +1440,7 @@ TL;DR - Linear Regression in a Nutshell
 </section>
 <section id="qualitative-predictors" class="level2">
 <h2 class="anchored" data-anchor-id="qualitative-predictors">Qualitative Predictors:</h2>
+<p>When we have categorical predictors</p>
 <ul>
 <li><strong>Dummy Variables</strong>: Categorical variables are incorporated by creating dummy variables, which take on values of 0 or 1 to represent different categories.</li>
 <li><strong>Baseline Category</strong>: One category is chosen as the baseline, and its coefficient represents the average response for that category. Other dummy variable coefficients represent differences from the baseline.</li>
@@ -1383,11 +1488,27 @@ TL;DR - Linear Regression in a Nutshell
 <blockquote class="blockquote">
 <p>“When levels of either TV or radio are low, then the true sales are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate sales.”</p>
 </blockquote>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
-<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
-<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
-<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch03.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch03.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
 
 
 </section>
@@ -1508,7 +1629,11 @@ TL;DR - Statistical Learning
 <li>The Bias-Variance Trade-Off</li>
 </ul></li>
 <li>The Classification Setting</li>
+</ul>
+<p>There is also a lab which I split into two parts:</p>
+<ul>
 <li><a href="../../posts/ch02-statistical-learning/Ch02-statlearn-lab.html">Lab: Introduction to Python</a></li>
+<li><a href="../../posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html">Lab: Graphics</a></li>
 </ul>
 <section id="key-terms-in-statistical-learning-and-machine-learning" class="level2">
 <h2 class="anchored" data-anchor-id="key-terms-in-statistical-learning-and-machine-learning">Key Terms in Statistical Learning and Machine Learning</h2>

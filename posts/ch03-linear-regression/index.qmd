@@ -1,13 +1,90 @@
 ---
 title: "Chapter 3: Linear Regression"
-description: "When the labels are continuous, we are faced with a regression problem. This chapter introduces the fundamental concepts of linear regression, a powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable."
+description: "When the labels are continuous, we are faced with a regression problem. In this chapter we model tabular data using a straight line. THis is the linear regression model, a simple yet powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable."
 categories: [notes,edx,podcast]
 keywords: [statistical learning, linear regression, least squares, model assessment, model interpretation, qualitative predictors, interactions, polynomial regression, model diagnostics]
 date: 2024-06-21
 ---
 
-The lab for this chapter is at [lab](Ch03-linreg-lab.qmd)
+
+> “Essentially, all models are wrong, but some are useful” --- George Box
+
+
+::: {.callout-tip}  
+
+## TL;DR - Linear Regression :chart_with_upwards_trend: :chart_with_downwards_trend: {.unnumbered}
+
+![Linear Regression in a nutshell](/images/in_a_nutshell.jpg)
+
+
+
+- Linear regression is the fundamental statistical technique for modeling the relationship between a  predictor variable and a response variable. [In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.]{.mark}
+- The model's accuracy is assessed :see_no_evil: :hear_no_evil: :speak_no_evil: via metrics like:
+    - the **Residual Standard Error** (RSE) :broken_heart:
+    - the adjusted $R^2$ :kiss:  
+    - the fantastic **F-statistic**, :sparkling_heart: and 
+    - the black :sheep: of statistics - **p-values**. :scream:
+
+The [coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant]{.mark} :yawning_face: . Qualitative predictors are incorporated using :dumpling: dummy variables, and interactions between predictors can capture complex relationships. 
+
+Model diagnostics help identify potential issues like **non-linearity** :vampire:, **heteroscedasticity** :space_invader:, **outliers** :alien:, **high leverage points** :ghost:, and **collinearity** :zombie:.
+
+Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. :headphones:
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+
+> “The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” --- Fred Mosteller and John Tukey
+
+
 The chapter is 64 pages long and covers the following topics:
+
+- Linear Regression
+    - Simple Linear Regression 
+        - Estimating the Coefficients
+        - Assessing the Accuracy of the Coefficient Estimates
+        - Assessing the Accuracy of the Model
+    - Multiple Linear Regression 
+        - Estimating the Regression Coefficients
+        - Some Important Questions
+    - Other Considerations in the Regression Model
+        - Qualitative Predictors
+        - Extensions of the Linear Model 
+        - Potential Problems
+    - The Marketing Plan 
+    - Comparison of Linear Regression with K-Nearest Neighbors
+
+- There is a lab:
+    - [Lab: Linear Regression](Ch03-linreg-lab.qmd)
+
+
+
+
+
+## Linear Regression Orientation ::old_key::
+
+There are plenty of big words in this chapter, but don't worry, we'll :muscle: break them down together:palms_up_together:!
+Here's a quick overview of the key concepts covered in this chapter:
+
+1. **Simple Linear Regression**: Modeling the relationship between a single input (*predictor*) variable and an output (*response*) variable using a straight line.
+1. **Multiple Linear Regression**: Extending simple linear regression to accommodate multiple *predictor* variables.
+1. **Model Assessment**: Evaluating the accuracy and fit of linear regression models using metrics like **RSE**, **$R^2$**, **F-statistic**, and **p-values**.
+1. **Model Interpretation**: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
+1. **Qualitative Predictors**: When we want to play with non0numerical predictors, e.g. representing  color categoris, we can encode them as numerical values or better yet we can use **dummy variables** that track if a category is on :arrow_forward: or off :stop_button:.
+Incorporating categorical variables into regression models using *dummy variables*. 
+1. **Interactions**: Modeling complex relationships by including interaction terms between predictors.
+1. **Polynomial Regression**: Capturing non-linear relationships using polynomial terms of predictor variables.
+1. **Model Diagnostics** :thermometer: : Identifying and addressing potential issues :face_with_thermometer: like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
+1. **heteroscedasticity** :space_invader: - when the response spreads out more as the predictors increase. You can usually eyeball :roll_eyes: this by looking at the residuals vs. fitted values plot.
+1. **outliers** :alien: - observations that don't fit the general pattern of the data. If they are mistakes we can toss them out :wastebasket:. But is they are for real, we call them **high leverage points** :ghost:.
+1. **collinearity** :zombie: - when *predictors* are highly correlated, leading to unstable coefficient estimates. The **VIF** (Variance Inflation Factor) helps detect collinearity.
+
+
 
 
 ::: {#fig-v3.1 .column-margin}
@@ -51,45 +128,9 @@ Extensions of the Linear Model
 Regression in R
 :::
 
-- Linear Regression
-    - Simple Linear Regression 
-        - Estimating the Coefficients
-        - Assessing the Accuracy of the Coefficient Estimates
-        - Assessing the Accuracy of the Model
-    - Multiple Linear Regression 
-        - Estimating the Regression Coefficients
-        - Some Important Questions
-    - Other Considerations in the Regression Model
-        - Qualitative Predictors
-        - Extensions of the Linear Model 
-        - Potential Problems
-    - The Marketing Plan 
-    - Comparison of Linear Regression with K-Nearest Neighbors
-    - Lab: Linear Regression
-
-::: {.callout-tip}  
-
-## TL;DR - Linear Regression in a Nutshell {.unnumbered}
-
-![Linear Regression in a nutshell](/images/in_a_nutshell.jpg)
-
-Linear regression is a fundamental statistical technique for modeling the relationship between a single predictor variable and a response variable. The model assumes a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values. The accuracy of the model is assessed using metrics like the **Residual Standard Error** (RSE), adjusted $R^2$, **F-statistic**, and **p-values**. The coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant. Qualitative predictors are incorporated using dummy variables, and interactions between predictors can capture complex relationships. Model diagnostics help identify potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
-:::
-
-## Linear Regression Summary
-
-1. **Simple Linear Regression**: Modeling the relationship between a single predictor variable and a response variable using a straight line.
-1. **Multiple Linear Regression**: Extending simple linear regression to accommodate multiple predictor variables.
-1. **Model Assessment**: Evaluating the accuracy and fit of linear regression models using metrics like **RSE**, **$R^2$**, **F-statistic**, and **p-values**.
-1. **Model Interpretation**: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
-1. **Qualitative Predictors**: Incorporating categorical variables into regression models using dummy variables.
-1. **Interactions**: Modeling complex relationships by including interaction terms between predictors.
-1. **Polynomial Regression**: Capturing non-linear relationships using polynomial terms of predictor variables.
-1. **Model Diagnostics**: Identifying and addressing potential issues like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
-
 ## Simple Linear Regression:
 
-- **Model**: The relationship between response $(Y)$ and predictor $(X)$ is represented as 
+- **Model**: The relationship between *response* $(Y)$ and *predictor* $(X)$ is represented as 
 $$
 Y = β_0 + β_1 X + \epsilon
 $$
@@ -101,6 +142,8 @@ $$
 - **Least Squares Estimation**: The coefficients $β_0$ and $β_1$ are estimated by minimizing the **Residual Sum of Squares (RSS)**, which quantifies the difference between observed and predicted values.
 - **Assessing Accuracy**: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between $X$ and $Y$.
 - **$R^2$**: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.
+
+
 
 ## Multiple Linear Regression:
 
@@ -114,6 +157,8 @@ $$
 - **Variable Selection**: Techniques like **Mallow's Cp**, **AIC**, **BIC**, and **adjusted $R^2$** are employed to choose the best subset of predictors for the model.
 
 ## Qualitative Predictors:
+
+When we have categorical predictors
 
 - **Dummy Variables**: Categorical variables are incorporated by creating dummy variables, which take on values of 0 or 1 to represent different categories.
 - **Baseline Category**: One category is chosen as the baseline, and its coefficient represents the average response for that category. Other dummy variable coefficients represent differences from the baseline.
@@ -148,5 +193,12 @@ $$
 
 >"When levels of either TV or radio are low, then the true sales are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate sales."
 
-{{< lipsum >}}
+## Resources
 
+## Slides 
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+## Chapter
+
+![Chapter](ch03.pdf){.col-page width="800px" height="1000px"}

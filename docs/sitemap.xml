@@ -26,11 +26,11 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/index.html</loc>
-    <lastmod>2025-01-21T02:41:48.792Z</lastmod>
+    <lastmod>2025-01-21T10:47:36.451Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/index.html</loc>
-    <lastmod>2025-01-21T00:31:05.482Z</lastmod>
+    <lastmod>2025-01-21T12:17:38.082Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/index.html</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/index.html</loc>
-    <lastmod>2025-01-20T23:26:50.731Z</lastmod>
+    <lastmod>2025-01-21T10:10:16.102Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/index.html</loc>
@@ -78,15 +78,15 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/Ch03-linreg-lab.html</loc>
-    <lastmod>2025-01-21T00:30:03.478Z</lastmod>
+    <lastmod>2025-01-21T12:19:56.359Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab.html</loc>
-    <lastmod>2025-01-21T00:29:20.133Z</lastmod>
+    <lastmod>2025-01-21T10:43:26.959Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/Ch06-varselect-lab.html</loc>
-    <lastmod>2025-01-21T01:47:42.430Z</lastmod>
+    <lastmod>2025-01-21T13:12:18.640Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch09-svm/index.html</loc>
@@ -94,7 +94,7 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/index.html</loc>
-    <lastmod>2025-01-21T02:56:07.864Z</lastmod>
+    <lastmod>2025-01-21T03:03:03.798Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch04-classification/Ch04-classification-lab.html</loc>
@@ -107,5 +107,13 @@
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/Ch05-resample-lab.html</loc>
     <lastmod>2025-01-21T00:54:34.115Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab copy.html</loc>
+    <lastmod>2025-01-21T10:32:32.485Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html</loc>
+    <lastmod>2025-01-21T10:43:58.017Z</lastmod>
   </url>
 </urlset>

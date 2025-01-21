@@ -10,10 +10,18 @@ date: 2024-07-21
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch06-varselect-lab.ipynb)
 
-
 In this lab we implement many of the techniques discussed in this chapter.
-We import some of our libraries at this top
-level. 
+We import some of our libraries at this top level. 
+
+::: {.callout-tip}
+## Oren's Note {.unnumbered}
+I've used `#| warning: false` to suppress hundreds of warnings in this lab because I couldn't read the output with them all displayed. You may want to run the code without this suppression to see if any warnings are important. You can do this bt running the lab in colab which uses the original. 
+
+The author suggests that some of warnings are superious may be removed as tha software mature. However the versions of the packages are pinned in the `requirements.txt` file so we may never know.
+
+The code and texts seem to have been put through some filter that has changed the formatting. I've been unable to
+resist the temptation to fix some of the formatting. 
+:::
 
 ```{python}
 import numpy as np
@@ -26,11 +34,10 @@ from sklearn.preprocessing import StandardScaler
 from ISLP import load_data
 from ISLP.models import ModelSpec as MS
 from functools import partial
-
 ```
 
-We again collect the new imports
-needed for this lab. Readers will also have to have installed `l0bnb` using `pip install l0bnb`.
+We again collect the new imports needed for this lab. 
+Readers will also have to have installed `l0bnb` using `pip install l0bnb`.
 
 ```{python}
 from sklearn.pipeline import Pipeline
@@ -45,6 +52,7 @@ from l0bnb import fit_path
 ```
 
 ## Subset Selection Methods
+
 Here we implement methods that reduce the number of parameters in a
 model by restricting the model to a subset of the input variables.
 
@@ -127,7 +135,7 @@ strategy = Stepwise.first_peak(design,
                                max_terms=len(design.terms))
 
 ```
- 
+
 We now fit a linear regression model with `Salary` as outcome using forward
 selection. To do so, we use the function `sklearn_selected()`  from the `ISLP.models` package. This takes
 a model from `statsmodels` along with a search strategy and selects a model with its
@@ -141,7 +149,7 @@ hitters_MSE.fit(Hitters, Y)
 hitters_MSE.selected_state_
 
 ```
- 
+
 Using `neg_Cp` results in a smaller model, as expected, with just 10 variables selected.
 
 ```{python}
@@ -152,15 +160,10 @@ hitters_Cp.fit(Hitters, Y)
 hitters_Cp.selected_state_
 
 ```
- 
+
 ### Choosing Among Models Using the Validation Set Approach and Cross-Validation
  
-As an  alternative to using $C_p$, we might try cross-validation to select a model in forward selection. For this, we need a
-method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the `sklearn_selection_path()` 
-estimator from `ISLP.models`. The function `cross_val_predict()` from `ISLP.models`
-computes the cross-validated predictions for each of the models
-along the path, which we can use to evaluate the cross-validated MSE
-along the path.
+As an  alternative to using $C_p$, we might try cross-validation to select a model in forward selection. For this, we need a method that stores the full path of models found in forward selection, and allows predictions for each of these. This can be done with the `sklearn_selection_path()` estimator from `ISLP.models`. The function `cross_val_predict()` from `ISLP.models` computes the cross-validated predictions for each of the models along the path, which we can use to evaluate the cross-validated MSE along the path.
 
 
 Here we define a strategy that fits the full forward selection path.
@@ -181,9 +184,8 @@ We now fit the full forward-selection path on the `Hitters` data and compute the
 full_path.fit(Hitters, Y)
 Yhat_in = full_path.predict(Hitters)
 Yhat_in.shape
-
 ```
-    
+
  
 This gives us an array of fitted values --- 20 steps in all, including the fitted mean for the null model --- which we can use to evaluate
 in-sample MSE. As expected, the in-sample MSE improves each step we take,
@@ -208,8 +210,8 @@ ax.set_xlabel('# steps of forward stepwise',
 ax.set_xticks(np.arange(n_steps)[::2])
 ax.legend()
 ax.set_ylim([50000,250000]);
-
 ```
+
 Notice the expression `None` in `Y[:,None]` above.
 This adds an axis (dimension) to the one-dimensional array `Y`,
 which allows it to be recycled when subtracted from the two-dimensional `Yhat_in`.
@@ -218,11 +220,8 @@ which allows it to be recycled when subtracted from the two-dimensional `Yhat_in
 We are now ready to use cross-validation to estimate test error along
 the model path. We must use *only the training observations* to perform all aspects of model-fitting --- including
 variable selection.  Therefore, the determination of which model of a
-given size is best must be made using \emph{only the training
-  observations} in each training fold. This point is subtle but important.  If the full data
-set is used to select the best subset at each step, then the validation
-set errors and cross-validation errors that we obtain will not be
-accurate estimates of the test error.
+given size is best must be made using \emph{only the training observations} in each training fold. This point is subtle but important.  If the full data set is used to select the best subset at each step, then the validation
+set errors and cross-validation errors that we obtain will not be accurate estimates of the test error.
 
 We now compute the cross-validated predicted values using 5-fold cross-validation.
 
@@ -242,10 +241,8 @@ Yhat_cv.shape
 The prediction matrix `Yhat_cv` is the same shape as `Yhat_in`; the difference is that the predictions in each row, corresponding to a particular sample index, were made from models fit on a training fold that did not include that row.
 
 At each model along the path, we compute the MSE in each of the cross-validation folds.
-These we will average to get the  mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean. {The estimate is crude because the five error estimates  are based on overlapping training sets, and hence are not independent.}
-Hence we must know the test indices for each cross-validation
-split. This can be found by using the `split()` method of `kfold`. Because
-we  fixed the random state above, whenever we split any array with the same
+These we will average to get the  mean MSE, and can also use the individual values to compute a crude estimate of the standard error of the mean. {The estimate is crude because the five error estimates  are based on overlapping training sets, and hence are not independent.} 
+Hence we must know the test indices for each cross-validation split. This can be found by using the `split()` method of `kfold`. Because we  fixed the random state above, whenever we split any array with the same
 number of rows as $Y$ we recover the same training and test indices, though we simply
 ignore the training indices below.
 
@@ -271,9 +268,8 @@ ax.errorbar(np.arange(n_steps),
 ax.set_ylim([50000,250000])
 ax.legend()
 mse_fig
-
 ```
- 
+
 To repeat the above using the validation set approach, we simply change our
 `cv` argument to a validation set: one random split of the data into a test and training. We choose a test size
 of 20%, similar to the size of each test set in 5-fold cross-validation.`skm.ShuffleSplit()`
@@ -288,9 +284,9 @@ for train_idx, test_idx in validation.split(Y):
     Yhat_val = full_path.predict(Hitters.iloc[test_idx])
     errors = (Yhat_val - Y[test_idx,None])**2
     validation_mse = errors.mean(0)
-
 ```
- As for the in-sample MSE case, the validation set approach does not provide standard errors.
+
+As for the in-sample MSE case, the validation set approach does not provide standard errors.
 
 ```{python}
 ax.plot(np.arange(n_steps), 
@@ -301,35 +297,30 @@ ax.set_xticks(np.arange(n_steps)[::2])
 ax.set_ylim([50000,250000])
 ax.legend()
 mse_fig
-
 ```
- 
+
 
 ### Best Subset Selection
-Forward stepwise is a *greedy* selection procedure; at each step it augments the current set by including one additional variable.  We now apply best subset selection  to the  `Hitters` 
-data, which for every subset size, searches for the best set of predictors.  
 
-We will use a package called `l0bnb` to perform
-best subset selection.
-Instead of constraining the subset to be a given size,
-this package produces a path of solutions using the subset size as a
-penalty rather than a constraint. Although the distinction is subtle, the difference comes when we cross-validate. 
+Forward stepwise is a *greedy* selection procedure; at each step it augments the current set by including one additional variable.  We now apply best subset selection  to the  `Hitters` data, which for every subset size, searches for the best set of predictors.  
+
+We will use a package called `l0bnb` to perform best subset selection.
+
+Instead of constraining the subset to be a given size, this package produces a path of solutions using the subset size as a penalty rather than a constraint. Although the distinction is subtle, the difference comes when we cross-validate. 
 
 
 ```{python}
 D = design.fit_transform(Hitters)
 D = D.drop('intercept', axis=1)
 X = np.asarray(D)
-
 ```
+
 Here we excluded the first column corresponding to the intercept, as
 `l0bnb` will fit the intercept separately. We can find a path using the `fit_path()` function.
 
 ```{python}
-path = fit_path(X, 
-                Y,
-                max_nonzeros=X.shape[1])
-
+#| output: false
+path = fit_path(X,Y,max_nonzeros=X.shape[1])
 ```
  
 The function `fit_path()` returns a list whose values include the fitted coefficients as `B`, an intercept as `B0`, as well as a few other attributes related to the particular path algorithm used. Such details are beyond the scope of this book.
@@ -338,30 +329,33 @@ The function `fit_path()` returns a list whose values include the fitted coeffic
 path[3]
 
 ```
+
 In the example above, we see that at the fourth step in the path, we have two nonzero coefficients in `'B'`, corresponding to the value $0.114$ for the penalty parameter `lambda_0`.
 We could make predictions using this sequence of fits on a validation set as a function of `lambda_0`, or with more work using cross-validation.
 
+::: {.callout-note}
+the output of this path isn't clear.
+:::
+
 ## Ridge Regression and the Lasso
-We will use the `sklearn.linear_model` package (for which
-we use `skl` as shorthand below)
-to fit ridge and  lasso regularized linear models on the `Hitters` data.
+
+We will use the `sklearn.linear_model` package (for which we use `skl` as shorthand below) to fit ridge and  lasso regularized linear models on the `Hitters` data.
 We start with the model matrix `X` (without an intercept) that we computed in the previous section on best subset regression.
 
 ### Ridge Regression
+
 We will use the function `skl.ElasticNet()` to fit both  ridge and the lasso.
-To fit a *path* of ridge regressions models, we use
-`skl.ElasticNet.path()`, which can fit both ridge and lasso, as well as a hybrid mixture;  ridge regression
-corresponds to `l1_ratio=0`.
+To fit a *path* of ridge regressions models, we use `skl.ElasticNet.path()`, which can fit both ridge and lasso, as well as a hybrid mixture;  ridge regression corresponds to `l1_ratio=0`.
+
 It is good practice to standardize the columns of `X` in these applications, if the variables are measured in different units. Since `skl.ElasticNet()` does no normalization, we have to take care of that ourselves.
-Since we
-standardize first, in order to find coefficient
-estimates on the original scale, we must *unstandardize*
-the coefficient estimates. The parameter
-$\lambda$ in (\ref{Ch6:ridge}) and (\ref{Ch6:LASSO}) is called `alphas` in `sklearn`. In order to
-be consistent with the rest of this chapter, we use `lambdas`
-rather than `alphas` in what follows.  {At the time of publication, ridge fits like the one in code chunk [22] issue unwarranted convergence warning messages; we expect these to disappear as this package matures.}
+Since we standardize first, in order to find coefficient estimates on the original scale, we must *unstandardize*
+the coefficient estimates. The parameter $\lambda$ in (\ref{Ch6:ridge}) and (\ref{Ch6:LASSO}) is called `alphas` in `sklearn`. In order to be consistent with the rest of this chapter, we use `lambdas` rather than `alphas` in what follows.  
+
+
+{At the time of publication, ridge fits like the one in code chunk [22] issue unwarranted convergence warning messages; we expect these to disappear as this package matures.}
 
 ```{python}
+#| warning: false
 Xs = X - X.mean(0)[None,:]
 X_scale = X.std(0)
 Xs = Xs / X_scale[None,:]
@@ -371,23 +365,16 @@ soln_array = skl.ElasticNet.path(Xs,
                                  l1_ratio=0.,
                                  alphas=lambdas)[1]
 soln_array.shape
-
 ```
-Here we extract the array of coefficients corresponding to the solutions along the regularization path.
-By default the `skl.ElasticNet.path` method fits a path along
-an automatically selected range of $\lambda$ values, except for the case when
-`l1_ratio=0`, which results in ridge regression (as is the case here). {The reason is rather technical; for all models except ridge, we can find the smallest value of $\lambda$ for which all coefficients are zero. For ridge this value is $\infty$.}  So here
-we have chosen to implement the function over a grid of values ranging
-from $\lambda=10^{8}$ to $\lambda=10^{-2}$ scaled by the standard
-deviation of $y$, essentially covering the full range of scenarios
-from the null model containing only the intercept, to the least
-squares fit.
 
-Associated with each value of $\lambda$ is a vector of ridge
-regression coefficients,   that can be accessed by
+
+Here we extract the array of coefficients corresponding to the solutions along the regularization path.
+By default the `skl.ElasticNet.path` method fits a path along an automatically selected range of $\lambda$ values, except for the case when `l1_ratio=0`, which results in ridge regression (as is the case here). {The reason is rather technical; for all models except ridge, we can find the smallest value of $\lambda$ for which all coefficients are zero. For ridge this value is $\infty$.}  So here we have chosen to implement the function over a grid of values ranging
+from $\lambda=10^{8}$ to $\lambda=10^{-2}$ scaled by the standard deviation of $y$, essentially covering the full range of scenarios from the null model containing only the intercept, to the least squares fit.
+
+Associated with each value of $\lambda$ is a vector of ridge regression coefficients,   that can be accessed by
 a column of `soln_array`. In this case, `soln_array` is a $19 \times 100$ matrix, with
-19 rows (one for each predictor) and 100
-columns (one for each value of $\lambda$).
+19 rows (one for each predictor) and 100 columns (one for each value of $\lambda$).
 
 We transpose this matrix and turn it into a data frame to facilitate viewing and plotting.
 
@@ -413,44 +400,38 @@ ax.legend(loc='upper left');
 
 ```
 (We have used `latex` formatting in the horizontal label, in order to format the Greek $\lambda$ appropriately.) 
-We expect the coefficient estimates to be much smaller, in terms of
-$\ell_2$ norm, when a large value of $\lambda$ is used, as compared to
-when a small value of $\lambda$ is used. (Recall that the  $\ell_2$ norm is the square root of the sum of squared coefficient values.) We display  the coefficients at the $40$th step,
-where $\lambda$ is 25.535.
+We expect the coefficient estimates to be much smaller, in terms of $\ell_2$ norm, when a large value of $\lambda$ is used, as compared to when a small value of $\lambda$ is used. (Recall that the  $\ell_2$ norm is the square root of the sum of squared coefficient values.) We display  the coefficients at the $40$th step, where $\lambda$ is 25.535.
 
 ```{python}
 beta_hat = soln_path.loc[soln_path.index[39]]
 lambdas[39], beta_hat
-
 ```
- 
+
 Let’s compute the $\ell_2$ norm of the standardized coefficients.
 
 ```{python}
 np.linalg.norm(beta_hat)
-
 ```
-    
+
 In contrast, here is the $\ell_2$ norm when $\lambda$ is 2.44e-01.
-Note the much larger $\ell_2$ norm of the
-coefficients associated with this smaller value of $\lambda$.
+
+Note the much larger $\ell_2$ norm of the coefficients associated with this smaller value of $\lambda$.
 
 ```{python}
 beta_hat = soln_path.loc[soln_path.index[59]]
 lambdas[59], np.linalg.norm(beta_hat)
-
 ```
+
 Above we normalized `X` upfront, and fit the ridge model using `Xs`.
-The `Pipeline()`  object
-in `sklearn` provides a clear way to separate feature
+The `Pipeline()`  object in `sklearn` provides a clear way to separate feature
 normalization from the fitting of the ridge model itself.
 
 ```{python}
+#| warning: false
 ridge = skl.ElasticNet(alpha=lambdas[59], l1_ratio=0)
 scaler = StandardScaler(with_mean=True,  with_std=True)
 pipe = Pipeline(steps=[('scaler', scaler), ('ridge', ridge)])
 pipe.fit(X, Y)
-
 ```
 
 We show that it gives the same $\ell_2$ norm as in our previous fit on the standardized data.
@@ -460,16 +441,12 @@ np.linalg.norm(ridge.coef_)
 
 ```
  Notice that the operation `pipe.fit(X, Y)` above has changed the `ridge` object, and in particular has added attributes such as `coef_` that were not there before. 
-### Estimating Test Error of Ridge Regression
-Choosing an *a priori* value of $\lambda$ for ridge regression is
-difficult if not impossible. We will want to use the validation method
-or cross-validation to select the tuning parameter. The reader may not
-be surprised that the  `Pipeline()` approach can be used in
-`skm.cross_validate()` with either a validation method
-(i.e. `validation`) or $k$-fold cross-validation.
 
-We fix the random state of the splitter
-so that the results obtained will be reproducible.
+### Estimating Test Error of Ridge Regression
+
+Choosing an *a priori* value of $\lambda$ for ridge regression is difficult if not impossible. We will want to use the validation method or cross-validation to select the tuning parameter. The reader may not be surprised that the  `Pipeline()` approach can be used in `skm.cross_validate()` with either a validation method (i.e. `validation`) or $k$-fold cross-validation.
+
+[We fix the random state of the splitter so that the results obtained will be reproducible.]{.marked}
 
 ```{python}
 validation = skm.ShuffleSplit(n_splits=1,
@@ -482,15 +459,12 @@ results = skm.cross_validate(ridge,
                              scoring='neg_mean_squared_error',
                              cv=validation)
 -results['test_score']
-
 ```
-    
-The test MSE is 1.342e+05.  Note
-that if we had instead simply fit a model with just an intercept, we
-would have predicted each test observation using the mean of the
-training observations. We can get the same result by fitting a ridge regression model
-with a *very* large value of $\lambda$. Note that `1e10`
-means $10^{10}$.
+
+The test MSE is 1.342e+05.  
+
+Note that if we had instead simply fit a model with just an intercept, we would have predicted each test observation using the mean of the training observations. We can get the same result by fitting a ridge regression model
+with a *very* large value of $\lambda$. Note that `1e10` means $10^{10}$.
 
 ```{python}
 ridge.alpha = 1e10
@@ -504,13 +478,12 @@ results = skm.cross_validate(ridge,
 ```
 Obviously choosing $\lambda=0.01$ is arbitrary,  so we will  use cross-validation or the validation-set
 approach to choose the tuning parameter $\lambda$.
-The object `GridSearchCV()`  allows exhaustive
-grid search to choose such a parameter.
+The object `GridSearchCV()`  allows exhaustive grid search to choose such a parameter.
 
-We first use the validation set method
-to choose $\lambda$.
+We first use the validation set method to choose $\lambda$.
 
 ```{python}
+#| warning: false
 param_grid = {'ridge__alpha': lambdas}
 grid = skm.GridSearchCV(pipe,
                         param_grid,
@@ -519,12 +492,12 @@ grid = skm.GridSearchCV(pipe,
 grid.fit(X, Y)
 grid.best_params_['ridge__alpha']
 grid.best_estimator_
-
 ```
  
 Alternatively, we can use 5-fold cross-validation.
 
 ```{python}
+#| warning: false
 grid = skm.GridSearchCV(pipe, 
                         param_grid,
                         cv=kfold,
@@ -532,10 +505,9 @@ grid = skm.GridSearchCV(pipe,
 grid.fit(X, Y)
 grid.best_params_['ridge__alpha']
 grid.best_estimator_
-
 ```
-Recall we set up the `kfold` object for 5-fold cross-validation on page~\pageref{line:choos-among-models}. We now plot the cross-validated MSE as a function of $-\log(\lambda)$, which has shrinkage decreasing from left
-to right.
+
+Recall we set up the `kfold` object for 5-fold cross-validation on page~\pageref{line:choos-among-models}. We now plot the cross-validated MSE as a function of $-\log(\lambda)$, which has shrinkage decreasing from left to right.
 
 ```{python}
 ridge_fig, ax = subplots(figsize=(8,8))
@@ -545,21 +517,20 @@ ax.errorbar(-np.log(lambdas),
 ax.set_ylim([50000,250000])
 ax.set_xlabel('$-\log(\lambda)$', fontsize=20)
 ax.set_ylabel('Cross-validated MSE', fontsize=20);
-
 ```
- 
+
 One can cross-validate different metrics to choose a parameter. The default
 metric for `skl.ElasticNet()` is test $R^2$.
 Let’s compare $R^2$ to MSE for cross-validation here.
 
 ```{python}
+#| warning: false
 grid_r2 = skm.GridSearchCV(pipe, 
                            param_grid,
                            cv=kfold)
 grid_r2.fit(X, Y)
-
 ```
- 
+
 Finally, let’s plot the results for cross-validated $R^2$.
 
 ```{python}
@@ -574,26 +545,23 @@ ax.set_ylabel('Cross-validated $R^2$', fontsize=20);
  
 
 ### Fast Cross-Validation for Solution Paths
-The ridge, lasso, and elastic net can be efficiently fit along a sequence of $\lambda$ values, creating what is known as a *solution path* or *regularization path*. Hence there is specialized code to fit
-such paths, and to choose a suitable value of $\lambda$ using cross-validation. Even with
-identical splits the results will not agree *exactly* with our `grid`
-above because the standardization of each feature  in `grid` is carried out on each fold,
-while in `pipeCV` below it is carried out only once.
-Nevertheless, the results are similar as the normalization
-is relatively stable across folds.
+
+The ridge, lasso, and elastic net can be efficiently fit along a sequence of $\lambda$ values, creating what is known as a *solution path* or *regularization path*. 
+Hence there is specialized code to fit such paths, and to choose a suitable value of $\lambda$ using cross-validation. 
+Even with identical splits the results will not agree *exactly* with our `grid` above because the standardization of each feature  in `grid` is carried out on each fold, while in `pipeCV` below it is carried out only once.
+Nevertheless, the results are similar as the normalization is relatively stable across folds.
 
 ```{python}
+#| warning: false
 ridgeCV = skl.ElasticNetCV(alphas=lambdas, 
                            l1_ratio=0,
                            cv=kfold)
 pipeCV = Pipeline(steps=[('scaler', scaler),
                          ('ridge', ridgeCV)])
 pipeCV.fit(X, Y)
-
 ```
- 
-Let’s produce a plot again of the cross-validation error to see that
-it is similar to using `skm.GridSearchCV`.
+
+Let’s produce a plot again of the cross-validation error to see that it is similar to using `skm.GridSearchCV`.
 
 ```{python}
 tuned_ridge = pipeCV.named_steps['ridge']
@@ -605,48 +573,30 @@ ax.axvline(-np.log(tuned_ridge.alpha_), c='k', ls='--')
 ax.set_ylim([50000,250000])
 ax.set_xlabel('$-\log(\lambda)$', fontsize=20)
 ax.set_ylabel('Cross-validated MSE', fontsize=20);
-
 ```
- 
-We see that the value of $\lambda$ that results in the
-smallest cross-validation error is 1.19e-02, available
-as the value `tuned_ridge.alpha_`. What is the test MSE
-associated with this value of $\lambda$?
+
+We see that the value of $\lambda$ that results in the smallest cross-validation error is 1.19e-02, available as the value `tuned_ridge.alpha_`. What is the test MSE associated with this value of $\lambda$?
 
 ```{python}
 np.min(tuned_ridge.mse_path_.mean(1))
-
 ```
-    
-This represents a further improvement over the test MSE that we got
-using $\lambda=4$.  Finally, `tuned_ridge.coef_`
-has the coefficients fit on the entire data set
-at this value of  $\lambda$.
+
+This represents a further improvement over the test MSE that we got using $\lambda=4$.  
+Finally, `tuned_ridge.coef_` has the coefficients fit on the entire data set at this value of  $\lambda$.
 
 ```{python}
 tuned_ridge.coef_
-
 ```
+
 As expected, none of the coefficients are zero—ridge regression does
 not perform variable selection!
 
 
 ### Evaluating Test Error of Cross-Validated Ridge
-Choosing $\lambda$ using cross-validation provides a single regression
-estimator, similar to fitting a linear regression model as we saw in
-Chapter~\ref{Ch3:linreg}. It is therefore reasonable to estimate what its test error
-is. We run into a problem here in that cross-validation will have
-*touched* all of its data in choosing $\lambda$, hence we have no
-further data to estimate test error. A compromise is to do an initial
-split of the data into two disjoint sets: a training set and a test set.
-We then fit a cross-validation
-tuned ridge regression on the training set, and evaluate its performance on the test set.
-We might call this cross-validation nested
-within the validation set approach. A priori there is no reason to use
-half of the data for each of the two sets in validation. Below, we use
-75% for training and 25% for test, with the estimator being ridge
-regression tuned using 5-fold cross-validation.  This can be achieved
-in code as follows:
+
+Choosing $\lambda$ using cross-validation provides a single regression estimator, similar to fitting a linear regression model as we saw in Chapter~\ref{Ch3:linreg}. 
+It is therefore reasonable to estimate what its test error is. We run into a problem here in that cross-validation will have *touched* all of its data in choosing $\lambda$, hence we have no further data to estimate test error. 
+A compromise is to do an initial split of the data into two disjoint sets: a training set and a test set. We then fit a cross-validation tuned ridge regression on the training set, and evaluate its performance on the test set. We might call this cross-validation nested within the validation set approach. A priori there is no reason to use half of the data for each of the two sets in validation. Below, we use 75% for training and 25% for test, with the estimator being ridge regression tuned using 5-fold cross-validation. This can be achieved in code as follows:
 
 ```{python}
 outer_valid = skm.ShuffleSplit(n_splits=1, 
@@ -660,10 +610,10 @@ ridgeCV = skl.ElasticNetCV(alphas=lambdas,
                            cv=inner_cv)
 pipeCV = Pipeline(steps=[('scaler', scaler),
                          ('ridge', ridgeCV)]);
-
 ```
 
 ```{python}
+#| warning: false
 results = skm.cross_validate(pipeCV, 
                              X,
                              Y,
@@ -676,6 +626,7 @@ results = skm.cross_validate(pipeCV,
  
 
 ### The Lasso
+
 We saw that ridge regression with a wise choice of $\lambda$ can
 outperform least squares as well as the null model on the
  `Hitters`  data set. We now ask whether the lasso can yield
@@ -872,10 +823,8 @@ $M=1$ only captures 38.31% of the variance, while $M=2$ captures an additional 2
 By  $M=6$ it increases to
 88.63%. Beyond this the increments continue to diminish, until we use all $M=p=19$ components, which captures all  100% of the variance.
 
- 
-
-
 ### Partial Least Squares
+
 Partial least squares (PLS) is implemented in the
 `PLSRegression()`  function.
 
