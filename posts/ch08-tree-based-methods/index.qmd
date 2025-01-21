@@ -6,6 +6,24 @@ keywords: ["Trees", "Decision Trees", "Classification and Regression Trees", "CA
 date: 2024-08-01
 ---
 
+::: {.callout-tip}  
+
+## TL;DR - Trees  {.unnumbered}
+
+![Trees in a nutshell](/images/in_a_nutshell.jpg)
+
+- **Tree-based methods** are supervised learning algorithms that stratify the predictor space to make predictions.
+- **Decision trees** are simple to interpret but may not be as competitive as other methods in terms of prediction accuracy.
+- **Ensembles of trees**, such as bagging, boosting, and random forests, can improve prediction performance.
+- **Classification trees** are used when the response is a categorical variable.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
 :::: {.callout-note collapse="false"}
 ## Tree based methods Video {.unnumbered}
 
@@ -304,3 +322,10 @@ Outline of [seventh video](#fig-8.7)
     -   Comparison of random forest and boosting
 ::::
 
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch08.pdf){.col-page width="800px" height="1000px"}

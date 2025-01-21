@@ -3,8 +3,9 @@ title: "Chapter 9: Support Vector Machines"
 description: "The support vector machine (SVM), an approach
 for classification that was developed in the computer science community in
 the 1990s and that has grown in popularity since then"
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 keywords: [statistical learning, support vector machines, maximal margin classifier, support vector classifier, support vector machine, nonlinear decision boundaries, KKT conditions, soft margin, SVM with more than two classes, relationship to logistic regression, relationship to other methods, computational considerations, relevance of SVMs]
+
 date: 2024-08-10
 ---
 
@@ -21,3 +22,32 @@ Opening Remarks
 Examples and Framework
 :::
 
+
+
+::: {.callout-tip}  
+
+## TL;DR - Support Vector Machines {.unnumbered}
+
+![Support Vector Machines in a nutshell](/images/in_a_nutshell.jpg)
+
+- **Maximal Margin Classifier**: The SVM finds the hyperplane that maximizes the margin between classes.
+- **Support Vector Classifier**: The SVM allows for misclassification by introducing slack variables.
+- **Support Vector Machine**: The SVM extends to nonlinear decision boundaries using kernels.
+- **KKT Conditions**: The Karush-Kuhn-Tucker conditions are necessary for the SVM solution.
+- **Soft Margin**: The SVM can handle noisy data by allowing for misclassification.
+- **Multi-Class SVM**: The SVM can be extended to more than two classes.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch09.pdf){.col-page width="800px" height="1000px"}

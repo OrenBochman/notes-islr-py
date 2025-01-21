@@ -7,6 +7,7 @@ date: 2024-07-28
 ---
 
 
+
 ::: {#fig-v1.1 .column-margin}
 {{< video https://youtu.be/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
@@ -20,3 +21,24 @@ Examples and Framework
 :::
 
 
+::: {.callout-tip}  
+
+## TL;DR - Beyond Linearity  {.unnumbered}
+
+![Beyond Linearity in a nutshell](/images/in_a_nutshell.jpg)
+
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch07.pdf){.col-page width="800px" height="1000px"}

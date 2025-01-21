@@ -19,3 +19,24 @@ Opening Remarks
 Examples and Framework
 :::
 
+::: {.callout-tip}  
+
+## TL;DR - Deep Learning {.unnumbered}
+
+![Deep Learning in a nutshell](/images/in_a_nutshell.jpg)
+
+Deep learning is a subfield of machine learning that is concerned with algorithms inspired by the structure and function of the brain called artificial neural networks. It has been applied to a wide range of applications, including computer vision, speech recognition, natural language processing, and more. Deep learning models are typically trained on large datasets using a technique called backpropagation, which adjusts the model's weights to minimize the error between the predicted output and the true output. Popular deep learning frameworks include TensorFlow, Keras, and PyTorch.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch10.pdf){.col-page width="800px" height="1000px"}

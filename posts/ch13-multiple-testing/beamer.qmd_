@@ -1,0 +1,89 @@
+---
+title: Multiple Hypothesis Testing
+format: beamer
+---
+
+# Introduction
+
+- When testing multiple hypotheses, it's important to be mindful of the increased risk of false positives.
+- A classic example is testing the equality of expected blood pressure between mice in a treatment group and a control group.
+- We can expand this to testing multiple hypotheses, like comparing the expected values of various biomarkers between the two groups.
+- **The challenge is to avoid incorrectly rejecting too many null hypotheses (i.e., too many false positives).**
+
+# Quick Review of Hypothesis Testing
+
+Hypothesis tests help us address straightforward "yes-or-no" questions about data, like:
+
+- Is a specific coefficient in a linear regression equal to zero?
+- Are the expected blood pressures of mice in treatment and control groups the same?
+
+# Steps in Hypothesis Testing
+
+1. **Define Null and Alternative Hypotheses**:
+   - The null hypothesis (\(H_0\)) represents the default belief (e.g., the coefficient is zero, or there's no difference in blood pressures).
+   - The alternative hypothesis (\(H_a\)) contradicts the null hypothesis.
+2. **Construct a Test Statistic**: This statistic quantifies how consistent the data is with \(H_0\).
+3. **Compute the p-value**: The p-value is the probability of getting a test statistic as extreme as the one observed, assuming \(H_0\) is true. A small p-value indicates evidence against \(H_0\).
+4. **Decide Whether to Reject \(H_0\)**: A small p-value provides evidence against \(H_0\), potentially signifying a discovery. But determining "how small is small enough" to reject \(H_0\) requires understanding Type I error.
+
+# The Problem of Multiple Testing
+
+- Imagine testing numerous hypotheses (say, 10,000) and rejecting those with p-values below 0.01. Even if all null hypotheses are true, you'd likely reject about 100 due to random chance.
+- Analogy: Flipping 1,024 fair coins ten times each. You'd anticipate one coin to land all tails, even though it's fair.
+- **Simply rejecting hypotheses based on a fixed p-value threshold without adjustments for multiplicity results in too many false positives.**
+
+# Family-Wise Error Rate (FWER)
+
+- FWER is the probability of making at least one Type I error.
+- Methods for controlling FWER include:
+  - **Bonferroni Correction**: Rejects hypotheses with p-values less than \(\alpha/m\), where \(\alpha\) is the desired significance level and \(m\) is the number of hypotheses.
+  - **Holm's Method**: A less conservative method than Bonferroni, capable of rejecting more hypotheses while still controlling FWER.
+
+# Example: FWER Control
+
+Consider five fund managers and a desired FWER of 0.05.
+
+- **Bonferroni**: Reject hypotheses with p-values below 0.05/5 = 0.01.
+- **Holm**: May permit slightly higher p-values, leading to more rejections.
+
+# Other Methods for FWER Control
+
+- **Tukey's Method**: Designed for pairwise comparisons of expected means across multiple groups.
+- **Scheffé's Method**: Useful for testing general linear combinations of expected means.
+- **While Bonferroni and Holm are widely applicable, Tukey and Scheffé can provide better results (more rejections with FWER control) in specific scenarios.**
+
+# False Discovery Rate (FDR)
+
+- FDR is the expected proportion of falsely rejected hypotheses among all rejected hypotheses.
+- It's beneficial when dealing with a large number of hypotheses, allowing some false positives for increased discoveries.
+- **Benjamini-Hochberg Procedure**: A common method for FDR control. It involves finding the largest p-value that fulfills a particular criterion and rejecting hypotheses with p-values less than or equal to that p-value.
+
+# Resampling Approaches
+
+- These approaches are particularly helpful when a theoretical null distribution isn't known or requires strong assumptions.
+- They work by simulating data under the null hypotheses and using the simulated data to approximate the null distribution, compute p-values, or estimate FDR.
+
+# Example: Resampling
+
+Consider comparing gene expression between cancer types.
+
+1. Calculate the two-sample t-statistic on the original data.
+2. Shuffle patient data and repeatedly calculate t-statistics on the shuffled data. This creates a resampling-based null distribution.
+3. Compute the p-value based on the proportion of resampled t-statistics as or more extreme than the original t-statistic.
+
+This method lets you estimate the p-value without relying on specific distributional assumptions.
+
+# Conclusion
+
+- Multiple hypothesis testing can lead to many false positives.
+- Controlling FWER and FDR provides solutions to this problem.
+- Resampling techniques offer flexibility when theoretical assumptions are difficult to satisfy.
+Changes and Quarto-Specific Fixes:
+
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch13.pdf){.col-page width="800px" height="1000px"}

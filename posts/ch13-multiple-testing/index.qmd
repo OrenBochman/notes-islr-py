@@ -1,7 +1,7 @@
 ---
 title: "Chapter 13: Multiple Testing"
 description: "The incidence of coincidece and risks of multiple testing"
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 date: 2024-09-20
 ---
 
@@ -17,3 +17,28 @@ Opening Remarks
 Examples and Framework
 :::
 
+
+
+::: {.callout-tip}  
+
+## TL;DR - Multiple Testing {.unnumbered}
+
+![Multiple Testing in a nutshell](/images/in_a_nutshell.jpg)
+
+Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+
+
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch13.pdf){.col-page width="800px" height="1000px"}

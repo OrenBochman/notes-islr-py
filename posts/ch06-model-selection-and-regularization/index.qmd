@@ -2,7 +2,7 @@
 title: "Chapter 6: Linear Model Selection and Regularization"
 description: "Alternative fitting procedures can yield better prediction accuracy and model interpretability"
 keywords: [statistical learning, linear model selection, regularization, subset selection, shrinkage methods, ridge regression, lasso, best subset selection, forward and backward stepwise selection]
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 date: 2024-07-20
 ---
 

@@ -39,7 +39,7 @@ Lab: Introduction to R
 
 ::: {.callout-tip}  
 
-## TL;DR - Statistical Learning in a Nutshell {.unnumbered}
+## TL;DR - Statistical Learning  {.unnumbered}
 
 ![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
 
