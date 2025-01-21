@@ -2,7 +2,9 @@
 title: "Chapter 2: Introduction to Python - Lab Graphics"
 categories: [lab,python]
 date: 2024-06-12
-
+format:
+   html:
+      page-layout: full
 ---
 
 ## Graphics

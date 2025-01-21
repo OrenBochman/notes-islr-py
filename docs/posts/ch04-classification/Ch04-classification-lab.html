@@ -214,7 +214,7 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
+    <div class="quarto-title column-page-right">
       <h1 class="title">Chapter 4: Classification Lab</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">lab</div>
@@ -224,7 +224,7 @@ window.Quarto = {
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-right">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -244,7 +244,7 @@ window.Quarto = {
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
@@ -277,7 +277,7 @@ window.Quarto = {
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
 
 
 
@@ -290,7 +290,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="the-stock-market-data">The Stock Market Data</h2>
 <p>In this lab we will examine the <code>Smarket</code> data, which is part of the <code>ISLP</code> library. This data set consists of percentage returns for the S&amp;P 500 stock index over 1,250 days, from the beginning of 2001 until the end of 2005. For each date, we have recorded the percentage returns for each of the five previous trading days, <code>Lag1</code> through <code>Lag5</code>. We have also recorded <code>Volume</code> (the number of shares traded on the previous day, in billions), <code>Today</code> (the percentage return on the date in question) and <code>Direction</code> (whether the market was <code>Up</code> or <code>Down</code> on this date).</p>
 <p>We start by importing our libraries at this top level; these are all imports we have seen in previous labs.</p>
-<div id="d65436ea" class="cell" data-execution_count="1">
+<div id="d65436ea" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots</span>
@@ -300,7 +300,7 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                         summarize)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We also collect together the new imports needed for this lab.</p>
-<div id="07abda8b" class="cell" data-execution_count="2">
+<div id="07abda8b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ISLP <span class="im">import</span> confusion_table</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ISLP.models <span class="im">import</span> contrast</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.discriminant_analysis <span class="im">import</span> <span class="op">\</span></span>
@@ -313,7 +313,7 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we are ready to load the <code>Smarket</code> data.</p>
-<div id="a59f6c8f" class="cell" data-execution_count="3">
+<div id="a59f6c8f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Smarket <span class="op">=</span> load_data(<span class="st">'Smarket'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Smarket</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -476,7 +476,7 @@ window.Quarto = {
 </div>
 </div>
 <p>This gives a truncated listing of the data. We can see what the variable names are.</p>
-<div id="09ec8858" class="cell" data-execution_count="4">
+<div id="09ec8858" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Smarket.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>Index(['Year', 'Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume', 'Today',
@@ -486,7 +486,7 @@ window.Quarto = {
 </div>
 <p>We compute the correlation matrix using the <code>corr()</code> method for data frames, which produces a matrix that contains all of the pairwise correlations among the variables.</p>
 <p>By instructing <code>pandas</code> to use only numeric variables, the <code>corr()</code> method does not report a correlation for the <code>Direction</code> variable because it is qualitative.</p>
-<div id="185692b0" class="cell" data-execution_count="5">
+<div id="185692b0" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Smarket.corr(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -602,7 +602,7 @@ window.Quarto = {
 </div>
 </div>
 <p>As one would expect, the correlations between the lagged return variables and today’s return are close to zero. The only substantial correlation is between <code>Year</code> and <code>Volume</code>. By plotting the data we see that <code>Volume</code> is increasing over time. In other words, the average number of shares traded daily increased from 2001 to 2005.</p>
-<div id="af895545" class="cell" data-execution_count="6">
+<div id="af895545" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Smarket.plot(y<span class="op">=</span><span class="st">'Volume'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -616,7 +616,7 @@ window.Quarto = {
 <section id="logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h2>
 <p>Next, we will fit a logistic regression model in order to predict <code>Direction</code> using <code>Lag1</code> through <code>Lag5</code> and <code>Volume</code>. The <code>sm.GLM()</code> function fits <em>generalized linear models</em>, a class of models that includes logistic regression. Alternatively, the function <code>sm.Logit()</code> fits a logistic regression model directly. The syntax of <code>sm.GLM()</code> is similar to that of <code>sm.OLS()</code>, except that we must pass in the argument <code>family=sm.families.Binomial()</code> in order to tell <code>statsmodels</code> to run a logistic regression rather than some other type of generalized linear model.</p>
-<div id="d28738f1" class="cell" data-execution_count="7">
+<div id="d28738f1" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>allvars <span class="op">=</span> Smarket.columns.drop([<span class="st">'Today'</span>, <span class="st">'Direction'</span>, <span class="st">'Year'</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>design <span class="op">=</span> MS(allvars)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> design.fit_transform(Smarket)</span>
@@ -698,7 +698,7 @@ window.Quarto = {
 </div>
 <p>The smallest <em>p</em>-value here is associated with <code>Lag1</code>. The negative coefficient for this predictor suggests that if the market had a positive return yesterday, then it is less likely to go up today. However, at a value of 0.15, the <em>p</em>-value is still relatively large, and so there is no clear evidence of a real association between <code>Lag1</code> and <code>Direction</code>.</p>
 <p>We use the <code>params</code> attribute of <code>results</code> in order to access just the coefficients for this fitted model.</p>
-<div id="cbcffd2c" class="cell" data-execution_count="8">
+<div id="cbcffd2c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>results.params</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>intercept   -0.126000
@@ -712,7 +712,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Likewise we can use the <code>pvalues</code> attribute to access the <em>p</em>-values for the coefficients.</p>
-<div id="6812aa51" class="cell" data-execution_count="9">
+<div id="6812aa51" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>results.pvalues</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>intercept    0.600700
@@ -726,7 +726,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The <code>predict()</code> method of <code>results</code> can be used to predict the probability that the market will go up, given values of the predictors. This method returns predictions on the probability scale. If no data set is supplied to the <code>predict()</code> function, then the probabilities are computed for the training data that was used to fit the logistic regression model. As with linear regression, one can pass an optional <code>exog</code> argument consistent with a design matrix if desired. Here we have printed only the first ten probabilities.</p>
-<div id="7d9f2d5b" class="cell" data-execution_count="10">
+<div id="7d9f2d5b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> results.predict()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>probs[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
@@ -735,12 +735,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>In order to make a prediction as to whether the market will go up or down on a particular day, we must convert these predicted probabilities into class labels, <code>Up</code> or <code>Down</code>. The following two commands create a vector of class predictions based on whether the predicted probability of a market increase is greater than or less than 0.5.</p>
-<div id="12d8ab69" class="cell" data-execution_count="11">
+<div id="12d8ab69" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> np.array([<span class="st">'Down'</span>]<span class="op">*</span><span class="dv">1250</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>labels[probs<span class="op">&gt;</span><span class="fl">0.5</span>] <span class="op">=</span> <span class="st">"Up"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>confusion_table()</code> function from the <code>ISLP</code> package summarizes these predictions, showing how many observations were correctly or incorrectly classified. Our function, which is adapted from a similar function in the module <code>sklearn.metrics</code>, transposes the resulting matrix and includes row and column labels. The <code>confusion_table()</code> function takes as first argument the predicted labels, and second argument the true labels.</p>
-<div id="a1437e66" class="cell" data-execution_count="12">
+<div id="a1437e66" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>confusion_table(labels, Smarket.Direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -777,7 +777,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The diagonal elements of the confusion matrix indicate correct predictions, while the off-diagonals represent incorrect predictions. Hence our model correctly predicted that the market would go up on 507 days and that it would go down on 145 days, for a total of 507 + 145 = 652 correct predictions. The <code>np.mean()</code> function can be used to compute the fraction of days for which the prediction was correct. In this case, logistic regression correctly predicted the movement of the market 52.2% of the time.</p>
-<div id="a289091a" class="cell" data-execution_count="13">
+<div id="a289091a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">507</span><span class="op">+</span><span class="dv">145</span>)<span class="op">/</span><span class="dv">1250</span>, np.mean(labels <span class="op">==</span> Smarket.Direction)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>(0.5216, 0.5216)</code></pre>
@@ -785,7 +785,7 @@ dtype: float64</code></pre>
 </div>
 <p>At first glance, it appears that the logistic regression model is working a little better than random guessing. However, this result is misleading because we trained and tested the model on the same set of 1,250 observations. In other words, <span class="math inline">100-52.2=47.8%</span> is the <em>training</em> error rate. As we have seen previously, the training error rate is often overly optimistic — it tends to underestimate the test error rate. In order to better assess the accuracy of the logistic regression model in this setting, we can fit the model using part of the data, and then examine how well it predicts the <em>held out</em> data. This will yield a more realistic error rate, in the sense that in practice we will be interested in our model’s performance not on the data that we used to fit the model, but rather on days in the future for which the market’s movements are unknown.</p>
 <p>To implement this strategy, we first create a Boolean vector corresponding to the observations from 2001 through 2004. We then use this vector to create a held out data set of observations from 2005.</p>
-<div id="a659ba4a" class="cell" data-execution_count="14">
+<div id="a659ba4a" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> (Smarket.Year <span class="op">&lt;</span> <span class="dv">2005</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Smarket_train <span class="op">=</span> Smarket.loc[train]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Smarket_test <span class="op">=</span> Smarket.loc[<span class="op">~</span>train]</span>
@@ -796,7 +796,7 @@ dtype: float64</code></pre>
 </div>
 <p>The object <code>train</code> is a vector of 1,250 elements, corresponding to the observations in our data set. The elements of the vector that correspond to observations that occurred before 2005 are set to <code>True</code>, whereas those that correspond to observations in 2005 are set to <code>False</code>. Hence <code>train</code> is a <em>boolean</em> array, since its elements are <code>True</code> and <code>False</code>. Boolean arrays can be used to obtain a subset of the rows or columns of a data frame using the <code>loc</code> method. For instance, the command <code>Smarket.loc[train]</code> would pick out a submatrix of the stock market data set, corresponding only to the dates before 2005, since those are the ones for which the elements of <code>train</code> are <code>True</code>. The <code>~</code> symbol can be used to negate all of the elements of a Boolean vector. That is, <code>~train</code> is a vector similar to <code>train</code>, except that the elements that are <code>True</code> in <code>train</code> get swapped to <code>False</code> in <code>~train</code>, and vice versa. Therefore, <code>Smarket.loc[~train]</code> yields a subset of the rows of the data frame of the stock market data containing only the observations for which <code>train</code> is <code>False</code>. The output above indicates that there are 252 such observations.</p>
 <p>We now fit a logistic regression model using only the subset of the observations that correspond to dates before 2005. We then obtain predicted probabilities of the stock market going up for each of the days in our test set — that is, for the days in 2005.</p>
-<div id="5e87292b" class="cell" data-execution_count="15">
+<div id="5e87292b" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> X.loc[train], X.loc[<span class="op">~</span>train]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>y_train, y_test <span class="op">=</span> y.loc[train], y.loc[<span class="op">~</span>train]</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>glm_train <span class="op">=</span> sm.GLM(y_train,</span>
@@ -807,12 +807,12 @@ dtype: float64</code></pre>
 </div>
 <p>Notice that we have trained and tested our model on two completely separate data sets: training was performed using only the dates before 2005, and testing was performed using only the dates in 2005.</p>
 <p>Finally, we compare the predictions for 2005 to the actual movements of the market over that time period. We will first store the test and training labels (recall <code>y_test</code> is binary).</p>
-<div id="ee8faf2d" class="cell" data-execution_count="16">
+<div id="ee8faf2d" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> Smarket.Direction</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>L_train, L_test <span class="op">=</span> D.loc[train], D.loc[<span class="op">~</span>train]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we threshold the fitted probability at 50% to form our predicted labels.</p>
-<div id="2a5f444f" class="cell" data-execution_count="17">
+<div id="2a5f444f" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> np.array([<span class="st">'Down'</span>]<span class="op">*</span><span class="dv">252</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>labels[probs<span class="op">&gt;</span><span class="fl">0.5</span>] <span class="op">=</span> <span class="st">'Up'</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>confusion_table(labels, L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -851,7 +851,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>The test accuracy is about 48% while the error rate is about 52%</p>
-<div id="e07ae75d" class="cell" data-execution_count="18">
+<div id="e07ae75d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>np.mean(labels <span class="op">==</span> L_test), np.mean(labels <span class="op">!=</span> L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>(0.4801587301587302, 0.5198412698412699)</code></pre>
@@ -859,7 +859,7 @@ dtype: float64</code></pre>
 </div>
 <p>The <code>!=</code> notation means <em>not equal to</em>, and so the last command computes the test set error rate. The results are rather disappointing: the test error rate is 52%, which is worse than random guessing! Of course this result is not all that surprising, given that one would not generally expect to be able to use previous days’ returns to predict future market performance. (After all, if it were possible to do so, then the authors of this book would be out striking it rich rather than writing a statistics textbook.)</p>
 <p>We recall that the logistic regression model had very underwhelming <em>p</em>-values associated with all of the predictors, and that the smallest <em>p</em>-value, though not very small, corresponded to <code>Lag1</code>. Perhaps by removing the variables that appear not to be helpful in predicting <code>Direction</code>, we can obtain a more effective model. After all, using predictors that have no relationship with the response tends to cause a deterioration in the test error rate (since such predictors cause an increase in variance without a corresponding decrease in bias), and so removing such predictors may in turn yield an improvement. Below we refit the logistic regression using just <code>Lag1</code> and <code>Lag2</code>, which seemed to have the highest predictive power in the original logistic regression model.</p>
-<div id="7169ad7e" class="cell" data-execution_count="19">
+<div id="7169ad7e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MS([<span class="st">'Lag1'</span>, <span class="st">'Lag2'</span>]).fit(Smarket)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> model.transform(Smarket)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> X.loc[train], X.loc[<span class="op">~</span>train]</span>
@@ -906,7 +906,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Let’s evaluate the overall accuracy as well as the accuracy within the days when logistic regression predicts an increase.</p>
-<div id="1d31dacc" class="cell" data-execution_count="20">
+<div id="1d31dacc" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">35</span><span class="op">+</span><span class="dv">106</span>)<span class="op">/</span><span class="dv">252</span>,<span class="dv">106</span><span class="op">/</span>(<span class="dv">106</span><span class="op">+</span><span class="dv">76</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>(0.5595238095238095, 0.5824175824175825)</code></pre>
@@ -914,7 +914,7 @@ dtype: float64</code></pre>
 </div>
 <p>Now the results appear to be a little better: 56% of the daily movements have been correctly predicted. It is worth noting that in this case, a much simpler strategy of predicting that the market will increase every day will also be correct 56% of the time! Hence, in terms of overall error rate, the logistic regression method is no better than the naive approach. However, the confusion matrix shows that on days when logistic regression predicts an increase in the market, it has a 58% accuracy rate. This suggests a possible trading strategy of buying on days when the model predicts an increasing market, and avoiding trades on days when a decrease is predicted. Of course one would need to investigate more carefully whether this small improvement was real or just due to random chance.</p>
 <p>Suppose that we want to predict the returns associated with particular values of <code>Lag1</code> and <code>Lag2</code>. In particular, we want to predict <code>Direction</code> on a day when <code>Lag1</code> and <code>Lag2</code> equal <span class="math inline">1.2</span> and <span class="math inline">1.1</span>, respectively, and on a day when they equal <span class="math inline">1.5</span> and <span class="math inline">-0.8</span>. We do this using the <code>predict()</code> function.</p>
-<div id="c9cea2b0" class="cell" data-execution_count="21">
+<div id="c9cea2b0" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>newdata <span class="op">=</span> pd.DataFrame({<span class="st">'Lag1'</span>:[<span class="fl">1.2</span>, <span class="fl">1.5</span>],</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'Lag2'</span>:[<span class="fl">1.1</span>, <span class="op">-</span><span class="fl">0.8</span>]})<span class="op">;</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>newX <span class="op">=</span> model.transform(newdata)</span>
@@ -929,11 +929,11 @@ dtype: float64</code></pre>
 <section id="linear-discriminant-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="linear-discriminant-analysis">Linear Discriminant Analysis</h2>
 <p>We begin by performing LDA on the <code>Smarket</code> data, using the function <code>LinearDiscriminantAnalysis()</code>, which we have abbreviated <code>LDA()</code>. We fit the model using only the observations before 2005.</p>
-<div id="3e194ec8" class="cell" data-execution_count="22">
+<div id="3e194ec8" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>lda <span class="op">=</span> LDA(store_covariance<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Since the <code>LDA</code> estimator automatically adds an intercept, we should remove the column corresponding to the intercept in both <code>X_train</code> and <code>X_test</code>. We can also directly use the labels rather than the Boolean vectors <code>y_train</code>.</p>
-<div id="528f25fb" class="cell" data-execution_count="23">
+<div id="528f25fb" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> [M.drop(columns<span class="op">=</span>[<span class="st">'intercept'</span>])</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">for</span> M <span class="kw">in</span> [X_train, X_test]]</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>lda.fit(X_train, L_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1347,7 +1347,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>Here we have used the list comprehensions introduced in Section~. Looking at our first line above, we see that the right-hand side is a list of length two. This is because the code <code>for M in [X_train, X_test]</code> iterates over a list of length two. While here we loop over a list, the list comprehension method works when looping over any iterable object. We then apply the <code>drop()</code> method to each element in the iteration, collecting the result in a list. The left-hand side tells <code>Python</code> to unpack this list of length two, assigning its elements to the variables <code>X_train</code> and <code>X_test</code>. Of course, this overwrites the previous values of <code>X_train</code> and <code>X_test</code>.</p>
 <p>Having fit the model, we can extract the means in the two classes with the <code>means_</code> attribute. These are the average of each predictor within each class, and are used by LDA as estimates of <span class="math inline">\mu_k</span>. These suggest that there is a tendency for the previous 2 days’ returns to be negative on days when the market increases, and a tendency for the previous days’ returns to be positive on days when the market declines.</p>
-<div id="45756470" class="cell" data-execution_count="24">
+<div id="45756470" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lda.means_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>array([[ 0.04279022,  0.03389409],
@@ -1355,21 +1355,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The estimated prior probabilities are stored in the <code>priors_</code> attribute. The package <code>sklearn</code> typically uses this trailing <code>_</code> to denote a quantity estimated when using the <code>fit()</code> method. We can be sure of which entry corresponds to which label by looking at the <code>classes_</code> attribute.</p>
-<div id="01fe6164" class="cell" data-execution_count="25">
+<div id="01fe6164" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>lda.classes_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>array(['Down', 'Up'], dtype='&lt;U4')</code></pre>
 </div>
 </div>
 <p>The LDA output indicates that <span class="math inline">\hat\pi_{Down}=0.492</span> and <span class="math inline">\hat\pi_{Up}=0.508</span>.</p>
-<div id="b83dea78" class="cell" data-execution_count="26">
+<div id="b83dea78" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>lda.priors_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>array([0.49198397, 0.50801603])</code></pre>
 </div>
 </div>
 <p>The linear discriminant vectors can be found in the <code>scalings_</code> attribute:</p>
-<div id="5a09eba3" class="cell" data-execution_count="27">
+<div id="5a09eba3" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>lda.scalings_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([[-0.64201904],
@@ -1377,11 +1377,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>These values provide the linear combination of <code>Lag1</code> and <code>Lag2</code> that are used to form the LDA decision rule. In other words, these are the multipliers of the elements of <span class="math inline">X=x</span> in (). If $-0.64<code>Lag1</code> - 0.51 <code>Lag2</code> $ is large, then the LDA classifier will predict a market increase, and if it is small, then the LDA classifier will predict a market decline.</p>
-<div id="51089d59" class="cell" data-execution_count="28">
+<div id="51089d59" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>lda_pred <span class="op">=</span> lda.predict(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As we observed in our comparison of classification methods (Section~), the LDA and logistic regression predictions are almost identical.</p>
-<div id="185313c0" class="cell" data-execution_count="29">
+<div id="185313c0" class="cell" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>confusion_table(lda_pred, L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
 <div>
@@ -1418,7 +1418,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>We can also estimate the probability of each class for each point in a training set. Applying a 50% threshold to the posterior probabilities of being in class one allows us to recreate the predictions contained in <code>lda_pred</code>.</p>
-<div id="52ab6c82" class="cell" data-execution_count="30">
+<div id="52ab6c82" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>lda_prob <span class="op">=</span> lda.predict_proba(X_test)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">all</span>(</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>       np.where(lda_prob[:,<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="fl">0.5</span>, <span class="st">'Up'</span>,<span class="st">'Down'</span>) <span class="op">==</span> lda_pred</span>
@@ -1428,7 +1428,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Above, we used the <code>np.where()</code> function that creates an array with value <code>'Up'</code> for indices where the second column of <code>lda_prob</code> (the estimated posterior probability of <code>'Up'</code>) is greater than 0.5. For problems with more than two classes the labels are chosen as the class whose posterior probability is highest:</p>
-<div id="9368fe6e" class="cell" data-execution_count="31">
+<div id="9368fe6e" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">all</span>(</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>       [lda.classes_[i] <span class="cf">for</span> i <span class="kw">in</span> np.argmax(lda_prob, <span class="dv">1</span>)] <span class="op">==</span> lda_pred</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>       )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1437,7 +1437,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>If we wanted to use a posterior probability threshold other than 50% in order to make predictions, then we could easily do so. For instance, suppose that we wish to predict a market decrease only if we are very certain that the market will indeed decrease on that day — say, if the posterior probability is at least 90%. We know that the first column of <code>lda_prob</code> corresponds to the label <code>Down</code> after having checked the <code>classes_</code> attribute, hence we use the column index 0 rather than 1 as we did above.</p>
-<div id="dc32441f" class="cell" data-execution_count="32">
+<div id="dc32441f" class="cell" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>(lda_prob[:,<span class="dv">0</span>] <span class="op">&gt;</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>0</code></pre>
@@ -1449,7 +1449,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <section id="quadratic-discriminant-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="quadratic-discriminant-analysis">Quadratic Discriminant Analysis</h2>
 <p>We will now fit a QDA model to the <code>Smarket</code> data. QDA is implemented via <code>QuadraticDiscriminantAnalysis()</code> in the <code>sklearn</code> package, which we abbreviate to <code>QDA()</code>. The syntax is very similar to <code>LDA()</code>.</p>
-<div id="de4ea31f" class="cell" data-execution_count="33">
+<div id="de4ea31f" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>qda <span class="op">=</span> QDA(store_covariance<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>qda.fit(X_train, L_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
@@ -1861,7 +1861,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The <code>QDA()</code> function will again compute <code>means_</code> and <code>priors_</code>.</p>
-<div id="fbc697dd" class="cell" data-execution_count="34">
+<div id="fbc697dd" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>qda.means_, qda.priors_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>(array([[ 0.04279022,  0.03389409],
@@ -1870,7 +1870,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The <code>QDA()</code> classifier will estimate one covariance per class. Here is the estimated covariance in the first class:</p>
-<div id="300e42b7" class="cell" data-execution_count="35">
+<div id="300e42b7" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>qda.covariance_[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>array([[ 1.50662277, -0.03924806],
@@ -1878,7 +1878,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The output contains the group means. But it does not contain the coefficients of the linear discriminants, because the QDA classifier involves a quadratic, rather than a linear, function of the predictors. The <code>predict()</code> function works in exactly the same fashion as for LDA.</p>
-<div id="35821f24" class="cell" data-execution_count="36">
+<div id="35821f24" class="cell" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>qda_pred <span class="op">=</span> qda.predict(X_test)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>confusion_table(qda_pred, L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
@@ -1916,7 +1916,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Interestingly, the QDA predictions are accurate almost 60% of the time, even though the 2005 data was not used to fit the model.</p>
-<div id="8c4f76c1" class="cell" data-execution_count="37">
+<div id="8c4f76c1" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>np.mean(qda_pred <span class="op">==</span> L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>0.5992063492063492</code></pre>
@@ -1927,7 +1927,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <section id="naive-bayes" class="level2">
 <h2 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h2>
 <p>Next, we fit a naive Bayes model to the <code>Smarket</code> data. The syntax is similar to that of <code>LDA()</code> and <code>QDA()</code>. By default, this implementation <code>GaussianNB()</code> of the naive Bayes classifier models each quantitative feature using a Gaussian distribution. However, a kernel density method can also be used to estimate the distributions.</p>
-<div id="54bf7d2b" class="cell" data-execution_count="38">
+<div id="54bf7d2b" class="cell" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>NB <span class="op">=</span> GaussianNB()</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>NB.fit(X_train, L_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
@@ -2339,21 +2339,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The classes are stored as <code>classes_</code>.</p>
-<div id="7478558a" class="cell" data-execution_count="39">
+<div id="7478558a" class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>NB.classes_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>array(['Down', 'Up'], dtype='&lt;U4')</code></pre>
 </div>
 </div>
 <p>The class prior probabilities are stored in the <code>class_prior_</code> attribute.</p>
-<div id="d168355c" class="cell" data-execution_count="40">
+<div id="d168355c" class="cell" data-execution_count="41">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>NB.class_prior_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>array([0.49198397, 0.50801603])</code></pre>
 </div>
 </div>
 <p>The parameters of the features can be found in the <code>theta_</code> and <code>var_</code> attributes. The number of rows is equal to the number of classes, while the number of columns is equal to the number of features. We see below that the mean for feature <code>Lag1</code> in the <code>Down</code> class is 0.043.</p>
-<div id="b5f3110b" class="cell" data-execution_count="41">
+<div id="b5f3110b" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>NB.theta_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>array([[ 0.04279022,  0.03389409],
@@ -2361,7 +2361,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Its variance is 1.503.</p>
-<div id="999c4723" class="cell" data-execution_count="42">
+<div id="999c4723" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>NB.var_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>array([[1.50355429, 1.53246749],
@@ -2370,7 +2370,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>How do we know the names of these attributes? We use <code>NB?</code> (or <code>?NB</code>).</p>
 <p>We can easily verify the mean computation:</p>
-<div id="25d4a42a" class="cell" data-execution_count="43">
+<div id="25d4a42a" class="cell" data-execution_count="44">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>X_train[L_train <span class="op">==</span> <span class="st">'Down'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>Lag1    0.042790
@@ -2379,7 +2379,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Similarly for the variance:</p>
-<div id="d5e9624d" class="cell" data-execution_count="44">
+<div id="d5e9624d" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>X_train[L_train <span class="op">==</span> <span class="st">'Down'</span>].var(ddof<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 <pre><code>Lag1    1.503554
@@ -2388,7 +2388,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Since <code>NB()</code> is a classifier in the <code>sklearn</code> library, making predictions uses the same syntax as for <code>LDA()</code> and <code>QDA()</code> above.</p>
-<div id="2d0d9676" class="cell" data-execution_count="45">
+<div id="2d0d9676" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>nb_labels <span class="op">=</span> NB.predict(X_test)</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>confusion_table(nb_labels, L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="45">
@@ -2427,7 +2427,7 @@ dtype: float64</code></pre>
 </div>
 <p>Naive Bayes performs well on these data, with accurate predictions over 59% of the time. This is slightly worse than QDA, but much better than LDA.</p>
 <p>As for <code>LDA</code>, the <code>predict_proba()</code> method estimates the probability that each observation belongs to a particular class.</p>
-<div id="c8bfe98a" class="cell" data-execution_count="46">
+<div id="c8bfe98a" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>NB.predict_proba(X_test)[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>array([[0.4873288 , 0.5126712 ],
@@ -2442,7 +2442,7 @@ dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="k-nearest-neighbors">K-Nearest Neighbors</h2>
 <p>We will now perform KNN using the <code>KNeighborsClassifier()</code> function. This function works similarly to the other model-fitting functions that we have encountered thus far.</p>
 <p>As is the case for LDA and QDA, we fit the classifier using the <code>fit</code> method. New predictions are formed using the <code>predict</code> method of the object returned by <code>fit()</code>.</p>
-<div id="14241d9e" class="cell" data-execution_count="47">
+<div id="14241d9e" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>knn1 <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test <span class="op">=</span> [np.asarray(X) <span class="cf">for</span> X <span class="kw">in</span> [X_train, X_test]]</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>knn1.fit(X_train, L_train)</span>
@@ -2890,14 +2890,14 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>The results using <span class="math inline">K=1</span> are not very good, since only <span class="math inline">50%</span> of the observations are correctly predicted. Of course, it may be that <span class="math inline">K=1</span> results in an overly-flexible fit to the data.</p>
-<div id="2ed31136" class="cell" data-execution_count="48">
+<div id="2ed31136" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">83</span><span class="op">+</span><span class="dv">43</span>)<span class="op">/</span><span class="dv">252</span>, np.mean(knn1_pred <span class="op">==</span> L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>(0.5, 0.5)</code></pre>
 </div>
 </div>
 <p>We repeat the analysis below using <span class="math inline">K=3</span>.</p>
-<div id="64cc13a6" class="cell" data-execution_count="49">
+<div id="64cc13a6" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>knn3 <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>knn3_pred <span class="op">=</span> knn3.fit(X_train, L_train).predict(X_test)</span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>np.mean(knn3_pred <span class="op">==</span> L_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2907,7 +2907,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>The results have improved slightly. But increasing <em>K</em> further provides no further improvements. It appears that for these data, and this train/test split, QDA gives the best results of the methods that we have examined so far.</p>
 <p>KNN does not perform well on the <code>Smarket</code> data, but it often does provide impressive results. As an example we will apply the KNN approach to the <code>Caravan</code> data set, which is part of the <code>ISLP</code> library. This data set includes 85 predictors that measure demographic characteristics for 5,822 individuals. The response variable is <code>Purchase</code>, which indicates whether or not a given individual purchases a caravan insurance policy. In this data set, only 6% of people purchased caravan insurance.</p>
-<div id="754a0d3b" class="cell" data-execution_count="50">
+<div id="754a0d3b" class="cell" data-execution_count="51">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>Caravan <span class="op">=</span> load_data(<span class="st">'Caravan'</span>)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>Purchase <span class="op">=</span> Caravan.Purchase</span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>Purchase.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2919,26 +2919,26 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 <p>The method <code>value_counts()</code> takes a <code>pd.Series</code> or <code>pd.DataFrame</code> and returns a <code>pd.Series</code> with the corresponding counts for each unique element. In this case <code>Purchase</code> has only <code>Yes</code> and <code>No</code> values and the method returns how many values of each there are.</p>
-<div id="7be14998" class="cell" data-execution_count="51">
+<div id="7be14998" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="dv">348</span> <span class="op">/</span> <span class="dv">5822</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="51">
 <pre><code>0.05977327378907592</code></pre>
 </div>
 </div>
 <p>Our features will include all columns except <code>Purchase</code>.</p>
-<div id="e97f9cbe" class="cell" data-execution_count="52">
+<div id="e97f9cbe" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>feature_df <span class="op">=</span> Caravan.drop(columns<span class="op">=</span>[<span class="st">'Purchase'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because the KNN classifier predicts the class of a given test observation by identifying the observations that are nearest to it, the scale of the variables matters. Any variables that are on a large scale will have a much larger effect on the <em>distance</em> between the observations, and hence on the KNN classifier, than variables that are on a small scale. For instance, imagine a data set that contains two variables, <code>salary</code> and <code>age</code> (measured in dollars and years, respectively). As far as KNN is concerned, a difference of 1,000 USD in salary is enormous compared to a difference of 50 years in age. Consequently, <code>salary</code> will drive the KNN classification results, and <code>age</code> will have almost no effect. This is contrary to our intuition that a salary difference of 1,000 USD is quite small compared to an age difference of 50 years. Furthermore, the importance of scale to the KNN classifier leads to another issue: if we measured <code>salary</code> in Japanese yen, or if we measured <code>age</code> in minutes, then we’d get quite different classification results from what we get if these two variables are measured in dollars and years.</p>
 <p>A good way to handle this problem is to <em>standardize</em> the data so that all variables are given a mean of zero and a standard deviation of one. Then all variables will be on a comparable scale. This is accomplished using the <code>StandardScaler()</code> transformation.</p>
-<div id="4e3a500c" class="cell" data-execution_count="53">
+<div id="4e3a500c" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler(with_mean<span class="op">=</span><span class="va">True</span>,</span>
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>                        with_std<span class="op">=</span><span class="va">True</span>,</span>
 <span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>                        copy<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The argument <code>with_mean</code> indicates whether or not we should subtract the mean, while <code>with_std</code> indicates whether or not we should scale the columns to have standard deviation of 1 or not. Finally, the argument <code>copy=True</code> indicates that we will always copy data, rather than trying to do calculations in place where possible.</p>
 <p>This transformation can be fit and then applied to arbitrary data. In the first line below, the parameters for the scaling are computed and stored in <code>scaler</code>, while the second line actually constructs the standardized set of features.</p>
-<div id="26cd669b" class="cell" data-execution_count="54">
+<div id="26cd669b" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>scaler.fit(feature_df)</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>X_std <span class="op">=</span> scaler.transform(feature_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
@@ -3350,7 +3350,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>Now every column of <code>feature_std</code> below has a standard deviation of one and a mean of zero.</p>
-<div id="d96c99d8" class="cell" data-execution_count="55">
+<div id="d96c99d8" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>feature_std <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>                 X_std,</span>
 <span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>                 columns<span class="op">=</span>feature_df.columns)<span class="op">;</span></span>
@@ -3372,7 +3372,7 @@ Length: 85, dtype: float64</code></pre>
 </div>
 <p>Notice that the standard deviations are not quite <span class="math inline">1</span> here; this is again due to some procedures using the <span class="math inline">1/n</span> convention for variances (in this case <code>scaler()</code>), while others use <span class="math inline">1/(n-1)</span> (the <code>std()</code> method). See the footnote on page~. In this case it does not matter, as long as the variables are all on the same scale.</p>
 <p>Using the function <code>train_test_split()</code> we now split the observations into a test set, containing 1000 observations, and a training set containing the remaining observations. The argument <code>random_state=0</code> ensures that we get the same split each time we rerun the code.</p>
-<div id="f6cf6320" class="cell" data-execution_count="56">
+<div id="f6cf6320" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>(X_train,</span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a> X_test,</span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a> y_train,</span>
@@ -3382,7 +3382,7 @@ Length: 85, dtype: float64</code></pre>
 <span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>                            random_state<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>?train_test_split</code> reveals that the non-keyword arguments can be <code>lists</code>, <code>arrays</code>, <code>pandas dataframes</code> etc that all have the same length (<code>shape[0]</code>) and hence are <em>indexable</em>. In this case they are the dataframe <code>feature_std</code> and the response variable <code>Purchase</code>. {Note that we have converted <code>feature_std</code> to an <code>ndarray</code> to address a bug in <code>sklearn</code>.} We fit a KNN model on the training data using <span class="math inline">K=1</span>, and evaluate its performance on the test data.</p>
-<div id="536f2d90" class="cell" data-execution_count="57">
+<div id="536f2d90" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>knn1 <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>knn1_pred <span class="op">=</span> knn1.fit(X_train, y_train).predict(X_test)</span>
 <span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>np.mean(y_test <span class="op">!=</span> knn1_pred), np.mean(y_test <span class="op">!=</span> <span class="st">"No"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3392,7 +3392,7 @@ Length: 85, dtype: float64</code></pre>
 </div>
 <p>The KNN error rate on the 1,000 test observations is about <span class="math inline">11%</span>. At first glance, this may appear to be fairly good. However, since just over 6% of customers purchased insurance, we could get the error rate down to almost 6% by always predicting <code>No</code> regardless of the values of the predictors! This is known as the <em>null rate</em>.}</p>
 <p>Suppose that there is some non-trivial cost to trying to sell insurance to a given individual. For instance, perhaps a salesperson must visit each potential customer. If the company tries to sell insurance to a random selection of customers, then the success rate will be only 6%, which may be far too low given the costs involved. Instead, the company would like to try to sell insurance only to customers who are likely to buy it. So the overall error rate is not of interest. Instead, the fraction of individuals that are correctly predicted to buy insurance is of interest.</p>
-<div id="0e736468" class="cell" data-execution_count="58">
+<div id="0e736468" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>confusion_table(knn1_pred, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
 <div>
@@ -3429,7 +3429,7 @@ Length: 85, dtype: float64</code></pre>
 </div>
 </div>
 <p>It turns out that KNN with <span class="math inline">K=1</span> does far better than random guessing among the customers that are predicted to buy insurance. Among 62 such customers, 9, or 14.5%, actually do purchase insurance. This is double the rate that one would obtain from random guessing.</p>
-<div id="4f9d411c" class="cell" data-execution_count="59">
+<div id="4f9d411c" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span><span class="op">/</span>(<span class="dv">53</span><span class="op">+</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>0.14516129032258066</code></pre>
@@ -3438,7 +3438,7 @@ Length: 85, dtype: float64</code></pre>
 <section id="tuning-parameters" class="level3">
 <h3 class="anchored" data-anchor-id="tuning-parameters">Tuning Parameters</h3>
 <p>The number of neighbors in KNN is referred to as a <em>tuning parameter</em>, also referred to as a <em>hyperparameter</em>. We do not know <em>a priori</em> what value to use. It is therefore of interest to see how the classifier performs on test data as we vary these parameters. This can be achieved with a <code>for</code> loop, described in Section~. Here we use a for loop to look at the accuracy of our classifier in the group predicted to purchase insurance as we vary the number of neighbors from 1 to 5:</p>
-<div id="5d6fe02e" class="cell" data-execution_count="60">
+<div id="5d6fe02e" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">6</span>):</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    knn <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span>K)</span>
 <span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    knn_pred <span class="op">=</span> knn.fit(X_train, y_train).predict(X_test)</span>
@@ -3466,7 +3466,7 @@ K=5: # predicted to rent:  7,  # who did rent 1, accuracy 14.3%</code></pre>
 <h3 class="anchored" data-anchor-id="comparison-to-logistic-regression">Comparison to Logistic Regression</h3>
 <p>As a comparison, we can also fit a logistic regression model to the data. This can also be done with <code>sklearn</code>, though by default it fits something like the <em>ridge regression</em> version of logistic regression, which we introduce in Chapter~. This can be modified by appropriately setting the argument <code>C</code> below. Its default value is 1 but by setting it to a very large number, the algorithm converges to the same solution as the usual (unregularized) logistic regression estimator discussed above.</p>
 <p>Unlike the <code>statsmodels</code> package, <code>sklearn</code> focuses less on inference and more on classification. Hence, the <code>summary</code> methods seen in <code>statsmodels</code> and our simplified version seen with <code>summarize</code> are not generally available for the classifiers in <code>sklearn</code>.</p>
-<div id="fc7daec3" class="cell" data-execution_count="61">
+<div id="fc7daec3" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>logit <span class="op">=</span> LogisticRegression(C<span class="op">=</span><span class="fl">1e10</span>, solver<span class="op">=</span><span class="st">'liblinear'</span>)</span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>logit.fit(X_train, y_train)</span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>logit_pred <span class="op">=</span> logit.predict_proba(X_test)</span>
@@ -3915,7 +3915,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>We used the argument <code>solver='liblinear'</code> above to avoid a warning with the default solver which would indicate that the algorithm does not converge.</p>
 <p>If we use <span class="math inline">0.5</span> as the predicted probability cut-off for the classifier, then we have a problem: only two of the test observations are predicted to purchase insurance. However, we are not required to use a cut-off of <span class="math inline">0.5</span>. If we instead predict a purchase any time the predicted probability of purchase exceeds <span class="math inline">0.25</span>, we get much better results: we predict that 29 people will purchase insurance, and we are correct for about 31% of these people. This is almost five times better than random guessing!</p>
-<div id="3a6558c6" class="cell" data-execution_count="62">
+<div id="3a6558c6" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>logit_labels <span class="op">=</span> np.where(logit_pred[:,<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.25</span>, <span class="st">'Yes'</span>, <span class="st">'No'</span>)</span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>confusion_table(logit_labels, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
@@ -3952,7 +3952,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 </div>
-<div id="c5f8cced" class="cell" data-execution_count="63">
+<div id="c5f8cced" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span><span class="op">/</span>(<span class="dv">20</span><span class="op">+</span><span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>0.3103448275862069</code></pre>
@@ -3963,11 +3963,11 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <section id="linear-and-poisson-regression-on-the-bikeshare-data" class="level2">
 <h2 class="anchored" data-anchor-id="linear-and-poisson-regression-on-the-bikeshare-data">Linear and Poisson Regression on the Bikeshare Data</h2>
 <p>Here we fit linear and Poisson regression models to the <code>Bikeshare</code> data, as described in Section~. The response <code>bikers</code> measures the number of bike rentals per hour in Washington, DC in the period 2010–2012.</p>
-<div id="b03e4389" class="cell" data-execution_count="64">
+<div id="b03e4389" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>Bike <span class="op">=</span> load_data(<span class="st">'Bikeshare'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s have a peek at the dimensions and names of the variables in this dataframe.</p>
-<div id="5190bc51" class="cell" data-execution_count="65">
+<div id="5190bc51" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>Bike.shape, Bike.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
 <pre><code>((8645, 15),
@@ -3980,7 +3980,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <section id="linear-regression" class="level3">
 <h3 class="anchored" data-anchor-id="linear-regression">Linear Regression</h3>
 <p>We begin by fitting a linear regression model to the data.</p>
-<div id="98a0e732" class="cell" data-execution_count="66">
+<div id="98a0e732" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> MS([<span class="st">'mnth'</span>,</span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">'hr'</span>,</span>
 <span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'workingday'</span>,</span>
@@ -4292,12 +4292,12 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>There are 24 levels in <code>hr</code> and 40 rows in all. In <code>M_lm</code>, the first levels <code>hr[0]</code> and <code>mnth[Jan]</code> are treated as the baseline values, and so no coefficient estimates are provided for them: implicitly, their coefficient estimates are zero, and all other levels are measured relative to these baselines. For example, the Feb coefficient of <span class="math inline">6.845</span> signifies that, holding all other variables constant, there are on average about 7 more riders in February than in January. Similarly there are about 16.5 more riders in March than in January.</p>
 <p>The results seen in Section~ used a slightly different coding of the variables <code>hr</code> and <code>mnth</code>, as follows:</p>
-<div id="d7a01b6b" class="cell" data-execution_count="67">
+<div id="d7a01b6b" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>hr_encode <span class="op">=</span> contrast(<span class="st">'hr'</span>, <span class="st">'sum'</span>)</span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>mnth_encode <span class="op">=</span> contrast(<span class="st">'mnth'</span>, <span class="st">'sum'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Refitting again:</p>
-<div id="cdbfba1a" class="cell" data-execution_count="68">
+<div id="cdbfba1a" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>X2 <span class="op">=</span> MS([mnth_encode,</span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>         hr_encode,</span>
 <span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">'workingday'</span>,</span>
@@ -4609,21 +4609,21 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>What is the difference between the two codings? In <code>M2_lm</code>, a coefficient estimate is reported for all but level <code>23</code> of <code>hr</code> and level <code>Dec</code> of <code>mnth</code>. Importantly, in <code>M2_lm</code>, the (unreported) coefficient estimate for the last level of <code>mnth</code> is not zero: instead, it equals the negative of the sum of the coefficient estimates for all of the other levels. Similarly, in <code>M2_lm</code>, the coefficient estimate for the last level of <code>hr</code> is the negative of the sum of the coefficient estimates for all of the other levels. This means that the coefficients of <code>hr</code> and <code>mnth</code> in <code>M2_lm</code> will always sum to zero, and can be interpreted as the difference from the mean level. For example, the coefficient for January of <span class="math inline">-46.087</span> indicates that, holding all other variables constant, there are typically 46 fewer riders in January relative to the yearly average.</p>
 <p>It is important to realize that the choice of coding really does not matter, provided that we interpret the model output correctly in light of the coding used. For example, we see that the predictions from the linear model are the same regardless of coding:</p>
-<div id="d8afa27b" class="cell" data-execution_count="69">
+<div id="d8afa27b" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">sum</span>((M_lm.fittedvalues <span class="op">-</span> M2_lm.fittedvalues)<span class="op">**</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="69">
 <pre><code>1.5365640261199032e-20</code></pre>
 </div>
 </div>
 <p>The sum of squared differences is zero. We can also see this using the <code>np.allclose()</code> function:</p>
-<div id="f29939b7" class="cell" data-execution_count="70">
+<div id="f29939b7" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb107"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>np.allclose(M_lm.fittedvalues, M2_lm.fittedvalues)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="70">
 <pre><code>True</code></pre>
 </div>
 </div>
 <p>To reproduce the left-hand side of Figure~ we must first obtain the coefficient estimates associated with <code>mnth</code>. The coefficients for January through November can be obtained directly from the <code>M2_lm</code> object. The coefficient for December must be explicitly computed as the negative sum of all the other months. We first extract all the coefficients for month from the coefficients of <code>M2_lm</code>.</p>
-<div id="b3b70949" class="cell" data-execution_count="71">
+<div id="b3b70949" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>coef_month <span class="op">=</span> S2[S2.index.<span class="bu">str</span>.contains(<span class="st">'mnth'</span>)][<span class="st">'coef'</span>]</span>
 <span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>coef_month</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="71">
@@ -4642,7 +4642,7 @@ Name: coef, dtype: float64</code></pre>
 </div>
 </div>
 <p>Next, we append <code>Dec</code> as the negative of the sum of all other months.</p>
-<div id="f0b6ac80" class="cell" data-execution_count="72">
+<div id="f0b6ac80" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>months <span class="op">=</span> Bike[<span class="st">'mnth'</span>].dtype.categories</span>
 <span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>coef_month <span class="op">=</span> pd.concat([</span>
 <span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a>                       coef_month,</span>
@@ -4668,7 +4668,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Finally, to make the plot neater, we’ll just use the first letter of each month, which is the <span class="math inline">6</span>th entry of each of the labels in the index.</p>
-<div id="05a1c389" class="cell" data-execution_count="73">
+<div id="05a1c389" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>fig_month, ax_month <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>x_month <span class="op">=</span> np.arange(coef_month.shape[<span class="dv">0</span>])</span>
 <span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a>ax_month.plot(x_month, coef_month, marker<span class="op">=</span><span class="st">'o'</span>, ms<span class="op">=</span><span class="dv">10</span>)</span>
@@ -4685,7 +4685,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Reproducing the right-hand plot in Figure~ follows a similar process.</p>
-<div id="f9f23d61" class="cell" data-execution_count="74">
+<div id="f9f23d61" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>coef_hr <span class="op">=</span> S2[S2.index.<span class="bu">str</span>.contains(<span class="st">'hr'</span>)][<span class="st">'coef'</span>]</span>
 <span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>coef_hr <span class="op">=</span> coef_hr.reindex([<span class="st">'hr[</span><span class="sc">{0}</span><span class="st">]'</span>.<span class="bu">format</span>(h) <span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">23</span>)])</span>
 <span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>coef_hr <span class="op">=</span> pd.concat([coef_hr,</span>
@@ -4693,7 +4693,7 @@ dtype: float64</code></pre>
 <span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>                    ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now make the hour plot.</p>
-<div id="468b2bc3" class="cell" data-execution_count="75">
+<div id="468b2bc3" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>fig_hr, ax_hr <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
 <span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>x_hr <span class="op">=</span> np.arange(coef_hr.shape[<span class="dv">0</span>])</span>
 <span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>ax_hr.plot(x_hr, coef_hr, marker<span class="op">=</span><span class="st">'o'</span>, ms<span class="op">=</span><span class="dv">10</span>)</span>
@@ -4713,11 +4713,11 @@ dtype: float64</code></pre>
 <section id="poisson-regression" class="level3">
 <h3 class="anchored" data-anchor-id="poisson-regression">Poisson Regression</h3>
 <p>Now we fit instead a Poisson regression model to the <code>Bikeshare</code> data. Very little changes, except that we now use the function <code>sm.GLM()</code> with the Poisson family specified:</p>
-<div id="8815b960" class="cell" data-execution_count="76">
+<div id="8815b960" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>M_pois <span class="op">=</span> sm.GLM(Y, X2, family<span class="op">=</span>sm.families.Poisson()).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can plot the coefficients associated with <code>mnth</code> and <code>hr</code>, in order to reproduce Figure~. We first complete these coefficients as before.</p>
-<div id="9555d2a3" class="cell" data-execution_count="77">
+<div id="9555d2a3" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>S_pois <span class="op">=</span> summarize(M_pois)</span>
 <span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>coef_month <span class="op">=</span> S_pois[S_pois.index.<span class="bu">str</span>.contains(<span class="st">'mnth'</span>)][<span class="st">'coef'</span>]</span>
 <span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>coef_month <span class="op">=</span> pd.concat([coef_month,</span>
@@ -4729,7 +4729,7 @@ dtype: float64</code></pre>
 <span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>                     index<span class="op">=</span>[<span class="st">'hr[23]'</span>])])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The plotting is as before.</p>
-<div id="7570d123" class="cell" data-execution_count="78">
+<div id="7570d123" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>fig_pois, (ax_month, ax_hr) <span class="op">=</span> subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>,<span class="dv">8</span>))</span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>ax_month.plot(x_month, coef_month, marker<span class="op">=</span><span class="st">'o'</span>, ms<span class="op">=</span><span class="dv">10</span>)</span>
 <span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>ax_month.set_xticks(x_month)</span>
@@ -4753,7 +4753,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>We compare the fitted values of the two models. The fitted values are stored in the <code>fittedvalues</code> attribute returned by the <code>fit()</code> method for both the linear regression and the Poisson fits. The linear predictors are stored as the attribute <code>lin_pred</code>.</p>
-<div id="a7c82940" class="cell" data-execution_count="79">
+<div id="a7c82940" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(M2_lm.fittedvalues,</span>
 <span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>           M_pois.fittedvalues,</span>

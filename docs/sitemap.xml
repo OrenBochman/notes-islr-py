@@ -14,79 +14,83 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/Ch13-multiple-lab.html</loc>
-    <lastmod>2025-01-21T01:53:31.929Z</lastmod>
+    <lastmod>2025-01-21T14:12:17.227Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch09-svm/Ch09-svm-lab.html</loc>
-    <lastmod>2025-01-21T01:49:04.452Z</lastmod>
+    <lastmod>2025-01-21T14:11:26.857Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/index.html</loc>
     <lastmod>2025-01-21T02:47:43.129Z</lastmod>
   </url>
   <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/index.html</loc>
-    <lastmod>2025-01-21T10:47:36.451Z</lastmod>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html</loc>
+    <lastmod>2025-01-21T14:10:32.973Z</lastmod>
   </url>
   <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/index.html</loc>
-    <lastmod>2025-01-21T12:17:38.082Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/index.html</loc>
-    <lastmod>2025-01-21T02:43:11.752Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab.html</loc>
-    <lastmod>2025-01-21T01:53:15.731Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/Ch08-baggboost-lab.html</loc>
-    <lastmod>2025-01-21T01:48:53.629Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch01-intro/index.html</loc>
-    <lastmod>2025-01-21T00:11:50.217Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/Ch07-nonlin-lab.html</loc>
-    <lastmod>2025-01-21T01:48:06.009Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/about.html</loc>
-    <lastmod>2025-01-20T22:58:48.247Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/index.html</loc>
-    <lastmod>2025-01-21T10:10:16.102Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/index.html</loc>
-    <lastmod>2025-01-21T02:46:59.848Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/index.html</loc>
-    <lastmod>2025-01-21T02:45:47.694Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/index.html</loc>
-    <lastmod>2025-01-21T02:38:37.337Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/Ch10-deeplearning-lab.html</loc>
-    <lastmod>2025-01-21T01:49:52.317Z</lastmod>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab.html</loc>
+    <lastmod>2025-01-21T14:10:27.756Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/Ch03-linreg-lab.html</loc>
     <lastmod>2025-01-21T12:19:56.359Z</lastmod>
   </url>
   <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab.html</loc>
-    <lastmod>2025-01-21T10:43:26.959Z</lastmod>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/Ch10-deeplearning-lab.html</loc>
+    <lastmod>2025-01-21T14:11:39.448Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/index.html</loc>
+    <lastmod>2025-01-21T02:38:37.337Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/index.html</loc>
+    <lastmod>2025-01-21T02:45:47.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/index.html</loc>
+    <lastmod>2025-01-21T02:46:59.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/index.html</loc>
+    <lastmod>2025-01-21T10:10:16.102Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/about.html</loc>
+    <lastmod>2025-01-20T22:58:48.247Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/Ch07-nonlin-lab.html</loc>
+    <lastmod>2025-01-21T14:11:08.136Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch01-intro/index.html</loc>
+    <lastmod>2025-01-21T00:11:50.217Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch08-tree-based-methods/Ch08-baggboost-lab.html</loc>
+    <lastmod>2025-01-21T14:11:17.072Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab.html</loc>
+    <lastmod>2025-01-21T14:12:05.920Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch10-deep-learning/index.html</loc>
+    <lastmod>2025-01-21T02:43:11.752Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/index.html</loc>
+    <lastmod>2025-01-21T12:17:38.082Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/index.html</loc>
+    <lastmod>2025-01-21T10:47:36.451Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/Ch06-varselect-lab.html</loc>
-    <lastmod>2025-01-21T13:12:18.640Z</lastmod>
+    <lastmod>2025-01-21T14:10:55.276Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch09-svm/index.html</loc>
@@ -98,22 +102,14 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch04-classification/Ch04-classification-lab.html</loc>
-    <lastmod>2025-01-21T01:15:46.827Z</lastmod>
+    <lastmod>2025-01-21T13:31:47.960Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab.html</loc>
-    <lastmod>2025-01-21T01:52:24.564Z</lastmod>
+    <lastmod>2025-01-21T14:11:56.409Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/Ch05-resample-lab.html</loc>
-    <lastmod>2025-01-21T00:54:34.115Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab copy.html</loc>
-    <lastmod>2025-01-21T10:32:32.485Z</lastmod>
-  </url>
-  <url>
-    <loc>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html</loc>
-    <lastmod>2025-01-21T10:43:58.017Z</lastmod>
+    <lastmod>2025-01-21T14:10:46.857Z</lastmod>
   </url>
 </urlset>

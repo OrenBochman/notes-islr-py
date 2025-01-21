@@ -2,6 +2,9 @@
 title: "Chapter 6: Linear Models and Regularization Methods Lab"
 categories: [lab,python]
 date: 2024-07-21
+format:
+   html:
+      page-layout: full
 ---
 
 # Linear Models and Regularization Methods
