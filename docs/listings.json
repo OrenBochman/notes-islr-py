@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ch13-multiple-testing/index.html",
       "/posts/ch13-multiple-testing/Ch13-multiple-lab.html",
       "/posts/ch06-model-selection-and-regularization/Ch06-varselect-lab.html",
       "/posts/ch01-intro/index.html",
@@ -25,10 +26,7 @@
       "/posts/ch02-statistical-learning/index.html",
       "/posts/ch04-classification/Ch04-classification-lab.html",
       "/posts/ch03-linear-regression/Ch03-linreg-lab.html",
-      "/posts/ch05-resampling-methods/Ch05-resample-lab.html",
-      "/posts/ch13-multiple-testing/index.html",
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
+      "/posts/ch05-resampling-methods/Ch05-resample-lab.html"
     ]
   }
 ]

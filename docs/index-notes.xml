@@ -15,7 +15,57 @@
 <link>https://orenbochman.github.io/notes-islr/#category=notes</link>
 </image>
 <generator>quarto-1.6.39</generator>
-<lastBuildDate>Mon, 20 Jan 2025 23:40:23 GMT</lastBuildDate>
+<lastBuildDate>Mon, 20 Jan 2025 23:41:56 GMT</lastBuildDate>
+<item>
+  <title>Chapter 13: Multiple Testing</title>
+  <dc:creator>Oren Bochman</dc:creator>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+  author = {Bochman, Oren},
+  title = {Chapter 13: {Multiple} {Testing}},
+  date = {2025-01-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas">
+Bochman, Oren. 2025. <span>“Chapter 13: Multiple Testing.”</span>
+January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/">https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</a>.
+</div></div></section></div> ]]></description>
+  <category>notes</category>
+  <category>edx</category>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</guid>
+  <pubDate>Mon, 20 Jan 2025 23:41:56 GMT</pubDate>
+  <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Chapter 1: Introduction</title>
   <dc:creator>Oren Bochman</dc:creator>
