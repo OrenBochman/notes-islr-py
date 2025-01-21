@@ -2,9 +2,9 @@
 title: "Chapter 5: Resampling Methods"
 description: "Resampling methods are an indispensable in the age of big data statistics"
 keywords: [statistical learning, resampling methods, cross-validation, bootstrap, permutation tests, jackknife]
-categories: [notes,edx]
+categories: [notes,edx,podcast]
+date: 2024-07-10
 ---
-
 
 ::: {#fig-v5.1 .column-margin}
 {{< video https://youtu.be/6eWODQJrMKs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
@@ -48,6 +48,29 @@ Lab: Cross Validation
 Lab: Bootstrap
 :::
 
+::: {.callout-tip}  
+
+## TL;DR - Resampling Methods {.unnumbered}
+
+![Resampling Methods in a nutshell](/images/in_a_nutshell.jpg)
+
+Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.
+
+> "The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method."
+
+> "LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance."
+
+> "In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success."
+
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+:::
+
+
+
 ## Summary of Resampling Methods
 
 In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.
@@ -82,15 +105,7 @@ Key Concepts and Methods
 - Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a 'fairer' version of the adaptive predictor that hasn't 'seen' the response variable.
 - Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.
 
-## Illustrative Quotes
 
-> "The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method."
-
-
-> "LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance."
-
-
-> "In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success."
 
 
 Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.

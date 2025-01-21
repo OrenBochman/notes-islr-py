@@ -1,6 +1,7 @@
 ---
 title: "Chapter 3: Linear Regression - Lab"
 categories: [lab,python]
+date: 2024-06-22
 ---
 
 # Linear Regression

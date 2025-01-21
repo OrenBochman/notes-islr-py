@@ -3,6 +3,7 @@ title: "Chapter 12: Unsupervised Learning"
 description: "About the book, datasets and notation"
 categories: [notes,edx]
 keywords: [statistical learning]
+date: 2024-09-10
 ---
 
 

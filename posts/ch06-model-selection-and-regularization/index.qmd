@@ -3,40 +3,222 @@ title: "Chapter 6: Linear Model Selection and Regularization"
 description: "Alternative fitting procedures can yield better prediction accuracy and model interpretability"
 keywords: [statistical learning, linear model selection, regularization, subset selection, shrinkage methods, ridge regression, lasso, best subset selection, forward and backward stepwise selection]
 categories: [notes,edx]
+date: 2024-07-20
 ---
 
 
-::: {#fig-v1.1 .column-margin}
-{{< video https://youtu.be/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+::: {#fig-v6.1 .column-margin}
+{{< video https://youtu.be/nsv5rEV3mVI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-Opening Remarks
+Introduction and Best Subset Selection
 :::
 
-::: {#fig-v1.2 .column-margin}
-{{< video https://youtu.be/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+::: {#fig-v6.2 .column-margin}
+{{< video https://youtu.be/ynXq-Gw1xfE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-Examples and Framework
+Stepwise Selection
 :::
 
-1. This chapter doen't have a lab and is a bit dull. 
-1. The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.
-1. IBM's Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.
-1. A second story they  mention is **Nate Silver**'s Five Thirty Eight site for prediction of the  presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a "rock star". It's worth mentioning though that predicing elections is isn't hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980.  And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.
+::: {#fig-v6.3 .column-margin}
+{{< video https://youtu.be/c5aI9cowjRI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-1. **Spam Detection** - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn't somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.
-1. It covers the three of the datasets used in the book.
-    1. Wage data
-    2. Stock market data
-    3. Gene Expression Data
-1. ISL [@ISL] is an introduction text. [@ESL] is the more comprehensive text.
-1. Statistical learning is the author's preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.
+Backward stepwise selection
+:::
+
+::: {#fig-v6.4 .column-margin}
+{{< video https://youtu.be/48P-oV6cH44?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Estimating test error
+:::
+
+::: {#fig-v6.5 .column-margin}
+{{< video https://youtu.be/mzb5Xs58bb0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Validation and cross validation
+:::
+
+::: {#fig-v6.6 .column-margin}
+{{< video https://youtu.be/lLlG5xkyqIA?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Shrinkage methods and ridge regression
+:::
+
+::: {#fig-v6.7 .column-margin}
+{{< video https://youtu.be/0tfPuddPhEY?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+The Lasso
+:::
+
+::: {#fig-v6.8 .column-margin}
+{{< video https://youtu.be/KV1Kt6I8rYs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Tuning parameter selection
+:::
+
+::: {#fig-v6.9 .column-margin}
+{{< video https://youtu.be/bpto4g5l_go?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Dimension Reduction Methods
+:::
+
+::: {#fig-v6.10 .column-margin}
+{{< video https://youtu.be/Uo19ST0IEZI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+
+Principal Components Regression and Partial Least Squares
+:::
+
+::: {.callout-tip}  
+
+## TL;DR - Linear Model Selection and Regularization {.unnumbered}
+
+![Model Selection and Regularization in a nutshell](/images/in_a_nutshell.jpg)
+
+We cover four main topics in this chapter: 
+
+1. Model selection is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy). 
+2. Shrinkage Methods are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as ridge regression and lasso, help control overfitting by shrinking coefficient estimates towards zero. 
+3. Dimension Reduction Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization. 
+4. Cross-validation is a powerful tool for selecting tuning parameters and comparing different models.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
+:::
+
+## Terminology for Model Selection and Regularization
+
+Best Subset Selection
+: A method that evaluates all possible subsets of predictor variables to find the model with the lowest training error.
 
 
-## Premises:
+![](alg6.1.png)
 
-- Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.
-- While it is important to know what job is performed by each cog, it is
-not necessary to have the skills to construct the machine inside the
-box!
-- The readers are interested in applying the methods to real-world problems.
+Forward Stepwise Selection
+: A method that starts with an empty model and iteratively adds the predictor that most improves the model fit at each step.
 
+![](alg6.2.png)
+
+Backward Stepwise Selection
+: A method that starts with a model containing all predictors and iteratively removes the least significant predictor at each step.
+
+![](alg6.3.png)
+
+Mallow's Cp
+: A statistic used to assess the fit of a model, taking into account both the residual sum of squares and the number of parameters.
+
+Akaike Information Criterion (AIC)
+: A metric that estimates prediction error and balances model complexity with goodness of fit, favoring simpler models.
+
+Bayesian Information Criterion (BIC)
+: A similar metric to AIC but with a stronger penalty for model complexity, leading to even simpler models.
+
+Ridge Regression
+: A shrinkage method that adds an L2 penalty to the least squares objective function, shrinking coefficients towards zero and reducing variance.
+
+Lasso
+: A shrinkage method that uses an L1 penalty, forcing some coefficients to become exactly zero, leading to variable selection.
+
+Tuning Parameter (λ)
+: A parameter that controls the strength of the penalty in shrinkage methods, balancing model fit with coefficient shrinkage.
+
+Cross-Validation
+: A resampling technique used to estimate the performance of a model on unseen data and to select tuning parameters.
+
+Principal Component Regression (PCR)
+: A dimension reduction technique that uses principal components (linear combinations of predictors capturing maximum variance) as predictors in regression.
+
+Partial Least Squares (PLS)
+: A dimension reduction method that constructs components that maximize the covariance between the predictors and the response, aiming for better prediction performance.
+
+Multicollinearity
+: A situation where predictor variables are highly correlated, which can lead to unstable coefficient estimates in least squares regression.
+
+Bias-Variance Trade-off
+: The fundamental trade-off between model complexity and prediction accuracy. Simpler models have higher bias but lower variance, while complex models have lower bias but higher variance.
+
+Sparsity
+: A property of a model where many of the coefficient estimates are exactly zero, indicating that only a subset of the predictors is used in the model.
+
+L1 Norm
+: The sum of the absolute values of the elements of a vector.
+
+L2 Norm
+: The square root of the sum of squared elements of a vector.
+
+## Outline of Chapter 6
+
+
+## Important Concepts:
+
+1. Subset Selection Methods:
+
+    - **Best Subset Selection**: Evaluates all possible combinations of predictors, choosing the model with the lowest RSS (residual sum of squares) or highest R-squared. Computationally expensive for large datasets.
+    - **Forward Stepwise Selection**: Starts with a null model and iteratively adds the predictor that most improves the model fit. Continues until all predictors are included or a stopping criterion is met.
+    - **Backward Stepwise Selection**: Starts with the full model and iteratively removes the least useful predictor. Continues until a stopping criterion is met.
+    - Challenges: Selecting the optimal model size requires metrics that estimate test error.
+    - Common Metrics:
+        - **Mallow's $C_p$**: Estimates test MSE (mean squared error) based on training RSS and model complexity. Seeks models with low Cp.
+
+        > "Mallow’s Cp is sometimes defined as $C'_p = RSS/\hat{\sigma}^2 + 2d - n$. This is equivalent to the definition given above in the sense that $Cp = \frac{1}{n} \hat{\sigma}^2 (C'_p + n)$, and so the model with smallest $C_p$ also has smallest $C'_p$."
+        
+        - **AIC (Akaike Information Criterion)**: Estimates test MSE using maximum likelihood and model complexity. Favors models with low AIC.
+        
+        > "The AIC criterion is defined for a large class of models fit by maximum likelihood: AIC = −2 logL+ 2 · d where L is the maximized value of the likelihood function for the estimated model."
+        
+        - **BIC (Bayesian Information Criterion)**: Similar to AIC but penalizes model complexity more heavily. Prefers simpler models with low BIC.
+        
+        - **Adjusted R-squared**: Accounts for the number of predictors in the model. Higher adjusted R-squared indicates better fit.
+
+    - Cross-Validation: Directly estimates test error by splitting data into training and validation sets.
+
+    > "This procedure has an advantage relative to AIC, BIC, Cp, and adjusted R2, in that it provides a direct estimate of the test error, and makes fewer assumptions about the true underlying model."
+
+2. Shrinkage Methods:
+
+    - Ridge Regression: Shrinks coefficient estimates towards zero by adding a penalty term proportional to the sum of squared coefficients. All predictors are included in the final model.
+
+    > "Ridge regression is very similar to least squares, except that the coefficients are estimated by minimizing a slightly different quantity."
+    
+    > "The penalty $\lambda \sum \beta^2_j$ in (6.5) will shrink all of the coefficients towards zero, but it will not set any of them exactly to zero unless $\lambda = \infty$."
+    
+    -   Lasso (Least Absolute Shrinkage and Selection Operator): Shrinks coefficients by adding a penalty term proportional to the sum of absolute coefficient values. Forces some coefficients to be exactly zero, performing variable selection.
+    
+    > "The lasso is a relatively recent alternative to ridge regression that overcomes this disadvantage. The lasso coefficients, $\hat{\beta}^L_\lambda$#, minimize the quantity..."
+    
+    > "As with ridge regression, the lasso shrinks the coefficient estimates towards zero. However, in the case of the lasso, the %1 penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter ! is sufficiently large."
+    
+    - Benefits: Both methods improve prediction accuracy by reducing variance, but Lasso provides more interpretable models due to variable selection.
+    - Challenges: Selecting the optimal tuning parameter (λ or s). Cross-validation is widely used for this purpose.
+
+3. Dimension Reduction Methods:
+
+    - **Principal Component Regression** (PCR): Constructs new variables (principal components) as linear combinations of original predictors, capturing most of the variance. Regresses the response on a subset of these components.
+
+    > "PCR identifies linear combinations, or directions, that best represent the predictors $X_1, \ldots , X_p.$"
+    - **Partial Least Squares** (PLS): Similar to PCR but constructs components that are also related to the response variable.
+    - Benefits: Reduce dimensionality, potentially leading to improved prediction accuracy and model interpretability.
+    - Challenges: Choosing the number of components to retain. Cross-validation can be used to determine this.
+
+## Important Considerations in High Dimensions:
+
+Traditional methods can struggle with high-dimensional data (p > n).
+Regularization techniques become crucial for controlling variance and preventing overfitting.
+Computational efficiency is essential for handling large datasets.
+Key Takeaways:
+
+Choosing the right method depends on the specific dataset and the goal of the analysis.
+Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization.
+Cross-validation is a powerful tool for selecting tuning parameters and comparing different models.
+Further Research:
+
+Explore different cross-validation strategies and their performance with various model types.
+Investigate the theoretical properties and limitations of different model selection and regularization methods.
+Apply these techniques to real-world datasets and evaluate their effectiveness in practice.
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch06.pdf){.col-page width="800px" height="1000px"}

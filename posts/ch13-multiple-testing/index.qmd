@@ -2,6 +2,7 @@
 title: "Chapter 13: Multiple Testing"
 description: "The incidence of coincidece and risks of multiple testing"
 categories: [notes,edx]
+date: 2024-09-20
 ---
 
 ::: {#fig-v1.1 .column-margin}

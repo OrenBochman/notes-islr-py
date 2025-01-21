@@ -3,6 +3,7 @@ title: "Chapter 1: Introduction"
 description: "About the book, datasets and notation"
 categories: [notes,edx]
 keywords: ["Introduction", "Statistical Learning", "ISL", "ESL", "Statistical Learning vs Machine Learning"]
+date: 2024-06-01
 ---
 
 ::: {#fig-v1.1 .column-margin}

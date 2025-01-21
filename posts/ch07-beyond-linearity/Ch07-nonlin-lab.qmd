@@ -1,6 +1,7 @@
 ---
 title: "Chapter 7 - Non-Linear Modeling Lab"
 categories: [lab,python]
+date: 2024-07-30
 ---
 
 # Non-Linear Modeling

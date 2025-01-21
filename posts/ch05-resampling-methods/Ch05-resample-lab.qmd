@@ -1,6 +1,8 @@
 ---
 title: "Chapter 5: Cross-Validation and the Bootstrap Lab"
 categories: [lab,python]
+date: 2024-07-11
+
 ---
 
 

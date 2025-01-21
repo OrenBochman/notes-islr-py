@@ -1,6 +1,7 @@
 ---
 title: "Chapter 8: Tree-Based Methods"
 categories: [lab,python]
+date: 2024-08-02
 ---
 
 # Tree-Based Methods

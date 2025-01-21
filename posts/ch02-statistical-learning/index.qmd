@@ -1,8 +1,9 @@
 ---
 title: "Chapter 2: Statistical Learning"
 description: "What is this books about!?"
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 keywords: [statistical learning, prediction, inference, parametric, non-parametric, overfitting, bias-variance trade-off, Bayes classifier, K-nearest neighbors classifier]
+date: 2024-06-10
 ---
 
 ::: {#fig-v2.1 .column-margin}
@@ -35,6 +36,7 @@ Classification
 Lab: Introduction to R
 :::
 
+
 ::: {.callout-tip}  
 
 ## TL;DR - Statistical Learning in a Nutshell {.unnumbered}
@@ -42,7 +44,14 @@ Lab: Introduction to R
 ![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
 
 Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
+
 :::
+
 
 The chapter is 53 pages long and covers the following topics:
 
@@ -243,4 +252,4 @@ These tools provide a foundation for applying statistical learning methods in pr
 
 ![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
 
-![Chapter](ch02.pdf.pdf){.col-page width="800px" height="1000px"}
+![Chapter](ch02.pdf){.col-page width="800px" height="1000px"}

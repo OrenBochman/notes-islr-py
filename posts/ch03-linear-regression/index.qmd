@@ -1,9 +1,9 @@
 ---
 title: "Chapter 3: Linear Regression"
 description: "When the labels are continuous, we are faced with a regression problem. This chapter introduces the fundamental concepts of linear regression, a powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable."
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 keywords: [statistical learning, linear regression, least squares, model assessment, model interpretation, qualitative predictors, interactions, polynomial regression, model diagnostics]
-
+date: 2024-06-21
 ---
 
 The lab for this chapter is at [lab](Ch03-linreg-lab.qmd)

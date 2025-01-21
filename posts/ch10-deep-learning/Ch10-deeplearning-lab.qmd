@@ -1,6 +1,7 @@
 ---
 title: "Chapter 10: Deep Learning"
 categories: [lab,python]
+date: 2024-08-21
 ---
 
 # Deep Learning

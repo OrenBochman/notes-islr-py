@@ -146,6 +146,7 @@ background-size: cover;
                           <div class="quarto-categories">
                 <div class="quarto-category">notes</div>
                 <div class="quarto-category">edx</div>
+                <div class="quarto-category">podcast</div>
               </div>
                   </div>
   </div>
@@ -163,7 +164,7 @@ background-size: cover;
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Tuesday, January 21, 2025</p>
+        <p class="date">Wednesday, July 10, 2024</p>
       </div>
     </div>
     
@@ -187,7 +188,6 @@ background-size: cover;
   <ul>
   <li><a href="#summary-of-resampling-methods" id="toc-summary-of-resampling-methods" class="nav-link active" data-scroll-target="#summary-of-resampling-methods">Summary of Resampling Methods</a></li>
   <li><a href="#important-considerations" id="toc-important-considerations" class="nav-link" data-scroll-target="#important-considerations">Important Considerations</a></li>
-  <li><a href="#illustrative-quotes" id="toc-illustrative-quotes" class="nav-link" data-scroll-target="#illustrative-quotes">Illustrative Quotes</a></li>
   </ul>
 </nav>
 </nav>
@@ -272,6 +272,38 @@ Figure&nbsp;7: Lab: Bootstrap
 
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Resampling Methods
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Resampling Methods in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Resampling Methods in a nutshell"></a></p>
+<figcaption>Resampling Methods in a nutshell</figcaption>
+</figure>
+</div>
+<p>Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+<blockquote class="blockquote">
+<p>“The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success.”</p>
+</blockquote>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
 <section id="summary-of-resampling-methods" class="level2">
 <h2 class="anchored" data-anchor-id="summary-of-resampling-methods">Summary of Resampling Methods</h2>
 <p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>
@@ -321,28 +353,16 @@ Figure&nbsp;7: Lab: Bootstrap
 <li>Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a ‘fairer’ version of the adaptive predictor that hasn’t ‘seen’ the response variable.</li>
 <li>Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.</li>
 </ul>
-</section>
-<section id="illustrative-quotes" class="level2">
-<h2 class="anchored" data-anchor-id="illustrative-quotes">Illustrative Quotes</h2>
-<blockquote class="blockquote">
-<p>“The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method.”</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>“LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance.”</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>“In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success.”</p>
-</blockquote>
 <p>Conclusion: Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ch05.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter"><embed src="ch05.pdf" class="col-page" width="800" height="1000"></a></p>
+<p><a href="ch05.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch05.pdf" class="col-page" width="800" height="1000"></a></p>
 <figcaption>Chapter</figcaption>
 </figure>
 </div>
@@ -350,16 +370,16 @@ Figure&nbsp;7: Lab: Bootstrap
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2025,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
   title = {Chapter 5: {Resampling} {Methods}},
-  date = {2025-01-21},
+  date = {2024-07-10},
   url = {https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2025" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2025. <span>“Chapter 5: Resampling Methods.”</span>
-January 21, 2025. <a href="https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/">https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bochman, Oren. 2024. <span>“Chapter 5: Resampling Methods.”</span> July
+10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/">https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

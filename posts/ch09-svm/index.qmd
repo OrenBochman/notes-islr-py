@@ -5,7 +5,7 @@ for classification that was developed in the computer science community in
 the 1990s and that has grown in popularity since then"
 categories: [notes,edx]
 keywords: [statistical learning, support vector machines, maximal margin classifier, support vector classifier, support vector machine, nonlinear decision boundaries, KKT conditions, soft margin, SVM with more than two classes, relationship to logistic regression, relationship to other methods, computational considerations, relevance of SVMs]
-
+date: 2024-08-10
 ---
 
 

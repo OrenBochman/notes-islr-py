@@ -3,6 +3,7 @@ title: "Chapter 7: Moving Beyond Linearity"
 description: "About the book, datasets and notation"
 keywords: ["Beyond Linearity", "Generalized Additive Models", "GAMs", "Splines", "Smoothing Splines", "Generalized Additive Models for Location, Scale and Shape", "GAMLSS"]
 categories: [notes,edx]
+date: 2024-07-28
 ---
 
 

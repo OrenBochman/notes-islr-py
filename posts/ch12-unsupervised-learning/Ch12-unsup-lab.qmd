@@ -1,6 +1,7 @@
 ---
 title: "Chapter 12: Unsupervised Learning Lab"
 categories: [lab,python]
+date: 2024-09-11
 ---
 
 # Unsupervised Learning

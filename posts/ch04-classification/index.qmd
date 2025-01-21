@@ -1,8 +1,9 @@
 ---
 title: "Chapter 4: Classification"
 description: "When the labels are categorical, we are faced with a classification problem. In this chapter, we discuss the tools and techniques used to solve classification problems."
-categories: [notes,edx]
+categories: [notes,edx,podcast]
 keywords: [statistical learning, classification, logistic regression, discriminant analysis, naive bayes, generalized linear models, model assessment, model selection]
+date: 2024-07-01
 ---
 
 
@@ -119,6 +120,99 @@ The chapter is 65 pages long and covers the following topics:
 ![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
 
 Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+
+
+<audio controls="1">
+  <source src="podcast.mp3" data-external="1" type="audio/mpeg">
+  </source>
+</audio>
 :::
 
-{{< lipsum >}}
+## Glossary of Key Terms
+
+Classification
+: The task of predicting a categorical response variable based on a set of predictor variables.
+
+Qualitative Variable
+: A variable that takes values in an unordered set of categories.
+
+Logistic Regression
+: A classification method that models the probability of belonging to a category using a logit transformation and a linear combination of predictor variables.
+
+Confounding
+: A situation where the relationship between a predictor and the response is distorted by the presence of another variable.
+
+Bayes' Theorem
+: A mathematical formula that calculates the posterior probability of an event given prior knowledge and new evidence.
+
+Discriminant Analysis
+: A classification method that uses Bayes' theorem to classify observations based on the probability of belonging to each class, assuming that the predictor variables follow a certain probability distribution.
+
+LDA (Linear Discriminant Analysis)
+: A type of discriminant analysis that assumes a common covariance matrix for all classes, resulting in linear decision boundaries.
+
+QDA (Quadratic Discriminant Analysis)
+: A type of discriminant analysis that allows different covariance matrices for each class, resulting in quadratic decision boundaries.
+
+Naive Bayes
+: A classification method that assumes conditional independence of predictor variables within each class.
+
+Generalized Linear Model (GLM)
+: A statistical framework that extends linear regression by allowing for different response variable distributions and a link function that connects the linear predictor to the mean of the response.
+
+Overdispersion
+: A situation in Poisson regression where the variance of the response variable is larger than the mean.
+
+ROC Curve (Receiver Operating Characteristic Curve)
+: A graphical plot that illustrates the performance of a binary classifier by plotting the true positive rate against the false positive rate at various threshold settings.
+
+Generative Model
+: A statistical model that learns the joint probability distribution of the input features and the output variable, allowing for the generation of new data points.
+
+Discriminative Model
+: A statistical model that directly learns the decision boundary between classes without explicitly modeling the underlying data distribution.
+
+Curse of Dimensionality
+: The phenomenon where the performance of machine learning algorithms degrades as the number of features increases due to data sparsity and increased computational complexity.
+
+## Core Concepts:
+
+Classification: The task of assigning input data (feature vectors) to specific categories (classes) based on learned patterns. This is contrasted with regression, which predicts continuous outcomes.
+Logistic Regression: A powerful algorithm for predicting the probability of a binary outcome. It models the log-odds of the outcome as a linear function of the predictors.
+Discriminant Analysis: A generative approach to classification that assumes data within each class follows a specific distribution, often a Gaussian distribution.
+Linear Discriminant Analysis (LDA): Assumes the same covariance matrix for all classes, leading to linear decision boundaries.
+Quadratic Discriminant Analysis (QDA): Allows different covariance matrices for each class, leading to more flexible (quadratic) decision boundaries.
+Naive Bayes: A simplified generative model that assumes conditional independence among predictors within each class. It's computationally efficient and surprisingly effective, even when the independence assumption is violated.
+Generalized Linear Models (GLMs): A unified framework encompassing linear, logistic, and Poisson regression. They model the relationship between the response variable and predictors through a link function.
+Model Evaluation: Crucial for assessing the performance of classification models. Key metrics include accuracy, error rates (overall, false positive, false negative), and ROC curves.
+Important Ideas and Facts:
+
+Classification vs. Regression: While both involve predicting an outcome based on input features, classification deals with discrete categories (e.g., spam/ham, default/no default), whereas regression predicts a continuous value (e.g., house price).
+Logistic Regression for Probability Prediction: Logistic regression is widely used for binary classification, as it outputs a probability between 0 and 1. The equation relating probability to predictors is:
+p(X) = e^(β0 + β1X) / (1 + e^(β0 + β1X))
+LDA and QDA: Distributional Assumptions: LDA and QDA rely on the assumption that data within each class follows a multivariate Gaussian distribution. The difference lies in whether they assume a shared covariance matrix (LDA) or class-specific covariance matrices (QDA).
+Naive Bayes and Conditional Independence: Naive Bayes greatly simplifies the modeling of high-dimensional data by assuming features are independent within each class. While this assumption is often unrealistic, it leads to computational efficiency and can still yield good predictive performance.
+Generalized Additive Models and Naive Bayes: Naive Bayes can be viewed as a special case of generalized additive models (GAMs). Both allow for non-linear relationships between features and the response variable.
+Choice of Classification Method: The choice of the best classification method depends on factors like the nature of the data, the number of predictors, the distributional assumptions, and the computational constraints.
+
+## Illustrative Examples:
+
+Default Prediction: The "Default" dataset demonstrates logistic regression for predicting credit card default based on balance and student status. This example highlights the importance of interpreting model coefficients and evaluating performance metrics.
+South African Heart Disease: LDA is applied to predict the risk of myocardial infarction based on various risk factors. This illustrates the use of discriminant analysis for understanding the influence of predictors on a binary outcome.
+Bikeshare Data: This example explores the use of Poisson regression for modeling count data, showcasing its advantages over linear regression when the variance of the response is related to its mean.
+## Key Quotes:
+
+Classification: "Given a feature vector X and a qualitative response Y taking values in the set C, the classification task is to build a function C(X) that takes as input the feature vector X and predicts its value for Y" (Ch4_Classification.pdf)
+Logistic Regression: "The quantity p(X)/[1-p(X)] is called the odds, and can take on any value between 0 and ∞" (ch04.pdf).
+LDA Decision Boundary: "If there are K = 2 classes and π1 = π2 = 0.5, then one can see that the decision boundary is at x = (µ1 + µ2) / 2." (Ch4_Classification.pdf)
+Naive Bayes Assumption: "Within the kth class, the p predictors are independent." (ch04.pdf).
+GLMs: "Generalized linear models provide a unified framework for dealing with many different response types." (Ch4_Classification.pdf)
+Conclusion:
+
+Classification is a fundamental task in machine learning, with a variety of powerful algorithms at our disposal. Understanding the strengths and weaknesses of each method, along with their underlying assumptions, is essential for selecting the appropriate technique and interpreting the results effectively.
+
+## Slides and Chapter
+
+![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+![Chapter](ch04.pdf){.col-page width="800px" height="1000px"}

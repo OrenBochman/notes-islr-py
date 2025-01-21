@@ -1,6 +1,7 @@
 ---
 title: "Chapter 9: Support Vector Machines Lab"
 categories: [lab,python]
+date: 2024-08-11
 ---
  
 

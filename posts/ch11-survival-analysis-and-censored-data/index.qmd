@@ -2,6 +2,7 @@
 title: "Chapter 11: Survival Analysis" 
 description: "About the book, datasets and notation"
 categories: [notes,edx]
+date: 2024-09-01
 ---
 
 

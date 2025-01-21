@@ -1,6 +1,7 @@
 ---
 title: "Chapter 13: Multiple Testing Lab"
 categories: [lab,python]
+date: 2024-09-21
 ---
 
 # Multiple Testing
