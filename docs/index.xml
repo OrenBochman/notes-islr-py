@@ -1403,7 +1403,7 @@ Figure&nbsp;2: Examples and Framework
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-TL;DR - Multiple Testing
+TL;DR - Multiple Testing 🔬🔬🔬
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1413,13 +1413,76 @@ TL;DR - Multiple Testing
 <figcaption>Multiple Testing in a nutshell</figcaption>
 </figure>
 </div>
-<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <img src="https://latex.codecogs.com/png.latex?(f)"> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+<p>Multiple testing refers to the practice of conducting multiple hypothesis tests simultaneously, which can lead to an increased risk of making at least one Type I error. The Family-wise Error Rate (FWER) and False Discovery Rate (FDR) are two common error rates used to control for the risks of multiple testing. The Bonferroni correction, Holm’s method, and the Benjamini-Hochberg procedure are popular methods to adjust p-values and control for these error rates. Re-sampling methods like permutation testing can also be used to approximate the null distribution of the test statistic when theoretical distributions are unknown or assumptions about the data are difficult to justify.</p>
 <audio controls="1">
 <source src="podcast.mp3" data-external="1" type="audio/mpeg">
 
 </audio>
 </div>
 </div>
+<p>Glossary of Key Terms</p>
+<dl>
+<dt>Hypothesis Testing</dt>
+<dd>
+A statistical method used to assess the evidence provided by data against a specific null hypothesis in favor of an alternative hypothesis.
+</dd>
+<dt>Null Hypothesis (H0)</dt>
+<dd>
+The default statement of no effect or no difference that we aim to disprove using statistical evidence.
+</dd>
+<dt>Alternative Hypothesis (Ha)</dt>
+<dd>
+The statement that contradicts the null hypothesis and represents the claim we want to support if there is enough evidence.
+</dd>
+<dt>Test Statistic</dt>
+<dd>
+A numerical summary of the data that is used to assess the compatibility of the data with the null hypothesis.
+</dd>
+<dt>P-value</dt>
+<dd>
+The probability of observing a test statistic as extreme as or more extreme than the one calculated from the data, assuming the null hypothesis is true.
+</dd>
+<dt>Type I Error</dt>
+<dd>
+Rejecting a true null hypothesis (false positive).
+</dd>
+<dt>Type II Error</dt>
+<dd>
+Failing to reject a false null hypothesis (false negative).
+</dd>
+<dt>Multiple Hypothesis Testing</dt>
+<dd>
+Performing multiple hypothesis tests simultaneously, which increases the probability of making at least one Type I error.
+</dd>
+<dt>Family-wise Error Rate (FWER)</dt>
+<dd>
+The probability of making at least one Type I error among all hypotheses tested.
+</dd>
+<dt>False Discovery Rate (FDR)</dt>
+<dd>
+The expected proportion of falsely rejected null hypotheses among all rejected null hypotheses.
+</dd>
+<dt>Bonferroni Correction</dt>
+<dd>
+A method to control the FWER by dividing the desired overall significance level by the number of tests.
+</dd>
+<dt>Holm’s Method</dt>
+<dd>
+A step-down method to control the FWER that adjusts p-value thresholds sequentially, potentially leading to more rejections than the Bonferroni correction.
+</dd>
+<dt>Benjamini-Hochberg Procedure</dt>
+<dd>
+A method to control the FDR by identifying the largest p-value that satisfies a specific criterion and rejecting all null hypotheses with p-values less than or equal to this identified p-value.
+</dd>
+<dt>Re-sampling Methods</dt>
+<dd>
+Techniques like permutation testing that use random sampling with replacement from the observed data to approximate the null distribution of the test statistic, especially helpful when theoretical null distributions are unknown or assumptions about the data are difficult to justify.
+</dd>
+<dt>Permutation Testing</dt>
+<dd>
+A re-sampling method where data points are randomly reassigned to different groups to create new datasets under the assumption of the null hypothesis. This allows for the estimation of the null distribution of the test statistic without relying on specific distributional assumptions.
+</dd>
+</dl>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
 <div class="quarto-figure quarto-figure-center">

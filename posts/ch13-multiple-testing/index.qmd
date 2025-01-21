@@ -21,11 +21,12 @@ Examples and Framework
 
 ::: {.callout-tip}  
 
-## TL;DR - Multiple Testing {.unnumbered}
+## TL;DR - Multiple Testing  🔬🔬🔬 {.unnumbered}
 
 ![Multiple Testing in a nutshell](/images/in_a_nutshell.jpg)
 
-Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
+Multiple testing refers to the practice of conducting multiple hypothesis tests simultaneously, which can lead to an increased risk of making at least one Type I error. The Family-wise Error Rate (FWER) and False Discovery Rate (FDR) are two common error rates used to control for the risks of multiple testing. The Bonferroni correction, Holm's method, and the Benjamini-Hochberg procedure are popular methods to adjust p-values and control for these error rates. Re-sampling methods like permutation testing can also be used to approximate the null distribution of the test statistic when theoretical distributions are unknown or assumptions about the data are difficult to justify.
+
 
 <audio controls="1">
   <source src="podcast.mp3" data-external="1" type="audio/mpeg">
@@ -33,6 +34,53 @@ Statistical learning is a set of tools for understanding data and building model
 </audio>
 
 :::
+
+Glossary of Key Terms
+
+Hypothesis Testing
+: A statistical method used to assess the evidence provided by data against a specific null hypothesis in favor of an alternative hypothesis.
+
+Null Hypothesis (H0)
+: The default statement of no effect or no difference that we aim to disprove using statistical evidence.
+
+Alternative Hypothesis (Ha)
+: The statement that contradicts the null hypothesis and represents the claim we want to support if there is enough evidence.
+
+Test Statistic
+: A numerical summary of the data that is used to assess the compatibility of the data with the null hypothesis.
+
+P-value
+: The probability of observing a test statistic as extreme as or more extreme than the one calculated from the data, assuming the null hypothesis is true.
+
+Type I Error
+: Rejecting a true null hypothesis (false positive).
+
+Type II Error
+: Failing to reject a false null hypothesis (false negative).
+
+Multiple Hypothesis Testing
+: Performing multiple hypothesis tests simultaneously, which increases the probability of making at least one Type I error.
+
+Family-wise Error Rate (FWER)
+: The probability of making at least one Type I error among all hypotheses tested.
+
+False Discovery Rate (FDR)
+: The expected proportion of falsely rejected null hypotheses among all rejected null hypotheses.
+
+Bonferroni Correction
+: A method to control the FWER by dividing the desired overall significance level by the number of tests.
+
+Holm's Method
+: A step-down method to control the FWER that adjusts p-value thresholds sequentially, potentially leading to more rejections than the Bonferroni correction.
+
+Benjamini-Hochberg Procedure
+: A method to control the FDR by identifying the largest p-value that satisfies a specific criterion and rejecting all null hypotheses with p-values less than or equal to this identified p-value.
+
+Re-sampling Methods
+: Techniques like permutation testing that use random sampling with replacement from the observed data to approximate the null distribution of the test statistic, especially helpful when theoretical null distributions are unknown or assumptions about the data are difficult to justify.
+
+Permutation Testing
+: A re-sampling method where data points are randomly reassigned to different groups to create new datasets under the assumption of the null hypothesis. This allows for the estimation of the null distribution of the test statistic without relying on specific distributional assumptions.
 
 
 
