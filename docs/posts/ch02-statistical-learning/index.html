@@ -43,8 +43,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-594d21605a7b9fb32547fedacd8fc358.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d396125c57f3f0defba792e7b0e7a5dc.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-02131402185803fffdb13c72ead8d5c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8072ba3c8f90baa049cfdfc6dfb138ec.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -236,6 +236,7 @@ window.Quarto = {
   <li><a href="#answer-key" id="toc-answer-key" class="nav-link" data-scroll-target="#answer-key">Answer Key</a></li>
   </ul></li>
   <li><a href="#essay-questions" id="toc-essay-questions" class="nav-link" data-scroll-target="#essay-questions">Essay Questions</a></li>
+  <li><a href="#excercises" id="toc-excercises" class="nav-link" data-scroll-target="#excercises">Excercises</a></li>
   <li><a href="#slides-and-chapter" id="toc-slides-and-chapter" class="nav-link" data-scroll-target="#slides-and-chapter">Slides and Chapter</a></li>
   </ul>
 </nav>
@@ -521,6 +522,191 @@ Our model will be shooting an arrow at a know target so it is easier to evaluate
 <li><p>Describe the concept of cross-validation. Why is it important, and how can it be used to improve model selection and assessment?</p></li>
 <li><p>Discuss the challenges and considerations in choosing an appropriate level of flexibility for a statistical learning method. How does the bias-variance trade-off guide this decision? Explain the consequences of choosing a model that is too flexible or not flexible enough.</p></li>
 </ol>
+</section>
+<section id="excercises" class="level2">
+<h2 class="anchored" data-anchor-id="excercises">Excercises</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q1: flexible and inflexible
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol type="1">
+<li>For each parts, indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.
+<ol type="a">
+<li>The sample size n is extremely large, and the number of predictors p is small.</li>
+<li>The number of predictors p is extremely large, and the numberof observations n is small.</li>
+<li>The relationship between the predictors and response is highly non-linear.</li>
+<li>The variance of the error terms, i.e.&nbsp;<span class="math inline">σ^2 = Var(\epsilon)</span>, is extremely high.</li>
+</ol></li>
+</ol>
+<section id="answer" class="level2">
+<h2 class="anchored" data-anchor-id="answer">Answer</h2>
+<p>Let’s start by clarifing what we mean by flexible and inflexible.</p>
+<ul>
+<li>An inflexible model is parametric, and is one that has a sufficently small number of parameters to give a good fit for the data. Henve a multiple regression might be too flexible if there are more predictors than observations I would hazzard that a inflexible model should have an order of magnitude less parameters than observations.</li>
+<li>A flexible model is a non-parametric model like a neural network or loess. It should have a higher capacity to fit the data than the inflexible model yet can be trained not to overfit the data.</li>
+</ul>
+<ol type="a">
+<li>In this case I think that we would use a inflexible model. Perhaps because it is simple and is certain to work well. I would consider it as a baseline only consder a more flexible model if I needed to do better.</li>
+<li>In this case even a simple model like a multiple regression would underfit the data. I wouls consider a tree based model or pca to reduce the number of predictors to a number that is significantly smaller than the number of observations. Other methods of feature selecetion might also be considered.</li>
+<li>The fact that the relationship is non-linear does not neccesirily mean that an inflexible model would not work. If I can find a transformation of the data that makes the relationship linear then I would a multiple regression with the transformed data. If I could not I would use a flexible model like a gaussian process or a neural network.</li>
+<li>In this case I would want to avoid a flexible model as it would overfit on the noise of the data. I would prefer a inflexible model like an ANOVA that can model the variance thus reducing the variance of the model. I might also look for some transformation of the data that would reduce the variance of the error terms like a log transformation or a whitening transformation.</li>
+</ol>
+<p>So in general I would expect an inflexible model to be my first choice and to consider more flexible models only if the inflexible model proved unsatisfactory.</p>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q2: Classification or Regression
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol start="2" type="1">
+<li>Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide n and p.</li>
+</ol>
+<ol type="a">
+<li>We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry and the CEO salary. We are interested in understanding which factors affect CEO salary.</li>
+<li>We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables.</li>
+<li>We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market.</li>
+</ol>
+<section id="answer-2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="answer-2">Answer 2</h2>
+<ol type="a">
+<li>This is a regression problem with p=3 and n=500 and we are interested in inference.</li>
+<li>This is a binary classification problem with p=13 and n=20 and we are interested in prediction.</li>
+<li>This is a regression problem with p=3 and n=52 and we are interested in prediction.</li>
+</ol>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q3: Bias-Variance Trade-off
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol start="3" type="1">
+<li>We now revisit the bias-variance decomposition.</li>
+</ol>
+<ol type="a">
+<li>Provide a sketch of typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods towards more flexible approaches. The x-axis should represent the amount of flexibility in the method, and the y-axis should represent the values for each curve. There should be five curves. Make sure to label each one.</li>
+<li>Explain why each of the five curves has the shape displayed in part (a).</li>
+</ol>
+<section id="answer-3" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="answer-3">Answer 3</h2>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q4: Real-life Applications
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol start="4" type="1">
+<li>You will now think of some real-life applications for statistical learning.</li>
+</ol>
+<ol type="a">
+<li>Describe three real-life applications in which classification might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.</li>
+<li>Describe three real-life applications in which regression might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.</li>
+<li>Describe three real-life applications in which cluster analysis might be useful.</li>
+</ol>
+<section id="answer-4" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="answer-4">Answer 4</h2>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q5: Real-life Applications
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol start="5" type="1">
+<li>What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?</li>
+</ol>
+<section id="answer-5" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="answer-5">Answer 5</h2>
+</section>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q6: Parametric and a non-parametric
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol start="6" type="1">
+<li>Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a non- parametric approach)? What are its disadvantages?</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Q7: Real-life Applications
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+</div>
+</div>
 </section>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>

@@ -1557,14 +1557,17 @@ A re-sampling method where data points are randomly reassigned to different grou
 <li>Describe a real-world example of multiple hypothesis testing and discuss the implications of choosing different error control methods (FWER, FDR) for the specific problem.</li>
 </ol>
 </section>
-<section id="slides-and-chapter" class="level2">
-<h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="ch13.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch13.pdf" class="col-page" width="800" height="1000"></a></p>
@@ -1594,7 +1597,7 @@ September 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch13
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
-  <title>Unsupervised Learning</title>
+  <title>Chapter 12: Unsupervised Learning Lab</title>
   <dc:creator>Oren Bochman</dc:creator>
   <link>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab.html</link>
   <description><![CDATA[ 
@@ -1603,15 +1606,11 @@ September 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch13
 
 
 
-<p><a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch12-unsup-lab.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"> </a></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://mybinder.org/badge_logo.svg" class="img-fluid figure-img"></p>
-<figcaption>Binder</figcaption>
-</figure>
-</div>
+<section id="unsupervised-learning" class="level1">
+<h1>Unsupervised Learning</h1>
+<p><a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch12-unsup-lab.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <a href="https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch12-unsup-lab.ipynb"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid" alt="Binder"></a></p>
 <p>In this lab we demonstrate PCA and clustering on several datasets. As in other labs, we import some of our libraries at this top level. This makes the code more readable, as scanning the first few lines of the notebook tell us what libraries are used in this notebook.</p>
-<div id="58c7be55" class="cell" data-execution_count="1">
+<div id="354f9d2f" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
@@ -1646,10 +1645,22 @@ font-style: inherit;">import</span> StandardScaler</span>
 background-color: null;
 font-style: inherit;">from</span> ISLP <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> load_data</span></code></pre></div>
+font-style: inherit;">import</span> load_data</span>
+<span id="cb1-8"></span>
+<span id="cb1-9"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> IPython.display <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> display, HTML</span>
+<span id="cb1-10">display(HTML(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;"</span>))</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<style>.container { width:100% !important; }</style>
+</div>
 </div>
 <p>We also collect the new imports needed for this lab.</p>
-<div id="922b8615" class="cell" data-execution_count="2">
+<div id="e874a513" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> sklearn.cluster <span class="im" style="color: #00769E;
@@ -1678,7 +1689,7 @@ font-style: inherit;">import</span> compute_linkage</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="principal-components-analysis">Principal Components Analysis</h2>
 <p>In this lab, we perform PCA on <code>USArrests</code>, a data set in the <code>R</code> computing environment. We retrieve the data using <code>get_rdataset()</code>, which can fetch data from many standard <code>R</code> packages.</p>
 <p>The rows of the data set contain the 50 states, in alphabetical order.</p>
-<div id="1cb89e24" class="cell" data-execution_count="3">
+<div id="6a1263b2" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">USArrests <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> get_rdataset(<span class="st" style="color: #20794D;
@@ -2064,14 +2075,14 @@ font-style: inherit;">'USArrests'</span>).data</span>
 </div>
 </div>
 <p>The columns of the data set contain the four variables.</p>
-<div id="70228663" class="cell" data-execution_count="4">
+<div id="8cdef7a5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">USArrests.columns</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>Index(['Murder', 'Assault', 'UrbanPop', 'Rape'], dtype='object')</code></pre>
 </div>
 </div>
 <p>We first briefly examine the data. We notice that the variables have vastly different means.</p>
-<div id="a755d1ca" class="cell" data-execution_count="5">
+<div id="bd55e5bf" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">USArrests.mean()</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>Murder        7.788
@@ -2082,7 +2093,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Dataframes have several useful methods for computing column-wise summaries. We can also examine the variance of the four variables using the <code>var()</code> method.</p>
-<div id="0151096f" class="cell" data-execution_count="6">
+<div id="03e599c1" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">USArrests.var()</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>Murder        18.970465
@@ -2094,7 +2105,7 @@ dtype: float64</code></pre>
 </div>
 <p>Not surprisingly, the variables also have vastly different variances. The <code>UrbanPop</code> variable measures the percentage of the population in each state living in an urban area, which is not a comparable number to the number of rapes in each state per 100,000 individuals. PCA looks for derived variables that account for most of the variance in the data set. If we do not scale the variables before performing PCA, then the principal components would mostly be driven by the <code>Assault</code> variable, since it has by far the largest variance. So if the variables are measured in different units or vary widely in scale, it is recommended to standardize the variables to have standard deviation one before performing PCA. Typically we set the means to zero as well.</p>
 <p>This scaling can be done via the <code>StandardScaler()</code> transform imported above. We first <code>fit</code> the scaler, which computes the necessary means and standard deviations and then apply it to our data using the <code>transform</code> method. As before, we combine these steps using the <code>fit_transform()</code> method.</p>
-<div id="9229c741" class="cell" data-execution_count="7">
+<div id="a8a9b6d3" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">scaler <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> StandardScaler(with_std<span class="op" style="color: #5E5E5E;
@@ -2112,13 +2123,13 @@ background-color: null;
 font-style: inherit;">=</span> scaler.fit_transform(USArrests)</span></code></pre></div>
 </div>
 <p>Having scaled the data, we can then perform principal components analysis using the <code>PCA()</code> transform from the <code>sklearn.decomposition</code> package.</p>
-<div id="48f6155b" class="cell" data-execution_count="8">
+<div id="b74bcadf" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">pcaUS <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> PCA()</span></code></pre></div>
 </div>
 <p>(By default, the <code>PCA()</code> transform centers the variables to have mean zero though it does not scale them.) The transform <code>pcaUS</code> can be used to find the PCA <code>scores</code> returned by <code>fit()</code>. Once the <code>fit</code> method has been called, the <code>pcaUS</code> object also contains a number of useful quantities.</p>
-<div id="bdbccb46" class="cell" data-execution_count="9">
+<div id="3a1a23b5" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">pcaUS.fit(USArrests_scaled)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <style>#sk-container-id-1 {
@@ -2529,20 +2540,20 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>After fitting, the <code>mean_</code> attribute corresponds to the means of the variables. In this case, since we centered and scaled the data with <code>scaler()</code> the means will all be 0.</p>
-<div id="36f1ae87" class="cell" data-execution_count="10">
+<div id="940dab86" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">pcaUS.mean_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array([-7.10542736e-17,  1.38777878e-16, -4.39648318e-16,  8.59312621e-16])</code></pre>
 </div>
 </div>
 <p>The scores can be computed using the <code>transform()</code> method of <code>pcaUS</code> after it has been fit.</p>
-<div id="0efd1930" class="cell" data-execution_count="11">
+<div id="89bdd65b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">scores <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pcaUS.transform(USArrests_scaled)</span></code></pre></div>
 </div>
 <p>We will plot these scores a bit further down. The <code>components_</code> attribute provides the principal component loadings: each row of <code>pcaUS.components_</code> contains the corresponding principal component loading vector.</p>
-<div id="e4b0e0d0" class="cell" data-execution_count="12">
+<div id="5b880560" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">pcaUS.components_ </span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([[ 0.53589947,  0.58318363,  0.27819087,  0.54343209],
@@ -2552,7 +2563,7 @@ font-style: inherit;">=</span> pcaUS.transform(USArrests_scaled)</span></code></
 </div>
 </div>
 <p>The <code>biplot</code> is a common visualization method used with PCA. It is not built in as a standard part of <code>sklearn</code>, though there are python packages that do produce such plots. Here we make a simple biplot manually.</p>
-<div id="a7f59f38" class="cell" data-execution_count="13">
+<div id="82e0ef4e" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">i, j <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -2625,24 +2636,42 @@ font-style: inherit;">0</span>, pcaUS.components_[i,k], pcaUS.components_[j,k])<
 <span id="cb18-8">    ax.text(pcaUS.components_[i,k],</span>
 <span id="cb18-9">            pcaUS.components_[j,k],</span>
 <span id="cb18-10">            USArrests.columns[k])</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.5, 0, 'PC1')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0, 0.5, 'PC2')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.5358994749381554, -0.4181808654209545, 'Murder')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.5831836349096703, -0.18798560423193894, 'Assault')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.2781908746194329, 0.872806193060425, 'UrbanPop')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>Text(0.5434320914456824, 0.16731863540174635, 'Rape')</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-14-output-1.png" width="674" height="651" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-14-output-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-14-output-7.png" width="674" height="651" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Notice that this figure is a reflection of Figure~ through the <img src="https://latex.codecogs.com/png.latex?y">-axis. Recall that the principal components are only unique up to a sign change, so we can reproduce that figure by flipping the signs of the second set of scores and loadings. We also increase the length of the arrows to emphasize the loadings.</p>
-<div id="09086d33" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">scale_arrow <span class="op" style="color: #5E5E5E;
+<div id="dba24e57" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">scale_arrow <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> s_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span></span>
-<span id="cb19-2">scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb25-2">scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2651,7 +2680,7 @@ background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb19-3">pcaUS.components_[<span class="dv" style="color: #AD0000;
+<span id="cb25-3">pcaUS.components_[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2662,7 +2691,7 @@ background-color: null;
 font-style: inherit;">1</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># flip the y-axis</span></span>
-<span id="cb19-4">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb25-4">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2675,12 +2704,12 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb19-5">ax.scatter(scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb25-5">ax.scatter(scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>], scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>])</span>
-<span id="cb19-6">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb25-6">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PC</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -2693,7 +2722,7 @@ background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>))</span>
-<span id="cb19-7">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb25-7">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PC</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -2706,7 +2735,7 @@ background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>))</span>
-<span id="cb19-8"><span class="cf" style="color: #003B4F;
+<span id="cb25-8"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> k <span class="kw" style="color: #003B4F;
@@ -2717,7 +2746,7 @@ background-color: null;
 font-style: inherit;">range</span>(pcaUS.components_.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]):</span>
-<span id="cb19-9">    ax.arrow(<span class="dv" style="color: #AD0000;
+<span id="cb25-9">    ax.arrow(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2726,24 +2755,42 @@ background-color: null;
 font-style: inherit;">*</span>pcaUS.components_[i,k], s_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>pcaUS.components_[j,k])</span>
-<span id="cb19-10">    ax.text(s_<span class="op" style="color: #5E5E5E;
+<span id="cb25-10">    ax.text(s_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>pcaUS.components_[i,k],</span>
-<span id="cb19-11">            s_<span class="op" style="color: #5E5E5E;
+<span id="cb25-11">            s_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>pcaUS.components_[j,k],</span>
-<span id="cb19-12">            USArrests.columns[k])</span></code></pre></div>
+<span id="cb25-12">            USArrests.columns[k])</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(0.5, 0, 'PC1')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(0, 0.5, 'PC2')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(1.0717989498763107, 0.836361730841909, 'Murder')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(1.1663672698193406, 0.3759712084638779, 'Assault')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(0.5563817492388659, -1.74561238612085, 'UrbanPop')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>Text(1.0868641828913648, -0.3346372708034927, 'Rape')</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-15-output-1.png" width="662" height="651" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-15-output-7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-15-output-7.png" width="662" height="651" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The standard deviations of the principal component scores are as follows:</p>
-<div id="20f16d7f" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">scores.std(<span class="dv" style="color: #AD0000;
+<div id="2652e6e4" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">scores.std(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, ddof<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2755,25 +2802,25 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 </div>
 </div>
 <p>The variance of each score can be extracted directly from the <code>pcaUS</code> object via the <code>explained_variance_</code> attribute.</p>
-<div id="76102593" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">pcaUS.explained_variance_</span></code></pre></div>
+<div id="89aa3ea8" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">pcaUS.explained_variance_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>array([2.53085875, 1.00996444, 0.36383998, 0.17696948])</code></pre>
 </div>
 </div>
 <p>The proportion of variance explained by each principal component (PVE) is stored as <code>explained_variance_ratio_</code>:</p>
-<div id="b3c39956" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">pcaUS.explained_variance_ratio_</span></code></pre></div>
+<div id="14f1c564" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1">pcaUS.explained_variance_ratio_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>array([0.62006039, 0.24744129, 0.0891408 , 0.04335752])</code></pre>
 </div>
 </div>
 <p>We see that the first principal component explains 62.0% of the variance in the data, the next principal component explains 24.7% of the variance, and so forth. We can plot the PVE explained by each component, as well as the cumulative PVE. We first plot the proportion of variance explained.</p>
-<div id="fdc3bbd1" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><span class="op" style="color: #5E5E5E;
+<div id="b717c627" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%%</span>capture</span>
-<span id="cb26-2">fig, axes <span class="op" style="color: #5E5E5E;
+<span id="cb38-2">fig, axes <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2786,78 +2833,84 @@ background-color: null;
 font-style: inherit;">15</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">6</span>))</span>
-<span id="cb26-3">ticks <span class="op" style="color: #5E5E5E;
+<span id="cb38-3">ticks <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.arange(pcaUS.n_components_)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb26-4">ax <span class="op" style="color: #5E5E5E;
+<span id="cb38-4">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb26-5">ax.plot(ticks,</span>
-<span id="cb26-6">        pcaUS.explained_variance_ratio_,</span>
-<span id="cb26-7">        marker<span class="op" style="color: #5E5E5E;
+<span id="cb38-5">ax.plot(ticks,</span>
+<span id="cb38-6">        pcaUS.explained_variance_ratio_,</span>
+<span id="cb38-7">        marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>)</span>
-<span id="cb26-8">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb38-8">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Principal Component'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb26-9">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb38-9">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Proportion of Variance Explained'</span>)</span>
-<span id="cb26-10">ax.set_ylim([<span class="dv" style="color: #AD0000;
+<span id="cb38-10">ax.set_ylim([<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>])</span>
-<span id="cb26-11">ax.set_xticks(ticks)</span></code></pre></div>
+<span id="cb38-11">ax.set_xticks(ticks)</span></code></pre></div>
 </div>
 <p>Notice the use of <code>%%capture</code>, which suppresses the displaying of the partially completed figure.</p>
-<div id="e5061e29" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">ax <span class="op" style="color: #5E5E5E;
+<div id="1ae1c5dc" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]</span>
-<span id="cb27-2">ax.plot(ticks,</span>
-<span id="cb27-3">        pcaUS.explained_variance_ratio_.cumsum(),</span>
-<span id="cb27-4">        marker<span class="op" style="color: #5E5E5E;
+<span id="cb39-2">ax.plot(ticks,</span>
+<span id="cb39-3">        pcaUS.explained_variance_ratio_.cumsum(),</span>
+<span id="cb39-4">        marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>)</span>
-<span id="cb27-5">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb39-5">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Principal Component'</span>)</span>
-<span id="cb27-6">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb39-6">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Cumulative Proportion of Variance Explained'</span>)</span>
-<span id="cb27-7">ax.set_ylim([<span class="dv" style="color: #AD0000;
+<span id="cb39-7">ax.set_ylim([<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>])</span>
-<span id="cb27-8">ax.set_xticks(ticks)</span>
-<span id="cb27-9">fig</span></code></pre></div>
+<span id="cb39-8">ax.set_xticks(ticks)</span>
+<span id="cb39-9">fig</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>Text(0.5, 45.20000000000001, 'Principal Component')</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>Text(1262.6545454545449, 0.5, 'Cumulative Proportion of Variance Explained')</code></pre>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-20-output-1.png" width="1184" height="508" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-20-output-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-20-output-3.png" width="1184" height="508" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The result is similar to that shown in Figure~. Note that the method <code>cumsum()</code> computes the cumulative sum of the elements of a numeric vector. For instance:</p>
-<div id="5ff92ddd" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">a <span class="op" style="color: #5E5E5E;
+<div id="d78281fd" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1">a <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2870,7 +2923,7 @@ background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>])</span>
-<span id="cb28-2">np.cumsum(a)</span></code></pre></div>
+<span id="cb42-2">np.cumsum(a)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>array([ 1,  3, 11,  8])</code></pre>
 </div>
@@ -2880,25 +2933,25 @@ font-style: inherit;">3</span>])</span>
 <h2 class="anchored" data-anchor-id="matrix-completion">Matrix Completion</h2>
 <p>We now re-create the analysis carried out on the <code>USArrests</code> data in Section~.</p>
 <p>We saw in Section~ that solving the optimization problem~() on a centered data matrix <img src="https://latex.codecogs.com/png.latex?%5Cbf%20X"> is equivalent to computing the first <img src="https://latex.codecogs.com/png.latex?M"> principal components of the data. We use our scaled and centered <code>USArrests</code> data as <img src="https://latex.codecogs.com/png.latex?%5Cbf%20X"> below. The <em>singular value decomposition</em> (SVD) is a general algorithm for solving ().</p>
-<div id="da539adc" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">X <span class="op" style="color: #5E5E5E;
+<div id="df317f8c" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> USArrests_scaled</span>
-<span id="cb30-2">U, D, V <span class="op" style="color: #5E5E5E;
+<span id="cb44-2">U, D, V <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.linalg.svd(X, full_matrices<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span>)</span>
-<span id="cb30-3">U.shape, D.shape, V.shape</span></code></pre></div>
+<span id="cb44-3">U.shape, D.shape, V.shape</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>((50, 4), (4,), (4, 4))</code></pre>
 </div>
 </div>
 <p>The <code>np.linalg.svd()</code> function returns three components, <code>U</code>, <code>D</code> and <code>V</code>. The matrix <code>V</code> is equivalent to the loading matrix from principal components (up to an unimportant sign flip). Using the <code>full_matrices=False</code> option ensures that for a tall matrix the shape of <code>U</code> is the same as the shape of <code>X</code>.</p>
-<div id="64ff991b" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">V</span></code></pre></div>
+<div id="7835718f" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1">V</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>array([[-0.53589947, -0.58318363, -0.27819087, -0.54343209],
        [-0.41818087, -0.1879856 ,  0.87280619,  0.16731864],
@@ -2906,8 +2959,8 @@ font-style: inherit;">False</span>)</span>
        [ 0.6492278 , -0.74340748,  0.13387773,  0.08902432]])</code></pre>
 </div>
 </div>
-<div id="b41224b6" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">pcaUS.components_</span></code></pre></div>
+<div id="7664299d" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1">pcaUS.components_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>array([[ 0.53589947,  0.58318363,  0.27819087,  0.54343209],
        [ 0.41818087,  0.1879856 , -0.87280619, -0.16731864],
@@ -2916,8 +2969,8 @@ font-style: inherit;">False</span>)</span>
 </div>
 </div>
 <p>The matrix <code>U</code> corresponds to a <em>standardized</em> version of the PCA score matrix (each column standardized to have sum-of-squares one). If we multiply each column of <code>U</code> by the corresponding element of <code>D</code>, we recover the PCA scores exactly (up to a meaningless sign flip).</p>
-<div id="537f995d" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1">(U <span class="op" style="color: #5E5E5E;
+<div id="f9b46c3b" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1">(U <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> D[<span class="va" style="color: #111111;
 background-color: null;
@@ -2930,8 +2983,8 @@ font-style: inherit;">3</span>]</span></code></pre></div>
        [-1.76316354,  0.74595678, -0.05478082, -0.83465292]])</code></pre>
 </div>
 </div>
-<div id="972fb0dc" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1">scores[:<span class="dv" style="color: #AD0000;
+<div id="1d9e9f89" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1">scores[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>]</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
@@ -2942,48 +2995,48 @@ font-style: inherit;">3</span>]</span></code></pre></div>
 </div>
 <p>While it would be possible to carry out this lab using the <code>PCA()</code> estimator, here we use the <code>np.linalg.svd()</code> function in order to illustrate its use.</p>
 <p>We now omit 20 entries in the <img src="https://latex.codecogs.com/png.latex?50%5Ctimes%204"> data matrix at random. We do so by first selecting 20 rows (states) at random, and then selecting one of the four entries in each row at random. This ensures that every row has at least three observed values.</p>
-<div id="ca19fcb8" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1">n_omit <span class="op" style="color: #5E5E5E;
+<div id="464e9c72" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1">n_omit <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span></span>
-<span id="cb40-2">np.random.seed(<span class="dv" style="color: #AD0000;
+<span id="cb54-2">np.random.seed(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">15</span>)</span>
-<span id="cb40-3">r_idx <span class="op" style="color: #5E5E5E;
+<span id="cb54-3">r_idx <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.choice(np.arange(X.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]),</span>
-<span id="cb40-4">                         n_omit,</span>
-<span id="cb40-5">                         replace<span class="op" style="color: #5E5E5E;
+<span id="cb54-4">                         n_omit,</span>
+<span id="cb54-5">                         replace<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span>)</span>
-<span id="cb40-6">c_idx <span class="op" style="color: #5E5E5E;
+<span id="cb54-6">c_idx <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.choice(np.arange(X.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]),</span>
-<span id="cb40-7">                         n_omit,</span>
-<span id="cb40-8">                         replace<span class="op" style="color: #5E5E5E;
+<span id="cb54-7">                         n_omit,</span>
+<span id="cb54-8">                         replace<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span>
-<span id="cb40-9">Xna <span class="op" style="color: #5E5E5E;
+<span id="cb54-9">Xna <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> X.copy()</span>
-<span id="cb40-10">Xna[r_idx, c_idx] <span class="op" style="color: #5E5E5E;
+<span id="cb54-10">Xna[r_idx, c_idx] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.nan</span></code></pre></div>
 </div>
 <p>Here the array <code>r_idx</code> contains 20 integers from 0 to 49; this represents the states (rows of <code>X</code>) that are selected to contain missing values. And <code>c_idx</code> contains 20 integers from 0 to 3, representing the features (columns in <code>X</code>) that contain the missing values for each of the selected states.</p>
 <p>We now write some code to implement Algorithm~. We first write a function that takes in a matrix, and returns an approximation to the matrix using the <code>svd()</code> function. This will be needed in Step 2 of Algorithm~.</p>
-<div id="0a6970b2" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><span class="kw" style="color: #003B4F;
+<div id="ae9d6314" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb55" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">def</span> low_rank(X, M<span class="op" style="color: #5E5E5E;
@@ -2991,58 +3044,58 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>):</span>
-<span id="cb41-2">    U, D, V <span class="op" style="color: #5E5E5E;
+<span id="cb55-2">    U, D, V <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.linalg.svd(X)</span>
-<span id="cb41-3">    L <span class="op" style="color: #5E5E5E;
+<span id="cb55-3">    L <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> U[:,:M] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> D[<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,:M]</span>
-<span id="cb41-4">    <span class="cf" style="color: #003B4F;
+<span id="cb55-4">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">return</span> L.dot(V[:M])</span></code></pre></div>
 </div>
 <p>To conduct Step 1 of the algorithm, we initialize <code>Xhat</code> — this is <img src="https://latex.codecogs.com/png.latex?%5Ctilde%7B%5Cbf%20X%7D"> in Algorithm~ — by replacing the missing values with the column means of the non-missing entries. These are stored in <code>Xbar</code> below after running <code>np.nanmean()</code> over the row axis. We make a copy so that when we assign values to <code>Xhat</code> below we do not also overwrite the values in <code>Xna</code>.</p>
-<div id="b3b6a00b" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1">Xhat <span class="op" style="color: #5E5E5E;
+<div id="3a4d84b9" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1">Xhat <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Xna.copy()</span>
-<span id="cb42-2">Xbar <span class="op" style="color: #5E5E5E;
+<span id="cb56-2">Xbar <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.nanmean(Xhat, axis<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb42-3">Xhat[r_idx, c_idx] <span class="op" style="color: #5E5E5E;
+<span id="cb56-3">Xhat[r_idx, c_idx] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Xbar[c_idx]</span></code></pre></div>
 </div>
 <p>Before we begin Step 2, we set ourselves up to measure the progress of our iterations:</p>
-<div id="9f956388" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1">thresh <span class="op" style="color: #5E5E5E;
+<div id="82b07cba" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1">thresh <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1e-7</span></span>
-<span id="cb43-2">rel_err <span class="op" style="color: #5E5E5E;
+<span id="cb57-2">rel_err <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb43-3">count <span class="op" style="color: #5E5E5E;
+<span id="cb57-3">count <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span></span>
-<span id="cb43-4">ismiss <span class="op" style="color: #5E5E5E;
+<span id="cb57-4">ismiss <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.isnan(Xna)</span>
-<span id="cb43-5">mssold <span class="op" style="color: #5E5E5E;
+<span id="cb57-5">mssold <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.mean(Xhat[<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3051,7 +3104,7 @@ background-color: null;
 font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span>
-<span id="cb43-6">mss0 <span class="op" style="color: #5E5E5E;
+<span id="cb57-6">mss0 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.mean(Xna[<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3063,38 +3116,38 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 </div>
 <p>Here <code>ismiss</code> is a logical matrix with the same dimensions as <code>Xna</code>; a given element is <code>True</code> if the corresponding matrix element is missing. The notation <code>~ismiss</code> negates this boolean vector. This is useful because it allows us to access both the missing and non-missing entries. We store the mean of the squared non-missing elements in <code>mss0</code>. We store the mean squared error of the non-missing elements of the old version of <code>Xhat</code> in <code>mssold</code> (which currently agrees with <code>mss0</code>). We plan to store the mean squared error of the non-missing elements of the current version of <code>Xhat</code> in <code>mss</code>, and will then iterate Step 2 of Algorithm~ until the <em>relative error</em>, defined as <code>(mssold - mss) / mss0</code>, falls below <code>thresh = 1e-7</code>. {Algorithm~ tells us to iterate Step 2 until is no longer decreasing. Determining whether is decreasing requires us only to keep track of <code>mssold - mss</code>. However, in practice, we keep track of <code>(mssold - mss) / mss0</code> instead: this makes it so that the number of iterations required for Algorithm~ to converge does not depend on whether we multiplied the raw data <img src="https://latex.codecogs.com/png.latex?%5Cbf%20X"> by a constant factor.}</p>
 <p>In Step 2(a) of Algorithm~, we approximate <code>Xhat</code> using <code>low_rank()</code>; we call this <code>Xapp</code>. In Step 2(b), we use <code>Xapp</code> to update the estimates for elements in <code>Xhat</code> that are missing in <code>Xna</code>. Finally, in Step 2(c), we compute the relative error. These three steps are contained in the following <code>while</code> loop:</p>
-<div id="9880ad4e" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><span class="cf" style="color: #003B4F;
+<div id="e28f508b" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">while</span> rel_err <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> thresh:</span>
-<span id="cb44-2">    count <span class="op" style="color: #5E5E5E;
+<span id="cb58-2">    count <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb44-3">    <span class="co" style="color: #5E5E5E;
+<span id="cb58-3">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Step 2(a)</span></span>
-<span id="cb44-4">    Xapp <span class="op" style="color: #5E5E5E;
+<span id="cb58-4">    Xapp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> low_rank(Xhat, M<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb44-5">    <span class="co" style="color: #5E5E5E;
+<span id="cb58-5">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Step 2(b)</span></span>
-<span id="cb44-6">    Xhat[ismiss] <span class="op" style="color: #5E5E5E;
+<span id="cb58-6">    Xhat[ismiss] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Xapp[ismiss]</span>
-<span id="cb44-7">    <span class="co" style="color: #5E5E5E;
+<span id="cb58-7">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># Step 2(c)</span></span>
-<span id="cb44-8">    mss <span class="op" style="color: #5E5E5E;
+<span id="cb58-8">    mss <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.mean(((Xna <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3105,17 +3158,17 @@ background-color: null;
 font-style: inherit;">**</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span>
-<span id="cb44-9">    rel_err <span class="op" style="color: #5E5E5E;
+<span id="cb58-9">    rel_err <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> (mssold <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span> mss) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span> mss0</span>
-<span id="cb44-10">    mssold <span class="op" style="color: #5E5E5E;
+<span id="cb58-10">    mssold <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mss</span>
-<span id="cb44-11">    <span class="bu" style="color: null;
+<span id="cb58-11">    <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -3132,7 +3185,7 @@ background-color: null;
 font-style: inherit;">{2:.2e}</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span></span>
-<span id="cb44-12">          .<span class="bu" style="color: null;
+<span id="cb58-12">          .<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">format</span>(count, mss, rel_err))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3149,8 +3202,8 @@ Iteration: 9, MSS:0.381, Rel.Err 2.95e-08</code></pre>
 </div>
 <p>We see that after eight iterations, the relative error has fallen below <code>thresh = 1e-7</code>, and so the algorithm terminates. When this happens, the mean squared error of the non-missing elements equals 0.381.</p>
 <p>Finally, we compute the correlation between the 20 imputed values and the actual values:</p>
-<div id="1d60fe83" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1">np.corrcoef(Xapp[ismiss], X[ismiss])[<span class="dv" style="color: #AD0000;
+<div id="7ad6df68" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb60" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1">np.corrcoef(Xapp[ismiss], X[ismiss])[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3166,13 +3219,13 @@ font-style: inherit;">1</span>]</span></code></pre></div>
 <section id="k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="k-means-clustering"><img src="https://latex.codecogs.com/png.latex?K">-Means Clustering</h3>
 <p>The estimator <code>sklearn.cluster.KMeans()</code> performs <img src="https://latex.codecogs.com/png.latex?K">-means clustering in <code>Python</code>. We begin with a simple simulated example in which there truly are two clusters in the data: the first 25 observations have a mean shift relative to the next 25 observations.</p>
-<div id="7c71da62" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1">np.random.seed(<span class="dv" style="color: #AD0000;
+<div id="e42d2071" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb62" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1">np.random.seed(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb48-2">X <span class="op" style="color: #5E5E5E;
+<span id="cb62-2">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.standard_normal((<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3181,7 +3234,7 @@ background-color: null;
 font-style: inherit;">2</span>))<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb48-3">X[:<span class="dv" style="color: #AD0000;
+<span id="cb62-3">X[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">25</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3192,7 +3245,7 @@ background-color: null;
 font-style: inherit;">3</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb48-4">X[:<span class="dv" style="color: #AD0000;
+<span id="cb62-4">X[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">25</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3205,28 +3258,28 @@ background-color: null;
 font-style: inherit;">;</span></span></code></pre></div>
 </div>
 <p>We now perform <img src="https://latex.codecogs.com/png.latex?K">-means clustering with <img src="https://latex.codecogs.com/png.latex?K=2">.</p>
-<div id="33a8e8ee" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1">kmeans <span class="op" style="color: #5E5E5E;
+<div id="3ebd65f7" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1">kmeans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> KMeans(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>,</span>
-<span id="cb49-2">                random_state<span class="op" style="color: #5E5E5E;
+<span id="cb63-2">                random_state<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>,</span>
-<span id="cb49-3">                n_init<span class="op" style="color: #5E5E5E;
+<span id="cb63-3">                n_init<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span>).fit(X)</span></code></pre></div>
 </div>
 <p>We specify <code>random_state</code> to make the results reproducible. The cluster assignments of the 50 observations are contained in <code>kmeans.labels_</code>.</p>
-<div id="8818869b" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1">kmeans.labels_</span></code></pre></div>
+<div id="0afc8f35" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb64" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1">kmeans.labels_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
        0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -3234,8 +3287,8 @@ font-style: inherit;">20</span>).fit(X)</span></code></pre></div>
 </div>
 </div>
 <p>The <img src="https://latex.codecogs.com/png.latex?K">-means clustering perfectly separated the observations into two clusters even though we did not supply any group information to <code>KMeans()</code>. We can plot the data, with each observation colored according to its cluster assignment.</p>
-<div id="1bfdce51" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="e63cbc11" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3248,14 +3301,14 @@ background-color: null;
 font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb52-2">ax.scatter(X[:,<span class="dv" style="color: #AD0000;
+<span id="cb66-2">ax.scatter(X[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>], X[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>], c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>kmeans.labels_)</span>
-<span id="cb52-3">ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb66-3">ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"K-Means Clustering Results with K=2"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3263,32 +3316,32 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-36-output-1.png" width="643" height="653" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-36-output-1.png" width="643" height="653" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here the observations can be easily plotted because they are two-dimensional. If there were more than two variables then we could instead perform PCA and plot the first two principal component score vectors to represent the clusters.</p>
 <p>In this example, we knew that there really were two clusters because we generated the data. However, for real data, we do not know the true number of clusters, nor whether they exist in any precise way. We could instead have performed <img src="https://latex.codecogs.com/png.latex?K">-means clustering on this example with <img src="https://latex.codecogs.com/png.latex?K=3">.</p>
-<div id="59cddf45" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1">kmeans <span class="op" style="color: #5E5E5E;
+<div id="23b09f32" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1">kmeans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> KMeans(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb53-2">                random_state<span class="op" style="color: #5E5E5E;
+<span id="cb67-2">                random_state<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb53-3">                n_init<span class="op" style="color: #5E5E5E;
+<span id="cb67-3">                n_init<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span>).fit(X)</span>
-<span id="cb53-4">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb67-4">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3297,14 +3350,14 @@ background-color: null;
 font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb53-5">ax.scatter(X[:,<span class="dv" style="color: #AD0000;
+<span id="cb67-5">ax.scatter(X[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>], X[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>], c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>kmeans.labels_)</span>
-<span id="cb53-6">ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb67-6">ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"K-Means Clustering Results with K=3"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -3312,50 +3365,50 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-37-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-37-output-1.png" width="643" height="653" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-37-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-37-output-1.png" width="643" height="653" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>When <img src="https://latex.codecogs.com/png.latex?K=3">, <img src="https://latex.codecogs.com/png.latex?K">-means clustering splits up the two clusters. We have used the <code>n_init</code> argument to run the <img src="https://latex.codecogs.com/png.latex?K">-means with 20 initial cluster assignments (the default is 10). If a value of <code>n_init</code> greater than one is used, then <img src="https://latex.codecogs.com/png.latex?K">-means clustering will be performed using multiple random assignments in Step 1 of Algorithm~, and the <code>KMeans()</code> function will report only the best results. Here we compare using <code>n_init=1</code> to <code>n_init=20</code>.</p>
-<div id="0f2ddede" class="cell" data-execution_count="37">
-<div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1">kmeans1 <span class="op" style="color: #5E5E5E;
+<div id="cbfc285e" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb68" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1">kmeans1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> KMeans(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb54-2">                random_state<span class="op" style="color: #5E5E5E;
+<span id="cb68-2">                random_state<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb54-3">                n_init<span class="op" style="color: #5E5E5E;
+<span id="cb68-3">                n_init<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>).fit(X)</span>
-<span id="cb54-4">kmeans20 <span class="op" style="color: #5E5E5E;
+<span id="cb68-4">kmeans20 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> KMeans(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb54-5">                  random_state<span class="op" style="color: #5E5E5E;
+<span id="cb68-5">                  random_state<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>,</span>
-<span id="cb54-6">                  n_init<span class="op" style="color: #5E5E5E;
+<span id="cb68-6">                  n_init<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span>).fit(X)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb54-7">kmeans1.inertia_, kmeans20.inertia_</span></code></pre></div>
+<span id="cb68-7">kmeans1.inertia_, kmeans20.inertia_</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>(76.85131986999251, 75.06261242745384)</code></pre>
 </div>
@@ -3367,28 +3420,28 @@ font-style: inherit;">;</span></span>
 <section id="hierarchical-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h3>
 <p>The <code>AgglomerativeClustering()</code> class from the <code>sklearn.clustering</code> package implements hierarchical clustering. As its name is long, we use the short hand <code>HClust</code> for <em>hierarchical clustering</em>. Note that this will not change the return type when using this method, so instances will still be of class <code>AgglomerativeClustering</code>. In the following example we use the data from the previous lab to plot the hierarchical clustering dendrogram using complete, single, and average linkage clustering with Euclidean distance as the dissimilarity measure. We begin by clustering observations using complete linkage.</p>
-<div id="f9732dad" class="cell" data-execution_count="38">
-<div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1">HClust <span class="op" style="color: #5E5E5E;
+<div id="6aa44013" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb70" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1">HClust <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> AgglomerativeClustering</span>
-<span id="cb56-2">hc_comp <span class="op" style="color: #5E5E5E;
+<span id="cb70-2">hc_comp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb56-3">                 n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb70-3">                 n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb56-4">                 linkage<span class="op" style="color: #5E5E5E;
+<span id="cb70-4">                 linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'complete'</span>)</span>
-<span id="cb56-5">hc_comp.fit(X)</span></code></pre></div>
+<span id="cb70-5">hc_comp.fit(X)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
@@ -3800,53 +3853,53 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <p>This computes the entire dendrogram. We could just as easily perform hierarchical clustering with average or single linkage instead:</p>
-<div id="9377f37f" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1">hc_avg <span class="op" style="color: #5E5E5E;
+<div id="3935e7f0" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb71" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1">hc_avg <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb57-2">                n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb71-2">                n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb57-3">                linkage<span class="op" style="color: #5E5E5E;
+<span id="cb71-3">                linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'average'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb57-4">hc_avg.fit(X)</span>
-<span id="cb57-5">hc_sing <span class="op" style="color: #5E5E5E;
+<span id="cb71-4">hc_avg.fit(X)</span>
+<span id="cb71-5">hc_sing <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb57-6">                 n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb71-6">                 n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb57-7">                 linkage<span class="op" style="color: #5E5E5E;
+<span id="cb71-7">                 linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'single'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb57-8">hc_sing.fit(X)<span class="op" style="color: #5E5E5E;
+<span id="cb71-8">hc_sing.fit(X)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span></code></pre></div>
 </div>
 <p>To use a precomputed distance matrix, we provide an additional argument <code>metric="precomputed"</code>. In the code below, the first four lines computes the <img src="https://latex.codecogs.com/png.latex?50%5Ctimes%2050"> pairwise-distance matrix.</p>
-<div id="41ea0eda" class="cell" data-execution_count="40">
-<div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1">D <span class="op" style="color: #5E5E5E;
+<div id="9e95200a" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb72" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1">D <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.zeros((X.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3855,7 +3908,7 @@ background-color: null;
 font-style: inherit;">0</span>]))<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb58-2"><span class="cf" style="color: #003B4F;
+<span id="cb72-2"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -3866,12 +3919,12 @@ background-color: null;
 font-style: inherit;">range</span>(X.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]):</span>
-<span id="cb58-3">    x_ <span class="op" style="color: #5E5E5E;
+<span id="cb72-3">    x_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.multiply.outer(np.ones(X.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]), X[i])</span>
-<span id="cb58-4">    D[i] <span class="op" style="color: #5E5E5E;
+<span id="cb72-4">    D[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.sqrt(np.<span class="bu" style="color: null;
 background-color: null;
@@ -3886,29 +3939,29 @@ background-color: null;
 font-style: inherit;">1</span>))<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb58-5">hc_sing_pre <span class="op" style="color: #5E5E5E;
+<span id="cb72-5">hc_sing_pre <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb58-6">                     n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb72-6">                     n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb58-7">                     metric<span class="op" style="color: #5E5E5E;
+<span id="cb72-7">                     metric<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'precomputed'</span>,</span>
-<span id="cb58-8">                     linkage<span class="op" style="color: #5E5E5E;
+<span id="cb72-8">                     linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'single'</span>)</span>
-<span id="cb58-9">hc_sing_pre.fit(D)</span></code></pre></div>
+<span id="cb72-9">hc_sing_pre.fit(D)</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
@@ -4321,23 +4374,23 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <p>We use <code>dendrogram()</code> from <code>scipy.cluster.hierarchy</code> to plot the dendrogram. However, <code>dendrogram()</code> expects a so-called <em>linkage-matrix representation</em> of the clustering, which is not provided by <code>AgglomerativeClustering()</code>, but can be computed. The function <code>compute_linkage()</code> in the <code>ISLP.cluster</code> package is provided for this purpose.</p>
 <p>We can now plot the dendrograms. The numbers at the bottom of the plot identify each observation. The <code>dendrogram()</code> function has a default method to color different branches of the tree that suggests a pre-defined cut of the tree at a particular depth. We prefer to overwrite this default by setting this threshold to be infinite. Since we want this behavior for many dendrograms, we store these values in a dictionary <code>cargs</code> and pass this as keyword arguments using the notation <code>**cargs</code>.</p>
-<div id="82b373fb" class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1">cargs <span class="op" style="color: #5E5E5E;
+<div id="983c3433" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1">cargs <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'color_threshold'</span>:<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span>np.inf,</span>
-<span id="cb59-2">         <span class="st" style="color: #20794D;
+<span id="cb73-2">         <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'above_threshold_color'</span>:<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'black'</span>}</span>
-<span id="cb59-3">linkage_comp <span class="op" style="color: #5E5E5E;
+<span id="cb73-3">linkage_comp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc_comp)</span>
-<span id="cb59-4">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb73-4">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4350,11 +4403,11 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb59-5">dendrogram(linkage_comp,</span>
-<span id="cb59-6">           ax<span class="op" style="color: #5E5E5E;
+<span id="cb73-5">dendrogram(linkage_comp,</span>
+<span id="cb73-6">           ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax,</span>
-<span id="cb59-7">           <span class="op" style="color: #5E5E5E;
+<span id="cb73-7">           <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>cargs)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4362,14 +4415,14 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-42-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-42-output-1.png" width="632" height="634" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-42-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-42-output-1.png" width="632" height="634" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We may want to color branches of the tree above and below a cut-threshold differently. This can be achieved by changing the <code>color_threshold</code>. Let’s cut the tree at a height of 4, coloring links that merge above 4 in black.</p>
-<div id="9b652024" class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb60" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="415278a0" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb74" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4382,16 +4435,16 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb60-2">dendrogram(linkage_comp,</span>
-<span id="cb60-3">           ax<span class="op" style="color: #5E5E5E;
+<span id="cb74-2">dendrogram(linkage_comp,</span>
+<span id="cb74-3">           ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax,</span>
-<span id="cb60-4">           color_threshold<span class="op" style="color: #5E5E5E;
+<span id="cb74-4">           color_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>,</span>
-<span id="cb60-5">           above_threshold_color<span class="op" style="color: #5E5E5E;
+<span id="cb74-5">           above_threshold_color<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -4401,14 +4454,14 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-43-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-43-output-1.png" width="632" height="634" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-43-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-43-output-1.png" width="632" height="634" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>To determine the cluster labels for each observation associated with a given cut of the dendrogram, we can use the <code>cut_tree()</code> function from <code>scipy.cluster.hierarchy</code>:</p>
-<div id="44c022a8" class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1">cut_tree(linkage_comp, n_clusters<span class="op" style="color: #5E5E5E;
+<div id="40120efa" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb75" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1">cut_tree(linkage_comp, n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4420,8 +4473,8 @@ font-style: inherit;">4</span>).T</span></code></pre></div>
 </div>
 </div>
 <p>This can also be achieved by providing an argument <code>n_clusters</code> to <code>HClust()</code>; however each cut would require recomputing the clustering. Similarly, trees may be cut by distance threshold with an argument of <code>distance_threshold</code> to <code>HClust()</code> or <code>height</code> to <code>cut_tree()</code>.</p>
-<div id="a07fccb1" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1">cut_tree(linkage_comp, height<span class="op" style="color: #5E5E5E;
+<div id="d5e24abf" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb77" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1">cut_tree(linkage_comp, height<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4480,34 +4533,34 @@ font-style: inherit;">5</span>)</span></code></pre></div>
 </div>
 </div>
 <p>To scale the variables before performing hierarchical clustering of the observations, we use <code>StandardScaler()</code> as in our PCA example:</p>
-<div id="48e74459" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb65" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1">scaler <span class="op" style="color: #5E5E5E;
+<div id="82fbb960" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb79" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1">scaler <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> StandardScaler()</span>
-<span id="cb65-2">X_scale <span class="op" style="color: #5E5E5E;
+<span id="cb79-2">X_scale <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> scaler.fit_transform(X)</span>
-<span id="cb65-3">hc_comp_scale <span class="op" style="color: #5E5E5E;
+<span id="cb79-3">hc_comp_scale <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb65-4">                       n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb79-4">                       n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb65-5">                       linkage<span class="op" style="color: #5E5E5E;
+<span id="cb79-5">                       linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'complete'</span>).fit(X_scale)</span>
-<span id="cb65-6">linkage_comp_scale <span class="op" style="color: #5E5E5E;
+<span id="cb79-6">linkage_comp_scale <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc_comp_scale)</span>
-<span id="cb65-7">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb79-7">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4520,12 +4573,12 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb65-8">dendrogram(linkage_comp_scale, ax<span class="op" style="color: #5E5E5E;
+<span id="cb79-8">dendrogram(linkage_comp_scale, ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax, <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>cargs)</span>
-<span id="cb65-9">ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb79-9">ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Hierarchical Clustering with Scaled Features"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4533,55 +4586,55 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-46-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-46-output-1.png" width="632" height="654" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-46-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-46-output-1.png" width="632" height="654" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Correlation-based distances between observations can be used for clustering. The correlation between two observations measures the similarity of their feature values. {Suppose each observation has <img src="https://latex.codecogs.com/png.latex?p"> features, each a single numerical value. We measure the similarity of two such observations by computing the correlation of these <img src="https://latex.codecogs.com/png.latex?p"> pairs of numbers.} With <img src="https://latex.codecogs.com/png.latex?n"> observations, the <img src="https://latex.codecogs.com/png.latex?n%5Ctimes%20n"> correlation matrix can then be used as a similarity (or affinity) matrix, i.e.&nbsp;so that one minus the correlation matrix is the dissimilarity matrix used for clustering.</p>
 <p>Note that using correlation only makes sense for data with at least three features since the absolute correlation between any two observations with measurements on two features is always one. Hence, we will cluster a three-dimensional data set.</p>
-<div id="48c2f221" class="cell" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1">X <span class="op" style="color: #5E5E5E;
+<div id="3d790d90" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb80" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.standard_normal((<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>))</span>
-<span id="cb66-2">corD <span class="op" style="color: #5E5E5E;
+<span id="cb80-2">corD <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span> np.corrcoef(X)</span>
-<span id="cb66-3">hc_cor <span class="op" style="color: #5E5E5E;
+<span id="cb80-3">hc_cor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'complete'</span>,</span>
-<span id="cb66-4">                distance_threshold<span class="op" style="color: #5E5E5E;
+<span id="cb80-4">                distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb66-5">                n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb80-5">                n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb66-6">                metric<span class="op" style="color: #5E5E5E;
+<span id="cb80-6">                metric<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'precomputed'</span>)</span>
-<span id="cb66-7">hc_cor.fit(corD)</span>
-<span id="cb66-8">linkage_cor <span class="op" style="color: #5E5E5E;
+<span id="cb80-7">hc_cor.fit(corD)</span>
+<span id="cb80-8">linkage_cor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc_cor)</span>
-<span id="cb66-9">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb80-9">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4594,12 +4647,12 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb66-10">dendrogram(linkage_cor, ax<span class="op" style="color: #5E5E5E;
+<span id="cb80-10">dendrogram(linkage_cor, ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax, <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>cargs)</span>
-<span id="cb66-11">ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb80-11">ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Complete Linkage with Correlation-Based Dissimilarity"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4607,7 +4660,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-47-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-47-output-1.png" width="654" height="661" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-47-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-47-output-1.png" width="654" height="661" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -4617,18 +4670,18 @@ font-style: inherit;">;</span></span></code></pre></div>
 <section id="nci60-data-example" class="level2">
 <h2 class="anchored" data-anchor-id="nci60-data-example">NCI60 Data Example</h2>
 <p>Unsupervised techniques are often used in the analysis of genomic data. In particular, PCA and hierarchical clustering are popular tools. We illustrate these techniques on the <code>NCI60</code> cancer cell line microarray data, which consists of 6830 gene expression measurements on 64 cancer cell lines.</p>
-<div id="6c9f8213" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb67" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1">NCI60 <span class="op" style="color: #5E5E5E;
+<div id="fb0e00f9" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb81" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1">NCI60 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> load_data(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'NCI60'</span>)</span>
-<span id="cb67-2">nci_labs <span class="op" style="color: #5E5E5E;
+<span id="cb81-2">nci_labs <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> NCI60[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'labels'</span>]</span>
-<span id="cb67-3">nci_data <span class="op" style="color: #5E5E5E;
+<span id="cb81-3">nci_data <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> NCI60[<span class="st" style="color: #20794D;
 background-color: null;
@@ -4636,15 +4689,15 @@ font-style: inherit;">'data'</span>]</span></code></pre></div>
 </div>
 <p>Each cell line is labeled with a cancer type. We do not make use of the cancer types in performing PCA and clustering, as these are unsupervised techniques. But after performing PCA and clustering, we will check to see the extent to which these cancer types agree with the results of these unsupervised techniques.</p>
 <p>The data has 64 rows and 6830 columns.</p>
-<div id="c6a01f29" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb68" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1">nci_data.shape</span></code></pre></div>
+<div id="17f41b2e" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb82" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1">nci_data.shape</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>(64, 6830)</code></pre>
 </div>
 </div>
 <p>We begin by examining the cancer types for the cell lines.</p>
-<div id="63573690" class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb70" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1">nci_labs.value_counts()</span></code></pre></div>
+<div id="648b4960" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb84" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1">nci_labs.value_counts()</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>label      
 RENAL          9
@@ -4667,38 +4720,38 @@ Name: count, dtype: int64</code></pre>
 <section id="pca-on-the-nci60-data" class="level3">
 <h3 class="anchored" data-anchor-id="pca-on-the-nci60-data">PCA on the NCI60 Data</h3>
 <p>We first perform PCA on the data after scaling the variables (genes) to have standard deviation one, although here one could reasonably argue that it is better not to scale the genes as they are measured in the same units.</p>
-<div id="eeb221a6" class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb72" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1">scaler <span class="op" style="color: #5E5E5E;
+<div id="919c6c76" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb86" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1">scaler <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> StandardScaler()</span>
-<span id="cb72-2">nci_scaled <span class="op" style="color: #5E5E5E;
+<span id="cb86-2">nci_scaled <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> scaler.fit_transform(nci_data)</span>
-<span id="cb72-3">nci_pca <span class="op" style="color: #5E5E5E;
+<span id="cb86-3">nci_pca <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> PCA()</span>
-<span id="cb72-4">nci_scores <span class="op" style="color: #5E5E5E;
+<span id="cb86-4">nci_scores <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> nci_pca.fit_transform(nci_scaled)</span></code></pre></div>
 </div>
 <p>We now plot the first few principal component score vectors, in order to visualize the data. The observations (cell lines) corresponding to a given cancer type will be plotted in the same color, so that we can see to what extent the observations within a cancer type are similar to each other.</p>
-<div id="f210b357" class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1">cancer_types <span class="op" style="color: #5E5E5E;
+<div id="5b388568" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb87" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1">cancer_types <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">list</span>(np.unique(nci_labs))</span>
-<span id="cb73-2">nci_groups <span class="op" style="color: #5E5E5E;
+<span id="cb87-2">nci_groups <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([cancer_types.index(lab)</span>
-<span id="cb73-3">                       <span class="cf" style="color: #003B4F;
+<span id="cb87-3">                       <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> lab <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">in</span> nci_labs.values])</span>
-<span id="cb73-4">fig, axes <span class="op" style="color: #5E5E5E;
+<span id="cb87-4">fig, axes <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4711,62 +4764,62 @@ background-color: null;
 font-style: inherit;">15</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">6</span>))</span>
-<span id="cb73-5">ax <span class="op" style="color: #5E5E5E;
+<span id="cb87-5">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb73-6">ax.scatter(nci_scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb87-6">ax.scatter(nci_scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>],</span>
-<span id="cb73-7">           nci_scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb87-7">           nci_scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>],</span>
-<span id="cb73-8">           c<span class="op" style="color: #5E5E5E;
+<span id="cb87-8">           c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>nci_groups,</span>
-<span id="cb73-9">           marker<span class="op" style="color: #5E5E5E;
+<span id="cb87-9">           marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>,</span>
-<span id="cb73-10">           s<span class="op" style="color: #5E5E5E;
+<span id="cb87-10">           s<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>)</span>
-<span id="cb73-11">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb87-11">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PC1'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span> ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PC2'</span>)</span>
-<span id="cb73-12">ax <span class="op" style="color: #5E5E5E;
+<span id="cb87-12">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]</span>
-<span id="cb73-13">ax.scatter(nci_scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb87-13">ax.scatter(nci_scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>],</span>
-<span id="cb73-14">           nci_scores[:,<span class="dv" style="color: #AD0000;
+<span id="cb87-14">           nci_scores[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>],</span>
-<span id="cb73-15">           c<span class="op" style="color: #5E5E5E;
+<span id="cb87-15">           c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>nci_groups,</span>
-<span id="cb73-16">           marker<span class="op" style="color: #5E5E5E;
+<span id="cb87-16">           marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>,</span>
-<span id="cb73-17">           s<span class="op" style="color: #5E5E5E;
+<span id="cb87-17">           s<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>)</span>
-<span id="cb73-18">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb87-18">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PC1'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4778,15 +4831,15 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-52-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-52-output-1.png" width="1193" height="503" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-52-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-52-output-1.png" width="1193" height="503" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>On the whole, cell lines corresponding to a single cancer type do tend to have similar values on the first few principal component score vectors. This indicates that cell lines from the same cancer type tend to have pretty similar gene expression levels.</p>
 <p>We can also plot the percent variance explained by the principal components as well as the cumulative percent variance explained. This is similar to the plots we made earlier for the <code>USArrests</code> data.</p>
-<div id="522320ea" class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb74" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1">fig, axes <span class="op" style="color: #5E5E5E;
+<div id="e86288e2" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb88" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb88-1">fig, axes <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4799,51 +4852,51 @@ background-color: null;
 font-style: inherit;">15</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">6</span>))</span>
-<span id="cb74-2">ax <span class="op" style="color: #5E5E5E;
+<span id="cb88-2">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb74-3">ticks <span class="op" style="color: #5E5E5E;
+<span id="cb88-3">ticks <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.arange(nci_pca.n_components_)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb74-4">ax.plot(ticks,</span>
-<span id="cb74-5">        nci_pca.explained_variance_ratio_,</span>
-<span id="cb74-6">        marker<span class="op" style="color: #5E5E5E;
+<span id="cb88-4">ax.plot(ticks,</span>
+<span id="cb88-5">        nci_pca.explained_variance_ratio_,</span>
+<span id="cb88-6">        marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>)</span>
-<span id="cb74-7">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb88-7">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Principal Component'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb74-8">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb88-8">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'PVE'</span>)</span>
-<span id="cb74-9">ax <span class="op" style="color: #5E5E5E;
+<span id="cb88-9">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]</span>
-<span id="cb74-10">ax.plot(ticks,</span>
-<span id="cb74-11">        nci_pca.explained_variance_ratio_.cumsum(),</span>
-<span id="cb74-12">        marker<span class="op" style="color: #5E5E5E;
+<span id="cb88-10">ax.plot(ticks,</span>
+<span id="cb88-11">        nci_pca.explained_variance_ratio_.cumsum(),</span>
+<span id="cb88-12">        marker<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'o'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb74-13">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb88-13">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Principal Component'</span>)</span>
-<span id="cb74-14">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb88-14">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Cumulative PVE'</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4851,7 +4904,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-53-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-53-output-1.png" width="1192" height="503" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-53-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-53-output-1.png" width="1192" height="503" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -4861,57 +4914,57 @@ font-style: inherit;">;</span></span></code></pre></div>
 <section id="clustering-the-observations-of-the-nci60-data" class="level3">
 <h3 class="anchored" data-anchor-id="clustering-the-observations-of-the-nci60-data">Clustering the Observations of the NCI60 Data</h3>
 <p>We now perform hierarchical clustering of the cell lines in the <code>NCI60</code> data using complete, single, and average linkage. Once again, the goal is to find out whether or not the observations cluster into distinct types of cancer. Euclidean distance is used as the dissimilarity measure. We first write a short function to produce the three dendrograms.</p>
-<div id="8a587cac" class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb75" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><span class="kw" style="color: #003B4F;
+<div id="86152c4a" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb89" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">def</span> plot_nci(linkage, ax, cut<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=-</span>np.inf):</span>
-<span id="cb75-2">    cargs <span class="op" style="color: #5E5E5E;
+<span id="cb89-2">    cargs <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> {<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'above_threshold_color'</span>:<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'black'</span>,</span>
-<span id="cb75-3">             <span class="st" style="color: #20794D;
+<span id="cb89-3">             <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'color_threshold'</span>:cut}</span>
-<span id="cb75-4">    hc <span class="op" style="color: #5E5E5E;
+<span id="cb89-4">    hc <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb75-5">                distance_threshold<span class="op" style="color: #5E5E5E;
+<span id="cb89-5">                distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb75-6">                linkage<span class="op" style="color: #5E5E5E;
+<span id="cb89-6">                linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>linkage.lower()).fit(nci_scaled)</span>
-<span id="cb75-7">    linkage_ <span class="op" style="color: #5E5E5E;
+<span id="cb89-7">    linkage_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc)</span>
-<span id="cb75-8">    dendrogram(linkage_,</span>
-<span id="cb75-9">               ax<span class="op" style="color: #5E5E5E;
+<span id="cb89-8">    dendrogram(linkage_,</span>
+<span id="cb89-9">               ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax,</span>
-<span id="cb75-10">               labels<span class="op" style="color: #5E5E5E;
+<span id="cb89-10">               labels<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.asarray(nci_labs),</span>
-<span id="cb75-11">               leaf_font_size<span class="op" style="color: #5E5E5E;
+<span id="cb89-11">               leaf_font_size<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>,</span>
-<span id="cb75-12">               <span class="op" style="color: #5E5E5E;
+<span id="cb89-12">               <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>cargs)</span>
-<span id="cb75-13">    ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb89-13">    ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'</span><span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -4920,14 +4973,14 @@ background-color: null;
 font-style: inherit;"> Linkage'</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span> linkage)</span>
-<span id="cb75-14">    <span class="cf" style="color: #003B4F;
+<span id="cb89-14">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">return</span> hc</span></code></pre></div>
 </div>
 <p>Let’s plot our results.</p>
-<div id="f3f6250a" class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb76" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1">fig, axes <span class="op" style="color: #5E5E5E;
+<div id="68f97b9e" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb90" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1">fig, axes <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4940,7 +4993,7 @@ background-color: null;
 font-style: inherit;">15</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">30</span>))      </span>
-<span id="cb76-2">ax <span class="op" style="color: #5E5E5E;
+<span id="cb90-2">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4951,7 +5004,7 @@ background-color: null;
 font-style: inherit;">=</span> plot_nci(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Complete'</span>, ax)</span>
-<span id="cb76-3">ax <span class="op" style="color: #5E5E5E;
+<span id="cb90-3">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4962,7 +5015,7 @@ background-color: null;
 font-style: inherit;">=</span> plot_nci(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Average'</span>, ax)</span>
-<span id="cb76-4">ax <span class="op" style="color: #5E5E5E;
+<span id="cb90-4">ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> axes[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -4976,18 +5029,18 @@ font-style: inherit;">'Single'</span>, ax)</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-55-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-55-output-1.png" width="1170" height="2371" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-55-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-55-output-1.png" width="1170" height="2371" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We see that the choice of linkage certainly does affect the results obtained. Typically, single linkage will tend to yield <em>trailing</em> clusters: very large clusters onto which individual observations attach one-by-one. On the other hand, complete and average linkage tend to yield more balanced, attractive clusters. For this reason, complete and average linkage are generally preferred to single linkage. Clearly cell lines within a single cancer type do tend to cluster together, although the clustering is not perfect. We will use complete linkage hierarchical clustering for the analysis that follows.</p>
 <p>We can cut the dendrogram at the height that will yield a particular number of clusters, say four:</p>
-<div id="e4fd6654" class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb77" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1">linkage_comp <span class="op" style="color: #5E5E5E;
+<div id="0230cdea" class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb91" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1">linkage_comp <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc_comp)</span>
-<span id="cb77-2">comp_cut <span class="op" style="color: #5E5E5E;
+<span id="cb91-2">comp_cut <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> cut_tree(linkage_comp, n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -4998,10 +5051,10 @@ background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb77-3">pd.crosstab(nci_labs[<span class="st" style="color: #20794D;
+<span id="cb91-3">pd.crosstab(nci_labs[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'label'</span>],</span>
-<span id="cb77-4">            pd.Series(comp_cut.reshape(<span class="op" style="color: #5E5E5E;
+<span id="cb91-4">            pd.Series(comp_cut.reshape(<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -5138,8 +5191,8 @@ font-style: inherit;">'Complete'</span>))</span></code></pre></div>
 </div>
 <p>There are some clear patterns. All the leukemia cell lines fall in one cluster, while the breast cancer cell lines are spread out over three different clusters.</p>
 <p>We can plot a cut on the dendrogram that produces these four clusters:</p>
-<div id="02b2ed3a" class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb78" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="7ceaeea1" class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb92" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5148,14 +5201,14 @@ background-color: null;
 font-style: inherit;">10</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>))</span>
-<span id="cb78-2">plot_nci(<span class="st" style="color: #20794D;
+<span id="cb92-2">plot_nci(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Complete'</span>, ax, cut<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">140</span>)</span>
-<span id="cb78-3">ax.axhline(<span class="dv" style="color: #AD0000;
+<span id="cb92-3">ax.axhline(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">140</span>, c<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5171,37 +5224,37 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-57-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-57-output-1.png" width="799" height="892" class="figure-img"></a></p>
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-57-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-57-output-1.png" width="799" height="892" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The <code>axhline()</code> function draws a horizontal line line on top of any existing set of axes. The argument <code>140</code> plots a horizontal line at height 140 on the dendrogram; this is a height that results in four distinct clusters. It is easy to verify that the resulting clusters are the same as the ones we obtained in <code>comp_cut</code>.</p>
 <p>We claimed earlier in Section~ that <img src="https://latex.codecogs.com/png.latex?K">-means clustering and hierarchical clustering with the dendrogram cut to obtain the same number of clusters can yield very different results. How do these <code>NCI60</code> hierarchical clustering results compare to what we get if we perform <img src="https://latex.codecogs.com/png.latex?K">-means clustering with <img src="https://latex.codecogs.com/png.latex?K=4">?</p>
-<div id="743233b6" class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb79" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1">nci_kmeans <span class="op" style="color: #5E5E5E;
+<div id="1a0a9131" class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb93" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1">nci_kmeans <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> KMeans(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>, </span>
-<span id="cb79-2">                    random_state<span class="op" style="color: #5E5E5E;
+<span id="cb93-2">                    random_state<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb79-3">                    n_init<span class="op" style="color: #5E5E5E;
+<span id="cb93-3">                    n_init<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span>).fit(nci_scaled)</span>
-<span id="cb79-4">pd.crosstab(pd.Series(comp_cut, name<span class="op" style="color: #5E5E5E;
+<span id="cb93-4">pd.crosstab(pd.Series(comp_cut, name<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'HClust'</span>),</span>
-<span id="cb79-5">            pd.Series(nci_kmeans.labels_, name<span class="op" style="color: #5E5E5E;
+<span id="cb93-5">            pd.Series(nci_kmeans.labels_, name<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
@@ -5264,31 +5317,31 @@ font-style: inherit;">'K-means'</span>))</span></code></pre></div>
 </div>
 <p>We see that the four clusters obtained using hierarchical clustering and <img src="https://latex.codecogs.com/png.latex?K">-means clustering are somewhat different. First we note that the labels in the two clusterings are arbitrary. That is, swapping the identifier of the cluster does not change the clustering. We see here Cluster 3 in <img src="https://latex.codecogs.com/png.latex?K">-means clustering is identical to cluster 2 in hierarchical clustering. However, the other clusters differ: for instance, cluster 0 in <img src="https://latex.codecogs.com/png.latex?K">-means clustering contains a portion of the observations assigned to cluster 0 by hierarchical clustering, as well as all of the observations assigned to cluster 1 by hierarchical clustering.</p>
 <p>Rather than performing hierarchical clustering on the entire data matrix, we can also perform hierarchical clustering on the first few principal component score vectors, regarding these first few components as a less noisy version of the data.</p>
-<div id="be5dcb95" class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb80" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1">hc_pca <span class="op" style="color: #5E5E5E;
+<div id="bf2a666a" class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb94" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb94-1">hc_pca <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> HClust(n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,</span>
-<span id="cb80-2">                distance_threshold<span class="op" style="color: #5E5E5E;
+<span id="cb94-2">                distance_threshold<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb80-3">                linkage<span class="op" style="color: #5E5E5E;
+<span id="cb94-3">                linkage<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'complete'</span></span>
-<span id="cb80-4">                ).fit(nci_scores[:,:<span class="dv" style="color: #AD0000;
+<span id="cb94-4">                ).fit(nci_scores[:,:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>])</span>
-<span id="cb80-5">linkage_pca <span class="op" style="color: #5E5E5E;
+<span id="cb94-5">linkage_pca <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> compute_linkage(hc_pca)</span>
-<span id="cb80-6">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb94-6">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -5297,28 +5350,30 @@ background-color: null;
 font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb80-7">dendrogram(linkage_pca,</span>
-<span id="cb80-8">           labels<span class="op" style="color: #5E5E5E;
+<span id="cb94-7">dend<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>dendrogram(linkage_pca,</span>
+<span id="cb94-8">           labels<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>np.asarray(nci_labs),</span>
-<span id="cb80-9">           leaf_font_size<span class="op" style="color: #5E5E5E;
+<span id="cb94-9">           leaf_font_size<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>,</span>
-<span id="cb80-10">           ax<span class="op" style="color: #5E5E5E;
+<span id="cb94-10">           ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax,</span>
-<span id="cb80-11">           <span class="op" style="color: #5E5E5E;
+<span id="cb94-11">           <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>cargs)</span>
-<span id="cb80-12">ax.set_title(<span class="st" style="color: #20794D;
+<span id="cb94-12">ax.set_title(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Hier. Clust. on First Five Score Vectors"</span>)</span>
-<span id="cb80-13">pca_labels <span class="op" style="color: #5E5E5E;
+<span id="cb94-13">pca_labels <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.Series(cut_tree(linkage_pca,</span>
-<span id="cb80-14">                                n_clusters<span class="op" style="color: #5E5E5E;
+<span id="cb94-14">                                n_clusters<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -5327,15 +5382,27 @@ background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>),</span>
-<span id="cb80-15">                       name<span class="op" style="color: #5E5E5E;
+<span id="cb94-15">                       name<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">'Complete-PCA'</span>)</span>
-<span id="cb80-16">pd.crosstab(nci_labs[<span class="st" style="color: #20794D;
+font-style: inherit;">'Complete-PCA'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<pre><code>Text(0.5, 1.0, 'Hier. Clust. on First Five Score Vectors')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="Ch12-unsup-lab_files/figure-html/cell-59-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-59-output-2.png" width="651" height="745" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="ebd4a8b0" class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb96" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1">pd.crosstab(nci_labs[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'label'</span>], pca_labels)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="58">
+<div class="cell-output cell-output-display" data-execution_count="59">
 <div>
 
 
@@ -5460,16 +5527,10 @@ font-style: inherit;">'label'</span>], pca_labels)</span></code></pre></div>
 
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><a href="Ch12-unsup-lab_files/figure-html/cell-59-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/Ch12-unsup-lab_files/figure-html/cell-59-output-2.png" width="651" height="745" class="figure-img"></a></p>
-</figure>
-</div>
-</div>
 </div>
 
 
+</section>
 </section>
 </section>
 
@@ -5501,59 +5562,497 @@ Lab.”</span> September 11, 2024. <a href="https://orenbochman.github.io/notes-
 
 
 
-<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div class="no-row-height column-margin column-container"><div id="fig-v12.1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div aria-describedby="fig-v12.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kpuQqOzQXfM?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Opening Remarks
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Principal Components
 </figcaption>
 </figure>
-</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+</div><div id="fig-v12.2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div aria-describedby="fig-v12.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/O30nHhyBiAs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Examples and Framework
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Higher order principal components
+</figcaption>
+</figure>
+</div><div id="fig-v12.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ded_NQqOe7I?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e&amp;t=11" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: k-means clustering
+</figcaption>
+</figure>
+</div><div id="fig-v12.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/yktzn-Mr2Nw?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Hierarchical Clustering
+</figcaption>
+</figure>
+</div><div id="fig-v12.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/MYKb5KcI55s?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Matrix Completion
+</figcaption>
+</figure>
+</div><div id="fig-v12.6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/InBhMLEx6sU?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Breast Cancer Example
+</figcaption>
+</figure>
+</div><div id="fig-v12.7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/YCwSrtSoZ9M?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Principal Components
+</figcaption>
+</figure>
+</div><div id="fig-v12.8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/j6aM9ITqLIY?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: K-means Clustering
+</figcaption>
+</figure>
+</div><div id="fig-v12.9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v12.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/dJr7wBUYNgw?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v12.9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Hierarchical Clustering
 </figcaption>
 </figure>
 </div></div>
+
+
+
+
+
+
+
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-TL;DR - Statistical Learning in a Nutshell
+TL;DR - Unsupervised Learning
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Statistical Learning in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Statistical Learning in a nutshell"></a></p>
-<figcaption>Statistical Learning in a nutshell</figcaption>
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Unsupervised Learning Learning in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Unsupervised Learning Learning in a nutshell"></a></p>
+<figcaption>Unsupervised Learning Learning in a nutshell</figcaption>
 </figure>
 </div>
-<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <img src="https://latex.codecogs.com/png.latex?(f)"> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+<ul>
+<li><strong>Principal Component Analysis (PCA)</strong> is an unsupervised learning approach that involves only a set of features <img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cldots,%20X_p"> measured on <em>n</em> observations. PCA is not interested in prediction. Instead, the goal is to discover interesting things about the measurements. PCA can be used for data visualization, data pre-processing before supervised learning, and data imputation.</li>
+<li><strong>Matrix Completion</strong> is a method for imputing missing data that uses principal components. It can be used if the data is missing at random (i.e., the reason the value is missing is not related to the value itself). Matrix completion is used in recommender systems.</li>
+</ul>
 <audio controls="1">
 <source src="podcast.mp3" data-external="1" type="audio/mpeg">
 
 </audio>
 </div>
 </div>
-<section id="slides-and-chapter" class="level2">
-<h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
+<section id="chapter-orientation" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-orientation">Chapter Orientation</h2>
+<p>This chapter contains some big words, but don’t worry, we’ll break them down together.</p>
+<dl>
+<dt>Principal Component Analysis (PCA)</dt>
+<dd>
+An unsupervised learning approach that involves only a set of features <img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cldots,%20X_p"> measured on <em>n</em> observations. PCA is not interested in prediction. Instead, <mark>the goal is to discover interesting things about the measurements</mark>. PCA can be used for data visualization, data pre-processing before supervised learning, and data imputation.
+</dd>
+<dt>Principal Components</dt>
+<dd>
+<mark>Normalized linear combinations of features that have the largest variance</mark> Each principal component is uncorrelated with the others.
+</dd>
+<dt>Loadings</dt>
+<dd>
+The elements <img src="https://latex.codecogs.com/png.latex?(%5Cphi_%7B11%7D,%20%5Cphi_%7B21%7D,%20...%20%5Cphi_%7Bp1%7D)"> of the principal component loading vector <img src="https://latex.codecogs.com/png.latex?%5Cphi_%7B11%7D">.
+</dd>
+<dt>Loading Vector</dt>
+<dd>
+A vector made up of the loadings <img src="https://latex.codecogs.com/png.latex?%5Cphi_1=(%5Cphi_%7B11%7D,%20%5Cphi_%7B21%7D,%20...%20%5Cphi_%7Bp1%7D)%5ET">. The loading vector defines the direction in feature space along which the data vary the most.
+</dd>
+<dt>Principal Component Scores</dt>
+<dd>
+The values that result from projecting the <em>n</em> data points <img src="https://latex.codecogs.com/png.latex?X_1,%20X_2,%20%5Cldots,%20X_p"> onto the direction defined by the loading vector. They can be represented by <em>z</em><sub>11</sub>, …, z<sub>n1</sub>.
+</dd>
+<dt>Biplot</dt>
+<dd>
+<p>A plot that displays both the principal component scores and the loading vectors.</p>
+</dd>
+<dt>Proportion of Variance Explained (PVE)</dt>
+<dd>
+<mark>The proportion of variance in a data set that is explained by a principal component.</mark> The PVE can be interpreted as the <em>R</em><sup>2</sup> of the approximation for <em>X</em> given by the first <em>M</em> principal components.
+</dd>
+<dt>Scree Plot</dt>
+<dd>
+A plot that depicts the proportion of variance explained by each of the principal components. It can be used to decide how many principal components are needed.
+</dd>
+<dt>Imputation</dt>
+<dd>
+Filling in missing values in a data matrix.
+</dd>
+<dt>Matrix Completion</dt>
+<dd>
+A method for imputing missing data that uses principal components. It can be used if the data is <strong>missing at random</strong> (i.e., the reason the value is missing is not related to the value itself). <mark>Matrix completion is used in recommender systems.</mark>
+</dd>
+<dt>Recommender Systems</dt>
+<dd>
+<p>Systems that use matrix completion to predict a user’s preferences. They predict a user’s rating for an item by leveraging their past behavior and the preferences of similar users.</p>
+</dd>
+<dt>Clustering</dt>
+<dd>
+<p>A set of techniques used to <strong>find subgroups in a data set</strong> without having an associated response variable <em>Y</em>. Clustering is an unsupervised method because it attempts to discover structure (i.e., distinct clusters) on the basis of a data set.</p>
+</dd>
+<dt>K-means Clustering</dt>
+<dd>
+A clustering method that partitions the data into a pre-specified number of clusters (<em>K</em>).
+</dd>
+<dt>Hierarchical Clustering</dt>
+<dd>
+A clustering method that does not require knowing the number of clusters in advance. It results in a dendrogram, which allows for simultaneous viewing of clusters obtained for each possible number of clusters (from 1 to <em>n</em>).
+</dd>
+<dt>Dendrogram</dt>
+<dd>
+A tree-like visualization of the observations that results from hierarchical clustering. <mark>The height of the cut on the dendrogram serves the same role as the <em>K</em> in K-means clustering</mark>, and determines the number of clusters obtained.
+</dd>
+<dt>Bottom-up (Agglomerative) Clustering</dt>
+<dd>
+<p>The most common type of hierarchical clustering. The dendrogram (typically depicted as an upside-down tree) is built by combining clusters starting from the leaves and going up to the trunk.</p>
+</dd>
+<dt>Linkage</dt>
+<dd>
+<p>The definition of dissimilarity between two groups of observations. It extends the concept of dissimilarity between a pair of observations to a pair of groups of observations. <strong>The four most common types of linkage are complete, average, single, and centroid.</strong></p>
+</dd>
+<dt>Inversion</dt>
+<dd>
+<p>This occurs in centroid linkage, where two clusters are fused at a height below either of the individual clusters in the dendrogram. Inversions can make dendrograms difficult to interpret.</p>
+</dd>
+</dl>
+<section id="chapter-outline" class="level3">
+<h3 class="anchored" data-anchor-id="chapter-outline">Chapter Outline</h3>
+<p><strong>Unsupervised learning</strong> uses statistical tools to discover information about a set of features <em>X</em><sub>1</sub>, X<sub>2</sub>, …, X<sub>p</sub> measured on <em>n</em> observations. Unlike supervised learning methods, unsupervised learning methods are not used for prediction because they are not applied to a response variable <em>Y</em>. The goal of unsupervised learning is to explore and understand the relationships and patterns within the features. Unsupervised learning can answer questions like:</p>
+<ul>
+<li>How can data be visualized informatively?</li>
+<li>Can subgroups be found among variables or observations?</li>
+</ul>
+<p>Some techniques in unsupervised learning include principal components analysis and clustering.</p>
+</section>
+<section id="applications-of-unsupervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="applications-of-unsupervised-learning">Applications of Unsupervised Learning</h3>
+<p>Unsupervised learning is used in various fields, including:</p>
+<ul>
+<li><strong>Cancer research</strong>: Researchers can use gene expression levels in patients with breast cancer to identify subgroups among patients or genes. This provides a better understanding of the disease.</li>
+<li><strong>E-commerce</strong>: Online retailers can identify groups of shoppers with similar buying habits. This enables them to show each shopper items that they are more likely to buy based on the purchase history of similar shoppers.</li>
+</ul>
+</section>
+<section id="principal-components-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="principal-components-analysis">Principal Components Analysis</h3>
+<p>Principal components analysis (PCA) is a technique used for:</p>
+<ul>
+<li>Data visualization</li>
+<li>Data pre-processing before using supervised techniques</li>
+<li>Data imputation (filling in missing values)</li>
+</ul>
+<section id="what-are-principal-components" class="level4">
+<h4 class="anchored" data-anchor-id="what-are-principal-components">What are Principal Components?</h4>
+<p>Principal components (PCs) are a way to find a low-dimensional representation of a dataset that captures most of its variation. Each PC is a linear combination of the original features.</p>
+<p>Imagine a dataset with <em>n</em> observations and <em>p</em> features. PCA finds a smaller number of dimensions that represent the most variation in the data, allowing the information to be visualized.</p>
+</section>
+<section id="how-are-principal-components-found" class="level4">
+<h4 class="anchored" data-anchor-id="how-are-principal-components-found">How are Principal Components Found?</h4>
+<p>PCA finds the linear combination of features, called <em>Z</em><sub>1</sub>, with the largest sample variance. This linear combination is subject to a constraint that ensures the sum of the squares of the coefficients (loadings) equals one.</p>
+<p><strong>The first principal component loading vector (a direction in feature space) represents the direction in which the data varies the most.</strong> Projecting the <em>n</em> data points onto this direction gives the principal component scores.</p>
+<p>After determining the first PC, subsequent PCs are found in a similar way, but they are constrained to be uncorrelated with the previous PCs. This constraint means that each new PC direction is orthogonal (perpendicular) to the previous directions.</p>
+</section>
+<section id="proportion-of-variance-explained" class="level4">
+<h4 class="anchored" data-anchor-id="proportion-of-variance-explained">Proportion of Variance Explained</h4>
+<p>It’s natural to ask how much information is lost when projecting the observations onto a smaller number of PCs. The proportion of variance explained (PVE) by each PC quantifies this information loss.</p>
+<p><strong>The PVE can be interpreted as the <em>R</em></strong><sup>2</sup> of the approximation for the data matrix <em>X</em> using the first <em>M</em> principal components.</p>
+</section>
+<section id="importance-of-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="importance-of-scaling">Importance of Scaling</h4>
+<p><strong>Scaling the variables before performing PCA is generally recommended.</strong> If variables are measured in different units or have vastly different variances, scaling ensures that each variable contributes equally to the PCs. This prevents PCs from being dominated by variables with the largest variance.</p>
+</section>
+<section id="deciding-how-many-principal-components-to-use" class="level4">
+<h4 class="anchored" data-anchor-id="deciding-how-many-principal-components-to-use">Deciding How Many Principal Components to Use</h4>
+<p>There are several methods to determine the optimal number of PCs:</p>
+<ul>
+<li><strong>Scree Plot</strong>: A scree plot visualizes the PVE of each component. The “elbow” point in the plot, where the proportion of variance explained drops off, is often chosen as the cutoff for the number of PCs.</li>
+<li><strong>Supervised Analysis</strong>: When using PCA for supervised learning, cross-validation can be used to determine the optimal number of PC score vectors to use as features.</li>
+<li><strong>Subjective Evaluation</strong>: If using PCA for data exploration, the choice is subjective. It’s common to examine the first few PCs and continue until no further interesting patterns are found.</li>
+</ul>
+</section>
+<section id="other-uses-for-principal-components" class="level4">
+<h4 class="anchored" data-anchor-id="other-uses-for-principal-components">Other Uses for Principal Components</h4>
+<p>Principal components can be used as features in various statistical techniques, such as regression, classification, and clustering. Using the PC score vectors instead of the full data matrix can lead to less noisy results. This is because the signal in the data is often concentrated in the first few PCs.</p>
+</section>
+</section>
+<section id="missing-values-and-matrix-completion" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values-and-matrix-completion">Missing Values and Matrix Completion</h3>
+<p>Missing values in datasets can be a problem for statistical analyses. Matrix completion is a technique that uses PCA to impute missing values by exploiting the correlation between variables. <strong>This is only applicable if the data is missing at random (MAR).</strong> For example, missing a patient’s weight because the scale’s battery died is an example of MAR. However, if the weight is missing because the patient was too heavy for the scale, it is not MAR, and matrix completion would not be suitable.</p>
+<section id="principal-components-with-missing-values" class="level4">
+<h4 class="anchored" data-anchor-id="principal-components-with-missing-values">Principal Components with Missing Values</h4>
+<p>Matrix completion seeks to find the principal component score and loading vectors that best approximate the observed data matrix. This involves minimizing the sum of squared differences between the observed data and its approximation based on the PC score and loading vectors.</p>
+<p>Once the problem is solved, the missing values can be imputed using the estimated score and loading vectors.</p>
+<p><strong>Algorithm 12.1 provides an iterative method for imputing missing values and solving the principal component problem simultaneously.</strong> The algorithm initializes a complete data matrix by replacing missing values with column means. It then iteratively updates the missing values by approximating the matrix using the first M principal components until the error is minimized.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<p><a href="alg12.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Matrix Compleation"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.1.png" class="img-fluid figure-img" alt="Matrix Compleation"></a></p>
+<figcaption>Matrix Compleation</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="clustering-methods" class="level3">
+<h3 class="anchored" data-anchor-id="clustering-methods">Clustering Methods</h3>
+<p>Clustering methods are used to group observations in a dataset into subgroups, or clusters, such that observations within a cluster are similar to each other and different from observations in other clusters. The definition of similarity is often specific to the domain and the data being studied.</p>
+<p>For example, a cancer researcher might use clustering to find subgroups of patients with breast cancer based on gene expression measurements. The idea is that different subtypes of breast cancer may exist, and clustering can help discover them.</p>
+<section id="types-of-clustering" class="level4">
+<h4 class="anchored" data-anchor-id="types-of-clustering">Types of Clustering</h4>
+<p>Two common types of clustering methods are:</p>
+<ul>
+<li><strong>K-means clustering</strong>: This method partitions the data into a pre-specified number of clusters (<em>K</em>).</li>
+<li><strong>Hierarchical clustering</strong>: This method does not require specifying the number of clusters beforehand. It produces a tree-like representation of the observations called a dendrogram. The dendrogram shows the clusterings obtained for all possible numbers of clusters, from 1 to <em>n</em>.</li>
+</ul>
+</section>
+<section id="k-means-clustering" class="level4">
+<h4 class="anchored" data-anchor-id="k-means-clustering">K-means Clustering</h4>
+<p>K-means clustering aims to partition data into <em>K</em> distinct, non-overlapping clusters by minimizing the within-cluster variation.</p>
+<p><strong>Algorithm 12.2 outlines the K-means clustering procedure</strong>:</p>
+<ol type="1">
+<li>Randomly assign each observation to one of the <em>K</em> clusters.</li>
+<li>Iterate until the cluster assignments stabilize:
+<ul>
+<li>Calculate the cluster centroid (the vector of feature means) for each cluster.</li>
+<li>Reassign each observation to the cluster with the closest centroid (using Euclidean distance).</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg12.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="K-means Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.2.png" class="img-fluid figure-img" alt="K-means Clustering"></a></p>
+<figcaption>K-means Clustering</figcaption>
+</figure>
+</div>
+<p><strong>Algorithm 12.2 is guaranteed to find a local optimum for the K-means optimization problem.</strong> The algorithm iteratively improves the clustering by minimizing the sum-of-squared deviations within each cluster.</p>
+<p>One challenge with K-means clustering is that the algorithm can converge to different local optima depending on the initial random cluster assignments. To address this, the algorithm can be run multiple times with different initial configurations, and the solution with the lowest objective value is selected.</p>
+</section>
+<section id="hierarchical-clustering" class="level4">
+<h4 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg12.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Hierarchical Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.3.png" class="img-fluid figure-img" alt="Hierarchical Clustering"></a></p>
+<figcaption>Hierarchical Clustering</figcaption>
+</figure>
+</div>
+<p>Hierarchical clustering is an alternative approach that doesn’t require pre-specifying the number of clusters. It creates a dendrogram that visually represents the observations’ hierarchical relationships.</p>
+<p><strong>Agglomerative clustering</strong>, a bottom-up approach, is the most common type of hierarchical clustering. <strong>It starts with each observation as its own cluster and iteratively merges the most similar clusters until all observations belong to a single cluster.</strong></p>
+<section id="interpreting-a-dendrogram" class="level5">
+<h5 class="anchored" data-anchor-id="interpreting-a-dendrogram">Interpreting a Dendrogram</h5>
+<p>A dendrogram’s leaves represent individual observations. As you move up the tree, branches fuse, indicating the merging of similar observations or clusters. <strong>The height of the fusion on the vertical axis represents the dissimilarity between the groups being merged.</strong></p>
+<p>It’s important to note that <strong>the horizontal axis in a dendrogram doesn’t represent similarity.</strong> The dendrogram can be reordered without changing its meaning, so the proximity of observations on the horizontal axis is not indicative of their similarity.</p>
+<p><strong>Clusters can be identified by making a horizontal cut across the dendrogram.</strong> The sets of observations below the cut represent distinct clusters.</p>
+</section>
+<section id="the-hierarchical-clustering-algorithm" class="level5">
+<h5 class="anchored" data-anchor-id="the-hierarchical-clustering-algorithm">The Hierarchical Clustering Algorithm</h5>
+<p><strong>Algorithm 12.3 outlines the hierarchical clustering procedure</strong>:</p>
+<ol type="1">
+<li>Start with <em>n</em> observations as individual clusters and calculate all pairwise dissimilarities.</li>
+<li>Iteratively, for <em>i</em> from <em>n</em> down to 2:
+<ul>
+<li>Find the two clusters with the smallest dissimilarity and merge them.</li>
+<li>Update the pairwise dissimilarities between the remaining clusters.</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="linkage" class="level4">
+<h4 class="anchored" data-anchor-id="linkage">Linkage</h4>
+<p>Linkage defines the dissimilarity between two groups of observations and significantly influences the hierarchical clustering results. Common linkage types include:</p>
+<ul>
+<li><strong>Complete linkage</strong>: Uses the maximum dissimilarity between observations in the two clusters.</li>
+<li><strong>Single linkage</strong>: Uses the minimum dissimilarity between observations in the two clusters. This method can lead to extended, trailing clusters, where observations are added one by one.</li>
+<li><strong>Average linkage</strong>: Uses the average dissimilarity between observations in the two clusters.</li>
+<li><strong>Centroid linkage</strong>: Uses the dissimilarity between the centroids of the two clusters. This method can lead to inversions in the dendrogram, which can make interpretation difficult.</li>
+</ul>
+<p><strong>Average and complete linkage are generally preferred over single linkage because they produce more balanced dendrograms.</strong></p>
+</section>
+<section id="choice-of-dissimilarity-measure" class="level4">
+<h4 class="anchored" data-anchor-id="choice-of-dissimilarity-measure">Choice of Dissimilarity Measure</h4>
+<p>The choice of dissimilarity measure can affect the clustering results. Euclidean distance is common, but other measures like correlation-based distance can be more appropriate depending on the context.</p>
+<p><strong>Correlation-based distance considers observations similar if their feature values are highly correlated, even if the Euclidean distance is large.</strong> This measure is useful when the shape of the observation profiles is more important than their absolute values.</p>
+</section>
+</section>
+<section id="practical-issues-in-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="practical-issues-in-clustering">Practical Issues in Clustering</h3>
+<p>There are several practical considerations when using clustering methods:</p>
+<ul>
+<li><strong>Standardization</strong>: The choice of whether and how to standardize the data can impact the results.</li>
+<li><strong>Choice of Parameters</strong>: The dissimilarity measure, linkage type (in hierarchical clustering), the number of clusters (<em>K</em> in K-means clustering), and the dendrogram cut height all need to be chosen carefully.</li>
+<li><strong>Cluster Validation</strong>: Evaluating whether the clusters found reflect true subgroups or just noise is important. While methods exist to assess the statistical significance of clusters, there is no single best approach.</li>
+<li><strong>Outliers</strong>: Forcing every observation into a cluster can distort the results if outliers exist. Techniques like mixture models can handle outliers more effectively.</li>
+<li><strong>Robustness</strong>: Clustering results can be sensitive to data perturbations. It’s recommended to cluster subsets of the data to understand the robustness of the findings.</li>
+</ul>
+<p><strong>It’s crucial to interpret clustering results with caution and consider them as a starting point for further investigation rather than definitive conclusions.</strong> Repeating the analysis with different parameter settings and data subsets can provide a more comprehensive understanding of the data.</p>
+<p>The sources provide a lab demonstration of applying PCA and clustering in Python, including code examples for:</p>
+<ul>
+<li>Performing PCA on the USArrests data.</li>
+<li>Implementing matrix completion.</li>
+<li>Performing K-means and hierarchical clustering on a simulated dataset.</li>
+<li>Analyzing the NCI60 cancer cell line microarray data using PCA and hierarchical clustering.</li>
+</ul>
+</section>
+</section>
+<section id="excercises" class="level2">
+<h2 class="anchored" data-anchor-id="excercises">Excercises</h2>
+<p>Conceptual</p>
+<ol type="1">
+<li><p>This problem involves the K-means clustering algorithm.</p>
+<ol type="a">
+<li>Prove (12.18).</li>
+<li>On the basis of this identity, argue that the K-means clustering algorithm (Algorithm 12.2) decreases the objective (12.17) at each iteration.</li>
+</ol></li>
+<li><p>Suppose that we have four observations, for which we compute a dissimilarity matrix, given by<br>
+<img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Bbmatrix%7D%200&amp;%200.3&amp;%200%20.4&amp;%200%20.7&amp;%20%5C%5C%200.3&amp;%200&amp;%20.5&amp;%200.8%5C%5C%200.4&amp;%200.5&amp;%200&amp;%20.45%5C%5C%200.7%20&amp;0.8&amp;%200.45&amp;0%5Cend%7Bbmatrix%7D%0A"></p>
+<p>For instance, the dissimilarity between the first and second observations is 0.3, and the dissimilarity between the second and fourth observations is 0.8.</p>
+<ol type="a">
+<li>On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations using complete linkage. Be sure to indicate on the plot the height at which each fusion occurs, as well as the observations corresponding to each leaf in the dendrogram.</li>
+<li>Repeat (a), this time using single linkage clustering.</li>
+<li>Suppose that we cut the dendrogram obtained in (a) such that two clusters result. Which observations are in each cluster?</li>
+<li>Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?</li>
+<li>It is mentioned in this chapter that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.</li>
+</ol></li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Obs.</th>
+<th>X1</th>
+<th>X2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>6</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>4</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" type="1">
+<li><p>In this problem, you will perform K-means clustering manually, with K = 2 , on a small example with n = 6 observations and p = 2 features. The observations are above.</p>
+<ol type="a">
+<li>Plot the observations.</li>
+<li>Randomly assign a cluster label to each observation. You can use the np.random.choice() function to do this. Report the cluster labels for each observation.</li>
+<li>Compute the centroid for each cluster.</li>
+<li>Assign each observation to the centroid to which it is closest, in terms of Euclidean distance. Report the cluster labels for each observation.</li>
+<li>Repeat (c) and (d) until the answers obtained stop changing.</li>
+<li>In your plot from (a), color the observations according to the cluster labels obtained.</li>
+</ol></li>
+<li><p>Suppose that for a particular data set, we perform hierarchical clustering using single linkage and using complete linkage. We obtain two dendrograms.</p>
+<ol type="a">
+<li>At a certain point on the single linkage dendrogram, the clusters {1, 2, 3}and {4, 5} fuse. On the complete linkage dendro- gram, the clusters {1, 2, 3}and {4, 5} also fuse at a certain point. Which fusion will occur higher on the tree, or will they fuse at the same height, or is there not enough information to tell?</li>
+<li>At a certain point on the single linkage dendrogram, the clusters {5}and {6} fuse. On the complete linkage dendrogram, the clusters {5}and {6}also fuse at a certain point. Which fusion will occur higher on the tree, or will they fuse at the same height, or is there not enough information to tell?</li>
+</ol></li>
+<li><p>In words, describe the results that you would expect if you performed K-means clustering of the eight shoppers in Figure 12.16, on the basis of their sock and computer purchases, with K = 2 . Give three answers, one for each of the variable scalings displayed. Explain. 554 12. Unsupervised Learning</p></li>
+<li><p>We saw in Section 12.2.2 that the principal component loading and score vectors provide an approximation to a matrix, in the sense of (12.5). Specifically, the principal component score and loading vectors solve the optimization problem given in (12.6). Now, suppose that the M principal component score vectors zim, m = 1, . . . , M , are known. Using (12.6), explain that each of the first M principal component loading vectors φjm, m = 1 , . . . , M , can be ob- tained by performing p separate least squares linear regressions. In each regression, the principal component score vectors are the predictors, and one of the features of the data matrix is the response. Applied</p></li>
+<li><p>In this chapter, we mentioned the use of correlation-based distance and Euclidean distance as dissimilarity measures for hierarchical clus- tering. It turns out that these two measures are almost equivalent: if each observation has been centered to have mean zero and standard deviation one, and if we let rij denote the correlation between the ith and jth observations, then the quantity 1 −rij is proportional to the squared Euclidean distance between the ith and jth observations. On the US Arrests data, show that this proportionality holds. Hint: The Euclidean distance can be calculated using the pairwise_distances() function from the sklearn.metrics module, and pairwise_ distances()correlations can be calculated using the np.corrcoef() function.</p></li>
+<li><p>In Section 12.2.3, a formula for calculating PVE was given in Equa- tion 12.10. We also saw that the PVE can be obtained using the explained_variance_ratio_ attribute of a fitted PCA() estimator. On the USArrests data, calculate PVE in two ways:</p>
+<ol type="a">
+<li>Using the explained_variance_ratio_ output of the fitted PCA() estimator, as was done in Section 12.2.3.</li>
+<li>By applying Equation 12.10 directly. The loadings are stored as the components_ attribute of the fitted PCA() estimator. Use those loadings in Equation 12.10 to obtain the PVE. These two approaches should give the same results. Hint: You will only obtain the same results in (a) and (b) if the same data is used in both cases. For instance, if in (a) you performed PCA() using centered and scaled variables, then you must center and scale the variables before applying Equation 12.10 in (b).</li>
+</ol></li>
+<li><p>Consider the USArrests data. We will now perform hierarchical clus- tering on the states.</p>
+<ol type="a">
+<li>Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.</li>
+<li>Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?</li>
+<li>Hierarchically cluster the states using complete linkage and Eu- clidean distance, after scaling the variables to have standard deviation one.</li>
+<li>What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.</li>
+</ol></li>
+<li><p>In this problem, you will generate simulated data, and then perform PCA and K-means clustering on the data.</p>
+<ol type="a">
+<li>Generate a simulated data set with 20 observations in each of three classes (i.e.&nbsp;60 observations total), and 50 variables. Hint: There are a number of functions in Python that you can use to generate data. One example is the <code>normal()</code> method of the <code>random()</code> function in <code>numpy</code>; the <code>uniform()</code> method is another option. Be sure to add a mean shift to the observations in each class so that there are three distinct classes.</li>
+<li>Perform PCA on the 60 observations and plot the first two prin- cipal component score vectors. Use a different color to indicate the observations in each of the three classes. If the three classes appear separated in this plot, then continue on to part (c). If not, then return to part (a) and modify the simulation so that there is greater separation between the three classes. Do not continue to part (c) until the three classes show at least some separation in the first two principal component score vectors.</li>
+<li>Perform K-means clustering of the observations with K = 3 . How well do the clusters that you obtained in K-means cluster- ing compare to the true class labels? Hint: You can use the <code>pd.crosstab()</code> function in <code>Python</code> to compare the true class labels to the class labels obtained by cluster- ing. Be careful how you interpret the results: K-means clustering will arbitrarily number the clusters, so you cannot simply check whether the true class labels and clustering labels are the same.</li>
+<li>Perform K-means clustering with K = 2 . Describe your results.</li>
+<li>Now perform K-means clustering with K = 4 , and describe your results.</li>
+<li>Now perform K-means clustering with K = 3 on the first two principal component score vectors, rather than on the raw data. That is, perform K-means clustering on the 60 × 2 matrix of which the first column is the first principal component score vector, and the second column is the second principal component score vector. Comment on the results.</li>
+<li>Using the <code>StandardScaler()</code> estimator, perform K-means clustering with K = 3 on the data after scaling each variable to have standard deviation one. How do these results compare to those obtained in (b)? Explain.</li>
+</ol></li>
+<li><p>Write a Python function to perform matrix completion as in Algorithm 12.1, and as outlined in Section 12.5.2. In each iteration, the function should keep track of the relative error, as well as the itera- tion count. Iterations should continue until the relative error is small enough or until some maximum number of iterations is reached (set a default value for this maximum number). Furthermore, there should be an option to print out the progress in each iteration. Test your function on the Boston data. First, standardize the features to have mean zero and standard deviation one using the StandardScaler() function. Run an experiment where you randomly leave out an increasing (and nested) number of observations from 5% to 30%, in steps of 5%. Apply Algorithm 12.1 with M = 1 , 2, . . . , 8. Display the approximation error as a function of the fraction of ob- servations that are missing, and the value of M , averaged over 10 repetitions of the experiment.</p></li>
+<li><p>In Section 12.5.2, Algorithm 12.1 was implemented using the <code>svd()</code> function from the <code>np.linalg</code> module. However, given the connection between the <code>svd()</code> function and the <code>PCA()</code> estimator highlighted in the lab, we could have instead implemented the algorithm using PCA(). Write a function to implement Algorithm 12.1 that makes use of <code>PCA()</code> rather than <code>svd()</code>.</p></li>
+<li><p>On the book website, <a href="www.statlearning.com">www.statlearning.com</a> there is a gene expression data set (Ch12Ex13.csv) that consists of 40 tissue samples with measurements on 1,000 genes. The first 20 samples are from healthy patients, while the second 20 are from a diseased group.</p>
+<ol type="a">
+<li><p>Load in the data using <code>pd.read_csv()</code>. You will need to select header = None.</p></li>
+<li><p>Apply hierarchical clustering to the samples using correlation-based distance, and plot the dendrogram. Do the genes separate the samples into the two groups? Do your results depend on the type of linkage used?</p></li>
+<li><p>Your collaborator wants to know which genes differ the most across the two groups. Suggest a way to answer this question, and apply it here.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ch02.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch02.pdf" class="col-page" width="800" height="1000"></a></p>
+<p><a href="ch12.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Chapter"><embed src="ch12.pdf" class="col-page" width="800" height="1000"></a></p>
 <figcaption>Chapter</figcaption>
 </figure>
 </div>
@@ -55179,6 +55678,10 @@ a resampling method used to estimate the test error associated with a given ml m
 <dd>
 a method for estimating the test error associated with fitting a particular ml method on a set of observations that involves randomly dividing the available set of observations into two parts, a training set and a validation set.
 </dd>
+<dt>Validation set error rate</dt>
+<dd>
+typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
+</dd>
 <dt>Leave-one-out cross-validation (LOOCV)</dt>
 <dd>
 a method that attempts to address the validation set approach’s drawbacks of high variability and overestimation of the test error rate; involves splitting the set of observations into two parts, but instead of creating two subsets of comparable size, a single observation is used for the validation set, and the remaining observations make up the training set.
@@ -55195,15 +55698,25 @@ a resampling method used to provide a measure of accuracy of a parameter estimat
 <dd>
 the validation set.
 </dd>
-<dt>Validation set error rate</dt>
-<dd>
-typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
-</dd>
 <dt>k-fold CV</dt>
 <dd>
 an alternative to LOOCV that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k - 1 folds.
 </dd>
 </dl>
+<section id="rethinking-test-train-and-validation-sets" class="level2 unnumbered .callout-info">
+<h2 class="unnumbered anchored" data-anchor-id="rethinking-test-train-and-validation-sets">rethinking test train and validation sets</h2>
+<p>The definition I took away from this course were confused. I want to clarify things abit here. In the ML world, we have do a three way split as follows.</p>
+<ol type="1">
+<li>training set - used to learn the papemeters.</li>
+<li>test set - used to evaluate the model capacity to generalize to new data.</li>
+<li>validation set - used to tune the hyperparameters of the model.</li>
+</ol>
+<p>Once we are finished tuning the hyperparameters we will train the model on all the data using our best hyperparameters and use that for production.</p>
+<p>In statitical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.</p>
+<p>The validation set approach is the simplest but can suffer from if the split underrepresents classes of the data.</p>
+<p>LOOCV is computationally expensive for any but the smallest datasets - unless you use a clever trick to estimate it using a single training run. Using such tricks is quite common for work for bayesian hierarchical models. However as the chapter suggests there is also problem of correlation in LOOCV that can lead to high variance in the test error estimate.</p>
+<p>k-fold CV is the most common approach and is used in most ML libraries. It is a good balance between computational cost and accuracy. However it is still useful to consider how to pick the k-folds so that they faithfully represent all the classes in the data.</p>
+</section>
 <section id="outline-of-resampling-methods" class="level2">
 <h2 class="anchored" data-anchor-id="outline-of-resampling-methods">Outline of Resampling Methods</h2>
 <p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>

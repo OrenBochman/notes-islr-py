@@ -5,19 +5,19 @@ date: 2024-09-11
 format:
    html:
       page-layout: full
+      fig-width: 8
+      fig-height: 6
+execute: 
+        cache: false
 ---
 
 # Unsupervised Learning
 
-<a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch12-unsup-lab.ipynb">
-<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch12-unsup-lab.ipynb)
+<a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch12-unsup-lab.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch12-unsup-lab.ipynb)
 
 In this lab we demonstrate PCA and clustering on several datasets.
-As in other labs, we import some of our libraries at this top
-level. This makes the code more readable, as scanning the first few
-lines of the notebook tell us what libraries are used in this
-notebook.
+As in other labs, we import some of our libraries at this top level. 
+This makes the code more readable, as scanning the first few lines of the notebook tell us what libraries are used in this notebook.
 
 ```{python}
 import numpy as np
@@ -28,7 +28,11 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from ISLP import load_data
 
+from IPython.display import display, HTML
+display(HTML("<style>.container { width:100% !important; }</style>"))
+
 ```
+
 We also collect the new imports
 needed for this lab.
 
@@ -40,37 +44,31 @@ from scipy.cluster.hierarchy import \
      (dendrogram,
       cut_tree)
 from ISLP.cluster import compute_linkage
-
 ```
- 
+
 ## Principal Components Analysis
-In this lab, we perform PCA on  `USArrests`, a data set in the
-`R` computing environment.
-We retrieve the data using `get_rdataset()`, which can fetch data from
-many standard `R` packages.
+In this lab, we perform PCA on  `USArrests`, a data set in the `R` computing environment.
+We retrieve the data using `get_rdataset()`, which can fetch data from many standard `R` packages.
 
 The rows of the data set contain the 50 states, in alphabetical order.
 
 ```{python}
 USArrests = get_rdataset('USArrests').data
 USArrests
-
 ```
- 
+
 The columns of the data set contain the four variables.
 
 ```{python}
 USArrests.columns
-
 ```
- 
+
 We first briefly examine the data. We notice that the variables have vastly different means.
 
 ```{python}
 USArrests.mean()
-
 ```
-    
+
  
 Dataframes have several useful methods for computing
 column-wise summaries. We can also examine the
@@ -877,10 +875,7 @@ observations assigned to cluster 0 by hierarchical clustering, as well
 as all of the observations assigned to cluster 1 by hierarchical
 clustering.
 
-Rather than performing hierarchical clustering on the entire data
-matrix, we can also perform hierarchical clustering on the first few
-principal component score vectors, regarding these first few components
-as a less noisy version of the data.
+Rather than performing hierarchical clustering on the entire data matrix, we can also perform hierarchical clustering on the first few principal component score vectors, regarding these first few components as a less noisy version of the data.
 
 ```{python}
 hc_pca = HClust(n_clusters=None,
@@ -889,7 +884,7 @@ hc_pca = HClust(n_clusters=None,
                 ).fit(nci_scores[:,:5])
 linkage_pca = compute_linkage(hc_pca)
 fig, ax = plt.subplots(figsize=(8,8))
-dendrogram(linkage_pca,
+dend=dendrogram(linkage_pca,
            labels=np.asarray(nci_labs),
            leaf_font_size=10,
            ax=ax,
@@ -898,6 +893,9 @@ ax.set_title("Hier. Clust. on First Five Score Vectors")
 pca_labels = pd.Series(cut_tree(linkage_pca,
                                 n_clusters=4).reshape(-1),
                        name='Complete-PCA')
+```
+
+```{python}
 pd.crosstab(nci_labs['label'], pca_labels)
 
 ```

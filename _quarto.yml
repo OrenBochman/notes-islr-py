@@ -30,6 +30,11 @@ format:
       light: flatly
       dark: darkly
     css: styles.css
+    grid:
+      sidebar-width: 300px
+      body-width: 1600px
+      margin-width: 420px
+      gutter-width: 1.5rem
     ipynb-shell-interactivity: all 
     #include-after-body: ../footer.html
     anchor-sections: true
@@ -49,5 +54,6 @@ execute:
   
 filters:
   - pseudocode
+
 
 

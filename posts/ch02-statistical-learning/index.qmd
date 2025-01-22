@@ -250,10 +250,134 @@ These tools provide a foundation for applying statistical learning methods in pr
 
 1. Discuss the challenges and considerations in choosing an appropriate level of flexibility for a statistical learning method. How does the bias-variance trade-off guide this decision? Explain the consequences of choosing a model that is too flexible or not flexible enough.
 
+## Excercises
 
+
+
+::: {.callout-note collapse='true'}
+
+## Q1: flexible and inflexible {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+
+1. For each parts, indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer.
+   a. The sample size n is extremely large, and the number of predictors p is small.
+   b. The number of predictors p is extremely large, and the numberof observations n is small.
+   c. The relationship between the predictors and response is highly non-linear.
+   d. The variance of the error terms, i.e. $σ^2 = Var(\epsilon)$, is extremely high.
+
+## Answer
+
+Let's start by clarifing what we mean by flexible and inflexible. 
+
+- An inflexible model is parametric, and is one that has a sufficently small number of parameters to give a good fit for the data. Henve a multiple regression might be too flexible if there are more predictors than observations I would hazzard that a inflexible model should have an order of magnitude less parameters than observations. 
+- A flexible model is a non-parametric model like a neural network or loess. It should have a higher capacity to fit the data than the inflexible model yet can be trained not to overfit the data.
+
+a. In this case I think that we would use a inflexible model. Perhaps because it is simple and is certain to work well. I would consider it as a baseline only consder a more flexible model  if I needed to do better.
+b. In this case even a simple model like a multiple regression would underfit the data. I wouls consider a tree based model or pca to reduce the number of predictors to a number that is significantly smaller than the number of observations. Other methods of feature selecetion might also be considered.
+c. The fact that the relationship is non-linear does not neccesirily mean that an inflexible model would not work. If I can find a transformation of the data that makes the relationship linear then I would a multiple regression with the transformed data. If I could not I would use a flexible model like a gaussian process or a neural network.
+d. In this case I would want to avoid a flexible model as it would overfit on the noise of the data. I would prefer a inflexible model like an ANOVA that can model the variance thus reducing the variance of the model. I might also look for some transformation of the data that would reduce the variance of the error terms like a log transformation or a whitening transformation.
+
+So in general I would expect an inflexible model to be my first choice and to consider more flexible models only if the inflexible model proved unsatisfactory.
+
+:::
+
+
+::: {.callout-note collapse='true'}
+
+## Q2: Classification or Regression {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+
+2. Explain whether each scenario is a classification or regression problem, and indicate whether we are most interested in inference or prediction. Finally, provide n and p.
+
+(a) We collect a set of data on the top 500 firms in the US. For each firm we record profit, number of employees, industry and the CEO salary. We are interested in understanding which factors affect CEO salary.
+(b) We are considering launching a new product and wish to know whether it will be a success or a failure. We collect data on 20 similar products that were previously launched. For each product we have recorded whether it was a success or failure, price charged for the product, marketing budget, competition price, and ten other variables.
+(c) We are interested in predicting the % change in the USD/Euro exchange rate in relation to the weekly changes in the world stock markets. Hence we collect weekly data for all of 2012. For each week we record the % change in the USD/Euro, the % change in the US market, the % change in the British market, and the % change in the German market.
+
+## Answer 2 {.unnumbered}
+
+a. This is a regression problem with p=3 and n=500 and we are interested in inference.
+b. This is a binary classification problem with p=13 and n=20 and we are interested in prediction.
+c. This is a regression problem with p=3 and n=52 and we are interested in prediction.
+
+:::
+
+::: {.callout-note collapse='true'}
+
+## Q3: Bias-Variance Trade-off {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+3. We now revisit the bias-variance decomposition.
+a. Provide a sketch of typical (squared) bias, variance, training error, test error, and Bayes (or irreducible) error curves, on a single plot, as we go from less flexible statistical learning methods
+towards more flexible approaches. The x-axis should represent the amount of flexibility in the method, and the y-axis should represent the values for each curve. There should be five curves. Make sure to label each one.
+b. Explain why each of the five curves has the shape displayed in part (a).
+
+## Answer 3 {.unnumbered}
+
+:::
+
+
+::: {.callout-note collapse='true'}
+
+## Q4: Real-life Applications {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+
+4. You will now think of some real-life applications for statistical learning.
+
+(a) Describe three real-life applications in which classification might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+(b) Describe three real-life applications in which regression might be useful. Describe the response, as well as the predictors. Is the goal of each application inference or prediction? Explain your answer.
+(c) Describe three real-life applications in which cluster analysis might be useful.
+
+## Answer 4 {.unnumbered}
+
+
+:::
+
+
+::: {.callout-note collapse='true'}
+
+## Q5: Real-life Applications {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+5. What are the advantages and disadvantages of a very flexible (versus a less flexible) approach for regression or classification? 
+   Under what circumstances might a more flexible approach be preferred to a less flexible approach? When might a less flexible approach be preferred?
+
+## Answer 5 {.unnumbered}
+:::
+
+
+
+::: {.callout-note collapse='true'}
+
+## Q6: Parametric and a non-parametric {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+6. Describe the differences between a parametric and a non-parametric statistical learning approach. What are the advantages of a parametric approach to regression or classification (as opposed to a non- parametric approach)? What are its disadvantages?
+
+
+
+
+:::
+
+::: {.callout-note collapse='true'}
+
+## Q7: Real-life Applications {.unnumbered}
+
+{{< video https://youtu.be/RjItg-PajpQ?list=PL4OalocKlC1Qt9l6JxBHgRSRbb3ENKFr9 location=.column-margin >}}
+
+:::
 
 ## Slides and Chapter
 
 ![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
 
 ![Chapter](ch02.pdf){.col-page width="800px" height="1000px"}
+

@@ -1,1 +1,18 @@
 /* css styles */
+
+
+@media (min-width: 1200px) {
+    .container {
+      width: 98%;
+    }
+  }
+
+
+div.cell{
+        width:100%;
+        margin-left:1%;
+        margin-right:auto;
+}
+
+
+

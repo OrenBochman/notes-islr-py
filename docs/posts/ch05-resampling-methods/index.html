@@ -43,8 +43,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-594d21605a7b9fb32547fedacd8fc358.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d396125c57f3f0defba792e7b0e7a5dc.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-02131402185803fffdb13c72ead8d5c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-8072ba3c8f90baa049cfdfc6dfb138ec.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
@@ -186,7 +186,8 @@ background-size: cover;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#outline-of-resampling-methods" id="toc-outline-of-resampling-methods" class="nav-link active" data-scroll-target="#outline-of-resampling-methods">Outline of Resampling Methods</a></li>
+  <li><a href="#rethinking-test-train-and-validation-sets" id="toc-rethinking-test-train-and-validation-sets" class="nav-link active" data-scroll-target="#rethinking-test-train-and-validation-sets">rethinking test train and validation sets</a></li>
+  <li><a href="#outline-of-resampling-methods" id="toc-outline-of-resampling-methods" class="nav-link" data-scroll-target="#outline-of-resampling-methods">Outline of Resampling Methods</a></li>
   <li><a href="#important-considerations" id="toc-important-considerations" class="nav-link" data-scroll-target="#important-considerations">Important Considerations</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
@@ -332,6 +333,10 @@ a resampling method used to estimate the test error associated with a given ml m
 <dd>
 a method for estimating the test error associated with fitting a particular ml method on a set of observations that involves randomly dividing the available set of observations into two parts, a training set and a validation set.
 </dd>
+<dt>Validation set error rate</dt>
+<dd>
+typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
+</dd>
 <dt>Leave-one-out cross-validation (LOOCV)</dt>
 <dd>
 a method that attempts to address the validation set approach’s drawbacks of high variability and overestimation of the test error rate; involves splitting the set of observations into two parts, but instead of creating two subsets of comparable size, a single observation is used for the validation set, and the remaining observations make up the training set.
@@ -348,15 +353,25 @@ a resampling method used to provide a measure of accuracy of a parameter estimat
 <dd>
 the validation set.
 </dd>
-<dt>Validation set error rate</dt>
-<dd>
-typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
-</dd>
 <dt>k-fold CV</dt>
 <dd>
 an alternative to LOOCV that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k - 1 folds.
 </dd>
 </dl>
+<section id="rethinking-test-train-and-validation-sets" class="level2 unnumbered .callout-info">
+<h2 class="unnumbered anchored" data-anchor-id="rethinking-test-train-and-validation-sets">rethinking test train and validation sets</h2>
+<p>The definition I took away from this course were confused. I want to clarify things abit here. In the ML world, we have do a three way split as follows.</p>
+<ol type="1">
+<li>training set - used to learn the papemeters.</li>
+<li>test set - used to evaluate the model capacity to generalize to new data.</li>
+<li>validation set - used to tune the hyperparameters of the model.</li>
+</ol>
+<p>Once we are finished tuning the hyperparameters we will train the model on all the data using our best hyperparameters and use that for production.</p>
+<p>In statitical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.</p>
+<p>The validation set approach is the simplest but can suffer from if the split underrepresents classes of the data.</p>
+<p>LOOCV is computationally expensive for any but the smallest datasets - unless you use a clever trick to estimate it using a single training run. Using such tricks is quite common for work for bayesian hierarchical models. However as the chapter suggests there is also problem of correlation in LOOCV that can lead to high variance in the test error estimate.</p>
+<p>k-fold CV is the most common approach and is used in most ML libraries. It is a good balance between computational cost and accuracy. However it is still useful to consider how to pick the k-folds so that they faithfully represent all the classes in the data.</p>
+</section>
 <section id="outline-of-resampling-methods" class="level2">
 <h2 class="anchored" data-anchor-id="outline-of-resampling-methods">Outline of Resampling Methods</h2>
 <p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>
