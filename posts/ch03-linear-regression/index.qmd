@@ -7,7 +7,7 @@ date: 2024-06-21
 ---
 
 
-> “Essentially, all models are wrong, but some are useful” --- George Box
+> “Essentially, all models are wrong, but some are useful” --- [George Box](https://en.wikipedia.org/wiki/George_E._P._Box)
 
 
 ::: {.callout-tip}  
@@ -39,7 +39,7 @@ Here is a light-hearted deep dive into regression to help you ease into this cha
 :::
 
 
-> “The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” --- Fred Mosteller and John Tukey
+> “The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” --- [Fred Mosteller](https://en.wikipedia.org/wiki/Frederick_Mosteller)^[studied attribution problem of the disputed Federalist Papers and authored the amazing "Fifty Challenging Problems in Probability"] and [John Tukey](https://en.wikipedia.org/wiki/John_Tukey)
 
 
 The chapter is 64 pages long and covers the following topics:
@@ -71,20 +71,42 @@ The chapter is 64 pages long and covers the following topics:
 There are plenty of big words in this chapter, but don't worry, we'll :muscle: break them down together:palms_up_together:!
 Here's a quick overview of the key concepts covered in this chapter:
 
-1. **Simple Linear Regression**: Modeling the relationship between a single input (*predictor*) variable and an output (*response*) variable using a straight line.
-1. **Multiple Linear Regression**: Extending simple linear regression to accommodate multiple *predictor* variables.
-1. **Model Assessment**: Evaluating the accuracy and fit of linear regression models using metrics like **RSE**, **$R^2$**, **F-statistic**, and **p-values**.
-1. **Model Interpretation**: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
-1. **Qualitative Predictors**: When we want to play with non0numerical predictors, e.g. representing  color categoris, we can encode them as numerical values or better yet we can use **dummy variables** that track if a category is on :arrow_forward: or off :stop_button:.
-Incorporating categorical variables into regression models using *dummy variables*. 
-1. **Interactions**: Modeling complex relationships by including interaction terms between predictors.
-1. **Polynomial Regression**: Capturing non-linear relationships using polynomial terms of predictor variables.
-1. **Model Diagnostics** :thermometer: : Identifying and addressing potential issues :face_with_thermometer: like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
-1. **heteroscedasticity** :space_invader: - when the response spreads out more as the predictors increase. You can usually eyeball :roll_eyes: this by looking at the residuals vs. fitted values plot.
-1. **outliers** :alien: - observations that don't fit the general pattern of the data. If they are mistakes we can toss them out :wastebasket:. But is they are for real, we call them **high leverage points** :ghost:.
-1. **collinearity** :zombie: - when *predictors* are highly correlated, leading to unstable coefficient estimates. The **VIF** (Variance Inflation Factor) helps detect collinearity.
+Simple Linear Regression
+: Modeling the relationship between a single input (*predictor*) variable and an output (*response*) variable using a straight line.
+
+Multiple Linear Regression
+: Extending simple linear regression to accommodate multiple *predictor* variables.
+
+Model Assessment
+: Evaluating the accuracy and fit of linear regression models using metrics like **RSE**, **$R^2$**, **F-statistic**, and **p-values**.
+
+Model Interpretation
+: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
+
+Qualitative Predictors
+: When we want to play with non0numerical predictors, e.g. representing  color categories, we can encode them as numerical values or better yet we can use **dummy variables** that track if a 
+category is on :arrow_forward: or off :stop_button:. Incorporating categorical variables into regression models using *dummy variables*. 
+
+Interactions
+: Modeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is $\beta A \times B$. where $\beta$ is the coefficient representing thr strength of the interaction.
+
+Polynomial Regression
+: Capturing non-linear relationships using polynomial terms of predictor variables.
+
+Model Diagnostics :thermometer: 
+: Identifying and addressing potential issues :face_with_thermometer: like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
+
+Heteroscedasticity :space_invader: 
+: When the response spreads out more as the predictors increase. You can usually eyeball :roll_eyes: this by looking at the residuals vs. fitted values plot.
+
+Outliers :alien: 
+: Observations that don't fit the general pattern of the data. If they are mistakes we can toss them out :wastebasket:. But is they are for real, we call them **high leverage points** :ghost:.
+
+Collinearity :zombie:
+: when *predictors* are highly correlated, leading to unstable coefficient estimates. The **VIF** (Variance Inflation Factor) helps detect collinearity.
 
 
+## Simple linear regression
 
 
 ::: {#fig-v3.1 .column-margin}
@@ -93,6 +115,105 @@ Incorporating categorical variables into regression models using *dummy variable
 Simple linear regression
 :::
 
+- **Model**: The relationship between *response* $(Y)$ and *predictor* $(X)$ is represented as 
+$$
+Y = β_0 + β_1 X + \epsilon
+$$
+
+- where
+   - $β_0$ is the intercept, 
+   - $β_1$ is the slope, and 
+   - $\epsilon$ is the error term.
+
+We have two problems:
+
+1. **Inference**: how can we find the best values for $β_0$ and $β_1$ that minimize the difference between the observed and predicted values of $Y$.
+2. **Prediction**: given a value of $X$, and $\hat{β}_0$ and $\hat{β}_1$ parameters how can we predict the corresponding value of $\hat{y}$.
+
+$$
+\hat{y} = \hat{β}_0 + \hat{β}_1 x
+$$
+
+where $\hat{y}$ is the predicted value of $Y$ for a given value of $X$.
+
+and we can define the residuals as:
+
+$$
+e_i = y_i - \hat{y}_i
+$$
+
+
+### Estimating the Coefficients
+
+- **Least Squares Estimation**: The coefficients $β_0$ and $β_1$ are estimated by minimizing the **Residual Sum of Squares (RSS)**, which quantifies the difference between observed and predicted values.
+
+- The RSS is defined as:
+
+$$
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} e_i^2
+$$
+
+least squares estimates are:
+
+$$
+\hat{β}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+$$
+\hat{β}_0 = \bar{y} - \hat{β}_1 \bar{x}
+$$
+
+where $\bar{x}$ and $\bar{y}$ are the sample means of the predictors and response, respectively.
+
+###  Assessing the Accuracy of the Coefficient Estimates
+
+- **Assessing Accuracy**: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between $X$ and $Y$.
+
+$$
+SE(\hat{β}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+$$
+
+$$
+SE(\hat{β}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \right]
+$$
+
+where $\sigma^2 = Var[\epsilon]$
+
+- **$R^2$**: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.
+
+We can use these standard errors to compute confidence intervals. A 95% CI is one which will contain the true value of the parameter with a probability of 95%. 
+
+
+::: {.callout-caution}
+
+## Over thinking standard errors :skull::skull::skull:
+
+This approach seems strange as we seem to have computed the values precisely using the above estimators.
+What can possibly change that would give us a different value ?
+
+This is intimated in the slides which mentions repeated sampling? 
+
+Where is this repeated sampling - 
+
+Some strange Fisherian fantasy that if we repeated the experiment many times we would get different samples each time drawn from some contrafactual distribution that generates the data for each contrafactual version of the experiment. 
+
+Getting back to the book we may rephrase this as follows. Since we know the Data generating rule
+we can simulate data to our hear's content. Each time the random number generator spits out different
+Xs so we get a new data set. For each data set the least square estimator will give us different parameters. Corresponding to a different approximation of the population regression model. (One that has points from all possible experiments). I.e. the point is that we are using $x$ and $\sigma^2$ from the sample not the population so we will have 
+
+the book says 
+
+> In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.
+
+I.e. we don't know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalised distance the estimator from the data.)
+
+:::
+
+
+### Assessing the Accuracy of the Model
+
+
+## Hypothesis Testing and Confidence Intervals
 
 ::: {#fig-v3.2 .column-margin}
 {{< video https://youtu.be/3GiWpRfkSjc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
@@ -107,12 +228,18 @@ Hypothesis Testing and Confidence Intervals
 Multiple Linear Regression
 :::
 
+## Some important questions
 
 ::: {#fig-v3.4 .column-margin}
 {{< video https://youtu.be/50sv4UTjE90?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-Some important questions
+Some important questions:
 :::
+
+1. Is at least one of the predictors $X_1, X_2, \ldots , X_p$ useful in predicting the response?
+2. Do all the predictors help to explain $Y$, or is only a subset of the predictors useful?
+3. How well does the model fit the data?
+4. Given a set of predictor values, what response value should we predict, and how accurate is our prediction?
 
 
 ::: {#fig-v3.5 .column-margin}
@@ -130,18 +257,6 @@ Regression in R
 
 ## Simple Linear Regression:
 
-- **Model**: The relationship between *response* $(Y)$ and *predictor* $(X)$ is represented as 
-$$
-Y = β_0 + β_1 X + \epsilon
-$$
-
-- where
-   - $β_0$ is the intercept, 
-   - $β_1$ is the slope, and 
-   - $\epsilon$ is the error term.
-- **Least Squares Estimation**: The coefficients $β_0$ and $β_1$ are estimated by minimizing the **Residual Sum of Squares (RSS)**, which quantifies the difference between observed and predicted values.
-- **Assessing Accuracy**: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between $X$ and $Y$.
-- **$R^2$**: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.
 
 
 
@@ -202,3 +317,8 @@ When we have categorical predictors
 ## Chapter
 
 ![Chapter](ch03.pdf){.col-page width="800px" height="1000px"}
+
+
+
+
+

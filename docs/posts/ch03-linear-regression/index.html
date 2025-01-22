@@ -230,7 +230,15 @@ window.Quarto = {
    
   <ul>
   <li><a href="#linear-regression-orientation" id="toc-linear-regression-orientation" class="nav-link active" data-scroll-target="#linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</a></li>
-  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple Linear Regression:</a></li>
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a>
+  <ul class="collapse">
+  <li><a href="#estimating-the-coefficients" id="toc-estimating-the-coefficients" class="nav-link" data-scroll-target="#estimating-the-coefficients">Estimating the Coefficients</a></li>
+  <li><a href="#assessing-the-accuracy-of-the-coefficient-estimates" id="toc-assessing-the-accuracy-of-the-coefficient-estimates" class="nav-link" data-scroll-target="#assessing-the-accuracy-of-the-coefficient-estimates">Assessing the Accuracy of the Coefficient Estimates</a></li>
+  <li><a href="#assessing-the-accuracy-of-the-model" id="toc-assessing-the-accuracy-of-the-model" class="nav-link" data-scroll-target="#assessing-the-accuracy-of-the-model">Assessing the Accuracy of the Model</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing-and-confidence-intervals" id="toc-hypothesis-testing-and-confidence-intervals" class="nav-link" data-scroll-target="#hypothesis-testing-and-confidence-intervals">Hypothesis Testing and Confidence Intervals</a></li>
+  <li><a href="#some-important-questions" id="toc-some-important-questions" class="nav-link" data-scroll-target="#some-important-questions">Some important questions</a></li>
+  <li><a href="#simple-linear-regression-1" id="toc-simple-linear-regression-1" class="nav-link" data-scroll-target="#simple-linear-regression-1">Simple Linear Regression:</a></li>
   <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression:</a></li>
   <li><a href="#qualitative-predictors" id="toc-qualitative-predictors" class="nav-link" data-scroll-target="#qualitative-predictors">Qualitative Predictors:</a></li>
   <li><a href="#interactions" id="toc-interactions" class="nav-link" data-scroll-target="#interactions">Interactions:</a></li>
@@ -255,7 +263,7 @@ window.Quarto = {
 
 
 <blockquote class="blockquote">
-<p>“Essentially, all models are wrong, but some are useful” — George Box</p>
+<p>“Essentially, all models are wrong, but some are useful” — <a href="https://en.wikipedia.org/wiki/George_E._P._Box">George Box</a></p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -294,7 +302,7 @@ TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_tre
 </div>
 </div>
 <blockquote class="blockquote">
-<p>“The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” — Fred Mosteller and John Tukey</p>
+<p>“The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” — <a href="https://en.wikipedia.org/wiki/Frederick_Mosteller">Fred Mosteller</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and <a href="https://en.wikipedia.org/wiki/John_Tukey">John Tukey</a></p>
 </blockquote>
 <p>The chapter is 64 pages long and covers the following topics:</p>
 <ul>
@@ -325,22 +333,58 @@ TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_tre
 <li><a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
 </ul></li>
 </ul>
-<section id="linear-regression-orientation" class="level2 page-columns page-full">
+<section id="linear-regression-orientation" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</h2>
 <p>There are plenty of big words in this chapter, but don’t worry, we’ll <span class="emoji" data-emoji="muscle">💪</span> break them down together<span class="emoji" data-emoji="palms_up_together">🤲</span>! Here’s a quick overview of the key concepts covered in this chapter:</p>
-<ol type="1">
-<li><strong>Simple Linear Regression</strong>: Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.</li>
-<li><strong>Multiple Linear Regression</strong>: Extending simple linear regression to accommodate multiple <em>predictor</em> variables.</li>
-<li><strong>Model Assessment</strong>: Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><span class="math inline">R^2</span></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</li>
-<li><strong>Model Interpretation</strong>: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</li>
-<li><strong>Qualitative Predictors</strong>: When we want to play with non0numerical predictors, e.g.&nbsp;representing color categoris, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.</li>
-<li><strong>Interactions</strong>: Modeling complex relationships by including interaction terms between predictors.</li>
-<li><strong>Polynomial Regression</strong>: Capturing non-linear relationships using polynomial terms of predictor variables.</li>
-<li><strong>Model Diagnostics</strong> <span class="emoji" data-emoji="thermometer">🌡️</span> : Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</li>
-<li><strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span> - when the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.</li>
-<li><strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span> - observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.</li>
-<li><strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span> - when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</li>
-</ol>
+<dl>
+<dt>Simple Linear Regression</dt>
+<dd>
+Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.
+</dd>
+<dt>Multiple Linear Regression</dt>
+<dd>
+Extending simple linear regression to accommodate multiple <em>predictor</em> variables.
+</dd>
+<dt>Model Assessment</dt>
+<dd>
+Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><span class="math inline">R^2</span></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.
+</dd>
+<dt>Model Interpretation</dt>
+<dd>
+Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
+</dd>
+<dt>Qualitative Predictors</dt>
+<dd>
+When we want to play with non0numerical predictors, e.g.&nbsp;representing color categories, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.
+</dd>
+<dt>Interactions</dt>
+<dd>
+Modeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is <span class="math inline">\beta A \times B</span>. where <span class="math inline">\beta</span> is the coefficient representing thr strength of the interaction.
+</dd>
+<dt>Polynomial Regression</dt>
+<dd>
+Capturing non-linear relationships using polynomial terms of predictor variables.
+</dd>
+<dt>Model Diagnostics <span class="emoji" data-emoji="thermometer">🌡️</span></dt>
+<dd>
+Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
+</dd>
+<dt>Heteroscedasticity <span class="emoji" data-emoji="space_invader">👾</span></dt>
+<dd>
+When the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.
+</dd>
+<dt>Outliers <span class="emoji" data-emoji="alien">👽</span></dt>
+<dd>
+Observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.
+</dd>
+<dt>Collinearity <span class="emoji" data-emoji="zombie">🧟</span></dt>
+<dd>
+when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.
+</dd>
+</dl>
+</section>
+<section id="simple-linear-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple linear regression</h2>
 
 <div class="no-row-height column-margin column-container"><div id="fig-v3.1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -351,7 +395,95 @@ TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_tre
 Figure&nbsp;1: Simple linear regression
 </figcaption>
 </figure>
-</div><div id="fig-v3.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+</div></div><ul>
+<li><p><strong>Model</strong>: The relationship between <em>response</em> <span class="math inline">(Y)</span> and <em>predictor</em> <span class="math inline">(X)</span> is represented as <span class="math display">
+Y = β_0 + β_1 X + \epsilon
+</span></p></li>
+<li><p>where</p>
+<ul>
+<li><span class="math inline">β_0</span> is the intercept,</li>
+<li><span class="math inline">β_1</span> is the slope, and</li>
+<li><span class="math inline">\epsilon</span> is the error term.</li>
+</ul></li>
+</ul>
+<p>We have two problems:</p>
+<ol type="1">
+<li><strong>Inference</strong>: how can we find the best values for <span class="math inline">β_0</span> and <span class="math inline">β_1</span> that minimize the difference between the observed and predicted values of <span class="math inline">Y</span>.</li>
+<li><strong>Prediction</strong>: given a value of <span class="math inline">X</span>, and <span class="math inline">\hat{β}_0</span> and <span class="math inline">\hat{β}_1</span> parameters how can we predict the corresponding value of <span class="math inline">\hat{y}</span>.</li>
+</ol>
+<p><span class="math display">
+\hat{y} = \hat{β}_0 + \hat{β}_1 x
+</span></p>
+<p>where <span class="math inline">\hat{y}</span> is the predicted value of <span class="math inline">Y</span> for a given value of <span class="math inline">X</span>.</p>
+<p>and we can define the residuals as:</p>
+<p><span class="math display">
+e_i = y_i - \hat{y}_i
+</span></p>
+<section id="estimating-the-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-the-coefficients">Estimating the Coefficients</h3>
+<ul>
+<li><p><strong>Least Squares Estimation</strong>: The coefficients <span class="math inline">β_0</span> and <span class="math inline">β_1</span> are estimated by minimizing the <strong>Residual Sum of Squares (RSS)</strong>, which quantifies the difference between observed and predicted values.</p></li>
+<li><p>The RSS is defined as:</p></li>
+</ul>
+<p><span class="math display">
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} e_i^2
+</span></p>
+<p>least squares estimates are:</p>
+<p><span class="math display">
+\hat{β}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+</span></p>
+<p><span class="math display">
+\hat{β}_0 = \bar{y} - \hat{β}_1 \bar{x}
+</span></p>
+<p>where <span class="math inline">\bar{x}</span> and <span class="math inline">\bar{y}</span> are the sample means of the predictors and response, respectively.</p>
+</section>
+<section id="assessing-the-accuracy-of-the-coefficient-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="assessing-the-accuracy-of-the-coefficient-estimates">Assessing the Accuracy of the Coefficient Estimates</h3>
+<ul>
+<li><strong>Assessing Accuracy</strong>: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between <span class="math inline">X</span> and <span class="math inline">Y</span>.</li>
+</ul>
+<p><span class="math display">
+SE(\hat{β}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+</span></p>
+<p><span class="math display">
+SE(\hat{β}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \right]
+</span></p>
+<p>where <span class="math inline">\sigma^2 = Var[\epsilon]</span></p>
+<ul>
+<li><strong><span class="math inline">R^2</span></strong>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</li>
+</ul>
+<p>We can use these standard errors to compute confidence intervals. A 95% CI is one which will contain the true value of the parameter with a probability of 95%.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Over thinking standard errors <span class="emoji" data-emoji="skull">💀</span><span class="emoji" data-emoji="skull">💀</span><span class="emoji" data-emoji="skull">💀</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This approach seems strange as we seem to have computed the values precisely using the above estimators. What can possibly change that would give us a different value ?</p>
+<p>This is intimated in the slides which mentions repeated sampling?</p>
+<p>Where is this repeated sampling -</p>
+<p>Some strange Fisherian fantasy that if we repeated the experiment many times we would get different samples each time drawn from some contrafactual distribution that generates the data for each contrafactual version of the experiment.</p>
+<p>Getting back to the book we may rephrase this as follows. Since we know the Data generating rule we can simulate data to our hear’s content. Each time the random number generator spits out different Xs so we get a new data set. For each data set the least square estimator will give us different parameters. Corresponding to a different approximation of the population regression model. (One that has points from all possible experiments). I.e. the point is that we are using <span class="math inline">x</span> and <span class="math inline">\sigma^2</span> from the sample not the population so we will have</p>
+<p>the book says</p>
+<blockquote class="blockquote">
+<p>In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.</p>
+</blockquote>
+<p>I.e. we don’t know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalised distance the estimator from the data.)</p>
+</div>
+</div>
+</section>
+<section id="assessing-the-accuracy-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="assessing-the-accuracy-of-the-model">Assessing the Accuracy of the Model</h3>
+</section>
+</section>
+<section id="hypothesis-testing-and-confidence-intervals" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="hypothesis-testing-and-confidence-intervals">Hypothesis Testing and Confidence Intervals</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-v3.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/3GiWpRfkSjc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -369,16 +501,28 @@ Figure&nbsp;2: Hypothesis Testing and Confidence Intervals
 Figure&nbsp;3: Multiple Linear Regression
 </figcaption>
 </figure>
-</div><div id="fig-v3.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+</div></div>
+</section>
+<section id="some-important-questions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="some-important-questions">Some important questions</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.4" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/50sv4UTjE90?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Some important questions
+Figure&nbsp;4: Some important questions:
 </figcaption>
 </figure>
-</div><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+</div></div><ol type="1">
+<li>Is at least one of the predictors <span class="math inline">X_1, X_2, \ldots , X_p</span> useful in predicting the response?</li>
+<li>Do all the predictors help to explain <span class="math inline">Y</span>, or is only a subset of the predictors useful?</li>
+<li>How well does the model fit the data?</li>
+<li>Given a set of predictor values, what response value should we predict, and how accurate is our prediction?</li>
+</ol>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/dEBQmiXv9fk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
@@ -397,27 +541,9 @@ Figure&nbsp;6: Regression in R
 </figcaption>
 </figure>
 </div></div>
-
-
-
-
 </section>
-<section id="simple-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple Linear Regression:</h2>
-<ul>
-<li><p><strong>Model</strong>: The relationship between <em>response</em> <span class="math inline">(Y)</span> and <em>predictor</em> <span class="math inline">(X)</span> is represented as <span class="math display">
-Y = β_0 + β_1 X + \epsilon
-</span></p></li>
-<li><p>where</p>
-<ul>
-<li><span class="math inline">β_0</span> is the intercept,</li>
-<li><span class="math inline">β_1</span> is the slope, and</li>
-<li><span class="math inline">\epsilon</span> is the error term.</li>
-</ul></li>
-<li><p><strong>Least Squares Estimation</strong>: The coefficients <span class="math inline">β_0</span> and <span class="math inline">β_1</span> are estimated by minimizing the <strong>Residual Sum of Squares (RSS)</strong>, which quantifies the difference between observed and predicted values.</p></li>
-<li><p><strong>Assessing Accuracy</strong>: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between <span class="math inline">X</span> and <span class="math inline">Y</span>.</p></li>
-<li><p><strong><span class="math inline">R^2</span></strong>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</p></li>
-</ul>
+<section id="simple-linear-regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression-1">Simple Linear Regression:</h2>
 </section>
 <section id="multiple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression:</h2>
@@ -505,7 +631,13 @@ Y = β_0 + β_1 X_1 + β_2 X_2 + \ldots + β_p X_p + \epsilon
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>studied attribution problem of the disputed Federalist Papers and authored the amazing “Fifty Challenging Problems in Probability”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
   title = {Chapter 3: {Linear} {Regression}},
   date = {2024-06-21},

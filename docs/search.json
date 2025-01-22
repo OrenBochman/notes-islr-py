@@ -508,7 +508,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This are some notes on one of my favourite books: An Introduction to Statistical Learning by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. The book is available for free from the authors’ website. The book is a great introduction to statistical learning and is a good starting point for anyone interested in machine learning. The book is a bit light on the maths but it is a good introduction to the concepts and the authors have a more advanced book called The Elements of Statistical Learning which is more mathematically rigorous.\nAnother reason I like this book is that there are videos by the authors on YouTube which explain the material. Although I first read the book book before the videos came out and I considered it easy to undestand for most topics. However I found that the videos seem to be a bit orthogonal i.e. the seem to give lost of background information, beyond what is going on in the book. This is a good thing as it gives a lot of context to the material.\nTHe authors also make thier slides and figures available for free.\nA little while back this book came out with codes in python. This makes it more relevant for data scientists and machine learning engineers then the original which came out in R. More so there is now a chapter on deep learning which is a big plus. Though I dare say its hard to get the lab to run properly on a local machine.\nTne book covers lots of algorithms as well as many practical aspects of Data Science and Machine Learning. The book is a great starting point for anyone interested in the field."
+    "text": "This are some notes on one of my favorite books of all times: An Introduction to Statistical Learning by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. And in this note perhaps I can explain why I like it so much, despite much criticism that are scattered throughout the notes.\nThe book is available for free from the authors’ website. The book is a great introduction to statistical learning and is a good starting point for anyone interested in machine learning. The book is a bit light on the maths but it is a good introduction to the concepts and the authors have a more advanced book called The Elements of Statistical Learning which is more mathematically rigorous.\nAnother reason I like this book is that there are videos by the authors on YouTube which explain the material. Although I first read the book book before the videos came out and I considered it easy to understand for most topics. However I found that the videos seem to be a bit orthogonal i.e. the seem to give lost of background information, beyond what is going on in the book. This is a good thing as it gives a lot of context to the material.\nThe authors also make their slides and figures available for free.\nA little while back this book came out with codes in python. This makes it more relevant for data scientists and machine learning engineers then the original which came out in R. More so there is now a chapter on deep learning which is a big plus. Though I dare say its hard to get the lab to run properly on a local machine.\nTne book covers lots of algorithms as well as many practical aspects of Data Science and Machine Learning. The book is a great starting point for anyone interested in the field.\nI haven’t come across any videos with some of the people who were not the authors of the course. I hope to find these."
   },
   {
     "objectID": "posts/ch07-beyond-linearity/Ch07-nonlin-lab.html",
@@ -560,11 +560,18 @@
     "text": "Premises:\n\nStatistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.\nWhile it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!\nThe readers are interested in applying the methods to real-world problems."
   },
   {
-    "objectID": "posts/ch01-intro/index.html#slides-and-chapter",
-    "href": "posts/ch01-intro/index.html#slides-and-chapter",
+    "objectID": "posts/ch01-intro/index.html#slides",
+    "href": "posts/ch01-intro/index.html#slides",
     "title": "Chapter 1: Introduction",
-    "section": "Slides and Chapter",
-    "text": "Slides and Chapter\n\n\n\nChapter Slides\n\n\n\n\n\nChapter"
+    "section": "Slides",
+    "text": "Slides\n\n\n\nChapter Slides"
+  },
+  {
+    "objectID": "posts/ch01-intro/index.html#chapter",
+    "href": "posts/ch01-intro/index.html#chapter",
+    "title": "Chapter 1: Introduction",
+    "section": "Chapter",
+    "text": "Chapter\n\n\n\nChapter"
   },
   {
     "objectID": "posts/ch08-tree-based-methods/Ch08-baggboost-lab.html",
@@ -669,14 +676,35 @@
     "href": "posts/ch03-linear-regression/index.html#linear-regression-orientation",
     "title": "Chapter 3: Linear Regression",
     "section": "Linear Regression Orientation :🗝️:",
-    "text": "Linear Regression Orientation :🗝️:\nThere are plenty of big words in this chapter, but don’t worry, we’ll 💪 break them down together🤲! Here’s a quick overview of the key concepts covered in this chapter:\n\nSimple Linear Regression: Modeling the relationship between a single input (predictor) variable and an output (response) variable using a straight line.\nMultiple Linear Regression: Extending simple linear regression to accommodate multiple predictor variables.\nModel Assessment: Evaluating the accuracy and fit of linear regression models using metrics like RSE, R^2, F-statistic, and p-values.\nModel Interpretation: Understanding the practical meaning of estimated coefficients and their significance in the context of the data.\nQualitative Predictors: When we want to play with non0numerical predictors, e.g. representing color categoris, we can encode them as numerical values or better yet we can use dummy variables that track if a category is on ▶️ or off ⏹️. Incorporating categorical variables into regression models using dummy variables.\nInteractions: Modeling complex relationships by including interaction terms between predictors.\nPolynomial Regression: Capturing non-linear relationships using polynomial terms of predictor variables.\nModel Diagnostics 🌡️ : Identifying and addressing potential issues 🤒 like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.\nheteroscedasticity 👾 - when the response spreads out more as the predictors increase. You can usually eyeball 🙄 this by looking at the residuals vs. fitted values plot.\noutliers 👽 - observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out 🗑️. But is they are for real, we call them high leverage points 👻.\ncollinearity 🧟 - when predictors are highly correlated, leading to unstable coefficient estimates. The VIF (Variance Inflation Factor) helps detect collinearity.\n\n\n\n\n\n\n\n\nFigure 1: Simple linear regression\n\n\n\n\n\n\n\n\nFigure 2: Hypothesis Testing and Confidence Intervals\n\n\n\n\n\n\n\n\nFigure 3: Multiple Linear Regression\n\n\n\n\n\n\n\n\nFigure 4: Some important questions\n\n\n\n\n\n\n\n\nFigure 5: Extensions of the Linear Model\n\n\n\n\n\n\n\n\nFigure 6: Regression in R"
+    "text": "Linear Regression Orientation :🗝️:\nThere are plenty of big words in this chapter, but don’t worry, we’ll 💪 break them down together🤲! Here’s a quick overview of the key concepts covered in this chapter:\n\nSimple Linear Regression\n\nModeling the relationship between a single input (predictor) variable and an output (response) variable using a straight line.\n\nMultiple Linear Regression\n\nExtending simple linear regression to accommodate multiple predictor variables.\n\nModel Assessment\n\nEvaluating the accuracy and fit of linear regression models using metrics like RSE, R^2, F-statistic, and p-values.\n\nModel Interpretation\n\nUnderstanding the practical meaning of estimated coefficients and their significance in the context of the data.\n\nQualitative Predictors\n\nWhen we want to play with non0numerical predictors, e.g. representing color categories, we can encode them as numerical values or better yet we can use dummy variables that track if a category is on ▶️ or off ⏹️. Incorporating categorical variables into regression models using dummy variables.\n\nInteractions\n\nModeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is \\beta A \\times B. where \\beta is the coefficient representing thr strength of the interaction.\n\nPolynomial Regression\n\nCapturing non-linear relationships using polynomial terms of predictor variables.\n\nModel Diagnostics 🌡️\n\nIdentifying and addressing potential issues 🤒 like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.\n\nHeteroscedasticity 👾\n\nWhen the response spreads out more as the predictors increase. You can usually eyeball 🙄 this by looking at the residuals vs. fitted values plot.\n\nOutliers 👽\n\nObservations that don’t fit the general pattern of the data. If they are mistakes we can toss them out 🗑️. But is they are for real, we call them high leverage points 👻.\n\nCollinearity 🧟\n\nwhen predictors are highly correlated, leading to unstable coefficient estimates. The VIF (Variance Inflation Factor) helps detect collinearity."
   },
   {
     "objectID": "posts/ch03-linear-regression/index.html#simple-linear-regression",
     "href": "posts/ch03-linear-regression/index.html#simple-linear-regression",
     "title": "Chapter 3: Linear Regression",
+    "section": "Simple linear regression",
+    "text": "Simple linear regression\n\n\n\n\n\n\n\nFigure 1: Simple linear regression\n\n\n\nModel: The relationship between response (Y) and predictor (X) is represented as \nY = β_0 + β_1 X + \\epsilon\n\nwhere\n\nβ_0 is the intercept,\nβ_1 is the slope, and\n\\epsilon is the error term.\n\n\nWe have two problems:\n\nInference: how can we find the best values for β_0 and β_1 that minimize the difference between the observed and predicted values of Y.\nPrediction: given a value of X, and \\hat{β}_0 and \\hat{β}_1 parameters how can we predict the corresponding value of \\hat{y}.\n\n\n\\hat{y} = \\hat{β}_0 + \\hat{β}_1 x\n\nwhere \\hat{y} is the predicted value of Y for a given value of X.\nand we can define the residuals as:\n\ne_i = y_i - \\hat{y}_i\n\n\nEstimating the Coefficients\n\nLeast Squares Estimation: The coefficients β_0 and β_1 are estimated by minimizing the Residual Sum of Squares (RSS), which quantifies the difference between observed and predicted values.\nThe RSS is defined as:\n\n\nRSS = \\sum_{i=1}^{n} (y_i - \\hat{y}_i)^2 = \\sum_{i=1}^{n} e_i^2\n\nleast squares estimates are:\n\n\\hat{β}_1 = \\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})(y_i - \\bar{y})}{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}\n\n\n\\hat{β}_0 = \\bar{y} - \\hat{β}_1 \\bar{x}\n\nwhere \\bar{x} and \\bar{y} are the sample means of the predictors and response, respectively.\n\n\nAssessing the Accuracy of the Coefficient Estimates\n\nAssessing Accuracy: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between X and Y.\n\n\nSE(\\hat{β}_1)^2 = \\frac{\\sigma^2}{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}\n\n\nSE(\\hat{β}_0)^2 = \\sigma^2 \\left[ \\frac{1}{n} + \\frac{\\bar{x}^2}{\\sum_{i=1}^{n} (x_i - \\bar{x})^2} \\right]\n\nwhere \\sigma^2 = Var[\\epsilon]\n\nR^2: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.\n\nWe can use these standard errors to compute confidence intervals. A 95% CI is one which will contain the true value of the parameter with a probability of 95%.\n\n\n\n\n\n\nOver thinking standard errors 💀💀💀\n\n\n\nThis approach seems strange as we seem to have computed the values precisely using the above estimators. What can possibly change that would give us a different value ?\nThis is intimated in the slides which mentions repeated sampling?\nWhere is this repeated sampling -\nSome strange Fisherian fantasy that if we repeated the experiment many times we would get different samples each time drawn from some contrafactual distribution that generates the data for each contrafactual version of the experiment.\nGetting back to the book we may rephrase this as follows. Since we know the Data generating rule we can simulate data to our hear’s content. Each time the random number generator spits out different Xs so we get a new data set. For each data set the least square estimator will give us different parameters. Corresponding to a different approximation of the population regression model. (One that has points from all possible experiments). I.e. the point is that we are using x and \\sigma^2 from the sample not the population so we will have\nthe book says\n\nIn other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.\n\nI.e. we don’t know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalised distance the estimator from the data.)\n\n\n\n\nAssessing the Accuracy of the Model"
+  },
+  {
+    "objectID": "posts/ch03-linear-regression/index.html#hypothesis-testing-and-confidence-intervals",
+    "href": "posts/ch03-linear-regression/index.html#hypothesis-testing-and-confidence-intervals",
+    "title": "Chapter 3: Linear Regression",
+    "section": "Hypothesis Testing and Confidence Intervals",
+    "text": "Hypothesis Testing and Confidence Intervals\n\n\n\n\n\n\n\nFigure 2: Hypothesis Testing and Confidence Intervals\n\n\n\n\n\n\n\n\nFigure 3: Multiple Linear Regression"
+  },
+  {
+    "objectID": "posts/ch03-linear-regression/index.html#some-important-questions",
+    "href": "posts/ch03-linear-regression/index.html#some-important-questions",
+    "title": "Chapter 3: Linear Regression",
+    "section": "Some important questions",
+    "text": "Some important questions\n\n\n\n\n\n\n\nFigure 4: Some important questions:\n\n\n\nIs at least one of the predictors X_1, X_2, \\ldots , X_p useful in predicting the response?\nDo all the predictors help to explain Y, or is only a subset of the predictors useful?\nHow well does the model fit the data?\nGiven a set of predictor values, what response value should we predict, and how accurate is our prediction?\n\n\n\n\n\n\n\n\nFigure 5: Extensions of the Linear Model\n\n\n\n\n\n\n\n\nFigure 6: Regression in R"
+  },
+  {
+    "objectID": "posts/ch03-linear-regression/index.html#simple-linear-regression-1",
+    "href": "posts/ch03-linear-regression/index.html#simple-linear-regression-1",
+    "title": "Chapter 3: Linear Regression",
     "section": "Simple Linear Regression:",
-    "text": "Simple Linear Regression:\n\nModel: The relationship between response (Y) and predictor (X) is represented as \nY = β_0 + β_1 X + \\epsilon\n\nwhere\n\nβ_0 is the intercept,\nβ_1 is the slope, and\n\\epsilon is the error term.\n\nLeast Squares Estimation: The coefficients β_0 and β_1 are estimated by minimizing the Residual Sum of Squares (RSS), which quantifies the difference between observed and predicted values.\nAssessing Accuracy: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between X and Y.\nR^2: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data."
+    "text": "Simple Linear Regression:"
   },
   {
     "objectID": "posts/ch03-linear-regression/index.html#multiple-linear-regression",
@@ -740,6 +768,13 @@
     "title": "Chapter 3: Linear Regression",
     "section": "Chapter",
     "text": "Chapter\n\n\n\nChapter"
+  },
+  {
+    "objectID": "posts/ch03-linear-regression/index.html#footnotes",
+    "href": "posts/ch03-linear-regression/index.html#footnotes",
+    "title": "Chapter 3: Linear Regression",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nstudied attribution problem of the disputed Federalist Papers and authored the amazing “Fifty Challenging Problems in Probability”↩︎"
   },
   {
     "objectID": "posts/ch02-statistical-learning/index.html",
@@ -819,11 +854,18 @@
     "text": "Answer 5"
   },
   {
-    "objectID": "posts/ch02-statistical-learning/index.html#slides-and-chapter",
-    "href": "posts/ch02-statistical-learning/index.html#slides-and-chapter",
+    "objectID": "posts/ch02-statistical-learning/index.html#slides",
+    "href": "posts/ch02-statistical-learning/index.html#slides",
     "title": "Chapter 2: Statistical Learning",
-    "section": "Slides and Chapter",
-    "text": "Slides and Chapter\n\n\n\nChapter Slides\n\n\n\n\n\nChapter"
+    "section": "Slides",
+    "text": "Slides\n\n\n\nChapter Slides"
+  },
+  {
+    "objectID": "posts/ch02-statistical-learning/index.html#chapter",
+    "href": "posts/ch02-statistical-learning/index.html#chapter",
+    "title": "Chapter 2: Statistical Learning",
+    "section": "Chapter",
+    "text": "Chapter\n\n\n\nChapter"
   },
   {
     "objectID": "posts/ch06-model-selection-and-regularization/Ch06-varselect-lab.html",

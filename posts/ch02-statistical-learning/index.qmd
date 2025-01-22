@@ -375,9 +375,12 @@ b. Explain why each of the five curves has the shape displayed in part (a).
 
 :::
 
-## Slides and Chapter
+## Slides
 
 ![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
+
+## Chapter
+
 
 ![Chapter](ch02.pdf){.col-page width="800px" height="1000px"}
 

@@ -3,7 +3,7 @@ author: "Oren Bochman"
 page-layout: article
 bibliography: ../references.bib
 lightbox: true
-image: ../images/nlp-brain-wordcloud.jpg
+image: ../images/tiling.png
 image-placeholder: {{< placeholder 400 200 format=svg >}}
 title-block-banner: ../images/banner_black_3.jpg
 license: "CC SA BY-NC-ND"

@@ -12,17 +12,21 @@ about:
     - icon: github
       text: Github
       href: https://github.com
-image: images/nlp-brain-wordcloud.jpg
+image: images/tiling.png
 title-block-banner: images/banner_black_3.jpg
 image-placeholder: images/dnn_cover.png
 ---
 
-This are some notes on one of my favourite books: *An Introduction to Statistical Learning* by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. The book is available for free from the authors' website. The book is a great introduction to statistical learning and is a good starting point for anyone interested in machine learning. The book is a bit light on the maths but it is a good introduction to the concepts and the authors have a more advanced book called *The Elements of Statistical Learning* which is more mathematically rigorous.
+This are some notes on one of my favorite books of all times: *An Introduction to Statistical Learning* by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. And in this note perhaps I can explain why I like it so much, despite much criticism that are scattered throughout the notes.
 
-Another reason I like this book is that there are videos by the authors on YouTube which explain the material. Although I first read the book book before the videos came out and I considered it easy to undestand for most topics. However I found that the videos seem to be a bit orthogonal i.e. the seem to give lost of background information, beyond what is going on in the book. This is a good thing as it gives a lot of context to the material.
+The book is available for free from the authors' website. The book is a great introduction to statistical learning and is a good starting point for anyone interested in machine learning. The book is a bit light on the maths but it is a good introduction to the concepts and the authors have a more advanced book called *The Elements of Statistical Learning* which is more mathematically rigorous.
 
-THe authors also make thier slides and figures available for free. 
+Another reason I like this book is that there are videos by the authors on YouTube which explain the material. Although I first read the book book before the videos came out and I considered it easy to understand for most topics. However I found that the videos seem to be a bit orthogonal i.e. the seem to give lost of background information, beyond what is going on in the book. This is a good thing as it gives a lot of context to the material.
+
+The authors also make their slides and figures available for free. 
 
 A little while back this book came out with codes in python. This makes it more relevant for data scientists and machine learning engineers then the original which came out in R. More so there is now a chapter on deep learning which is a big plus. Though I dare say its hard to get the lab to run properly on a local machine.
 
 Tne book covers lots of algorithms as well as many practical aspects of Data Science and Machine Learning. The book is a great starting point for anyone interested in the field. 
+
+I haven't come across any videos with some of the people who were not the authors of the course. I hope to find these.
