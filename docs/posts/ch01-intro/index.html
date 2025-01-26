@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -105,6 +139,49 @@ background-size: cover;
       }
 </style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -205,7 +282,12 @@ background-size: cover;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#premises" id="toc-premises" class="nav-link active" data-scroll-target="#premises">Premises:</a></li>
+  <li><a href="#statistical-learning-problems" id="toc-statistical-learning-problems" class="nav-link active" data-scroll-target="#statistical-learning-problems">Statistical Learning Problems</a>
+  <ul class="collapse">
+  <li><a href="#identify-the-risk-factors-for-prostate-cancer" id="toc-identify-the-risk-factors-for-prostate-cancer" class="nav-link" data-scroll-target="#identify-the-risk-factors-for-prostate-cancer">Identify the risk factors for prostate cancer</a></li>
+  <li><a href="#sec-phonemes-prolem" id="toc-sec-phonemes-prolem" class="nav-link" data-scroll-target="#sec-phonemes-prolem">Phoneme Classifications</a></li>
+  </ul></li>
+  <li><a href="#premises" id="toc-premises" class="nav-link" data-scroll-target="#premises">Premises:</a></li>
   <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   <li><a href="#chapter" id="toc-chapter" class="nav-link" data-scroll-target="#chapter">Chapter</a></li>
   </ul>
@@ -242,24 +324,328 @@ Figure&nbsp;2: Examples and Framework
 </figcaption>
 </figure>
 </div></div>
-<ol type="1">
-<li>This chapter is a bit dull. The authors make significant effort to breathe life into it in the course via the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the questions raised are quite divergent to the ones considered in the book. I think that by getting the younger authors to participate we get a better sense of why Statistical learning is more interesting.</li>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Introduction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Statistical Learning in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Statistical Learning in a nutshell"></a></p>
+<figcaption>Statistical Learning in a nutshell</figcaption>
+</figure>
+</div>
+<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <span class="math inline">(f)</span> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
+<p>This chapter is a bit dull. The authors make significant effort to breathe life into it in the course via the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the questions raised are quite divergent to the ones considered in the book. I think that by getting the younger authors to participate we get a better sense of why Statistical learning is more interesting.</p>
+<ul>
 <li><strong>IBM’s Watson</strong> beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project description is indicating the use of reinforcement learning and not statistical learning or ml methods and this is not covered in the book. However the authors do suggests that many methods were used to create Watson and that sounds about true.</li>
 <li><strong>Nates Silver</strong> wrote “The signal and the noise”. Its a well written and fun to read. I think that we can all take lessons from it on how to breathe more life into statistics.
 <ul>
 <li>Another story they mention is Nate Silver’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticians. I agree that Nate Silver is a “rock star” of statistics. It’s worth mentioning though that predicting elections is isn’t hard mathematically - the challenge is getting the details right and Nate Silver is good at that and thus deserves a lot of respect.</li>
 <li>There is fascinating work by Andrew Gelman and John Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy planes, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</li>
 </ul></li>
-<li><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is fairly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t so much a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</li>
-<li>It covers the three of the datasets used in the book.
+</ul>
+<section id="statistical-learning-problems" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="statistical-learning-problems">Statistical Learning Problems</h2>
+<ul>
+<li>Identify the risk factors for prostate cancer.</li>
+<li>Classify a recorded phoneme based on a log-periodogram.</li>
+<li>Predict whether someone will have a heart attack on the basis of demographic, diet and clinical measurements.</li>
+<li>Customize an email spam detection system.</li>
+<li>Identify the numbers in a handwritten zip code.</li>
+<li>Classify a tissue sample into one of several cancer classes, based on a gene expression profile.</li>
+<li>Establish the relationship between salary and demographic variables in population survey data.</li>
+<li>Classify the pixels in a LANDSAT image, by usage.</li>
+</ul>
+<section id="identify-the-risk-factors-for-prostate-cancer" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="identify-the-risk-factors-for-prostate-cancer">Identify the risk factors for prostate cancer</h3>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="fig-prostate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="SPLOM"><img src="fig-prostate.png" class="img-fluid figure-img" alt="SPLOM"></a></p>
+<figcaption>SPLOM</figcaption>
+</figure>
+</div></div><ul>
+<li><p>This is the first example but we have a few issues:</p></li>
+<li><p>Our instructors seem to be familiar with the researcher but they don’t tell what is going on at first. It would only take 3 minutes to explain the variables but they don’t bother to do so. If they did this example might make more sense.</p></li>
+<li><p>IS this a regression, classification, survival analysis, an annova, a clustering problem?</p></li>
+<li><p>So Trevor tells us it is a regression problem and the response is PSA</p></li>
+<li><p>Github co-pilot suggest that the predictors and response are:</p>
+<ul>
+<li>the log of the prostate specific antigen (lpsa).</li>
+<li>lcavol - log cancer volume</li>
+<li>lweight - log prostate weight</li>
+<li>age</li>
+<li>lbph - log of the amount of benign prostatic hyperplasia. aka enlargement of the prostate that is not cancerous but has many issues for the patient.</li>
+<li>svi - seminal vesicle invasion which is a measure of how far the cancer has spread and an indicator that the patient is unlikely to survive.</li>
+<li>pgg45 - a measure of how aggressive the cancer is.</li>
+</ul></li>
+<li><p>They say that these are people with cancer so they are sick. Dr.&nbsp;Google says 80% should survive 10 years or more.</p>
+<ul>
+<li>How long was the study.</li>
+<li>Is there any data on severity of the cancer? (lcavol and svi are indicators of severity)</li>
+<li>But do we have data for a control group? Are there any data for healthy people here?</li>
+</ul></li>
+<li><p>Ever I first learned about them I really, really love scatter plot matrix - I mean you can immediately see the effects and diagnose problems right?</p>
+<ul>
+<li>There are 64/2 = 32 effects to look at. But we really need to consider the predictors vs the response. Where those 8 plots? According to Trevor there are the top 8 plots.</li>
+<li>lpsa vs lcavol seems linear.</li>
+<li>lpsa vs lweight seems affine and heteroskedastic. But might look better if we dropped the outlier.- lpsa vs.&nbsp;age seems like a linear relationship with high variance. Or there may be clusters.</li>
+<li>lpsa vs.&nbsp;lbph looks zero inflated or censored. I mean much of the data is squished to the left.
+<ul>
+<li>The log scale is hard to interpret what is -1 for lbph?</li>
+<li>Should we be alarmed if the plot shows the two predictors with this pattern.</li>
+<li>What if we see this for a predictor and the response?</li>
+</ul></li>
+</ul></li>
+<li><p>Except that:</p>
+<ul>
+<li><p>The scales are there but on the side but they alternate, left right, or up and down. The two labels are also far away easy to misinterpret . So it is not easy to tell at a glance what you are looking at.</p></li>
+<li><p>Eveything is shown twice. And what is worse if you look above or bellow the diagonal the axis are flipped.</p></li>
+<li><p>I prefer to plot something different below to avoid this issue and I like the ellipses form of a corellogram. But this is easier in R I don’t think I quite got it right in Python.</p></li>
+<li><p>For binary and categorical variables it’s the scatter plot is pretty uninformative. And more so when you plot two categorical predictors against each other since the plot lines them up on top of each other. What I like to do us use a violin plot or a box plot.</p></li>
+<li><p>This plot features nine variables and already hard to make sense of.</p></li>
+<li><p>I spent some time as an analyst and this got me used to segmenting things. It’s easy to segment SPLOMs and show lots of interesting relations in one big chart but it a challenge to make sense of and the big point being made is that we should take the time to look at the data.</p></li>
+<li><p>Notice that the massive outlier is very easy to miss. Perhaps we might want to indicate potential outliers/etc in a way that stands out more?</p></li>
+<li><p>But it would be even better if we could interactively zoom into two of the charts and examine them in tandem.</p></li>
+</ul></li>
+<li><p>Trevor Hastie also show us a log transformed version. It seems to be better except that most of the data is already log transformed. So if he advocating for a double log transform. It can help to find so called supper outliers called black swans by Nassim Taleb. But in this case it seems to be a mistake. On the other hand perhaps he showed us the inverse of the log transform which might make more sense. It not clear what he did!-</p></li>
+</ul>
+<div id="d42002c7" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Ellipse</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> correlation_ellipse(ax, x, y, data, <span class="op">**</span>kwargs):</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot correlation ellipses like R's circles package."""</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    cov <span class="op">=</span> np.cov(data[x], data[y])</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    eigvals, eigvecs <span class="op">=</span> np.linalg.eig(cov)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    angle <span class="op">=</span> np.degrees(np.arctan2(<span class="op">*</span>eigvecs[:, <span class="dv">0</span>][::<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    ellipse <span class="op">=</span> Ellipse(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        xy<span class="op">=</span>(data[x].mean(), data[y].mean()),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        width<span class="op">=</span><span class="dv">2</span> <span class="op">*</span> np.sqrt(eigvals[<span class="dv">0</span>]),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        height<span class="op">=</span><span class="dv">2</span> <span class="op">*</span> np.sqrt(eigvals[<span class="dv">1</span>]),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        angle<span class="op">=</span>angle,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        facecolor<span class="op">=</span><span class="st">'none'</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        linewidth<span class="op">=</span><span class="fl">1.5</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(ellipse)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> custom_pair_plot(df):</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate a pair plot with scatter plots for continuous variables,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">    violin plots for discrete variables, and correlation ellipses."""</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    continuous_vars <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'float64'</span>, <span class="st">'int64'</span>]).columns</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    discrete_vars <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'category'</span>]).columns</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    label_encoders <span class="op">=</span> {col: LabelEncoder().fit(df[col]) <span class="cf">for</span> col <span class="kw">in</span> discrete_vars}</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    df_encoded <span class="op">=</span> df.copy()</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Encode categorical variables</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> discrete_vars:</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        df_encoded[col] <span class="op">=</span> label_encoders[col].transform(df[col])</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    num_vars <span class="op">=</span> df_encoded.shape[<span class="dv">1</span>]</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(num_vars, num_vars, figsize<span class="op">=</span>(<span class="dv">2</span><span class="op">*</span>num_vars, <span class="dv">2</span><span class="op">*</span>num_vars))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, var1 <span class="kw">in</span> <span class="bu">enumerate</span>(df_encoded.columns):</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, var2 <span class="kw">in</span> <span class="bu">enumerate</span>(df_encoded.columns):</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> axes[i, j]</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                sns.histplot(df[var1], ax<span class="op">=</span>ax, kde<span class="op">=</span><span class="va">True</span>, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">"lightblue"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> var1 <span class="kw">in</span> continuous_vars <span class="kw">and</span> var2 <span class="kw">in</span> continuous_vars:</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                sns.scatterplot(x<span class="op">=</span>df[var2], y<span class="op">=</span>df[var1], ax<span class="op">=</span>ax, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>                correlation_ellipse(ax, var2, var1, df_encoded)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> var1 <span class="kw">in</span> discrete_vars <span class="kw">and</span> var2 <span class="kw">in</span> continuous_vars:</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>                sns.violinplot(x<span class="op">=</span>df[var1], y<span class="op">=</span>df[var2], ax<span class="op">=</span>ax)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> var1 <span class="kw">in</span> continuous_vars <span class="kw">and</span> var2 <span class="kw">in</span> discrete_vars:</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>                sns.violinplot(x<span class="op">=</span>df[var2], y<span class="op">=</span>df[var1], ax<span class="op">=</span>ax)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>                sns.heatmap(pd.crosstab(df[var2], df[var1]), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>, ax<span class="op">=</span>ax, cbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>            ax.set_xticks([])</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            ax.set_yticks([])</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">'A'</span>: np.random.randn(<span class="dv">100</span>),</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">'B'</span>: np.random.randn(<span class="dv">100</span>) <span class="op">*</span> <span class="dv">2</span>,</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C'</span>: np.random.choice([<span class="st">'Low'</span>, <span class="st">'Medium'</span>, <span class="st">'High'</span>], <span class="dv">100</span>),</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D'</span>: np.random.choice([<span class="st">'Yes'</span>, <span class="st">'No'</span>], <span class="dv">100</span>)</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>custom_pair_plot(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-2-output-1.png" width="758" height="758" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="0e9f00b3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.patches <span class="im">import</span> Ellipse</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> correlation_ellipse(ax, x, y, data, max_width<span class="op">=</span><span class="fl">1.2</span>, max_height<span class="op">=</span><span class="fl">1.2</span>):</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot a properly scaled correlation ellipse in the lower triangle."""</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="op">=</span> data[x]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    y_vals <span class="op">=</span> data[y]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    corr <span class="op">=</span> np.corrcoef(x_vals, y_vals)[<span class="dv">0</span>, <span class="dv">1</span>]  <span class="co"># Pearson correlation</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    cov <span class="op">=</span> np.cov(x_vals, y_vals)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    eigvals, eigvecs <span class="op">=</span> np.linalg.eig(cov)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize eigenvalues to keep ellipses consistent in size</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    max_eigenvalue <span class="op">=</span> np.<span class="bu">max</span>(eigvals)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    width, height <span class="op">=</span> max_width <span class="op">*</span> (eigvals <span class="op">/</span> max_eigenvalue)  <span class="co"># Scale relative to the largest eigenvalue</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    angle <span class="op">=</span> np.degrees(np.arctan2(<span class="op">*</span>eigvecs[:, <span class="dv">0</span>][::<span class="op">-</span><span class="dv">1</span>]))</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    ellipse <span class="op">=</span> Ellipse(</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        xy<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),  <span class="co"># Centered at (0,0) since we scale manually</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        width<span class="op">=</span>width, height<span class="op">=</span>height,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        angle<span class="op">=</span>angle,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        facecolor<span class="op">=</span><span class="st">'gray'</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.3</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ax.add_patch(ellipse)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Standardize limits to keep all ellipses inside a fixed square</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ax.set_frame_on(<span class="va">False</span>)  <span class="co"># Remove frame for clarity</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> custom_pair_plot(df):</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate a pair plot where:</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="co">    - Histograms appear on the diagonal.</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co">    - Scatter &amp; Violin plots are in the upper triangle.</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="co">    - Normalized correlation ellipses appear in the lower triangle.</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    continuous_vars <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'float64'</span>, <span class="st">'int64'</span>]).columns</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    discrete_vars <span class="op">=</span> df.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>, <span class="st">'category'</span>]).columns</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Encode categorical variables</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    label_encoders <span class="op">=</span> {col: LabelEncoder().fit(df[col]) <span class="cf">for</span> col <span class="kw">in</span> discrete_vars}</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    df_encoded <span class="op">=</span> df.copy()</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> discrete_vars:</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        df_encoded[col] <span class="op">=</span> label_encoders[col].transform(df[col])</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    num_vars <span class="op">=</span> <span class="bu">len</span>(df_encoded.columns)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(num_vars, num_vars, figsize<span class="op">=</span>(<span class="dv">2</span><span class="op">*</span>num_vars, <span class="dv">2</span><span class="op">*</span>num_vars))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, var1 <span class="kw">in</span> <span class="bu">enumerate</span>(df_encoded.columns):</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j, var2 <span class="kw">in</span> <span class="bu">enumerate</span>(df_encoded.columns):</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> axes[i, j]</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Diagonal: Histograms</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">==</span> j:</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>                sns.histplot(df[var1], ax<span class="op">=</span>ax, kde<span class="op">=</span><span class="va">True</span>, bins<span class="op">=</span><span class="dv">20</span>, color<span class="op">=</span><span class="st">"lightblue"</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Above diagonal: Scatter &amp; Violin plots</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> i <span class="op">&lt;</span> j:</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> var1 <span class="kw">in</span> continuous_vars <span class="kw">and</span> var2 <span class="kw">in</span> continuous_vars:</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>                    sns.scatterplot(x<span class="op">=</span>df[var2], y<span class="op">=</span>df[var1], ax<span class="op">=</span>ax, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> var1 <span class="kw">in</span> discrete_vars <span class="kw">and</span> var2 <span class="kw">in</span> continuous_vars:</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>                    sns.violinplot(x<span class="op">=</span>df[var1], y<span class="op">=</span>df[var2], ax<span class="op">=</span>ax)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>                <span class="cf">elif</span> var1 <span class="kw">in</span> continuous_vars <span class="kw">and</span> var2 <span class="kw">in</span> discrete_vars:</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>                    sns.violinplot(x<span class="op">=</span>df[var2], y<span class="op">=</span>df[var1], ax<span class="op">=</span>ax)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>                    sns.heatmap(pd.crosstab(df[var2], df[var1]), annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"Blues"</span>, ax<span class="op">=</span>ax, cbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Below diagonal: Correlation ellipses</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                correlation_ellipse(ax, var2, var1, df_encoded)</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>            ax.set_xticks([])</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>            ax.set_yticks([])</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>            ax.set_frame_on(<span class="va">False</span>)  <span class="co"># Remove frame for clarity</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Example dataset with continuous and categorical variables</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    <span class="st">'A'</span>: np.random.randn(<span class="dv">100</span>),</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    <span class="st">'B'</span>: np.random.randn(<span class="dv">100</span>) <span class="op">*</span> <span class="dv">10</span>,</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    <span class="st">'C'</span>: np.random.randn(<span class="dv">100</span>) <span class="op">*</span> <span class="op">-</span><span class="dv">10</span> <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D'</span>: np.random.randn(<span class="dv">100</span>) <span class="op">*</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    <span class="st">'E'</span>: np.random.choice([<span class="st">'Low'</span>, <span class="st">'Medium'</span>, <span class="st">'High'</span>], <span class="dv">100</span>),</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="st">'F'</span>: np.random.choice([<span class="st">'Yes'</span>, <span class="st">'No'</span>], <span class="dv">100</span>)</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>custom_pair_plot(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-3-output-1.png" width="1142" height="1142" class="figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-phonemes-prolem" class="level3">
+<h3 class="anchored" data-anchor-id="sec-phonemes-prolem">Phoneme Classifications</h3>
+<p>I also got interested in this subject at one time or another. It turns out that there are a number of issues involved.</p>
+<ul>
+<li><p>Sound is tricky to record. More so if it is in stereo.</p></li>
+<li><p>Phonemes are usually a wave form that repeats thousands of time with very subtle changes.</p></li>
+<li><p>How can we tell when one phoneme start and another one ends</p></li>
+<li><p>What is the best way to represent the phoneme - it is a number, a distribution, a time series, in image ?</p></li>
+<li><p>What is a log-periodogram</p>
+<ul>
+<li>What kind of preprocessing goes into making one ?</li>
+<li>Is some information dropped in making one?</li>
+</ul></li>
+<li><p>Does it tell the whole picture ?</p></li>
+<li><p>Phonemes are relative things - one person’s vowels might be shifted in terms of frequency compared to another person. By shifted I mean that different phonemes coincide in terms of frequency. So that to make a classifier you might want to train a model that looks can consider</p>
+<ul>
+<li>variations in one person’s phonemes</li>
+<li>variations in phonemes between people</li>
+</ul></li>
+<li><p>Phonemes are notoriously hard to classify individually - even for humans.</p></li>
+<li><p>One generally needs to consider sequences of three or more phonemes to get the context to make decent classifications.</p></li>
+<li><p>The instructors seem to be very clear on using a logistic regression. To telling the two phoneme apart. But we never have just two phonemes. Typically need to deal with 20+ phonemes. So a logistic regression is not going to cut it. :sad:</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is fairly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t so much a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p><strong>Handwritten Digits</strong> - the teachers say this is a hard problem. Actually most models get to 98% + accuracy. So no longer a hard problem.</p></li>
+<li><p><strong>Gene Expression</strong> - This is actually interesting but the charts are hard to understand. Although they explain it - the lesson on hierarcial clustering explains this better and this leads me to think there is something more to be</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
 <ol type="1">
 <li>Wage data</li>
 <li>Stock market data</li>
 <li>Gene Expression Data</li>
 </ol></li>
-<li>ISL <span class="citation" data-cites="ISL">(<a href="#ref-ISL" role="doc-biblioref">James et al. 2013</a>)</span> is an introduction text. <span class="citation" data-cites="ESL">(<a href="#ref-ESL" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2009</a>)</span> is the more comprehensive text.</li>
-<li>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data originating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</li>
-</ol>
+<li><p>ISL <span class="citation" data-cites="ISL">(<a href="#ref-ISL" role="doc-biblioref">James et al. 2013</a>)</span> is an introduction text. <span class="citation" data-cites="ESL">(<a href="#ref-ESL" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2009</a>)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data originating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ul>
+</section>
+</section>
 <section id="premises" class="level2">
 <h2 class="anchored" data-anchor-id="premises">Premises:</h2>
 <ul>
@@ -272,7 +658,7 @@ Figure&nbsp;2: Examples and Framework
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
@@ -281,7 +667,7 @@ Figure&nbsp;2: Examples and Framework
 <h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ch01.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter"><embed src="ch01.pdf" class="col-page" width="800" height="1000"></a></p>
+<p><a href="ch01.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Chapter"><embed src="ch01.pdf" class="col-page" width="800" height="1000"></a></p>
 <figcaption>Chapter</figcaption>
 </figure>
 </div>

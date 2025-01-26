@@ -1,0 +1,191 @@
+---
+title: Data Wrangling mastery!
+---
+
+Over the years I've come across a number of tools for working with data.
+
+each one is great in its own way. But each is siloed inside a tool. What would be better
+is if they were not siloed, i.e. they were integrated into a single api. Another aspect 
+of these tools is great UI. It would be even better if we could get the ui as well.
+
+Getting the ui as well means that we need to abstract it and to work in some way that 
+the ui can be introduced in the ide or jupyter notebook as a widget or plugin.
+
+Wouldn't it be great if we had a tool in python with a ui and api that lets us work with data 
+
+
+## Regex 
+
+When I was starting to code I  really liked regex.^[But when you work with regex it feels like you are learning Regex for the very first time.] 
+- Some years later I realised I could write regex but couldn't read them. 
+- Even when I liberaly commented them I still couldn't read them.
+
+So a regex are nice but even better is a code assistant that can craft reg ex from a few examples.
+
+```{python}
+import re
+
+data = """Disaster struck on 12th of May 2021 when the Titanic sank in the Atlantic Ocean.
+        And once again on 14th of May 2021 when the Hindenburg exploded in New Jersey.
+        And again on 3rd of March 1948 when the Lusitania was torpedoed by a German submarine.
+"""
+# extract all dates from the data above
+date = re.findall(r'\d{1,2}(?:st|nd|rd|th)? of \w+ \d{4}', data)
+
+print(date) # 12th of May 2021, 14th of May 2021, 3rd of March 1948
+```
+
+what would be neater is if I had a nice api to do this realibly.
+
+
+```python
+examples = ["12th of May 2021", "14th of May 2021", "3rd of March 1948", "1st January 2022"]
+autoregex = AutoRegex(examples)
+date = re.findall(autoregex, data)
+print(date) # 12th of May 2021, 14th of May 2021, 3rd of March 1948
+print(autoregex)
+```
+
+
+So this example worked using one example with Github Copilot. 
+But it couln't handle the case where the date is the 3rd of the month. However using the copilot chat it did an ok job. THe main point however is that specifiing examples is not as straight forwards as Sumit Gulwani suggests [here](https://www.youtube.com/watch?v=PeeFc9Js9ZU&ab_channel=ConferenceonComputer-AidedVerification). But this can handle out of disribution examples!
+
+
+```{python}
+import regex as re
+import os
+from itertools import zip_longest
+from collections import defaultdict
+
+class AutoRegex:
+    """
+    A class to generate multiple ranked regular expressions from example strings using a PROSE-inspired approach.
+    """
+    def __init__(self, examples):
+        if not examples:
+            raise ValueError("No examples provided.")
+        self.examples = sorted(set(examples))
+        self.patterns = self._generate_hierarchical_patterns()
+        self.discarded_patterns = []
+        
+        # Filter patterns based on test results
+        validated_patterns = []
+        for p in self.patterns:
+            failed_examples = self._test_regex(p)
+            if not failed_examples:
+                validated_patterns.append(p)
+            else:
+                self.discarded_patterns.append((p, failed_examples))
+        self.patterns = validated_patterns
+    
+    def _build_prefix_tree(self, examples):
+        """ Constructs a prefix tree (trie) from examples. """
+        trie = {}
+        for word in examples:
+            node = trie
+            for char in word:
+                node = node.setdefault(char, {})
+            node['#'] = True  # End marker
+        return trie
+    
+    def _extract_patterns_from_trie(self, node, path=""):
+        """ Extracts patterns from the trie, generalizing character categories. """
+        queue = [(node, path)]
+        patterns = []
+        while queue:
+            current_node, current_path = queue.pop(0)
+            if '#' in current_node:
+                patterns.append(re.escape(current_path))
+            else:
+                for char, sub_node in current_node.items():
+                    if char != '#':
+                        queue.append((sub_node, current_path + char))
+        return patterns
+    
+    def _generate_hierarchical_patterns(self):
+        """ Generates patterns by progressively increasing generality. """
+        patterns = set()
+        
+        # Level 1: Generalize using whole words and digits
+        generalized_examples = [
+            re.sub(r'\b\d+\b', r'\\d+', re.sub(r'\b\w+\b', r'\\w+', ex))
+            for ex in self.examples
+        ]
+        trie = self._build_prefix_tree(generalized_examples)
+        patterns.update(self._extract_patterns_from_trie(trie))
+        
+        # Level 2: Introduce space generalization
+        generalized_examples = [re.sub(r'\s+', r'\\s+', ex) for ex in self.examples]
+        trie = self._build_prefix_tree(generalized_examples)
+        patterns.update(self._extract_patterns_from_trie(trie))
+        
+        # Fallback: Exact phrase matching as a final disjunction
+        exact_match = f"(?:{'|'.join(map(re.escape, self.examples))})"
+        patterns.add(exact_match)
+        
+        return list(patterns)
+    
+    def _test_regex(self, pattern):
+        """ Tests a regex against all examples and returns failed examples. """
+        failed_examples = [ex for ex in self.examples if not re.search(pattern, ex)]
+        print(f"Testing regex: {pattern} - Passed: {len(self.examples) - len(failed_examples)}/{len(self.examples)}")
+        if failed_examples:
+            print(f"Failed Examples: {failed_examples}")
+        return failed_examples
+    
+    def get_patterns(self):
+        return self.patterns  # Return ranked patterns from general to specific
+    
+    def get_discarded_patterns(self):
+        return self.discarded_patterns  # Return patterns that failed to match all examples
+    
+    def matches(self, string):
+        return any(re.search(pattern, string) for pattern in self.patterns)
+    
+# Example Usage
+def example():
+    print('\n\n')
+    examples = ["abc999xyz", "abc123xyz", "abc456xyz"]
+    autoregex = AutoRegex(examples)
+    print("Generated Regex Patterns:", autoregex.get_patterns())
+    print("Discarded Patterns:", autoregex.get_discarded_patterns())
+    print("Matches abc456xyz?", autoregex.matches("abc999xyz"))
+    print("Matches abc123xyz?", autoregex.matches("abc123xyz"))
+    print("Matches abc456xyz?", autoregex.matches("abc456xyz"))
+    print("regex:", autoregex.get_patterns())
+    
+    # Substring Matching Test
+
+    print('\n\n')
+    text = "Today is 12th of May 2021, we met on the 3rd of May 2021 or the 1st January 2022"
+    examples = ["12th of May 2021", "14th of May 2021", "3rd of March 1948", "1st January 2022"]
+    autoregex = AutoRegex(examples)
+    patterns = autoregex.get_patterns()
+    if patterns:
+        dates = re.findall(patterns[0], text)
+        print("Extracted Dates:", dates)
+    else:
+        print("No valid regex patterns generated.")
+    
+    print("Generated Regex Patterns:", patterns)
+    for p, failed in autoregex.get_discarded_patterns():
+        print("Discarded Pattern:", p, "- Failed Examples:", failed)
+
+if __name__ == "__main__":
+    example()
+
+
+```
+
+
+1. extract a representtative sample of the data that is small enough to work with quickly but large enough to be representative of the full dataset.
+1. doing data wrangling like trifacta wrangler
+1. open refine - faceting, clustering, reconciliation, work with a schema like wikibase
+1. eda like voyager
+1. visualization using a grammar of graphics.
+1. capture explanation to create classifiers for entities etc like snorkel ai
+1. extract a minimal datasets via coresets like data-heros
+1. FlashText - extract entities from text, Flash++, FlashRelate
+1. give you a python code to reproduce the steps
+
+snuba is 

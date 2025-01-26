@@ -1,104 +1,39 @@
 ---
-title: "Chapter 1: Introduction"
-description: "About the book, datasets and notation"
-categories: [notes,edx]
+title: "Better SPLOM"
+description: "A better scatter plot matrix (SPLOM) with correlation ellipses and automatic plot selection based on data types."
+categories: [notes,code]
 keywords: ["Introduction", "Statistical Learning", "ISL", "ESL", "Statistical Learning vs Machine Learning"]
 date: 2024-06-01
 execute: 
   cache: false
 ---
 
-::: {#fig-v1.1 .column-margin}
-{{< video https://youtu.be/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-Opening Remarks
-:::
+In the notes on I had some ideas about making a better SPLOMs. 
+A splom is a scatterplot matrix.
 
-::: {#fig-v1.2 .column-margin}
-{{< video https://youtu.be/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
+The first batch of ideas involve making scatterplot more infomative by pickinga more suitable plot type based on the data types of the variables being plotted.
 
-Examples and Framework
-:::
+1. for a continuous vs continuous variable pairs plot a scatter plot.
+2. for a continuous vs discrete variable pairs plot a violin plot.
+3. for a discrete vs discrete variable pairs plot a heatmap.
+4. on the diagonal plot histograms with a density plot overlay.
+5. for the lower triangle of the plot, plot correlation ellipses. And the correlation ellipses can be overlayed with a number for the correlation coefficient.
 
-::: callout-tip
-## TL;DR - Introduction {.unnumbered}
+The second batch of ideas involve making the plot more useful for understanding effects in the data and potential regression issues like outliers and high leverage points, heteroscedasticity, and non-linear relationships. And one more issue that I came across is how to handle zero inflation arising from one or the other variable....
 
-![Statistical Learning in a nutshell](/images/in_a_nutshell.jpg)
+Another thought about SPLOM is to make the cells of the plot three dimensional so we could see the two predictors vs the response variable when we move off the first collumn.
 
-Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function $(f)$ that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e. to understand the underlying relationship between the variables.
 
-<audio controls="1">
-
-<source src="podcast.mp3" data-external="1" type="audio/mpeg">
-
-</source>
-
-</audio>
-:::
-
-This chapter is a bit dull. The authors make significant effort to breathe life into it in the course via the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the questions raised are quite divergent to the ones considered in the book. I think that by getting the younger authors to participate we get a better sense of why Statistical learning is more interesting.
-
--   **IBM's Watson** beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project description is indicating the use of reinforcement learning and not statistical learning or ml methods and this is not covered in the book. However the authors do suggests that many methods were used to create Watson and that sounds about true.
--   **Nates Silver** wrote "The signal and the noise". Its a well written and fun to read. I think that we can all take lessons from it on how to breathe more life into statistics.
-    -   Another story they mention is Nate Silver's Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticians. I agree that Nate Silver is a "rock star" of statistics. It's worth mentioning though that predicting elections is isn't hard mathematically - the challenge is getting the details right and Nate Silver is good at that and thus deserves a lot of respect.
-    -   There is fascinating work by Andrew Gelman and John Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy planes, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.
-
-## Statistical Learning Problems
-
--   Identify the risk factors for prostate cancer.
--   Classify a recorded phoneme based on a log-periodogram.
--   Predict whether someone will have a heart attack on the basis of demographic, diet and clinical measurements.
--   Customize an email spam detection system.
--   Identify the numbers in a handwritten zip code.
--   Classify a tissue sample into one of several cancer classes, based on a gene expression profile.
--   Establish the relationship between salary and demographic variables in population survey data.
--   Classify the pixels in a LANDSAT image, by usage.
-
-### Identify the risk factors for prostate cancer
-
-![SPLOM](fig-prostate.png){.column-margin}
-
--   This is the first example but we have a few issues:
--   Our instructors seem to be familiar with the researcher but they don't tell what is going on at first. It would only take 3 minutes to explain the variables but they don't bother to do so. If they did this example might make more sense.
--   IS this a regression, classification, survival analysis, an annova, a clustering problem?
--   So Trevor tells us it is a regression problem and the response is PSA 
--   Github co-pilot suggest that the predictors and response are:
-    -   the log of the prostate specific antigen (lpsa).
-    -   lcavol - log cancer volume
-    -   lweight - log prostate weight
-    -   age
-    -   lbph - log of the amount of benign prostatic hyperplasia. aka enlargement of the prostate that is not cancerous but has many issues for the patient.
-    -   svi - seminal vesicle invasion which is a measure of how far the cancer has spread and an indicator that the patient is unlikely to survive.
-    -    pgg45 - a measure of how aggressive the cancer is.
--   They say that these are people with cancer so they are sick. Dr. Google says 80% should survive 10 years or more. 
-
-    - How long was the study.
-    -  Is there any data on severity of the cancer? (lcavol and svi are indicators of severity)
-    - But do we have data for a control group? Are there any data for healthy people here?
--   Ever I first learned about them I really, really love scatter plot matrix - I mean you can immediately see the effects and diagnose problems right? 
-    - There are 64/2 = 32 effects to look at. But we really need to consider the predictors vs the response. Where those 8 plots? According to Trevor there are the top 8 plots.
-    - lpsa vs lcavol seems linear.
-    - lpsa vs lweight seems affine and heteroskedastic. But might look better if we dropped the outlier.- lpsa  vs. age seems like a linear relationship with high variance. Or there may be clusters.
-    - lpsa vs. lbph looks zero inflated or censored. I mean much of the data is squished to the left. 
-        - The log scale is hard to interpret what is -1 for lbph?
-        - Should we be alarmed if the plot shows the two predictors with this pattern. 
-        - What if we see this for a predictor and the response?
-
--   Except that:
-
-    -   The scales are there but on the side but they alternate, left right, or up and down. The two labels are also far away easy to misinterpret . So it is not easy to tell at a glance what you are looking at.
-    -   Eveything is shown twice. And what is worse if you look above or bellow the diagonal the axis are flipped.
-    -   I prefer to plot something different below to avoid this issue and I like the ellipses form of a corellogram. But this is easier in R I don't think I quite got it right in Python.
-    -   For binary and categorical variables it's the scatter plot is pretty uninformative. And more so when you plot two categorical predictors against each other since the plot lines them up on top of each other. What I like to do us use a violin plot or a box plot.
-    -   This plot features nine variables and already hard to make sense of.
-
-    -   I spent some time as an analyst and this got me used to segmenting things. It's easy to segment SPLOMs and show lots of interesting relations in one big chart but it a challenge to make sense of and the big point being made is that we should take the time to look at the data.
-
-    -   Notice that the massive outlier is very easy to miss. Perhaps we might want to indicate potential outliers/etc in a way that stands out more?
-
-    -   But it would be even better if we could interactively zoom into two of the charts and examine them in tandem.
-
-- Trevor Hastie also show us a log transformed version. It seems to be better except that most of the data is already log transformed. So if he advocating for a double log transform. It can help to find so called supper outliers called black swans by Nassim Taleb. But in this case it seems to be a mistake. On the other hand perhaps he showed us the inverse of the log transform which might make more sense. It not clear what he did!-
+6. Highlight effects in these plots. using a regression line or a loess line for the main effects.
+7. For the second order effects, we might show the fit a 3d quadratic spline or loess for the two predictors as a surface in a 3d plot. If we were interactive we might also show
+    - The residuals 
+    - Error surfaces above and below the fit surface. A sort of confidence interval for the fit
+    - The outliers and high leverage points for the interaction terms. Perhaps as bubbles for the residuals and as points for the outliers and high leverage points.
+    - The zero inflation points. Perhaps as a different color for the residuals.
+7. highlight hetroscedasticity by a residual from a normal distribution....
+7. make the 
+6. make it interactive.
 
 
 ```{python}
@@ -555,58 +490,3 @@ g.map_diag(sns.histplot, kde=True, bins=20, color="lightblue")
 
 plt.show()
 ```
-
-### Phoneme Classifications {#sec-phonemes-prolem}
-
-I also got interested in this subject at one time or another. It turns out that there are a number of issues involved.
-
--   Sound is tricky to record. More so if it is in stereo.
-
--   Phonemes are usually a wave form that repeats thousands of time with very subtle changes.
-
--   How can we tell when one phoneme start and another one ends
-
--   What is the best way to represent the phoneme - it is a number, a distribution, a time series, in image ?
-
--   What is a log-periodogram
-
-    -   What kind of preprocessing goes into making one ?
-    -   Is some information dropped in making one?
--   Does it tell the whole picture ?
--   Phonemes are relative things - one person's vowels might be shifted in terms of frequency compared to another person. By shifted I mean that different phonemes coincide in terms of frequency. So that to make a classifier you might want to train a model that looks can consider
-
-    -   variations in one person's phonemes
-    -   variations in phonemes between people
--   Phonemes are notoriously hard to classify individually - even for humans.
--   One generally needs to consider sequences of three or more phonemes to get the context to make decent classifications.
--   The instructors seem to be very clear on using a logistic regression. To telling the two phoneme apart. But we never have just two phonemes. Typically need to deal with 20+ phonemes. So a logistic regression is not going to cut it. :sad:
-
--   **Spam Detection** - is a good example of Statistical Learning. Building a binary classifier using logistic regression is fairly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn't so much a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.
-
--   **Handwritten Digits** - the teachers say this is a hard problem. Actually most models get to 98% + accuracy. So no longer a hard problem.
-
--   **Gene Expression** - This is actually interesting but the charts are hard to understand. Although they explain it - the lesson on hierarcial clustering explains this better and this leads me to think there is something more to be
-
--   It covers the three of the datasets used in the book.
-
-    1.  Wage data
-    2.  Stock market data
-    3.  Gene Expression Data
-
--   ISL [@ISL] is an introduction text. [@ESL] is the more comprehensive text.
-
--   Statistical learning is the author's preferred term for machine learning and it is a bit different in that it considers the data originating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.
-
-## Premises:
-
--   Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.
--   While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!
--   The readers are interested in applying the methods to real-world problems.
-
-## Slides
-
-![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
-
-## Chapter
-
-![Chapter](ch01.pdf){.col-page width="800px" height="1000px"}

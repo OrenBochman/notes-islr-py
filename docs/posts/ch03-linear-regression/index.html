@@ -339,47 +339,47 @@ TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_tre
 <dl>
 <dt>Simple Linear Regression</dt>
 <dd>
-Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.
+<p>Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.</p>
 </dd>
 <dt>Multiple Linear Regression</dt>
 <dd>
-Extending simple linear regression to accommodate multiple <em>predictor</em> variables.
+<p>Extending simple linear regression to accommodate multiple <em>predictor</em> variables.</p>
 </dd>
 <dt>Model Assessment</dt>
 <dd>
-Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <strong><span class="math inline">R^2</span></strong>, <strong>F-statistic</strong>, and <strong>p-values</strong>.
+<p>Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <span class="math inline">R^2</span>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</p>
 </dd>
 <dt>Model Interpretation</dt>
 <dd>
-Understanding the practical meaning of estimated coefficients and their significance in the context of the data.
+<p>Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</p>
 </dd>
 <dt>Qualitative Predictors</dt>
 <dd>
-When we want to play with non0numerical predictors, e.g.&nbsp;representing color categories, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.
+<p>When we want to play with non0numerical predictors, e.g.&nbsp;representing color categories, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.</p>
 </dd>
 <dt>Interactions</dt>
 <dd>
-Modeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is <span class="math inline">\beta A \times B</span>. where <span class="math inline">\beta</span> is the coefficient representing thr strength of the interaction.
+<p>Modeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is <span class="math inline">\beta A \times B</span>. where <span class="math inline">\beta</span> is the coefficient representing thr strength of the interaction.</p>
 </dd>
 <dt>Polynomial Regression</dt>
 <dd>
-Capturing non-linear relationships using polynomial terms of predictor variables.
+<p>Capturing non-linear relationships using polynomial terms of predictor variables.</p>
 </dd>
 <dt>Model Diagnostics <span class="emoji" data-emoji="thermometer">🌡️</span></dt>
 <dd>
-Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.
+<p>Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</p>
 </dd>
 <dt>Heteroscedasticity <span class="emoji" data-emoji="space_invader">👾</span></dt>
 <dd>
-When the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.
+<p>When the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.</p>
 </dd>
 <dt>Outliers <span class="emoji" data-emoji="alien">👽</span></dt>
 <dd>
-Observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.
+<p>Observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.</p>
 </dd>
 <dt>Collinearity <span class="emoji" data-emoji="zombie">🧟</span></dt>
 <dd>
-when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.
+<p>when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</p>
 </dd>
 </dl>
 </section>
@@ -450,7 +450,7 @@ SE(\hat{β}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^{n}
 </span></p>
 <p>where <span class="math inline">\sigma^2 = Var[\epsilon]</span></p>
 <ul>
-<li><strong><span class="math inline">R^2</span></strong>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</li>
+<li><span class="math inline">R^2</span>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</li>
 </ul>
 <p>We can use these standard errors to compute confidence intervals. A 95% CI is one which will contain the true value of the parameter with a probability of 95%.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -472,7 +472,7 @@ Over thinking standard errors <span class="emoji" data-emoji="skull">💀</span>
 <blockquote class="blockquote">
 <p>In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.</p>
 </blockquote>
-<p>I.e. we don’t know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalised distance the estimator from the data.)</p>
+<p>I.e. we don’t know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalized distance the estimator from the data.)</p>
 </div>
 </div>
 </section>
@@ -553,7 +553,7 @@ Y = β_0 + β_1 X_1 + β_2 X_2 + \ldots + β_p X_p + \epsilon
 </span></p></li>
 <li><p><strong>Interpretation</strong>: Each coefficient <span class="math inline">β_j</span> represents the average change in <span class="math inline">Y</span> for a one-unit increase in <span class="math inline">X_j</span>, holding all other predictors constant.</p></li>
 <li><p><strong>F-statistic</strong>: This statistic tests the overall significance of the model, determining whether at least one predictor is useful in predicting the response.</p></li>
-<li><p><strong>Variable Selection</strong>: Techniques like <strong>Mallow’s Cp</strong>, <strong>AIC</strong>, <strong>BIC</strong>, and <strong>adjusted <span class="math inline">R^2</span></strong> are employed to choose the best subset of predictors for the model.</p></li>
+<li><p><strong>Variable Selection</strong>: Techniques like <strong>Mallow’s Cp</strong>, <strong>AIC</strong>, <strong>BIC</strong>, and <strong>adjusted</strong> <span class="math inline">R^2</span> are employed to choose the best subset of predictors for the model.</p></li>
 </ul>
 </section>
 <section id="qualitative-predictors" class="level2">

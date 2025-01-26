@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/wrangler/index.html",
       "/posts/ch13-multiple-testing/Ch13-multiple-lab.html",
       "/posts/ch13-multiple-testing/index.html",
       "/posts/ch12-unsupervised-learning/Ch12-unsup-lab.html",
@@ -27,7 +28,8 @@
       "/posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html",
       "/posts/ch02-statistical-learning/Ch02-statlearn-lab.html",
       "/posts/ch02-statistical-learning/index.html",
-      "/posts/ch01-intro/index.html"
+      "/posts/ch01-intro/index.html",
+      "/posts/better-splom/index.html"
     ]
   }
 ]
