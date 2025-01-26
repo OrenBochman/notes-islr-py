@@ -266,7 +266,7 @@ Proportional Hazards Model
 
 - The proportional hazards assumption states that:
 $$
-h(t|xi) = h_0(t) exp \left( \sum_{j=1}^p x_{ij} \beta_j \right) \qquad
+h(t\mid x_i) = h_0(t) exp \left( \sum_{j=1}^p x_{ij} \beta_j \right) \qquad
 $$ {#eq-proportional-hazards}
 
 - where $h_0(t) ≥ 0$ is an unspecified function, known as the baseline hazard. It is the hazard function for an individual with features $x_{i1} = \ldots = x_{ip} = 0$.
@@ -276,6 +276,8 @@ $$ {#eq-proportional-hazards}
 - Basically, we make no assumptions about its functional form. We allow the instantaneous probability of death at time t, given that one has survived at least until time t, to take any form.
 - This means that the hazard function is very flexible and can model a wide range of relationships between the covariates and survival time.
 - Our only assumption is that a one-unit increase in xij corresponds to an increase in $h(t \mid x_i)$ by a factor of $exp(β_j)$.
+
+
 
 ### Example: Brain Cancer Data {#sec-11-5-3}
 
@@ -294,7 +296,18 @@ Estimation of Cox Model with Examples
 
 ## Shrinkage for the Cox Model {#sec-11-6}
 
-{{< lipsum 5 >}}
+In this section of the book the authors consider use of shrinkage method developed in section 6.2. to the Cox model. where they are motivated by the “loss+penalty” formulation of Section 6.2, we consider minimizing a penalized version of the negative log partial likelihood .
+
+This seems interesting if one whishes to formulate this as a hierarchical model, where shrinkage of coefficents is a common propertty of the models.
+
+
+$$
+- log \left( \prod_{i : \delta_i=1} \frac{ exp (\sum_{j=1}^p x_{ij}\beta_j) }{\sum_{i'}  exp (\sum_{i ': y_i'>y_i}^p x_{i'j}\beta_j)  } \right ) + \gamma P(\beta) \qquad
+$$
+
+
+
+{{< lipsum 1 >}}
 
 ## Additional Topics {#sec-11-7}
 
@@ -308,8 +321,23 @@ Model Evaluation and Further Topics
 
 ### Area Under the Curve for Survival Analysis {#sec-11-7-1}
 
+This is an appealing method for assessing a fitted Cox
+model on a test set.
+- For each observation, we calculate the estimated risk score, using the estimated Cox model coefficients via:
+$$
+\hat{η}_i = \hat{β}_1 x_{i1} + \ldots + \hat{β}_px_{ip}, for i = 1, \ldots , n
+$$
 
-{{< lipsum 5 >}}
+- Then Harrell’s concordance index (or C-index) computes the proportion of observation pairs for which $\hat{\eta}_{i'} > \hat{\eta}_{i}$ and $\hat{y}_{i'} >\hat{y}_{i}$
+
+$$
+C = \frac{\sum_{i,i'} \mathbb{I}(\hat{\eta}_{i'} > \hat{\eta}_i) \delta_{i'}}{\sum_{i,i'} \delta_{i'}} \qquad
+$$ {#eq-c-index}
+
+- where $\mathbb{I}(·)$ is the indicator function, which equals 1 if the argument is true and 0 otherwise.
+- This is the proportion of pairs for which the model
+correctly predicts the relative survival time, among all
+pairs for which this can be determined
 
 ### Choice of Time Scale {#sec-11-7-2}
 
@@ -372,6 +400,12 @@ Cox Models II Call Center Data
 ## References {#sec-11-10}
 
 ## Further Reading {#sec-11-11}
+
+### Software for Survival Analysis:
+
+- The examples in this lecture were creating using the survival and glmnet packages in R.
+- Both packages can handle time-dependent covariates and general forms of censoring.
+- Software for other machine learning approaches can be found both the R repository and the scikit-survival Python collection.
 
 ### Wikipedia Articles:
 
