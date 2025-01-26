@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Oren Bochman">
+<meta name="keywords" content="survival analysis, censored data, Kaplan-Meier, Cox Proportional Hazards Model, Log-Rank Test, churn prediction, time-to-event data, survival curve, hazard function, proportional hazards, survival trees, time-dependent covariates">
 <meta name="description" content="About the book, datasets and notation">
 
-<title>Chapter 11: Survival Analysis – An Introduction to Statistical Learning</title>
+<title>Chapter 11: Survival Analysis and Censored Data – An Introduction to Statistical Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -66,6 +47,9 @@ div.csl-indent {
 <link href="../../site_libs/bootstrap/bootstrap-dark-8072ba3c8f90baa049cfdfc6dfb138ec.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,6 +85,49 @@ background-size: cover;
       }
 </style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -153,7 +180,7 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Chapter 11: Survival Analysis</h1>
+      <h1 class="title">Chapter 11: Survival Analysis and Censored Data</h1>
                   <div>
         <div class="description">
           About the book, datasets and notation
@@ -186,6 +213,13 @@ background-size: cover;
       
     </div>
     
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>survival analysis, censored data, Kaplan-Meier, Cox Proportional Hazards Model, Log-Rank Test, churn prediction, time-to-event data, survival curve, hazard function, proportional hazards, survival trees, time-dependent covariates</p>
+    </div>
+  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
@@ -194,7 +228,43 @@ background-size: cover;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#premises" id="toc-premises" class="nav-link active" data-scroll-target="#premises">Premises:</a></li>
+  <li><a href="#sec-11-1" id="toc-sec-11-1" class="nav-link active" data-scroll-target="#sec-11-1">Survival and Censoring Times</a></li>
+  <li><a href="#sec-11-2" id="toc-sec-11-2" class="nav-link" data-scroll-target="#sec-11-2">A Closer Look at Censoring</a></li>
+  <li><a href="#sec-11-3" id="toc-sec-11-3" class="nav-link" data-scroll-target="#sec-11-3">The Kaplan–Meier Survival Curve</a></li>
+  <li><a href="#sec-11-4" id="toc-sec-11-4" class="nav-link" data-scroll-target="#sec-11-4">The Log-Rank Test</a></li>
+  <li><a href="#sec-11-5" id="toc-sec-11-5" class="nav-link" data-scroll-target="#sec-11-5">Regression Models With a Survival Response</a>
+  <ul class="collapse">
+  <li><a href="#sec-11-5-1" id="toc-sec-11-5-1" class="nav-link" data-scroll-target="#sec-11-5-1">The Hazard Function</a></li>
+  <li><a href="#sec-11-5-2" id="toc-sec-11-5-2" class="nav-link" data-scroll-target="#sec-11-5-2">Proportional Hazards</a></li>
+  <li><a href="#sec-11-5-3" id="toc-sec-11-5-3" class="nav-link" data-scroll-target="#sec-11-5-3">Example: Brain Cancer Data</a></li>
+  <li><a href="#sec-11-5-4" id="toc-sec-11-5-4" class="nav-link" data-scroll-target="#sec-11-5-4">Example: Publication Data</a></li>
+  </ul></li>
+  <li><a href="#sec-11-6" id="toc-sec-11-6" class="nav-link" data-scroll-target="#sec-11-6">Shrinkage for the Cox Model</a></li>
+  <li><a href="#sec-11-7" id="toc-sec-11-7" class="nav-link" data-scroll-target="#sec-11-7">Additional Topics</a>
+  <ul class="collapse">
+  <li><a href="#sec-11-7-1" id="toc-sec-11-7-1" class="nav-link" data-scroll-target="#sec-11-7-1">Area Under the Curve for Survival Analysis</a></li>
+  <li><a href="#sec-11-7-2" id="toc-sec-11-7-2" class="nav-link" data-scroll-target="#sec-11-7-2">Choice of Time Scale</a></li>
+  <li><a href="#sec-11-7-3" id="toc-sec-11-7-3" class="nav-link" data-scroll-target="#sec-11-7-3">Time-Dependent Covariates</a></li>
+  <li><a href="#sec-11-7-4" id="toc-sec-11-7-4" class="nav-link" data-scroll-target="#sec-11-7-4">Checking the Proportional Hazards Assumption</a></li>
+  <li><a href="#sec-11-7-5" id="toc-sec-11-7-5" class="nav-link" data-scroll-target="#sec-11-7-5">Survival Trees</a></li>
+  </ul></li>
+  <li><a href="#sec-11-8" id="toc-sec-11-8" class="nav-link" data-scroll-target="#sec-11-8">Lab: Survival Analysis</a>
+  <ul class="collapse">
+  <li><a href="#sec-11-8-1" id="toc-sec-11-8-1" class="nav-link" data-scroll-target="#sec-11-8-1">Brain Cancer Data</a></li>
+  <li><a href="#sec-11-8-2" id="toc-sec-11-8-2" class="nav-link" data-scroll-target="#sec-11-8-2">Publication Data</a></li>
+  <li><a href="#sec-11-8-3" id="toc-sec-11-8-3" class="nav-link" data-scroll-target="#sec-11-8-3">Call Center Data</a></li>
+  </ul></li>
+  <li><a href="#sec-11-9" id="toc-sec-11-9" class="nav-link" data-scroll-target="#sec-11-9">Exercises</a></li>
+  <li><a href="#sec-11-10" id="toc-sec-11-10" class="nav-link" data-scroll-target="#sec-11-10">References</a></li>
+  <li><a href="#sec-11-11" id="toc-sec-11-11" class="nav-link" data-scroll-target="#sec-11-11">Further Reading</a>
+  <ul class="collapse">
+  <li><a href="#wikipedia-articles" id="toc-wikipedia-articles" class="nav-link" data-scroll-target="#wikipedia-articles">Wikipedia Articles:</a></li>
+  <li><a href="#books" id="toc-books" class="nav-link" data-scroll-target="#books">Books</a></li>
+  <li><a href="#papers" id="toc-papers" class="nav-link" data-scroll-target="#papers">Papers:</a></li>
+  <li><a href="#additional-readings" id="toc-additional-readings" class="nav-link" data-scroll-target="#additional-readings">Additional Readings:</a></li>
+  </ul></li>
+  <li><a href="#sec-11-11" id="toc-sec-11-11" class="nav-link" data-scroll-target="#sec-11-11">Slides</a></li>
+  <li><a href="#sec-11-13" id="toc-sec-11-13" class="nav-link" data-scroll-target="#sec-11-13">Chapter</a></li>
   </ul>
 </nav>
 </nav>
@@ -209,70 +279,580 @@ background-size: cover;
 
 
 
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Survival Analysis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Survival Analysis in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Survival Analysis in a nutshell"></a></p>
+<figcaption>Survival Analysis in a nutshell</figcaption>
+</figure>
+</div>
+<p>Survival Analysis</p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
 
-<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</audio>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Opening Remarks
-</figcaption>
-</figure>
-</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Examples and Framework
-</figcaption>
-</figure>
-</div></div>
-<ol type="1">
-<li><p>This chapter doen’t have a lab and is a bit dull.</p></li>
-<li><p>The authors make significant effort to breathe life into it in the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the queations raised are quite diavervegent to the ones considered in the book.</p></li>
-<li><p>IBM’s Watson beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project is realy using reinfocement learnin and not statistical learning or machine learning methods that are covered in the book.</p></li>
-<li><p>A second story they mention is <strong>Nate Silver</strong>’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticans. Nate Silver is a “rock star”. It’s worth mentioning though that predicing elections is isn’t hard mathematically - the challange is getting the details right and Nate Silver is good at that and thus deserves a lot of respect. There is very intersting work by Gelman and Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy plaens, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</p></li>
-<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is faitly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t somuch a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
-<li><p>It covers the three of the datasets used in the book.</p>
-<ol type="1">
-<li>Wage data</li>
-<li>Stock market data</li>
-<li>Gene Expression Data</li>
-</ol></li>
-<li><p>ISL <span class="citation" data-cites="ISL">(<a href="#ref-ISL" role="doc-biblioref">James et al. 2013</a>)</span> is an introduction text. <span class="citation" data-cites="ESL">(<a href="#ref-ESL" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2009</a>)</span> is the more comprehensive text.</p></li>
-<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data orriginating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
-</ol>
-<section id="premises" class="level2">
-<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<p>There are a number of big words in this chapter, but like all statistics they are intuitive in some sense. For survival analysis, it helps to remember that we are doing a regression but with a twist. The twist is that we don’t have data for all subjects throughout the trial since some may die in the middle. So let us start by breaking them down:</p>
+<dl>
+<dt>Survival Analysis</dt>
+<dd>
+A set of statistical methods for <mark>analyzing the time until an event occurs</mark>. It is used when dealing with data where the outcome variable is the time until an event, and it’s common to have some data where the event hasn’t occurred by the end of the observation period (censored data).
+</dd>
+<dt>Censored Data</dt>
+<dd>
+Data where the exact time of an event is not known. This often occurs in studies where the event of interest may not happen to all participants during the study’s duration or when participants drop out of a study. There are different types of censoring, including:
+</dd>
+<dt>Right Censoring</dt>
+<dd>
+The most common type, where the true event time is known to be at least as large as the observed time. This occurs when the event of interest happens after the observation period or if a participant drops out of the study.
+</dd>
+<dt>Left Censoring</dt>
+<dd>
+The true event time is less than or equal to the observed time. For example, if a study surveys patients some time after a specific event and some patients have already experienced the event.
+</dd>
+<dt>Interval Censoring</dt>
+<dd>
+The event time is known to fall within a specific interval. This can happen if data is collected periodically instead of continuously.
+</dd>
+<dt>Survival Time <span class="math inline">(T)</span></dt>
+<dd>
+The time at which the event of interest occurs. This is also referred to as the failure time or event time.
+</dd>
+<dt>Censoring Time <span class="math inline">(C)</span></dt>
+<dd>
+The time at which censoring occurs. For example, the time when a patient drops out of a study or when the study ends.
+</dd>
+<dt>Observed Time <span class="math inline">(Y)</span></dt>
+<dd>
+The time that is actually observed, which is the minimum of the survival time and the censoring time. It is defined as <span class="math inline">Y = min(T, C)</span>. If the event occurs before censoring, then <span class="math inline">Y = T</span>. If censoring occurs before the event, then <span class="math inline">Y = C</span>.
+</dd>
+<dt>Status Indicator <span class="math inline">(δ)</span></dt>
+<dd>
+A variable indicating whether the event was observed or the data was censored. <span class="math inline">δ = 1</span> if the true survival time is observed <span class="math inline">(T &lt; C)</span>, and <span class="math inline">δ = 0</span> if censoring occurred <span class="math inline">(T &gt; C)</span>.
+</dd>
+<dt>Independent Censoring</dt>
+<dd>
+An assumption that the censoring mechanism is unrelated to the event time, conditional on the features. Specifically, the event time <span class="math inline">(T)</span> is independent of the censoring time <span class="math inline">(C)</span>, given the features. This assumption is crucial for many survival analysis methods, but it’s often impossible to verify from the data.
+</dd>
+<dt>Survival Curve/Survival Function <span class="math inline">(S(t))</span></dt>
+<dd>
+A function that quantifies the probability of surviving past time t. It is defined as <span class="math inline">S(t) = Pr(T &gt; t)</span>. This function is decreasing over time.
+</dd>
+<dt>Risk Set</dt>
+<dd>
+The set of individuals who are still at risk of experiencing the event at a given time.
+</dd>
+<dt>Kaplan-Meier Estimator</dt>
+<dd>
+A non-parametric estimator of the survival curve, which takes censoring into account. It calculates the probability of survival by considering the number of events and the number of individuals at risk at each event time. The Kaplan-Meier survival curve has a step-like shape.
+</dd>
+<dt>Log-Rank Test</dt>
+<dd>
+A statistical test used to compare the survival curves of two or more groups. It examines how events unfold sequentially over time in each group.
+</dd>
+<dt>Hazard Function/Hazard Rate (h(t))</dt>
+<dd>
+The instantaneous rate of death at time t, given survival past that time. It can be expressed as <span class="math inline">h(t) = \lim_{\Delta t \rightarrow 0} Pr(t &lt; T \le t+Δt \mid T &gt; t) / \Delta t</span>. It is a rate of death, rather than a probability of death.
+</dd>
+<dt>Probability Density Function <span class="math inline">(f(t))</span></dt>
+<dd>
+The instantaneous rate of death at time t. It is defined as <span class="math inline">f(t) = \lim_{\Delta t \rightarrow 0} \frac{Pr(t &lt; T \le t+ \Delta t) }{ \Delta t}</span>.
+</dd>
+<dt>Baseline Hazard <span class="math inline">(h0(t))</span></dt>
+<dd>
+In the Cox proportional hazards model, this is the hazard function for an individual with all features equal to zero. It is an unspecified function that serves as a reference point.
+</dd>
+<dt>Proportional Hazards Assumption</dt>
+<dd>
+The assumption that the hazard function for an individual with feature vector xi is some unknown function <span class="math inline">h_0(t)</span> times a factor, <span class="math inline">exp(\sum_{j=1}^p x_{ij}β_j)</span>. It implies that the ratio of hazards between two individuals is constant over time.
+</dd>
+<dt>Relative Risk</dt>
+<dd>
+The quantity <span class="math inline">exp(\sum_{j=1}^p x_{ij}β_j)</span>, representing the hazard for a given feature vector relative to the baseline hazard.
+</dd>
+<dt>Cox Proportional Hazards Model</dt>
+<dd>
+A regression model for survival data that models the hazard function as a function of covariates. It is a semi-parametric model, which means that it does not require specification of the baseline hazard. The model estimates the effect of covariates on the hazard rate while avoiding the need to estimate the baseline hazard.
+</dd>
+<dt>Partial Likelihood</dt>
+<dd>
+A likelihood function used in the Cox model to estimate the regression coefficients without needing to specify the baseline hazard function. It is the product of the probabilities of the observed events.
+</dd>
+<dt>Harrell’s Concordance Index (C-index)</dt>
+<dd>
+A measure of the predictive accuracy of a survival model. It represents the proportion of observation pairs for which the predicted order of survival times matches the observed order.
+</dd>
+<dt>Time-Dependent Covariates</dt>
+<dd>
+Predictor variables whose values can change over time. The proportional hazards model can accommodate time-dependent covariates.
+</dd>
+<dt>Survival Trees</dt>
+<dd>
+A modification of classification and regression trees for use in survival analysis. They use a split criterion that maximizes the difference between survival curves in resulting nodes.
+</dd>
+</dl>
+<p>The chapter is divided into the following sections:</p>
 <ul>
-<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
-<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
-<li>The readers are interested in applying the methods to real-world problems.</li>
+<li><a href="#sec-11-1">Survival and Censoring Times</a></li>
+<li><a href="#sec-11-2">A Closer Look at Censoring</a></li>
+<li><a href="#sec-11-3">The Kaplan–Meier Survival Curve</a></li>
+<li><a href="#sec-11-4">The Log-Rank Test</a></li>
+<li><a href="#sec-11-5">Regression Models With a Survival Response</a></li>
+<li><a href="#sec-11-6">Shrinkage for the Cox Model</a></li>
+<li><a href="#sec-11-7">Additional Topics</a></li>
+<li><a href="#sec-11-8">Lab: Survival Analysis</a></li>
+<li><a href="#sec-11-9">Exercises</a></li>
+<li><a href="#sec-11-10">References</a></li>
 </ul>
+<section id="sec-11-1" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-1">Survival and Censoring Times</h2>
 
+<div class="no-row-height column-margin column-container"><div id="fig-v11.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/7_XK7mGMm1E?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Introduction to Survival Data and Censoring
+</figcaption>
+</figure>
+</div></div><ul>
+<li><p>Survival analysis concerns a special kind of outcome variable: the time until an event occurs.</p></li>
+<li><p>For example, suppose that we have conducted a five-year medical study, in which patients have been treated for cancer.</p></li>
+<li><p>We would like to fit a model to predict patient survival time, using features such as baseline health measurements or type of treatment.</p></li>
+<li><p>Sounds like a <strong>regression problem</strong>. But there is an important complication: some of the patients have survived until the end of the study. Such a patient’s survival time is said to be <strong>censored</strong>.</p></li>
+<li><p>We do not want to discard this subset of surviving patients, since the fact that they survived at least five years amounts to valuable information.</p></li>
+<li><p>The roots of survival analysis seem rather mundane like estimating the wear and tear of carpets or the life expectancy of light bulbs. But the basic models developed for these problems have found wide applications</p></li>
+<li><p>The applications of survival analysis extend far beyond medicine. For example, consider a company that wishes to model churn, the event when customers cancel subscription to a service.</p></li>
+<li><p>The company might collect data on customers over some time period, in order to predict each customer’s time to cancellation.</p></li>
+<li><p>However, presumably not all customers will have cancelled their subscription by the end of this time period; for such customers, the time to cancellation is censored.</p></li>
+<li><p>Survival analysis is a very well-studied topic within statistics. However, it has received relatively little attention in the machine learning community.</p></li>
+<li><p>Survival and Censoring Times</p>
+<ul>
+<li><p>For each individual, we suppose that there is a true failure or event time T, as well as a true censoring time C.</p></li>
+<li><p>The survival time represents the time at which the event of interest occurs (such as death).</p></li>
+<li><p>By contrast, the censoring is the time at which censoring occurs: for example, the time at which the patient drops out of the study or the study ends.</p></li>
+<li><p>We observe either the survival time T or else the censoring time C. Specifically, we observe the random variable <span id="eq-observed-time"><span class="math display">
+Y = min(T,C) \qquad
+\tag{1}</span></span></p></li>
+<li><p>If the event occurs before censoring (i.e.&nbsp;T &lt; C) then we observe the true survival time T; if censoring occurs before the event (T &gt; C) then we observe the censoring time. We also observe a status indicator, <span id="eq-status-indicator"><span class="math display">
+\delta = \begin{cases}
+  1 &amp; \text{if } T \leq C, \\
+  0 &amp; \text{if } T &gt; C.
+\end{cases} \qquad
+\tag{2}</span></span></p></li>
+<li><p>Finally, in our dataset we observe <span class="math inline">n</span> pairs <span class="math inline">(Y,δ)</span>, which we denote as <span class="math inline">(y_1,δ_1),\ldots, (y_n,δ_n)</span>.</p></li>
+</ul></li>
+</ul>
+<p class="page-columns page-full"><a href="fig-survival-data.png" class="lightbox page-columns page-full" data-gallery="quarto-lightbox-gallery-2"><div class="no-row-height column-margin column-container"><img src="fig-survival-data.png" class="img-fluid"></div></a></p>
+</section>
+<section id="sec-11-2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-2">A Closer Look at Censoring</h2>
+<ul>
+<li>Suppose that a number of patients drop out of a cancer study early because they are very sick.</li>
+<li>An analysis that does not take into consideration the reason why the patients dropped out will likely overestimate the true average survival time.</li>
+<li>Similarly, suppose that males who are very sick are more likely to drop out of the study than females who are very sick. Then a comparison of male and female survival times may wrongly suggest that males survive longer than females.</li>
+<li>In general, we need to assume that, conditional on the features, the event time T is independent of the censoring time C. The two examples above violate the assumption of independent censoring.</li>
+</ul>
+</section>
+<section id="sec-11-3" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-3">The Kaplan–Meier Survival Curve</h2>
+<ul>
+<li>The Survival Curve
+<ul>
+<li>The survival function (or curve) is defined as <span id="eq-survival-function"><span class="math display">
+  S(t) = Pr(T &gt; t) \qquad
+   \tag{3}</span></span></li>
+<li>This decreasing function quantifies the probability of surviving past time t.</li>
+<li>For example, suppose that a company is interested in modeling customer churn. Let T represent the time that a customer cancels a subscription to the company’s service.</li>
+<li>Then S(t) represents the probability that a customer cancels later than time t. The larger the value of S(t), the less likely that the customer will cancel before time t</li>
+</ul></li>
+<li>Estimating the Survival Curve
+<ul>
+<li>Consider the BrainCancer dataset, which contains the survival times for patients with primary brain tumors undergoing treatment with stereotactic radiation methods.</li>
+<li>The predictors are gtv (gross tumor volume, in cubic centimeters); sex (male or female); diagnosis (meningioma, LG glioma, HG glioma, or other); loc (the tumor location: either infratentorial or supratentorial); ki (Karnofsky index); and stereo (stereotactic method).</li>
+<li>Only 53 of the 88 patients were still alive at the end of the study.</li>
+<li>Suppose we’d like to estimate <span class="math inline">S(20) = Pr(T &gt; 20)</span>, the probability that a patient survives for at least 20 months,</li>
+<li>It is tempting to simply compute the proportion of patients who are known to have survived past 20 months, that is, the proportion of patients for whom <span class="math inline">Y &gt; 20</span>.</li>
+<li>This turns out to be 48/88, or approximately 55%.</li>
+<li>However, this does not seem quite right: 17 of the 40 patients who did not survive to 20 months were actually censored, and this analysis implicitly assumes they died before 20 months. Hence it is probably an underestimate</li>
+</ul></li>
+</ul>
+</section>
+<section id="sec-11-4" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-4">The Log-Rank Test</h2>
+<ul>
+<li>Females seem to fare a little better up to about 50 months, but then the two curves both level off to about 50%. How can we carry out a formal test of equality of the two survival curves?</li>
+<li>At first glance, a two-sample t-test seems like an obvious choice: but the presence of censoring again creates a complication.</li>
+<li>To overcome this challenge, we will conduct a log-rank test.<br>
+</li>
+<li>Recall that <span class="math inline">d1 &lt; d2 &lt; ···&lt; dK</span> are the unique death times among the non-censored patients, rk is the number of patients at risk at time dk, and qk is the number of patients who died at time dk.</li>
+<li>We further define <span class="math inline">r_{1k}</span> and <span class="math inline">r_{2k}</span> to be the number of patients in groups 1 and 2, respectively, who are at risk at time <span class="math inline">d_k</span>.</li>
+<li>Similarly, we define <span class="math inline">q_{1k}</span> and <span class="math inline">q_{2k}</span> to be the number of patients in groups 1 and 2, respectively, who died at time <span class="math inline">d_k</span>. Note that <span class="math inline">r_{1k} + r_{2k} = rk</span> and <span class="math inline">q_{1k} + q_{2k} = q_k.</span></li>
+</ul>
+<p>Details of the Test Statistic:</p>
+
+<div class="no-row-height column-margin column-container"><div id="tbl-log-rank-test" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-log-rank-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Among the set of patients at risk at time <span class="math inline">d_k</span> , the number of patients who died and survived in each of two groups is reported
+</figcaption>
+<div aria-describedby="tbl-log-rank-test-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Group 1</th>
+<th>Group 2</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Died</td>
+<td><span class="math inline">q_{1k}</span></td>
+<td><span class="math inline">q_{2k}</span></td>
+<td><span class="math inline">q_k</span></td>
+</tr>
+<tr class="even">
+<td>Survived</td>
+<td><span class="math inline">r_{1k} − q_{1k}</span></td>
+<td><span class="math inline">r_{2k} − q_{2k}</span></td>
+<td><span class="math inline">r_k − q_k</span></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">r_{1k}</span></td>
+<td><span class="math inline">r_{2k}</span></td>
+<td><span class="math inline">r_k</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div></div><ul>
+<li>The log-rank test statistic is given by At each death time dk, we construct a 2 ×2 table of counts of the form shown above.</li>
+<li>Note that if the death times are unique (i.e.&nbsp;no two individuals die at the same time), then one of <span class="math inline">q_{1k}</span> and <span class="math inline">q_{2k}</span> equals one, and the other equals zero.</li>
+</ul>
+<p>Log Rank Test: the Main Idea</p>
+<ul>
+<li><p>To test <span class="math inline">H_0 : \mathbb{E}[X] = 0</span> for some random variable <span class="math inline">X</span>, one approach is to construct a test statistic of the form: <span id="eq-log-rank-test"><span class="math display">
+W = \frac{X-\mathbb{E}[X]}{\sqrt{\text{Var}(X)}} \qquad
+\tag{4}</span></span></p></li>
+<li><p>where <span class="math inline">\mathbb{E}[X]</span> and <span class="math inline">Var(X)</span> are the expectation and variance, respectively, of <span class="math inline">X</span> under <span class="math inline">H_0</span>.</p></li>
+<li><p>In order to construct the log-rank test statistic, we compute a quantity that takes exactly the form above, with <span class="math inline">X = \sum_{k=1}^K q_{1k}</span>, where <span class="math inline">q_{1k}</span> is given in the top left of the table above.</p></li>
+<li><p>The Final Result</p>
+<ul>
+<li><p>The resulting formula for the log-rank test statistic is: <span id="eq-log-rank-test-statistic"><span class="math display">
+W = \frac{\sum_{k=1}^K (q_{1k}- \mathbb{E}(q_{1k}) )}{\sqrt{ \sum_{k=1}^K Var (q_{1k})}}
+= \frac{\sum_{k=1}^K (q_{1k}- \frac{q_k}{r_k} r_{1k})}{\sqrt{ \sum_{k=1}^K \frac{q_k}{(r_k-1)} (r_{1k}/r_k)(1-r_{1k}/r_k)(r_k-q_k)}} \qquad
+\tag{5}</span></span></p></li>
+<li><p>When the sample size is large, the log-rank test statistic <span class="math inline">W</span> has approximately a standard normal distribution.</p></li>
+<li><p>This can be used to compute a p-value for the null hypothesis that there is no difference between the survival curves in the two groups.</p></li>
+</ul></li>
+<li><p>Application to the Brain Cancer Dataset</p>
+<ul>
+<li>Comparing the survival times of females and males on the BrainCancer data gives a log-rank test statistic of W = 1.2, which corresponds to a two-sided p-value of 0.2.</li>
+<li>Thus, we cannot reject the null hypothesis of no difference in survival curves between females and males.</li>
+<li>The log-rank test is closely related to Cox’s proportional hazards model, which we discuss next.</li>
+</ul></li>
+</ul>
+</section>
+<section id="sec-11-5" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-5">Regression Models With a Survival Response</h2>
+<ul>
+<li>We now consider the task of fitting a regression model to survival data.</li>
+<li>We wish to predict the true survival time T. Since the observed quantity Y = min(T,C) is positive and may have a long right tail, we might be tempted to fit a linear regression of log(Y ) on X. But <mark>censoring again creates a problem.</mark></li>
+<li><mark>To overcome this difficulty, we instead make use of a sequential construction, similar to the idea used for the Kaplan-Meier survival curve.</mark></li>
+</ul>
+<section id="sec-11-5-1" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-5-1">The Hazard Function</h3>
+<ul>
+<li><p>The hazard function or hazard rate — also known as the force of mortality — is formally defined as <span id="eq-hazard-function"><span class="math display">
+h(t) = \lim_{\Delta t \rightarrow 0} \frac{Pr(t &lt; T \le t + \Delta t \mid T &gt; t)}{\Delta t} \qquad
+\tag{6}</span></span></p></li>
+<li><p>where <span class="math inline">T</span> is the (true) survival time.</p></li>
+<li><p>It is the death rate in the instant after time t, given survival up to that time.</p></li>
+<li><p>The hazard function is the basis for the <strong>Proportional Hazards Model</strong>.</p></li>
+</ul>
+</section>
+<section id="sec-11-5-2" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-11-5-2">Proportional Hazards</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v11.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lP42Vly2MVg?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Proportional Hazards Model
+</figcaption>
+</figure>
+</div></div><ul>
+<li><p>The proportional hazards assumption states that: <span id="eq-proportional-hazards"><span class="math display">
+h(t|xi) = h_0(t) exp \left( \sum_{j=1}^p x_{ij} \beta_j \right) \qquad
+\tag{7}</span></span></p></li>
+<li><p>where <span class="math inline">h_0(t) ≥ 0</span> is an unspecified function, known as the baseline hazard. It is the hazard function for an individual with features <span class="math inline">x_{i1} = \ldots = x_{ip} = 0</span>.</p></li>
+<li><p>The name proportional hazards arises from the fact that the hazard function for an individual with feature vector <span class="math inline">x_i</span> is some unknown function <span class="math inline">h_0(t)</span> times the factor <span class="math inline">exp \left( \sum_{j=1}^p x_{ij} \beta_j \right)</span>. . The quantity <span class="math inline">exp \left( \sum_{j=1}^p x_{ij} \beta_j \right)</span> is called the relative risk for the feature vector <span class="math inline">x_i = (x_{i1}, \ldots, x_{ip})</span>, relative to that for the feature vector <span class="math inline">x_i = (0, \ldots, 0)</span>.</p></li>
+<li><p>The Cox model estimates the regression coefficients <span class="math inline">\beta_1, \ldots, \beta_p</span> by maximizing a partial likelihood function. This function is the product of the probabilities of the observed events, and it does not require specification of the baseline hazard function <span class="math inline">h_0(t)</span>.</p></li>
+<li><p>What does it mean that the baseline hazard function <span class="math inline">h_0(t)</span> is unspecified?</p></li>
+<li><p>Basically, we make no assumptions about its functional form. We allow the instantaneous probability of death at time t, given that one has survived at least until time t, to take any form.</p></li>
+<li><p>This means that the hazard function is very flexible and can model a wide range of relationships between the covariates and survival time.</p></li>
+<li><p>Our only assumption is that a one-unit increase in xij corresponds to an increase in <span class="math inline">h(t \mid x_i)</span> by a factor of <span class="math inline">exp(β_j)</span>.</p></li>
+</ul>
+</section>
+<section id="sec-11-5-3" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-11-5-3">Example: Brain Cancer Data</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v11.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ujIMPpl2Tr0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Estimation of Cox Model with Examples
+</figcaption>
+</figure>
+</div></div><p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+</section>
+<section id="sec-11-5-4" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-5-4">Example: Publication Data</h3>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+<p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
+<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+</section>
+</section>
+<section id="sec-11-6" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-6">Shrinkage for the Cox Model</h2>
+<p>Etiam quis tortor luctus, pellentesque ante a, finibus dolor. Phasellus in nibh et magna pulvinar malesuada. Ut nisl ex, sagittis at sollicitudin et, sollicitudin id nunc. In id porta urna. Proin porta dolor dolor, vel dapibus nisi lacinia in. Pellentesque ante mauris, ornare non euismod a, fermentum ut sapien. Proin sed vehicula enim. Aliquam tortor odio, vestibulum vitae odio in, tempor molestie justo. Praesent maximus lacus nec leo maximus blandit.</p>
+<p>Maecenas turpis velit, ultricies non elementum vel, luctus nec nunc. Nulla a diam interdum, faucibus sapien viverra, finibus metus. Donec non tortor diam. In ut elit aliquet, bibendum sem et, aliquam tortor. Donec congue, sem at rhoncus ultrices, nunc augue cursus erat, quis porttitor mauris libero ut ex. Nullam quis leo urna. Donec faucibus ligula eget pellentesque interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus interdum erat ut ultricies. Aenean tempus ex non elit suscipit, quis dignissim enim efficitur. Proin laoreet enim massa, vitae laoreet nulla mollis quis.</p>
+<p>Vestibulum ultrices, tortor at mattis porta, odio nisi rutrum nulla, sit amet tincidunt eros quam facilisis tellus. Fusce eleifend lectus in elementum lacinia. Nam auctor nunc in massa ullamcorper, sit amet auctor ante accumsan. Nam ut varius metus. Curabitur eget tristique leo. Cras finibus euismod erat eget elementum. Integer vel placerat ex. Ut id eros quis lectus lacinia venenatis hendrerit vel ante.</p>
+<p>Etiam congue quam eget velit convallis, eu sagittis orci vestibulum. Vestibulum at massa turpis. Curabitur ornare ex sed purus vulputate, vitae porta augue rhoncus. Phasellus auctor suscipit purus, vel ultricies nunc. Nunc eleifend nulla ac purus volutpat, id fringilla felis aliquet. Duis vitae porttitor nibh, in rhoncus risus. Vestibulum a est vitae est tristique vehicula. Proin mollis justo id est tempus hendrerit. Praesent suscipit placerat congue. Aliquam eu elit gravida, consequat augue non, ultricies sapien. Nunc ultricies viverra ante, sit amet vehicula ante volutpat id. Etiam tempus purus vitae tellus mollis viverra. Donec at ornare mauris. Aliquam sodales hendrerit ornare. Suspendisse accumsan lacinia sapien, sit amet imperdiet dui molestie ut.</p>
+<p>Etiam non efficitur urna, quis elementum nisi. Mauris posuere a augue vel gravida. Praesent luctus erat et ex iaculis interdum. Nulla vestibulum quam ac nunc consequat vulputate. Nullam iaculis lobortis sem sit amet fringilla. Aliquam semper, metus ut blandit semper, nulla velit fermentum sapien, fermentum ultrices dolor sapien sed leo. Vestibulum molestie faucibus magna, at feugiat nulla ullamcorper a. Aliquam erat volutpat. Praesent scelerisque magna a justo maximus, sit amet suscipit mauris tempor. Nulla nec dolor eget ipsum pellentesque lobortis a in ipsum. Morbi turpis turpis, fringilla a eleifend maximus, viverra nec neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+</section>
+<section id="sec-11-7" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-7">Additional Topics</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v11.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/rRYfWAsG4RI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Model Evaluation and Further Topics
+</figcaption>
+</figure>
+</div></div><p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
+<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+<p>Etiam quis tortor luctus, pellentesque ante a, finibus dolor. Phasellus in nibh et magna pulvinar malesuada. Ut nisl ex, sagittis at sollicitudin et, sollicitudin id nunc. In id porta urna. Proin porta dolor dolor, vel dapibus nisi lacinia in. Pellentesque ante mauris, ornare non euismod a, fermentum ut sapien. Proin sed vehicula enim. Aliquam tortor odio, vestibulum vitae odio in, tempor molestie justo. Praesent maximus lacus nec leo maximus blandit.</p>
+<p>Maecenas turpis velit, ultricies non elementum vel, luctus nec nunc. Nulla a diam interdum, faucibus sapien viverra, finibus metus. Donec non tortor diam. In ut elit aliquet, bibendum sem et, aliquam tortor. Donec congue, sem at rhoncus ultrices, nunc augue cursus erat, quis porttitor mauris libero ut ex. Nullam quis leo urna. Donec faucibus ligula eget pellentesque interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus interdum erat ut ultricies. Aenean tempus ex non elit suscipit, quis dignissim enim efficitur. Proin laoreet enim massa, vitae laoreet nulla mollis quis.</p>
+<p>Vestibulum ultrices, tortor at mattis porta, odio nisi rutrum nulla, sit amet tincidunt eros quam facilisis tellus. Fusce eleifend lectus in elementum lacinia. Nam auctor nunc in massa ullamcorper, sit amet auctor ante accumsan. Nam ut varius metus. Curabitur eget tristique leo. Cras finibus euismod erat eget elementum. Integer vel placerat ex. Ut id eros quis lectus lacinia venenatis hendrerit vel ante.</p>
+<section id="sec-11-7-1" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-7-1">Area Under the Curve for Survival Analysis</h3>
+<p>Vestibulum ultrices, tortor at mattis porta, odio nisi rutrum nulla, sit amet tincidunt eros quam facilisis tellus. Fusce eleifend lectus in elementum lacinia. Nam auctor nunc in massa ullamcorper, sit amet auctor ante accumsan. Nam ut varius metus. Curabitur eget tristique leo. Cras finibus euismod erat eget elementum. Integer vel placerat ex. Ut id eros quis lectus lacinia venenatis hendrerit vel ante.</p>
+<p>Etiam congue quam eget velit convallis, eu sagittis orci vestibulum. Vestibulum at massa turpis. Curabitur ornare ex sed purus vulputate, vitae porta augue rhoncus. Phasellus auctor suscipit purus, vel ultricies nunc. Nunc eleifend nulla ac purus volutpat, id fringilla felis aliquet. Duis vitae porttitor nibh, in rhoncus risus. Vestibulum a est vitae est tristique vehicula. Proin mollis justo id est tempus hendrerit. Praesent suscipit placerat congue. Aliquam eu elit gravida, consequat augue non, ultricies sapien. Nunc ultricies viverra ante, sit amet vehicula ante volutpat id. Etiam tempus purus vitae tellus mollis viverra. Donec at ornare mauris. Aliquam sodales hendrerit ornare. Suspendisse accumsan lacinia sapien, sit amet imperdiet dui molestie ut.</p>
+<p>Etiam non efficitur urna, quis elementum nisi. Mauris posuere a augue vel gravida. Praesent luctus erat et ex iaculis interdum. Nulla vestibulum quam ac nunc consequat vulputate. Nullam iaculis lobortis sem sit amet fringilla. Aliquam semper, metus ut blandit semper, nulla velit fermentum sapien, fermentum ultrices dolor sapien sed leo. Vestibulum molestie faucibus magna, at feugiat nulla ullamcorper a. Aliquam erat volutpat. Praesent scelerisque magna a justo maximus, sit amet suscipit mauris tempor. Nulla nec dolor eget ipsum pellentesque lobortis a in ipsum. Morbi turpis turpis, fringilla a eleifend maximus, viverra nec neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+<p>Duis urna urna, pellentesque eu urna ut, malesuada bibendum dolor. Suspendisse potenti. Vivamus ornare, arcu quis molestie ultrices, magna est accumsan augue, auctor vulputate erat quam quis neque. Nullam scelerisque odio vel ultricies facilisis. Ut porta arcu non magna sagittis lacinia. Cras ornare vulputate lectus a tristique. Pellentesque ac arcu congue, rhoncus mi id, dignissim ligula.</p>
+<p>Praesent ornare dolor turpis, sed tincidunt nisl pretium eget. Curabitur sed iaculis ex, vitae tristique sapien. Quisque nec ex dolor. Quisque ut nisl a libero egestas molestie. Nulla vel porta nulla. Phasellus id pretium arcu. Etiam sed mi pellentesque nibh scelerisque elementum sed at urna. Ut congue molestie nibh, sit amet pretium ligula consectetur eu. Integer consectetur augue justo, at placerat erat posuere at. Ut elementum urna lectus, vitae bibendum neque pulvinar quis. Suspendisse vulputate cursus eros id maximus. Duis pulvinar facilisis massa, et condimentum est viverra congue. Curabitur ornare convallis nisl. Morbi dictum scelerisque turpis quis pellentesque. Etiam lectus risus, luctus lobortis risus ut, rutrum vulputate justo. Nulla facilisi.</p>
+</section>
+<section id="sec-11-7-2" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-7-2">Choice of Time Scale</h3>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+<p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
+<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+<p>Etiam quis tortor luctus, pellentesque ante a, finibus dolor. Phasellus in nibh et magna pulvinar malesuada. Ut nisl ex, sagittis at sollicitudin et, sollicitudin id nunc. In id porta urna. Proin porta dolor dolor, vel dapibus nisi lacinia in. Pellentesque ante mauris, ornare non euismod a, fermentum ut sapien. Proin sed vehicula enim. Aliquam tortor odio, vestibulum vitae odio in, tempor molestie justo. Praesent maximus lacus nec leo maximus blandit.</p>
+<p>Maecenas turpis velit, ultricies non elementum vel, luctus nec nunc. Nulla a diam interdum, faucibus sapien viverra, finibus metus. Donec non tortor diam. In ut elit aliquet, bibendum sem et, aliquam tortor. Donec congue, sem at rhoncus ultrices, nunc augue cursus erat, quis porttitor mauris libero ut ex. Nullam quis leo urna. Donec faucibus ligula eget pellentesque interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus interdum erat ut ultricies. Aenean tempus ex non elit suscipit, quis dignissim enim efficitur. Proin laoreet enim massa, vitae laoreet nulla mollis quis.</p>
+</section>
+<section id="sec-11-7-3" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-7-3">Time-Dependent Covariates</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+</section>
+<section id="sec-11-7-4" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-7-4">Checking the Proportional Hazards Assumption</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+</section>
+<section id="sec-11-7-5" class="level3">
+<h3 class="anchored" data-anchor-id="sec-11-7-5">Survival Trees</h3>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+<p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
+<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+</section>
+</section>
+<section id="sec-11-8" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-8">Lab: Survival Analysis</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<section id="sec-11-8-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-11-8-1">Brain Cancer Data</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-l1r" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-l1r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hfKYYexJfuY?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l1r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Survival Curves Brain Cancer Data
+</figcaption>
+</figure>
+</div></div><p>Etiam quis tortor luctus, pellentesque ante a, finibus dolor. Phasellus in nibh et magna pulvinar malesuada. Ut nisl ex, sagittis at sollicitudin et, sollicitudin id nunc. In id porta urna. Proin porta dolor dolor, vel dapibus nisi lacinia in. Pellentesque ante mauris, ornare non euismod a, fermentum ut sapien. Proin sed vehicula enim. Aliquam tortor odio, vestibulum vitae odio in, tempor molestie justo. Praesent maximus lacus nec leo maximus blandit.</p>
+<p>Maecenas turpis velit, ultricies non elementum vel, luctus nec nunc. Nulla a diam interdum, faucibus sapien viverra, finibus metus. Donec non tortor diam. In ut elit aliquet, bibendum sem et, aliquam tortor. Donec congue, sem at rhoncus ultrices, nunc augue cursus erat, quis porttitor mauris libero ut ex. Nullam quis leo urna. Donec faucibus ligula eget pellentesque interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean rhoncus interdum erat ut ultricies. Aenean tempus ex non elit suscipit, quis dignissim enim efficitur. Proin laoreet enim massa, vitae laoreet nulla mollis quis.</p>
+<p>Vestibulum ultrices, tortor at mattis porta, odio nisi rutrum nulla, sit amet tincidunt eros quam facilisis tellus. Fusce eleifend lectus in elementum lacinia. Nam auctor nunc in massa ullamcorper, sit amet auctor ante accumsan. Nam ut varius metus. Curabitur eget tristique leo. Cras finibus euismod erat eget elementum. Integer vel placerat ex. Ut id eros quis lectus lacinia venenatis hendrerit vel ante.</p>
+<p>Etiam congue quam eget velit convallis, eu sagittis orci vestibulum. Vestibulum at massa turpis. Curabitur ornare ex sed purus vulputate, vitae porta augue rhoncus. Phasellus auctor suscipit purus, vel ultricies nunc. Nunc eleifend nulla ac purus volutpat, id fringilla felis aliquet. Duis vitae porttitor nibh, in rhoncus risus. Vestibulum a est vitae est tristique vehicula. Proin mollis justo id est tempus hendrerit. Praesent suscipit placerat congue. Aliquam eu elit gravida, consequat augue non, ultricies sapien. Nunc ultricies viverra ante, sit amet vehicula ante volutpat id. Etiam tempus purus vitae tellus mollis viverra. Donec at ornare mauris. Aliquam sodales hendrerit ornare. Suspendisse accumsan lacinia sapien, sit amet imperdiet dui molestie ut.</p>
+<p>Etiam non efficitur urna, quis elementum nisi. Mauris posuere a augue vel gravida. Praesent luctus erat et ex iaculis interdum. Nulla vestibulum quam ac nunc consequat vulputate. Nullam iaculis lobortis sem sit amet fringilla. Aliquam semper, metus ut blandit semper, nulla velit fermentum sapien, fermentum ultrices dolor sapien sed leo. Vestibulum molestie faucibus magna, at feugiat nulla ullamcorper a. Aliquam erat volutpat. Praesent scelerisque magna a justo maximus, sit amet suscipit mauris tempor. Nulla nec dolor eget ipsum pellentesque lobortis a in ipsum. Morbi turpis turpis, fringilla a eleifend maximus, viverra nec neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+</section>
+<section id="sec-11-8-2" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-11-8-2">Publication Data</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-l2r" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-l2r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/j3rcoz4u7m8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l2r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Cox Models I Publication Data
+</figcaption>
+</figure>
+</div></div><p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+<p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
+<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+<p>Etiam quis tortor luctus, pellentesque ante a, finibus dolor. Phasellus in nibh et magna pulvinar malesuada. Ut nisl ex, sagittis at sollicitudin et, sollicitudin id nunc. In id porta urna. Proin porta dolor dolor, vel dapibus nisi lacinia in. Pellentesque ante mauris, ornare non euismod a, fermentum ut sapien. Proin sed vehicula enim. Aliquam tortor odio, vestibulum vitae odio in, tempor molestie justo. Praesent maximus lacus nec leo maximus blandit.</p>
+</section>
+<section id="sec-11-8-3" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="sec-11-8-3">Call Center Data</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-l3r" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/w6VAT8jqTjk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Cox Models II Call Center Data
+</figcaption>
+</figure>
+</div></div><p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
+<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
+<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
+<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+</section>
+</section>
+<section id="sec-11-9" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-9">Exercises</h2>
+</section>
+<section id="sec-11-10" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-10">References</h2>
+</section>
+<section id="sec-11-11" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-11-11">Further Reading</h2>
+<section id="wikipedia-articles" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="wikipedia-articles">Wikipedia Articles:</h3>
+
+<div class="no-row-height column-margin column-container"><div id="fig-l3r" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/TiHCNRUiLKc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Interview with Sir David Cox - On Survival Analysis
+</figcaption>
+</figure>
+</div></div><ul>
+<li><a href="https://en.wikipedia.org/wiki/Survival_analysis">Survival Analysis</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator">Kaplan-Meier Estimator</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Censoring_(statistics)">Censoring (statistics)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Proportional_hazards_model">Cox Proportional Hazards Model</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Log-rank_test">Log-rank test</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Survival_function">Survival Function</a></li>
+</ul>
+</section>
+<section id="books" class="level3">
+<h3 class="anchored" data-anchor-id="books">Books</h3>
+<ul>
+<li><a href="https://www.springer.com/gp/book/9781441966452">Survival Analysis: A Self-Learning Text</a> by David G. Kleinbaum and Mitchel Klein</li>
+<li><a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470258019">Applied Survival Analysis: Regression Modeling of Time-to-Event Data</a> by David W. Hosmer, Jr., Stanley Lemeshow, and Susanne May</li>
+<li><a href="https://link.springer.com/book/10.1007/978-3-319-31245-3">Applied Survival Analysis Using R</a> by Dirk F. Moore</li>
+<li><a href="https://www.springer.com/gp/book/9780387953991">Survival Analysis: Techniques for Censored and Truncated Data</a> by John P. Klein and Melvin L. Moeschberger</li>
+</ul>
+</section>
+<section id="papers" class="level3">
+<h3 class="anchored" data-anchor-id="papers">Papers:</h3>
+<ul>
+<li><a href="kaplan58.pdf">Kaplan, E. L., &amp; Meier, P. (1958). Nonparametric estimation from incomplete observations. Journal of the American statistical association, 53(282), 457-481.</a></li>
+<li><a href="cox1972.pdf">Cox, D. R. (1972). Regression models and life-tables. Journal of the Royal Statistical Society. Series B (Methodological), 34(2), 187-220.</a></li>
+<li><a href="peto1972.pdf">Asymptotically Efficient Rank Invariant Test Procedures</a> by Richard Peto and Julian Peto</li>
+<li><a href="lin93.pdf">Lin, D. Y., Wei, L. J., &amp; Ying, Z. (1993). Checking the Cox model with cumulative sums of martingale-based residuals. Biometrika, 80(3), 557-572.</a></li>
+<li><a href="https://www.springer.com/gp/book/9780387987842">Therneau, T. M., &amp; Grambsch, P. M. (2000). Modeling survival data: extending the Cox model. Springer Science &amp; Business Media.</a></li>
+</ul>
+</section>
+<section id="additional-readings" class="level3">
+<h3 class="anchored" data-anchor-id="additional-readings">Additional Readings:</h3>
+<ul>
+<li><a href="marcelinoA2011.pdf">The Kumaraswamy Weibull distribution: A generalization of the Weibull probability distribution</a> by Gauss M. Cordeiro, Edwin M. M. Ortega, Marcelino A. de Pascoa</li>
+<li><a href="tsiatis1975.pdf">A Nonidentifiability Aspect of the Problem of Competing Risks</a> by Anastasios A. Tsiatis</li>
+</ul>
+</section>
+</section>
+<section id="sec-11-11" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-11">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-11-13" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-13">Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch11.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Chapter"><embed src="ch11.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-ESL" class="csl-entry" role="listitem">
-Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
-</div>
-<div id="ref-ISL" class="csl-entry" role="listitem">
-James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
-</div>
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
-  title = {Chapter 11: {Survival} {Analysis}},
+  title = {Chapter 11: {Survival} {Analysis} and {Censored} {Data}},
   date = {2024-09-01},
   url = {https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2024. <span>“Chapter 11: Survival Analysis.”</span>
-September 1, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/">https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/</a>.
+Bochman, Oren. 2024. <span>“Chapter 11: Survival Analysis and Censored
+Data .”</span> September 1, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/">https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -967,6 +1547,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     })(document);
     </script>
   
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
