@@ -6,11 +6,6 @@ keywords: [survival analysis, censored data, Kaplan-Meier, Cox Proportional Haza
 date: 2024-09-01
 ---
 
-
-
-
-
-
 ::: {.callout-tip}  
 
 ## TL;DR - Survival Analysis  {.unnumbered}
@@ -26,7 +21,6 @@ Survival Analysis
 </audio>
 
 :::
-
 
 There are a number of big words in this chapter, but like all statistics they are intuitive in some sense. For survival analysis, it helps to remember that we are doing a regression but with a twist. The twist is that  we don't have data for all subjects throughout the trial since some may die in the middle. So let us start by breaking them down:
 
@@ -118,6 +112,12 @@ The chapter is divided into the following sections:
 - [Exercises](#sec-11-9)
 - [References](#sec-11-10)
 
+## Introduction
+
+    - Describes survival analysis and censored data.
+    - Mentions examples of survival analysis in medical studies and other applications.
+    - Notes that survival analysis techniques can be applied to non-time-related data as well.
+
 
 ## Survival and Censoring Times {#sec-11-1}
 
@@ -169,6 +169,13 @@ may wrongly suggest that males survive longer than females.
 - In general, we need to assume that, conditional on the features, the event time T is independent of the censoring time C. The two examples above violate the assumption of independent censoring.
 
 ## The Kaplan–Meier Survival Curve {#sec-11-3}
+
+::: {#fig-v11.2 .column-margin}
+
+![](kaplan-meier.png)
+
+[Edward Kaplan](https://en.wikipedia.org/wiki/Edward_L._Kaplan) and [Paul Meier](https://en.wikipedia.org/wiki/Paul_Meier_(statistician)), who developed the [Kaplan-Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator) estimator in 1958.
+:::
 
 - The Survival Curve
     - The survival function (or curve) is defined as 
@@ -269,6 +276,14 @@ $$
 h(t\mid x_i) = h_0(t) exp \left( \sum_{j=1}^p x_{ij} \beta_j \right) \qquad
 $$ {#eq-proportional-hazards}
 
+
+::: {#fig-11.4 .column-margin}
+![Understanding Cox model assumptions](fig-11.4.png)
+
+**Top**: In a simple example with p = 1 and a binary covariate $x_i \in {0, 1}$, the log hazard and the survival function under the model (11.14) are shown (green for $x_i = 0$ and black for $x_i = 1$). Because of the proportional hazards assumption (11.14), the log hazard functions differ by a constant, and the survival functions do not cross. \
+**Bottom**: Again we have a single binary covariate $x_i \in {0, 1}$. However, the proportional hazards assumption (11.14) does not hold. The log hazard functions cross, as do the survival functions.
+:::
+
 - where $h_0(t) ≥ 0$ is an unspecified function, known as the baseline hazard. It is the hazard function for an individual with features $x_{i1} = \ldots = x_{ip} = 0$.
 -  The name proportional hazards arises from the fact that the hazard function for an individual with feature vector $x_i$ is some unknown function $h_0(t)$ times the factor $exp \left( \sum_{j=1}^p x_{ij} \beta_j \right)$. . The quantity $exp \left( \sum_{j=1}^p x_{ij} \beta_j \right)$ is called the relative risk for the feature vector $x_i = (x_{i1}, \ldots, x_{ip})$, relative to that for the feature vector $x_i = (0, \ldots, 0)$.
 - The Cox model estimates the regression coefficients $\beta_1, \ldots, \beta_p$ by maximizing a partial likelihood function. This function is the product of the probabilities of the observed events, and it does not require specification of the baseline hazard function $h_0(t)$.
@@ -276,6 +291,8 @@ $$ {#eq-proportional-hazards}
 - Basically, we make no assumptions about its functional form. We allow the instantaneous probability of death at time t, given that one has survived at least until time t, to take any form.
 - This means that the hazard function is very flexible and can model a wide range of relationships between the covariates and survival time.
 - Our only assumption is that a one-unit increase in xij corresponds to an increase in $h(t \mid x_i)$ by a factor of $exp(β_j)$.
+
+
 
 
 
@@ -342,17 +359,27 @@ pairs for which this can be determined
 ### Choice of Time Scale {#sec-11-7-2}
 
 
-{{< lipsum 5 >}}
+- One of the challenges of survival analysis and any temporal model is the choice of time scale. In many case it is 
+possible to derive many features from the time dimension. 
+- For censoring there is an added complexity though in the sense that we may want to shift different cohorts to begin at the same relative time. 
+- This is a common problem in churn prediction where we may want to compare the survival of different cohorts.
+- In this section the authors discuss subtleties involved in the choice of zero time (enrolment) and failure time (event time)
+- In epidemiology, one may set time zero to the patient's birth removing the need to adjust for age in the analysis.
+- If there is a treatment - the time of treatment may be a natural zero time.
+- In reality I don't think that the authors have provided a clear answer to this question, but rather opened a can of worms.
+
 
 ### Time-Dependent Covariates {#sec-11-7-3}
 
+- A powerful feature of the proportional hazards model is its ability to handle time-dependent covariates, predictors whose value may change over time.
+- Because the partial likelihood in (11.16) is constructed sequentially in time, dealing with time-dependent covariates is straightforward
+- The idea is that we might to encode a feature as f(x,t) rather than f(x) in the model to indicate the predictor is time dependent and more succictly that f(x) has a value at time t.
 
-{{< lipsum 5 >}}
 
 ### Checking the Proportional Hazards Assumption {#sec-11-7-4}
 
 
-{{< lipsum 5 >}}
+The Cox model depends on the assumption that the hazard ratio between two individuals is constant over time. While the model is robust to mild violations of this assumption, it is worthwhile to test it.
 
 ### Survival Trees {#sec-11-7-5}
 
@@ -361,8 +388,9 @@ pairs for which this can be determined
 
 ## Lab: Survival Analysis {#sec-11-8}
 
-
-{{< lipsum 5 >}}
+- Provides hands-on examples of survival analysis using Python libraries.
+- Analyzes the BrainCancer and Publication datasets using Kaplan-Meier curves, log-rank tests, and Cox's proportional hazards model.
+- Simulates call center data and analyzes the wait times with survival analysis techniques.
 
 ### Brain Cancer Data {#sec-11-8-1}
 
@@ -450,3 +478,52 @@ Interview with Sir David Cox - On Survival Analysis
 
 ![Chapter](ch11.pdf){.col-page width="800px" height="1000px"}
 
+
+
+
+--- 
+
+- Survival and Censoring Times
+    - Defines true survival time (T) and true censoring time (C).
+    - Explains the observed time (Y) as the minimum of T and C.
+    - Introduces the status indicator (δ) to differentiate between observed event time and censoring time.
+- A Closer Look at Censoring
+    - Discusses the assumption of independent censoring.
+    - Explains right censoring and mentions other censoring types such as left censoring and interval censoring.
+- The Kaplan–Meier Survival Curve
+    - Defines the survival curve (survival function) S(t).
+    - Presents the Kaplan-Meier estimator for estimating the survival curve in the presence of censoring.
+    - Illustrates the Kaplan-Meier survival curve using the BrainCancer dataset.
+- The Log-Rank Test 
+    - Explains the log-rank test for comparing survival curves between two groups.
+    - Details the construction of the log-rank test statistic based on a contingency table of event counts at each unique death time.
+    - Shows the application of the log-rank test on the BrainCancer data to compare survival
+- Regression Models With a Survival Response
+    - Discusses the challenge of fitting regression models to survival data with censoring.
+    - Introduces the hazard function as an alternative approach to modeling survival times.
+- The Hazard Function
+    - Defines the hazard function h(t) and its relationship to the survival function S(t) and probability density function f(t).
+    - Discusses the likelihood function for survival data with censoring.
+    - Explains the limitation of assuming a specific functional form for the hazard function.
+- Proportional Hazards
+    - Presents the proportional hazards assumption and explains the baseline hazard.
+    - Introduces Cox's proportional hazards model for estimating regression coefficients without specifying the baseline hazard.
+    - Discusses the partial likelihood and its importance in Cox's model.
+    - Highlights the connection between the log-rank test and Cox's model with a single binary covariate.
+- Example: Brain Cancer Data
+    - Applies Cox's proportional hazards model to the BrainCancer data.
+    - Interprets the estimated coefficients and their statistical significance.
+- Example: Publication Data 
+    - Analyzes the Publication data using Kaplan-Meier curves and Cox's proportional hazards model.
+    - Discusses the effect of positive results on time to publication after adjusting for other covariates.
+- Shrinkage for the Cox Model
+    - Introduces penalized Cox models with ridge and lasso penalties.
+    - Applies the lasso-penalized Cox model to the Publication data and interprets the cross-validation results.
+    - Demonstrates the use of risk scores for assessing model fit on the test set.
+- Additional Topics
+    - Briefly covers additional topics in survival analysis:
+    - AUC and Harrell's concordance index for evaluating survival models.
+    - Choice of time scale.
+    - Time-dependent covariates and their application in Cox's model.
+    - Methods for checking the proportional hazards assumption.
+    - Survival trees and random survival forests as extensions of tree-based methods.

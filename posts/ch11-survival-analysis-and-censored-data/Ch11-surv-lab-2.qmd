@@ -1,0 +1,79 @@
+---
+title: "Chapter 11: Survival Analysis - Lab part 2" 
+categories: [lab,python]
+date: 2024-09-03
+format:
+   html:
+      page-layout: full
+---
+
+# Survival Analysis {#sec-survival-analysis}
+
+We begin by importing some of our libraries at this top level.
+
+```{python}
+from matplotlib.pyplot import subplots
+import numpy as np
+import pandas as pd
+from ISLP.models import ModelSpec as MS
+from ISLP import load_data
+from lifelines import KaplanMeierFitter, CoxPHFitter
+from lifelines.statistics import logrank_test, multivariate_logrank_test
+from ISLP.survival import sim_time
+
+km = KaplanMeierFitter()
+coxph = CoxPHFitter
+```
+
+
+## Publication Data {#sec-pub}
+
+The  `Publication`  data   presented in Section~\ref{sec:pub}  can be found in the `ISLP` package.
+We first reproduce Figure~\ref{fig:lauersurv}  by plotting the Kaplan-Meier curves stratified on the  `posres`  variable, which records whether the study had a positive or negative result.
+
+```{python}
+fig, ax = subplots(figsize=(8,8))
+Publication = load_data('Publication')
+by_result = {}
+for result, df in Publication.groupby('posres'):
+    by_result[result] = df
+    km_result = km.fit(df['time'], df['status'])
+    km_result.plot(label='Result=%d' % result, ax=ax)
+
+```
+ 
+As discussed previously, the $p$-values from fitting Cox’s
+proportional hazards model to the `posres` variable are quite
+large, providing no evidence of a difference in time-to-publication
+between studies with positive versus negative results.
+
+```{python}
+posres_df = MS(['posres',
+                'time',
+                'status'],
+                intercept=False).fit_transform(Publication)
+posres_fit = coxph().fit(posres_df,
+                         'time',
+                         'status')
+posres_fit.summary[['coef', 'se(coef)', 'p']]
+
+```
+    
+ 
+However, the results change dramatically when we include other
+predictors in the model. Here we exclude the funding mechanism
+variable.
+
+```{python}
+model = MS(Publication.columns.drop('mech'),
+           intercept=False)
+coxph().fit(model.fit_transform(Publication),
+            'time',
+            'status').summary[['coef', 'se(coef)', 'p']]
+
+```
+    
+We see that there are a number of statistically significant variables,
+including whether the trial focused on a clinical endpoint, the impact
+of the study, and whether the study had positive or negative results.
+
