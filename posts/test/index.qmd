@@ -1,0 +1,74 @@
+---
+title: "The Problem"
+subtitle: "flashcards"
+date: 27-01-2025
+---
+
+
+::: {.callout-tip collapse='true'}
+## What does it mean for data to be IID?  {.unnambered}
+
+**IID** stands for **independent and identically distributed**. It is a common assumption about data in statistical modeling. The data are comprised of $n$ i.i.d. copies of a random variable $O$.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is $P_0$? {.unnambered}
+
+$P_0$ is the **true probability distribution** for $O$. $P_0$ is also the **data-generating distribution**, which is the true probability distribution that generated the observed data. Statistical models are models for the true data-generating distribution.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is a statistical model? {.unnambered}
+
+A statistical model $M$ is a set of probability distributions that represents what we know about the data-generating distribution $P_0$. $M$ is the set of possible probability distributions for $P_0$.  The statistical model can be **nonparametric** or **semiparametric**.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is a nonparametric model?  {.unnambered}
+
+A **nonparametric model** is a statistical model that does not assume a specific form or shape for the underlying distribution.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is a semiparametric model?  {.unnambered}
+A **semiparametric model** is a statistical model that has both parametric and nonparametric components.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is the target parameter?  {.unnambered}
+The **target parameter** is a particular feature of the unknown probability distribution $P_0$ and is denoted as $Ψ(P_0)$. The explicit definition of this mapping $Ψ$ on the statistical model requires that one defines $Ψ(P)$ at each $P$ in the statistical model.
+The target parameter has two interpretations: one as a parameter $Ψ(P_0)$ of a probability distribution $P_0$ and one as a causal parameter under additional (causal) assumptions.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is a Super Learner?  {.unnambered}
+A **Super Learner** is a flexible ensemble learner used to obtain an initial estimate of the data-generating distribution $P_0$, or the relevant part $Q_0$ of $P_0$.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is Targeted Maximum Likelihood Estimation (TMLE)?  {.unnambered}
+**Targeted Maximum Likelihood Estimation (TMLE)** is a **two-step procedure**.
+   *  The first step obtains an estimate of the relevant portion $Q_0$ of $P_0$.
+   *  The second step updates this initial fit in a step targeted toward making an optimal bias-variance tradeoff for the parameter of interest, instead of the overall density $P_0$.
+TMLE is **double robust** and can incorporate data-adaptive likelihood-based estimation procedures. TMLE removes all the asymptotic residual bias of the initial estimator for the target parameter, if it uses a consistent estimator of the treatment mechanism.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is causal inference? {.unnambered}
+**Causal inference** is the process of drawing conclusions about cause-and-effect relationships based on observed data.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is Estimating Equation Methodology?  {.unnambered}
+**Estimating Equation Methodology** is a framework that defines the target parameter as a particular function of the true probability distribution of the data and estimates the target parameter accordingly with a plug-in estimator.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is Marschak's Maxim?  {.unnambered}
+**Marschak's Maxim** is the idea that statisticians should focus on answering questions that researchers truly care about by defining the target parameter of interest, identifying it, and then estimating it.
+:::
+
+::: {.callout-tip collapse='true'}
+## What is double robustness?  {.unnambered}
+**Double robustness** is a property of an estimator such that it is consistent if either the initial estimator of the relevant part of the data-generating distribution $Q_0$ or the estimator of the treatment mechanism is consistent.
+:::

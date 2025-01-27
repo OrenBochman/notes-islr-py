@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/test/index.html",
       "/posts/wrangler/index.html",
       "/posts/ch13-multiple-testing/Ch13-multiple-lab.html",
       "/posts/ch13-multiple-testing/index.html",

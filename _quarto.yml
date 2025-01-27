@@ -18,8 +18,14 @@ website:
 
   site-url: https://orenbochman.github.io/notes-islr/
   description: Personal website, portfolio and blog
-  repo-url: https://github.com/OrenBochman/notes-rl
-  favicon: favicon.ico
+  repo-url: https://github.com/OrenBochman/notes-islr-py
+  repo-actions: [edit, issue]
+  #favicon: favicon.ico
+
+  page-footer:
+    right: "This page is built with 💛 and [Quarto](https://quarto.org/)."
+    left: "&copy; Copyright 2024-2025, Oren Bochman"
+    background: "#AB0520" # AZ Red
 
 date-format: full
 date: last-modified
@@ -27,8 +33,8 @@ date: last-modified
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: [flatly, style/isl.scss]
+      dark: [darkly,  style/isl.scss, style/dark.scss]
     css: styles.css
     grid:
       sidebar-width: 300px
@@ -47,6 +53,8 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     from: "markdown+emoji"
+
+
 
 execute:
   freeze: auto

@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/index.html</loc>
-    <lastmod>2025-01-27T04:18:42.267Z</lastmod>
+    <lastmod>2025-01-27T12:04:40.132Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab-1.html</loc>
@@ -58,7 +58,7 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/index.html</loc>
-    <lastmod>2025-01-21T02:46:59.848Z</lastmod>
+    <lastmod>2025-01-27T11:03:54.453Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/index.html</loc>
@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/about.html</loc>
-    <lastmod>2025-01-26T10:38:30.748Z</lastmod>
+    <lastmod>2025-01-27T11:02:42.731Z</lastmod>
   </url>
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch07-beyond-linearity/Ch07-nonlin-lab.html</loc>
@@ -127,5 +127,9 @@
   <url>
     <loc>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/Ch05-resample-lab.html</loc>
     <lastmod>2025-01-21T14:10:46.857Z</lastmod>
+  </url>
+  <url>
+    <loc>https://orenbochman.github.io/notes-islr/posts/test/index.html</loc>
+    <lastmod>2025-01-27T14:17:03.614Z</lastmod>
   </url>
 </urlset>

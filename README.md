@@ -18,3 +18,18 @@ done:
 - stub for all chapter
 - podcasts for all chapters
 - convert them all to mp3
+
+
+## Colors
+
+-   `#8B0015` - Chili
+-   `#EF4056` - Bloom
+-   `#AB0520` - Arizona Red
+-   `#378DBD` - Oasis
+-   `#1E5288` - Azurite
+-   `#FFFFFF` - White
+-   `#E2E9EB` - Cool Gray
+-   `#2A9BB7` - Blue Green
+
+
+[![](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
