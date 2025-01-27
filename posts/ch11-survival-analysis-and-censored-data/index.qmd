@@ -25,7 +25,6 @@ Survival Analysis
 There are a number of big words in this chapter, but like all statistics they are intuitive in some sense. For survival analysis, it helps to remember that we are doing a regression but with a twist. The twist is that  we don't have data for all subjects throughout the trial since some may die in the middle. So let us start by breaking them down:
 
 
-
 Survival Analysis
 : A set of statistical methods for [analyzing the time until an event occurs]{.mark}. It is used when dealing with data where the outcome variable is the time until an event, and it's common to have some data where the event hasn't occurred by the end of the observation period (censored data).
 
@@ -114,9 +113,9 @@ The chapter is divided into the following sections:
 
 ## Introduction
 
-    - Describes survival analysis and censored data.
-    - Mentions examples of survival analysis in medical studies and other applications.
-    - Notes that survival analysis techniques can be applied to non-time-related data as well.
+- Describes survival analysis and censored data.
+- Mentions examples of survival analysis in medical studies and other applications.
+- Notes that survival analysis techniques can be applied to non-time-related data as well.
 
 
 ## Survival and Censoring Times {#sec-11-1}
@@ -184,7 +183,7 @@ may wrongly suggest that males survive longer than females.
 
 ::: {#fig-v11.2 .column-margin}
 
-![](kaplan-meier.png)
+![Kaplan & Meier](kaplan-meier.png)
 
 [Edward Kaplan](https://en.wikipedia.org/wiki/Edward_L._Kaplan) and [Paul Meier](https://en.wikipedia.org/wiki/Paul_Meier_(statistician)), who developed the [Kaplan-Meier](https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator) estimator in 1958.
 :::
@@ -194,6 +193,7 @@ may wrongly suggest that males survive longer than females.
     $$
     S(t) = Pr(T > t) \qquad
     $$ {#eq-survival-function}
+
     - This decreasing function quantifies the probability of surviving past time t.
     - For example, suppose that a company is interested in modeling customer churn. Let T represent the time that a customer cancels a subscription to the company’s service.
     - Then S(t) represents the probability that a customer cancels later than time t. The larger the value of S(t), the less likely that the customer will cancel before time t
@@ -213,7 +213,15 @@ study.
     - Presents the Kaplan-Meier estimator for estimating the survival curve in the presence of censoring.
     - Illustrates the Kaplan-Meier survival curve using the BrainCancer dataset.
 
+
 ## The Log-Rank Test {#sec-11-4}
+
+::: {#fig-v11.4 .column-margin}
+
+![Mantel & Haenszel](Mantel-Haenszel.png)
+
+[Nathan Mantel](https://en.wikipedia.org/wiki/Nathan_Mantel) and [William Haenszel](https://en.wikipedia.org/wiki/William_M._Haenszel), who developed the [Mantel-Haenszel estimator](https://en.wikipedia.org/wiki/Mantel%E2%80%93Haenszel_estimator) in 1959, which is the basis for the [log-rank test](https://en.wikipedia.org/wiki/Logrank_test).
+:::
 
 -  Females seem to fare a little better up to about 50 months, but then the two curves both level off to about 50%. How can we carry out a formal test of equality of the two
 survival curves?
@@ -295,6 +303,13 @@ $$ {#eq-hazard-function}
 {{< video https://youtu.be/lP42Vly2MVg?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
 Proportional Hazards Model
+:::
+
+::: {#fig-v11.5 .column-margin}
+
+![](david_cox.png)
+
+[David Cox](https://en.wikipedia.org/wiki/David_Cox_(statistician)), who developed the [Cox Proportional Hazards Model](https://en.wikipedia.org/wiki/Proportional_hazards_model) in 1972.
 :::
 
 - Presents the proportional hazards assumption and explains the baseline hazard.
@@ -414,14 +429,13 @@ The Cox model depends on the assumption that the hazard ratio between two indivi
 
 ### Survival Trees {#sec-11-7-5}
 
-
-{{< lipsum 5 >}}
+- Survival trees are a modification of classification and regression trees that use a split criterion that maximizes the difference between the survival curves in the resulting daughter nodes.
+- Survival trees can then be used to create random survival forests.
+- C.f. [@Hamad2011] [A review of survival trees](hamad2011.pdf)
 
 ## Lab: Survival Analysis {#sec-11-8}
 
 - Provides hands-on examples of survival analysis using Python libraries.
-- Analyzes the BrainCancer and Publication datasets using Kaplan-Meier curves, log-rank tests, and Cox's proportional hazards model.
-- Simulates call center data and analyzes the wait times with survival analysis techniques.
 
 ### Brain Cancer Data {#sec-11-8-1}
 
@@ -431,12 +445,11 @@ The Cox model depends on the assumption that the hazard ratio between two indivi
 Survival Curves Brain Cancer Data
 :::
 
-
-- Application to the Brain Cancer Dataset
+- Application to the Brain Cancer Dataset is [here](Ch11-surv-lab-1.qmd)
+    - Analyzes the BrainCancer and Publication datasets using Kaplan-Meier curves, log-rank tests, and Cox's proportional hazards model.
     - Comparing the survival times of females and males on the BrainCancer data gives a log-rank test statistic of $W = 1.2$, which corresponds to a two-sided p-value of 0.2.
     - Thus, we cannot reject the null hypothesis of no difference in survival curves between females and males.
     - The log-rank test is closely related to Cox’s proportional hazards model, which we discuss next.
-
 
 ### Publication Data {#sec-11-8-2}
 
@@ -446,17 +459,19 @@ Survival Curves Brain Cancer Data
 Cox Models I Publication Data
 :::
 
-{{< lipsum 5 >}}
+[See here](Ch11-surv-lab-2.qmd)
 
 ### Call Center Data {#sec-11-8-3}
 
 ::: {#fig-l3r .column-margin}
 {{< video https://youtu.be/w6VAT8jqTjk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
-Cox Models II Call Center Data
+
+Cox Models II - Call Center Data
 :::
 
-{{< lipsum 5 >}}
+- Simulates call center data and analyzes the wait times with survival analysis techniques.
+- [See here](Ch11-surv-lab-3.qmd)
 
 
 ## Exercises {#sec-11-9}
@@ -497,7 +512,7 @@ Interview with Sir David Cox - On Survival Analysis
 
 - [Kaplan, E. L., & Meier, P. (1958). Nonparametric estimation from incomplete observations. Journal of the American statistical association, 53(282), 457-481.](kaplan58.pdf)
 - [Cox, D. R. (1972). Regression models and life-tables. Journal of the Royal Statistical Society. Series B (Methodological), 34(2), 187-220.](cox1972.pdf)
-- [Asymptotically Efficient Rank Invariant Test Procedures](peto1972.pdf) by Richard Peto and Julian Peto
+- [Asymptotically Efficient Rank Invariant Test Procedures](peto1972.pdf) by Richard Peto and Julian Peto is the source of the log-rank test.
 - [Lin, D. Y., Wei, L. J., & Ying, Z. (1993). Checking the Cox model with cumulative sums of martingale-based residuals. Biometrika, 80(3), 557-572.](lin93.pdf)
 - [Therneau, T. M., & Grambsch, P. M. (2000). Modeling survival data: extending the Cox model. Springer Science & Business Media.](https://www.springer.com/gp/book/9780387987842)
 
@@ -506,7 +521,7 @@ Interview with Sir David Cox - On Survival Analysis
 - [The Kumaraswamy Weibull distribution: A generalization of the Weibull probability distribution](marcelinoA2011.pdf) by Gauss M. Cordeiro, Edwin M. M. Ortega, Marcelino A. de Pascoa
 - [A Nonidentifiability Aspect of the Problem of Competing Risks](tsiatis1975.pdf) by Anastasios A. Tsiatis
 
-## Slides {#sec-11-11}
+## Slides {#sec-11-12}
 
 ![Chapter Slides](slides.pdf){.col-page width="5in" height="3.8in"}
 

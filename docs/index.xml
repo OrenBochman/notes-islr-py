@@ -8399,9 +8399,11 @@ A modification of classification and regression trees for use in survival analys
 </ul>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<pre><code>- Describes survival analysis and censored data.
-- Mentions examples of survival analysis in medical studies and other applications.
-- Notes that survival analysis techniques can be applied to non-time-related data as well.</code></pre>
+<ul>
+<li>Describes survival analysis and censored data.</li>
+<li>Mentions examples of survival analysis in medical studies and other applications.</li>
+<li>Notes that survival analysis techniques can be applied to non-time-related data as well.</li>
+</ul>
 </section>
 <section id="sec-11-1" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-11-1">Survival and Censoring Times</h2>
@@ -8466,7 +8468,12 @@ Figure&nbsp;1: Introduction to Survival Data and Censoring
 <div class="no-row-height column-margin column-container"><div id="fig-v11.2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-v11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="kaplan-meier.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;2: Edward Kaplan and Paul Meier, who developed the Kaplan-Meier estimator in 1958."><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/kaplan-meier.png" class="img-fluid figure-img"></a>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="kaplan-meier.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Kaplan &amp; Meier"><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/kaplan-meier.png" class="img-fluid figure-img"></a></p>
+<figcaption>Kaplan &amp; Meier</figcaption>
+</figure>
+</div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: <a href="https://en.wikipedia.org/wiki/Edward_L._Kaplan">Edward Kaplan</a> and <a href="https://en.wikipedia.org/wiki/Paul_Meier_(statistician)">Paul Meier</a>, who developed the <a href="https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator">Kaplan-Meier</a> estimator in 1958.
@@ -8475,10 +8482,10 @@ Figure&nbsp;2: <a href="https://en.wikipedia.org/wiki/Edward_L._Kaplan">Edward K
 </div></div><ul>
 <li>The Survival Curve
 <ul>
-<li>The survival function (or curve) is defined as <span id="eq-survival-function"><img src="https://latex.codecogs.com/png.latex?%0A%20%20S(t)%20=%20Pr(T%20%3E%20t)%20%5Cqquad%0A%20%20%20%5Ctag%7B3%7D"></span></li>
-<li>This decreasing function quantifies the probability of surviving past time t.</li>
-<li>For example, suppose that a company is interested in modeling customer churn. Let T represent the time that a customer cancels a subscription to the company’s service.</li>
-<li>Then S(t) represents the probability that a customer cancels later than time t. The larger the value of S(t), the less likely that the customer will cancel before time t</li>
+<li><p>The survival function (or curve) is defined as <span id="eq-survival-function"><img src="https://latex.codecogs.com/png.latex?%0A%20%20S(t)%20=%20Pr(T%20%3E%20t)%20%5Cqquad%0A%20%20%20%5Ctag%7B3%7D"></span></p></li>
+<li><p>This decreasing function quantifies the probability of surviving past time t.</p></li>
+<li><p>For example, suppose that a company is interested in modeling customer churn. Let T represent the time that a customer cancels a subscription to the company’s service.</p></li>
+<li><p>Then S(t) represents the probability that a customer cancels later than time t. The larger the value of S(t), the less likely that the customer will cancel before time t</p></li>
 </ul></li>
 <li>Estimating the Survival Curve
 <ul>
@@ -8500,7 +8507,22 @@ Figure&nbsp;2: <a href="https://en.wikipedia.org/wiki/Edward_L._Kaplan">Edward K
 </section>
 <section id="sec-11-4" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-11-4">The Log-Rank Test</h2>
-<ul>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v11.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="Mantel-Haenszel.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Mantel &amp; Haenszel"><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/Mantel-Haenszel.png" class="img-fluid figure-img"></a></p>
+<figcaption>Mantel &amp; Haenszel</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: <a href="https://en.wikipedia.org/wiki/Nathan_Mantel">Nathan Mantel</a> and <a href="https://en.wikipedia.org/wiki/William_M._Haenszel">William Haenszel</a>, who developed the <a href="https://en.wikipedia.org/wiki/Mantel%E2%80%93Haenszel_estimator">Mantel-Haenszel estimator</a> in 1959, which is the basis for the <a href="https://en.wikipedia.org/wiki/Logrank_test">log-rank test</a>.
+</figcaption>
+</figure>
+</div></div><ul>
 <li>Females seem to fare a little better up to about 50 months, but then the two curves both level off to about 50%. How can we carry out a formal test of equality of the two survival curves?</li>
 <li>At first glance, a two-sample t-test seems like an obvious choice: but the presence of censoring again creates a complication.</li>
 <li>To overcome this challenge, we will conduct a log-rank test.<br>
@@ -8605,10 +8627,20 @@ Table&nbsp;1: Among the set of patients at risk at time <img src="https://latex.
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lP42Vly2MVg?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Proportional Hazards Model
+Figure&nbsp;4: Proportional Hazards Model
 </figcaption>
 </figure>
-</div></div><ul>
+</div><div id="fig-v11.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v11.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="david_cox.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5: David Cox, who developed the Cox Proportional Hazards Model in 1972."><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/david_cox.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: <a href="https://en.wikipedia.org/wiki/David_Cox_(statistician)">David Cox</a>, who developed the <a href="https://en.wikipedia.org/wiki/Proportional_hazards_model">Cox Proportional Hazards Model</a> in 1972.
+</figcaption>
+</figure>
+</div></div>
+<ul>
 <li>Presents the proportional hazards assumption and explains the baseline hazard.</li>
 </ul>
 <p><span id="eq-proportional-hazards"><img src="https://latex.codecogs.com/png.latex?%0Ah(t%5Cmid%20x_i)%20=%20h_0(t)%20exp%20%5Cleft(%20%5Csum_%7Bj=1%7D%5Ep%20x_%7Bij%7D%20%5Cbeta_j%20%5Cright)%20%5Cqquad%0A%5Ctag%7B7%7D"></span></p>
@@ -8621,13 +8653,13 @@ Figure&nbsp;3: Proportional Hazards Model
 <div aria-describedby="fig-11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="fig-11.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Understanding Cox model assumptions"><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/fig-11.4.png" class="img-fluid figure-img"></a></p>
+<p><a href="fig-11.4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Understanding Cox model assumptions"><img src="https://orenbochman.github.io/notes-islr/posts/ch11-survival-analysis-and-censored-data/fig-11.4.png" class="img-fluid figure-img"></a></p>
 <figcaption>Understanding Cox model assumptions</figcaption>
 </figure>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: <strong>Top</strong>: In a simple example with p = 1 and a binary covariate <img src="https://latex.codecogs.com/png.latex?x_i%20%5Cin%20%7B0,%201%7D">, the log hazard and the survival function under the model (11.14) are shown (green for <img src="https://latex.codecogs.com/png.latex?x_i%20=%200"> and black for <img src="https://latex.codecogs.com/png.latex?x_i%20=%201">). Because of the proportional hazards assumption (11.14), the log hazard functions differ by a constant, and the survival functions do not cross.<br>
+Figure&nbsp;6: <strong>Top</strong>: In a simple example with p = 1 and a binary covariate <img src="https://latex.codecogs.com/png.latex?x_i%20%5Cin%20%7B0,%201%7D">, the log hazard and the survival function under the model (11.14) are shown (green for <img src="https://latex.codecogs.com/png.latex?x_i%20=%200"> and black for <img src="https://latex.codecogs.com/png.latex?x_i%20=%201">). Because of the proportional hazards assumption (11.14), the log hazard functions differ by a constant, and the survival functions do not cross.<br>
 <strong>Bottom</strong>: Again we have a single binary covariate <img src="https://latex.codecogs.com/png.latex?x_i%20%5Cin%20%7B0,%201%7D">. However, the proportional hazards assumption (11.14) does not hold. The log hazard functions cross, as do the survival functions.
 </figcaption>
 </figure>
@@ -8652,7 +8684,7 @@ Figure&nbsp;4: <strong>Top</strong>: In a simple example with p = 1 and a binary
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ujIMPpl2Tr0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Estimation of Cox Model with Examples
+Figure&nbsp;7: Estimation of Cox Model with Examples
 </figcaption>
 </figure>
 </div></div><ul>
@@ -8688,7 +8720,7 @@ Figure&nbsp;5: Estimation of Cox Model with Examples
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/rRYfWAsG4RI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v11.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Model Evaluation and Further Topics
+Figure&nbsp;8: Model Evaluation and Further Topics
 </figcaption>
 </figure>
 </div></div><ul>
@@ -8738,19 +8770,17 @@ Figure&nbsp;6: Model Evaluation and Further Topics
 </section>
 <section id="sec-11-7-5" class="level3">
 <h3 class="anchored" data-anchor-id="sec-11-7-5">Survival Trees</h3>
-<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
-<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
-<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
-<p>Nullam dapibus cursus dolor sit amet consequat. Nulla facilisi. Curabitur vel nulla non magna lacinia tincidunt. Duis porttitor quam leo, et blandit velit efficitur ut. Etiam auctor tincidunt porttitor. Phasellus sed accumsan mi. Fusce ut erat dui. Suspendisse eu augue eget turpis condimentum finibus eu non lorem. Donec finibus eros eu ante condimentum, sed pharetra sapien sagittis. Phasellus non dolor ac ante mollis auctor nec et sapien. Pellentesque vulputate at nisi eu tincidunt. Vestibulum at dolor aliquam, hendrerit purus eu, eleifend massa. Morbi consectetur eros id tincidunt gravida. Fusce ut enim quis orci hendrerit lacinia sed vitae enim.</p>
-<p>Nulla eget cursus ipsum. Vivamus porttitor leo diam, sed volutpat lectus facilisis sit amet. Maecenas et pulvinar metus. Ut at dignissim tellus. In in tincidunt elit. Etiam vulputate lobortis arcu, vel faucibus leo lobortis ac. Aliquam erat volutpat. In interdum orci ac est euismod euismod. Nunc eleifend tristique risus, at lacinia odio commodo in. Sed aliquet ligula odio, sed tempor neque ultricies sit amet.</p>
+<ul>
+<li>Survival trees are a modification of classification and regression trees that use a split criterion that maximizes the difference between the survival curves in the resulting daughter nodes.</li>
+<li>Survival trees can then be used to create random survival forests.</li>
+<li>C.f. <span class="citation" data-cites="Hamad2011">(Bou-Hamad, Larocque, and Ben-Ameur 2011)</span> <a href="hamad2011.pdf">A review of survival trees</a></li>
+</ul>
 </section>
 </section>
 <section id="sec-11-8" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="sec-11-8">Lab: Survival Analysis</h2>
 <ul>
 <li>Provides hands-on examples of survival analysis using Python libraries.</li>
-<li>Analyzes the BrainCancer and Publication datasets using Kaplan-Meier curves, log-rank tests, and Cox’s proportional hazards model.</li>
-<li>Simulates call center data and analyzes the wait times with survival analysis techniques.</li>
 </ul>
 <section id="sec-11-8-1" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="sec-11-8-1">Brain Cancer Data</h3>
@@ -8761,12 +8791,13 @@ Figure&nbsp;6: Model Evaluation and Further Topics
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/hfKYYexJfuY?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l1r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Survival Curves Brain Cancer Data
+Figure&nbsp;9: Survival Curves Brain Cancer Data
 </figcaption>
 </figure>
 </div></div><ul>
-<li>Application to the Brain Cancer Dataset
+<li>Application to the Brain Cancer Dataset is <a href="../../posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab-1.html">here</a>
 <ul>
+<li>Analyzes the BrainCancer and Publication datasets using Kaplan-Meier curves, log-rank tests, and Cox’s proportional hazards model.</li>
 <li>Comparing the survival times of females and males on the BrainCancer data gives a log-rank test statistic of <img src="https://latex.codecogs.com/png.latex?W%20=%201.2">, which corresponds to a two-sided p-value of 0.2.</li>
 <li>Thus, we cannot reject the null hypothesis of no difference in survival curves between females and males.</li>
 <li>The log-rank test is closely related to Cox’s proportional hazards model, which we discuss next.</li>
@@ -8782,14 +8813,10 @@ Figure&nbsp;7: Survival Curves Brain Cancer Data
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/j3rcoz4u7m8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l2r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Cox Models I Publication Data
+Figure&nbsp;10: Cox Models I Publication Data
 </figcaption>
 </figure>
-</div></div><p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
-<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
-<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
-<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
-<p>Ut ut condimentum augue, nec eleifend nisl. Sed facilisis egestas odio ac pretium. Pellentesque consequat magna sed venenatis sagittis. Vivamus feugiat lobortis magna vitae accumsan. Pellentesque euismod malesuada hendrerit. Ut non mauris non arcu condimentum sodales vitae vitae dolor. Nullam dapibus, velit eget lacinia rutrum, ipsum justo malesuada odio, et lobortis sapien magna vel lacus. Nulla purus neque, hendrerit non malesuada eget, mattis vel erat. Suspendisse potenti.</p>
+</div></div><p><a href="../../posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab-2.html">See here</a></p>
 </section>
 <section id="sec-11-8-3" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="sec-11-8-3">Call Center Data</h3>
@@ -8800,14 +8827,13 @@ Figure&nbsp;8: Cox Models I Publication Data
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/w6VAT8jqTjk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Cox Models II Call Center Data
+Figure&nbsp;11: Cox Models II - Call Center Data
 </figcaption>
 </figure>
-</div></div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<p>Nunc ac dignissim magna. Vestibulum vitae egestas elit. Proin feugiat leo quis ante condimentum, eu ornare mauris feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris cursus laoreet ex, dignissim bibendum est posuere iaculis. Suspendisse et maximus elit. In fringilla gravida ornare. Aenean id lectus pulvinar, sagittis felis nec, rutrum risus. Nam vel neque eu arcu blandit fringilla et in quam. Aliquam luctus est sit amet vestibulum eleifend. Phasellus elementum sagittis molestie. Proin tempor lorem arcu, at condimentum purus volutpat eu. Fusce et pellentesque ligula. Pellentesque id tellus at erat luctus fringilla. Suspendisse potenti.</p>
-<p>Etiam maximus accumsan gravida. Maecenas at nunc dignissim, euismod enim ac, bibendum ipsum. Maecenas vehicula velit in nisl aliquet ultricies. Nam eget massa interdum, maximus arcu vel, pretium erat. Maecenas sit amet tempor purus, vitae aliquet nunc. Vivamus cursus urna velit, eleifend dictum magna laoreet ut. Duis eu erat mollis, blandit magna id, tincidunt ipsum. Integer massa nibh, commodo eu ex vel, venenatis efficitur ligula. Integer convallis lacus elit, maximus eleifend lacus ornare ac. Vestibulum scelerisque viverra urna id lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eget enim at diam bibendum tincidunt eu non purus. Nullam id magna ultrices, sodales metus viverra, tempus turpis.</p>
-<p>Duis ornare ex ac iaculis pretium. Maecenas sagittis odio id erat pharetra, sit amet consectetur quam sollicitudin. Vivamus pharetra quam purus, nec sagittis risus pretium at. Nullam feugiat, turpis ac accumsan interdum, sem tellus blandit neque, id vulputate diam quam semper nisl. Donec sit amet enim at neque porttitor aliquet. Phasellus facilisis nulla eget placerat eleifend. Vestibulum non egestas eros, eget lobortis ipsum. Nulla rutrum massa eget enim aliquam, id porttitor erat luctus. Nunc sagittis quis eros eu sagittis. Pellentesque dictum, erat at pellentesque sollicitudin, justo augue pulvinar metus, quis rutrum est mi nec felis. Vestibulum efficitur mi lorem, at elementum purus tincidunt a. Aliquam finibus enim magna, vitae pellentesque erat faucibus at. Nulla mauris tellus, imperdiet id lobortis et, dignissim condimentum ipsum. Morbi nulla orci, varius at aliquet sed, facilisis id tortor. Donec ut urna nisi.</p>
-<p>Aenean placerat luctus tortor vitae molestie. Nulla at aliquet nulla. Sed efficitur tellus orci, sed fringilla lectus laoreet eget. Vivamus maximus quam sit amet arcu dignissim, sed accumsan massa ullamcorper. Sed iaculis tincidunt feugiat. Nulla in est at nunc ultricies dictum ut vitae nunc. Aenean convallis vel diam at malesuada. Suspendisse arcu libero, vehicula tempus ultrices a, placerat sit amet tortor. Sed dictum id nulla commodo mattis. Aliquam mollis, nunc eu tristique faucibus, purus lacus tincidunt nulla, ac pretium lorem nunc ut enim. Curabitur eget mattis nisl, vitae sodales augue. Nam felis massa, bibendum sit amet nulla vel, vulputate rutrum lacus. Aenean convallis odio pharetra nulla mattis consequat.</p>
+</div></div><ul>
+<li>Simulates call center data and analyzes the wait times with survival analysis techniques.</li>
+<li><a href="../../posts/ch11-survival-analysis-and-censored-data/Ch11-surv-lab-3.html">See here</a></li>
+</ul>
 </section>
 </section>
 <section id="sec-11-9" class="level2">
@@ -8835,7 +8861,7 @@ Figure&nbsp;9: Cox Models II Call Center Data
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/TiHCNRUiLKc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-l3r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10: Interview with Sir David Cox - On Survival Analysis
+Figure&nbsp;12: Interview with Sir David Cox - On Survival Analysis
 </figcaption>
 </figure>
 </div></div><ul>
@@ -8861,7 +8887,7 @@ Figure&nbsp;10: Interview with Sir David Cox - On Survival Analysis
 <ul>
 <li><a href="kaplan58.pdf">Kaplan, E. L., &amp; Meier, P. (1958). Nonparametric estimation from incomplete observations. Journal of the American statistical association, 53(282), 457-481.</a></li>
 <li><a href="cox1972.pdf">Cox, D. R. (1972). Regression models and life-tables. Journal of the Royal Statistical Society. Series B (Methodological), 34(2), 187-220.</a></li>
-<li><a href="peto1972.pdf">Asymptotically Efficient Rank Invariant Test Procedures</a> by Richard Peto and Julian Peto</li>
+<li><a href="peto1972.pdf">Asymptotically Efficient Rank Invariant Test Procedures</a> by Richard Peto and Julian Peto is the source of the log-rank test.</li>
 <li><a href="lin93.pdf">Lin, D. Y., Wei, L. J., &amp; Ying, Z. (1993). Checking the Cox model with cumulative sums of martingale-based residuals. Biometrika, 80(3), 557-572.</a></li>
 <li><a href="https://www.springer.com/gp/book/9780387987842">Therneau, T. M., &amp; Grambsch, P. M. (2000). Modeling survival data: extending the Cox model. Springer Science &amp; Business Media.</a></li>
 </ul>
@@ -8874,11 +8900,11 @@ Figure&nbsp;10: Interview with Sir David Cox - On Survival Analysis
 </ul>
 </section>
 </section>
-<section id="sec-11-11" class="level2">
-<h2 class="anchored" data-anchor-id="sec-11-11">Slides</h2>
+<section id="sec-11-12" class="level2">
+<h2 class="anchored" data-anchor-id="sec-11-12">Slides</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
@@ -8887,15 +8913,20 @@ Figure&nbsp;10: Interview with Sir David Cox - On Survival Analysis
 <h2 class="anchored" data-anchor-id="sec-11-13">Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ch11.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Chapter"><embed src="ch11.pdf" class="col-page" width="800" height="1000"></a></p>
+<p><a href="ch11.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Chapter"><embed src="ch11.pdf" class="col-page" width="800" height="1000"></a></p>
 <figcaption>Chapter</figcaption>
 </figure>
 </div>
 
 
+
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-Hamad2011" class="csl-entry">
+Bou-Hamad, Imad, Denis Larocque, and Hatem Ben-Ameur. 2011. <span>“<span class="nocase">A review of survival trees</span>.”</span> <em>Statistics Surveys</em> 5 (none): 44–71. <a href="https://doi.org/10.1214/09-SS047">https://doi.org/10.1214/09-SS047</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
   title = {Chapter 11: {Survival} {Analysis} and {Censored} {Data}},
   date = {2024-09-01},
