@@ -17,7 +17,7 @@ title-block-banner: images/banner_black_3.jpg
 image-placeholder: images/dnn_cover.png
 ---
 
-This are some notes on one of my favorite books of all times: *An Introduction to Statistical Learning* by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. And in this note perhaps I can explain why I like it so much, despite much criticism that are scattered throughout the notes.
+This are some notes on one of my favorite books of all times: *An Introduction to Statistical Learning* by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani. And in this note perhaps I can explain why I like it so much, despite much criticism scattered throughout these notes.
 
 The book is available for free from the authors' website. The book is a great introduction to statistical learning and is a good starting point for anyone interested in machine learning. The book is a bit light on the maths but it is a good introduction to the concepts and the authors have a more advanced book called *The Elements of Statistical Learning* which is more mathematically rigorous.
 

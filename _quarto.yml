@@ -14,9 +14,9 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/
+        href: https://github.com/OrenBochman/notes-islr-py
       - icon: twitter
-        href: https://twitter.com
+        href: https://x.com/orenbochman
       - icon: rss
         href: index.xml
   sidebar:
@@ -25,32 +25,63 @@ website:
       - section: "Book"
         contents:                
           - href: posts/ch01/index.qmd
-            text: 'Chapter 1: Introduction'
+            text: '1: Introduction'
           - href: posts/ch02/index.qmd
-            text: 'Chapter 2: Statistical Learning'
+            text: '2: Statistical Learning'
           - href: posts/ch03/index.qmd
-            text: 'Chapter 3: Linear Regression'
+            text: '3: Linear Regression'
           - href: posts/ch04/index.qmd
-            text: 'Chapter 4: Classification'
+            text: '4: Classification'
           - href: posts/ch05/index.qmd
-            text: 'Chapter 5: Resampling Methods'
+            text: '5: Resampling Methods'
           - href: posts/ch06/index.qmd
-            text: 'Chapter 6: Linear Model Selection and Regularization'
+            text: '6: Model Selection & Regularization'
           - href: posts/ch07/index.qmd
-            text: 'Chapter 7: Moving Beyond Linearity'
+            text: '7: Moving Beyond Linearity'
           - href: posts/ch08/index.qmd
-            text: 'Chapter 8: Tree-Based Methods'
+            text: '8: Tree-Based Methods'
           - href: posts/ch09/index.qmd
-            text: 'Chapter 9: Support Vector Machines'
+            text: '9: Support Vector Machines'
           - href: posts/ch10/index.qmd
-            text: 'Chapter 10: Deep Learning'
+            text: '10: Deep Learning'
           - href: posts/ch11/index.qmd
-            text: 'Chapter 11: Survival Analysis and Censored Data'
+            text: '11: Survival Analysis & Censored Data'
           - href: posts/ch12/index.qmd
-            text: 'Chapter 12: Unsupervised Learning'
+            text: '12: Unsupervised Learning'
           - href: posts/ch13/index.qmd
-            text: 'Chapter 13: Multiple Testing'
-       
+            text: '13: Multiple Testing'
+      - section: "Python Labs"
+        contents:                
+          - href: posts/ch02/Ch02-statlearn-lab.qmd          
+            text: 'L2.1 Introduction to Python'
+          - href: posts/ch02/Ch02-statlearn-lab-graphics.qmd
+            text: 'L2.2 Graphics'            
+          - href: posts/ch03/Ch03-linreg-lab.qmd          
+            text: 'L3: Linear Regression'
+          - href: posts/ch04/Ch04-classification-lab.qmd
+            text: 'L4: Classification'
+          - href: posts/ch05/Ch05-resample-lab.qmd
+            text: 'L5: Resampling Methods'
+          - href: posts/ch06/Ch06-varselect-lab.qmd
+            text: 'L6: Model Selection & Regularization'
+          - href: posts/ch07/Ch07-nonlin-lab.qmd
+            text: 'L7: Moving Beyond Linearity'
+          - href: posts/ch08/Ch08-baggboost-lab.qmd
+            text: 'L8: Tree-Based Methods'
+          - href: posts/ch09/Ch09-svm-lab.qmd
+            text: 'L9: Support Vector Machines'
+          - href: posts/ch10/Ch10-deeplearning-lab.qmd
+            text: 'L10: Deep Learning'
+          - href: posts/ch11/Ch11-surv-lab-1.qmd
+            text: 'L11.1: Survival Analysis 1'
+          - href: posts/ch11/Ch11-surv-lab-2.qmd
+            text: 'L11:.2 Survival Analysis 2'
+          - href: posts/ch11/Ch11-surv-lab-3.qmd
+            text: 'L11.3: Survival Analysis 3'            
+          - href: posts/ch12/Ch12-unsup-lab.qmd
+            text: 'L12: Unsupervised Learning'
+          - href: posts/ch13/Ch13-multiple-lab.qmd
+            text: 'L13: Multiple Testing'
   site-url: https://orenbochman.github.io/notes-islr/
   description: "Course and Research notes"
   repo-url: https://github.com/OrenBochman/notes-islr-py/
