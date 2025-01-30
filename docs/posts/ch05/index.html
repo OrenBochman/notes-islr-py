@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Oren Bochman">
+<meta name="keywords" content="statistical learning, resampling methods, cross-validation, bootstrap, permutation tests, jackknife">
+<meta name="description" content="Resampling methods are an indispensable in the age of big data statistics">
 
-<title>The Problem – An Introduction to Statistical Learning</title>
+<title>Chapter 5: Resampling Methods – An Introduction to Statistical Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-dark-007d2adcd9597ba82898f6769454e788.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,54 +84,11 @@ background-size: cover;
       }
 </style>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -184,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Problem</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch05/index.html">Chapter 5: Resampling Methods</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -193,10 +155,19 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The Problem</h1>
-            <p class="subtitle lead">flashcards</p>
-                      </div>
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch05/index.html">Chapter 5: Resampling Methods</a></li></ol></nav>
+      <h1 class="title">Chapter 5: Resampling Methods</h1>
+                  <div>
+        <div class="description">
+          Resampling methods are an indispensable in the age of big data statistics
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">notes</div>
+                <div class="quarto-category">edx</div>
+                <div class="quarto-category">podcast</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -212,13 +183,20 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, March 1, 2027</p>
+        <p class="date">Wednesday, July 10, 2024</p>
       </div>
     </div>
     
       
     </div>
     
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>statistical learning, resampling methods, cross-validation, bootstrap, permutation tests, jackknife</p>
+    </div>
+  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
@@ -260,7 +238,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/ch05/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/ch05/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 5: Resampling Methods</span></a>
   </div>
 </li>
@@ -316,223 +294,281 @@ window.Quarto = {
   </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#rethinking-test-train-and-validation-sets" id="toc-rethinking-test-train-and-validation-sets" class="nav-link active" data-scroll-target="#rethinking-test-train-and-validation-sets">rethinking test train and validation sets</a></li>
+  <li><a href="#outline-of-resampling-methods" id="toc-outline-of-resampling-methods" class="nav-link" data-scroll-target="#outline-of-resampling-methods">Outline of Resampling Methods</a></li>
+  <li><a href="#important-considerations" id="toc-important-considerations" class="nav-link" data-scroll-target="#important-considerations">Important Considerations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#the-chapter" id="toc-the-chapter" class="nav-link" data-scroll-target="#the-chapter">The chapter</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch05/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+
+
+
+
+
+
+<div class="no-row-height column-margin column-container"><div id="fig-v5.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/6eWODQJrMKs?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-v5.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: K-fold Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-v5.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v5.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/jgoa28FR__Y?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v5.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Cross Validation the wrong and right way
+</figcaption>
+</figure>
+</div><div id="fig-5.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/h_LweqiIotE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: K-fold Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-5.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AMfvd_hLssE?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: More on the Bootstrap
+</figcaption>
+</figure>
+</div><div id="fig-5.6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/nwD-03ncOZ8?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Lab: Cross Validation
+</figcaption>
+</figure>
+</div><div id="fig-5.7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-5.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sM_Gve1K4II?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-5.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Lab: Bootstrap
+</figcaption>
+</figure>
+</div></div>
 
 
 
 
 
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What does it mean for data to be IID?
+TL;DR - Resampling Methods
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>IID</strong> stands for <strong>independent and identically distributed</strong>. It is a common assumption about data in statistical modeling. The data are comprised of <span class="math inline">n</span> i.i.d. copies of a random variable <span class="math inline">O</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is <span class="math inline">P_0</span>?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><span class="math inline">P_0</span> is the <strong>true probability distribution</strong> for <span class="math inline">O</span>. <span class="math inline">P_0</span> is also the <strong>data-generating distribution</strong>, which is the true probability distribution that generated the observed data. Statistical models are models for the true data-generating distribution.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a statistical model?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A statistical model <span class="math inline">M</span> is a set of probability distributions that represents what we know about the data-generating distribution <span class="math inline">P_0</span>. <span class="math inline">M</span> is the set of possible probability distributions for <span class="math inline">P_0</span>. The statistical model can be <strong>nonparametric</strong> or <strong>semiparametric</strong>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a nonparametric model?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>nonparametric model</strong> is a statistical model that does not assume a specific form or shape for the underlying distribution.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a semiparametric model?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>semiparametric model</strong> is a statistical model that has both parametric and nonparametric components.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is the target parameter?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The <strong>target parameter</strong> is a particular feature of the unknown probability distribution <span class="math inline">P_0</span> and is denoted as <span class="math inline">Ψ(P_0)</span>. The explicit definition of this mapping <span class="math inline">Ψ</span> on the statistical model requires that one defines <span class="math inline">Ψ(P)</span> at each <span class="math inline">P</span> in the statistical model. The target parameter has two interpretations: one as a parameter <span class="math inline">Ψ(P_0)</span> of a probability distribution <span class="math inline">P_0</span> and one as a causal parameter under additional (causal) assumptions.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a Super Learner?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>Super Learner</strong> is a flexible ensemble learner used to obtain an initial estimate of the data-generating distribution <span class="math inline">P_0</span>, or the relevant part <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Targeted Maximum Likelihood Estimation (TMLE)?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Targeted Maximum Likelihood Estimation (TMLE)</strong> is a <strong>two-step procedure</strong>. * The first step obtains an estimate of the relevant portion <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>. * The second step updates this initial fit in a step targeted toward making an optimal bias-variance tradeoff for the parameter of interest, instead of the overall density <span class="math inline">P_0</span>. TMLE is <strong>double robust</strong> and can incorporate data-adaptive likelihood-based estimation procedures. TMLE removes all the asymptotic residual bias of the initial estimator for the target parameter, if it uses a consistent estimator of the treatment mechanism.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is causal inference?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Causal inference</strong> is the process of drawing conclusions about cause-and-effect relationships based on observed data.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Estimating Equation Methodology?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Estimating Equation Methodology</strong> is a framework that defines the target parameter as a particular function of the true probability distribution of the data and estimates the target parameter accordingly with a plug-in estimator.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Marschak’s Maxim?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Marschak’s Maxim</strong> is the idea that statisticians should focus on answering questions that researchers truly care about by defining the target parameter of interest, identifying it, and then estimating it.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is double robustness?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Double robustness</strong> is a property of an estimator such that it is consistent if either the initial estimator of the relevant part of the data-generating distribution <span class="math inline">Q_0</span> or the estimator of the treatment mechanism is consistent.</p>
-</div>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Resampling in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Resampling in a nutshell"></a></p>
+<figcaption>Resampling in a nutshell</figcaption>
+</figure>
+</div>
+<p>Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+<blockquote class="blockquote">
+<p>“The bootstrap is a flexible and powerful statistical tool that can be used to quantify the uncertainty associated with a given estimator or statistical learning method.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success.”</p>
+</blockquote>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
+<dl>
+<dt>Model assessment</dt>
+<dd>
+the process of evaluating a model’s performance.
+</dd>
+<dt>Model selection</dt>
+<dd>
+the process of selecting the proper level of flexibility for a model.
+</dd>
+<dt>Test error rate</dt>
+<dd>
+the average error that results from using a ml method to predict the response on a new observation— that is, a measurement that was not used in training the method.
+</dd>
+<dt>Training error rate</dt>
+<dd>
+the error calculated by applying the ml method to the observations used in its training. This is often dramaticaly less then the test error rate.
+</dd>
+<dt>Cross-validation</dt>
+<dd>
+a resampling method used to estimate the test error associated with a given ml method to evaluate its performance or to select the appropriate level of flexibility.
+</dd>
+<dt>Validation set approach</dt>
+<dd>
+a method for estimating the test error associated with fitting a particular ml method on a set of observations that involves randomly dividing the available set of observations into two parts, a training set and a validation set.
+</dd>
+<dt>Validation set error rate</dt>
+<dd>
+typically assessed using MSE in the case of a quantitative response, provides an estimate of the test error rate.
+</dd>
+<dt>Leave-one-out cross-validation (LOOCV)</dt>
+<dd>
+a method that attempts to address the validation set approach’s drawbacks of high variability and overestimation of the test error rate; involves splitting the set of observations into two parts, but instead of creating two subsets of comparable size, a single observation is used for the validation set, and the remaining observations make up the training set.
+</dd>
+<dt>Resampling methods</dt>
+<dd>
+involve repeatedly drawing samples from a training set and refitting a model on each sample to get more information about the fitted model.
+</dd>
+<dt>Bootstrap</dt>
+<dd>
+a resampling method used to provide a measure of accuracy of a parameter estimate or of a given statistical learning method.
+</dd>
+<dt>Hold-out set</dt>
+<dd>
+the validation set.
+</dd>
+<dt>k-fold CV</dt>
+<dd>
+an alternative to LOOCV that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining k - 1 folds.
+</dd>
+</dl>
+<section id="rethinking-test-train-and-validation-sets" class="level2 unnumbered .callout-info">
+<h2 class="unnumbered anchored" data-anchor-id="rethinking-test-train-and-validation-sets">rethinking test train and validation sets</h2>
+<p>The definition I took away from this course were confused. I want to clarify things abit here. In the ML world, we have do a three way split as follows.</p>
+<ol type="1">
+<li>training set - used to learn the papemeters.</li>
+<li>test set - used to evaluate the model capacity to generalize to new data.</li>
+<li>validation set - used to tune the hyperparameters of the model.</li>
+</ol>
+<p>Once we are finished tuning the hyperparameters we will train the model on all the data using our best hyperparameters and use that for production.</p>
+<p>In statitical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.</p>
+<p>The validation set approach is the simplest but can suffer from if the split underrepresents classes of the data.</p>
+<p>LOOCV is computationally expensive for any but the smallest datasets - unless you use a clever trick to estimate it using a single training run. Using such tricks is quite common for work for bayesian hierarchical models. However as the chapter suggests there is also problem of correlation in LOOCV that can lead to high variance in the test error estimate.</p>
+<p>k-fold CV is the most common approach and is used in most ML libraries. It is a good balance between computational cost and accuracy. However it is still useful to consider how to pick the k-folds so that they faithfully represent all the classes in the data.</p>
+</section>
+<section id="outline-of-resampling-methods" class="level2">
+<h2 class="anchored" data-anchor-id="outline-of-resampling-methods">Outline of Resampling Methods</h2>
+<p>In this chapter we focus on resampling methods, specifically focusing on cross-validation and the bootstrap.</p>
+<p>Central Theme: Resampling methods offer robust techniques to estimate the performance of statistical learning methods and quantify uncertainty associated with estimations. This is achieved by repeatedly drawing samples from the training data and refitting models on these samples.</p>
+<p>Key Concepts and Methods</p>
+<ol type="1">
+<li><strong>Validation Set Approach</strong>: This approach involves splitting the dataset into a training set and a validation set. The model is trained on the training set, and its performance (e.g., using MSE for regression problems) is evaluated on the validation set.</li>
+</ol>
+<ul>
+<li>Drawbacks:
+<ul>
+<li>High variability in test error estimates depending on the random split.</li>
+<li>Reduced sample size for training as only the training set is used.</li>
+<li>Example: Using the Auto dataset, the sources demonstrate that a quadratic fit performs better than a linear fit for predicting ‘mpg’ based on ‘horsepower’.</li>
+</ul></li>
+</ul>
+<ol type="1">
+<li><strong>Cross-Validation</strong>: addresses the limitations of the validation set approach. It involves dividing the data into ‘K’ folds and iteratively using one fold for validation and the rest for training. This provides more stable performance estimates.
+<ul>
+<li>Leave-One-Out Cross-Validation (LOOCV): A special case where K equals the number of observations. Each observation is held out once for validation.
+<ul>
+<li>Benefits: Less bias in test error estimates.</li>
+<li>Drawbacks: High variance due to high correlation between the training sets.</li>
+</ul></li>
+<li>k-Fold Cross-Validation: A more general approach where K is typically 5 or 10, balancing bias and variance.
+<ul>
+<li>Example: Using the Auto dataset, k-fold cross-validation confirms the superiority of the quadratic fit over the linear fit.</li>
+</ul></li>
+</ul></li>
+<li><strong>The Bootstrap</strong>: is used to quantify uncertainty in an estimator. It involves generating multiple ‘bootstrap’ datasets by sampling with replacement from the original data. The statistic of interest is calculated for each bootstrap dataset, creating a distribution from which standard errors and confidence intervals can be derived.
+<ul>
+<li>Example: Simulating investment returns for assets X and Y, the sources illustrate how the bootstrap can be used to estimate the standard error of the optimal investment allocation (α).</li>
+</ul></li>
+<li><strong>Bootstrap Applications</strong>:
+<ul>
+<li><strong>Estimating Standard Errors</strong>: The bootstrap provides an alternative way to calculate standard errors for complex estimators where analytical formulas may not be available.</li>
+<li><strong>Confidence Intervals</strong>: Approximate confidence intervals can be derived from the distribution of bootstrap estimates.</li>
+<li><strong>Prediction Error Estimation</strong>: While the bootstrap is mainly used for standard error and confidence interval calculations, it’s not ideal for directly estimating prediction error due to the overlap in training data between bootstrap samples.</li>
+</ul></li>
+</ol>
+</section>
+<section id="important-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="important-considerations">Important Considerations</h2>
+<ul>
+<li>Cross-validation for classification: When dealing with classification problems, the metric used for evaluating performance is typically the misclassification rate instead of MSE.</li>
+<li>Choosing K: The choice of K in k-fold cross-validation involves a bias-variance trade-off. K = 5 or K = 10 generally provides a good balance.</li>
+<li>Pre-validation: This technique is specifically designed for comparing adaptively derived predictors with fixed predictors by creating a ‘fairer’ version of the adaptive predictor that hasn’t ‘seen’ the response variable.</li>
+<li>Bootstrap Sampling: The way bootstrap samples are generated needs careful consideration depending on the data structure. For instance, in time series data, blocks of consecutive observations are sampled instead of individual observations to preserve the temporal correlation.</li>
+</ul>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Resampling methods are indispensable tools for data scientists. Cross-validation and the bootstrap empower us to evaluate model performance, estimate uncertainties, and ultimately make more informed decisions based on our statistical learning models.</p>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+</section>
+<section id="the-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="the-chapter">The chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch05.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch05.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
 </div>
 
 
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2027,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
-  title = {The {Problem}},
-  date = {2027-03-01},
-  url = {https://orenbochman.github.io/notes-islr/posts/test/},
+  title = {Chapter 5: {Resampling} {Methods}},
+  date = {2024-07-10},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch05/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2027" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2027. <span>“The Problem.”</span> March 1, 2027. <a href="https://orenbochman.github.io/notes-islr/posts/test/">https://orenbochman.github.io/notes-islr/posts/test/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bochman, Oren. 2024. <span>“Chapter 5: Resampling Methods.”</span> July
+10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch05/">https://orenbochman.github.io/notes-islr/posts/ch05/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1202,7 +1238,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/test/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch05/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with 💛 and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
@@ -1240,6 +1276,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     })(document);
     </script>
   
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

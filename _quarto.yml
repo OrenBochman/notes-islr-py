@@ -7,6 +7,10 @@ project:
 website:
   title: "An Introduction to Statistical Learning"
   navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
     right:
       - about.qmd
       - icon: github
@@ -15,10 +19,41 @@ website:
         href: https://twitter.com
       - icon: rss
         href: index.xml
-
+  sidebar:
+    #background: "#f1de67" # Arylide Yellow
+    contents:
+      - section: "Book"
+        contents:                
+          - href: posts/ch01/index.qmd
+            text: 'Chapter 1: Introduction'
+          - href: posts/ch02/index.qmd
+            text: 'Chapter 2: Statistical Learning'
+          - href: posts/ch03/index.qmd
+            text: 'Chapter 3: Linear Regression'
+          - href: posts/ch04/index.qmd
+            text: 'Chapter 4: Classification'
+          - href: posts/ch05/index.qmd
+            text: 'Chapter 5: Resampling Methods'
+          - href: posts/ch06/index.qmd
+            text: 'Chapter 6: Linear Model Selection and Regularization'
+          - href: posts/ch07/index.qmd
+            text: 'Chapter 7: Moving Beyond Linearity'
+          - href: posts/ch08/index.qmd
+            text: 'Chapter 8: Tree-Based Methods'
+          - href: posts/ch09/index.qmd
+            text: 'Chapter 9: Support Vector Machines'
+          - href: posts/ch10/index.qmd
+            text: 'Chapter 10: Deep Learning'
+          - href: posts/ch11/index.qmd
+            text: 'Chapter 11: Survival Analysis and Censored Data'
+          - href: posts/ch12/index.qmd
+            text: 'Chapter 12: Unsupervised Learning'
+          - href: posts/ch13/index.qmd
+            text: 'Chapter 13: Multiple Testing'
+       
   site-url: https://orenbochman.github.io/notes-islr/
-  description: Personal website, portfolio and blog
-  repo-url: https://github.com/OrenBochman/notes-islr-py
+  description: "Course and Research notes"
+  repo-url: https://github.com/OrenBochman/notes-islr-py/
   repo-actions: [edit, issue]
   #favicon: favicon.ico
 
@@ -41,6 +76,11 @@ format:
       body-width: 1600px
       margin-width: 420px
       gutter-width: 1.5rem
+    page-layout: full
+    reference-location: margin
+    citation: true
+    citation-location: document
+  
     ipynb-shell-interactivity: all 
     #include-after-body: ../footer.html
     anchor-sections: true
@@ -55,6 +95,7 @@ format:
     from: "markdown+emoji"
 
 
+bibliography: references.bib
 
 execute:
   freeze: auto
@@ -62,6 +103,7 @@ execute:
   
 filters:
   - pseudocode
+
 
 
 

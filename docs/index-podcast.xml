@@ -8,7 +8,7 @@
 <title>An Introduction to Statistical Learning</title>
 <link>https://orenbochman.github.io/notes-islr/#category=podcast</link>
 <atom:link href="https://orenbochman.github.io/notes-islr/index-podcast.xml" rel="self" type="application/rss+xml"/>
-<description>Personal website, portfolio and blog</description>
+<description>Course and Research notes</description>
 <image>
 <url>https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg</url>
 <title>An Introduction to Statistical Learning</title>
@@ -19,7 +19,7 @@
 <item>
   <title>Chapter 13: Multiple Testing</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch13/</link>
   <description><![CDATA[ 
 
 
@@ -231,24 +231,24 @@ A re-sampling method where data points are randomly reassigned to different grou
   author = {Bochman, Oren},
   title = {Chapter 13: {Multiple} {Testing}},
   date = {2024-09-20},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch13/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 13: Multiple Testing.”</span>
-September 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/">https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</a>.
+September 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch13/">https://orenbochman.github.io/notes-islr/posts/ch13/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch13-multiple-testing/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch13/</guid>
   <pubDate>Thu, 19 Sep 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 12: Unsupervised Learning</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch12/</link>
   <description><![CDATA[ 
 
 
@@ -517,7 +517,7 @@ A tree-like visualization of the observations that results from hierarchical clu
 <p><strong>Algorithm 12.1 provides an iterative method for imputing missing values and solving the principal component problem simultaneously.</strong> The algorithm initializes a complete data matrix by replacing missing values with column means. It then iteratively updates the missing values by approximating the matrix using the first M principal components until the error is minimized.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="alg12.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Matrix Compleation"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.1.png" class="img-fluid figure-img" alt="Matrix Compleation"></a></p>
+<p><a href="alg12.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Matrix Compleation"><img src="https://orenbochman.github.io/notes-islr/posts/ch12/alg12.1.png" class="img-fluid figure-img" alt="Matrix Compleation"></a></p>
 <figcaption>Matrix Compleation</figcaption>
 </figure>
 </div>
@@ -549,7 +549,7 @@ A tree-like visualization of the observations that results from hierarchical clu
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="alg12.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="K-means Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.2.png" class="img-fluid figure-img" alt="K-means Clustering"></a></p>
+<p><a href="alg12.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="K-means Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12/alg12.2.png" class="img-fluid figure-img" alt="K-means Clustering"></a></p>
 <figcaption>K-means Clustering</figcaption>
 </figure>
 </div>
@@ -560,7 +560,7 @@ A tree-like visualization of the observations that results from hierarchical clu
 <h4 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="alg12.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Hierarchical Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/alg12.3.png" class="img-fluid figure-img" alt="Hierarchical Clustering"></a></p>
+<p><a href="alg12.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Hierarchical Clustering"><img src="https://orenbochman.github.io/notes-islr/posts/ch12/alg12.3.png" class="img-fluid figure-img" alt="Hierarchical Clustering"></a></p>
 <figcaption>Hierarchical Clustering</figcaption>
 </figure>
 </div>
@@ -758,24 +758,24 @@ A tree-like visualization of the observations that results from hierarchical clu
   author = {Bochman, Oren},
   title = {Chapter 12: {Unsupervised} {Learning}},
   date = {2024-09-10},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch12/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 12: Unsupervised Learning.”</span>
-September 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/">https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</a>.
+September 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch12/">https://orenbochman.github.io/notes-islr/posts/ch12/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch12-unsupervised-learning/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch12/</guid>
   <pubDate>Mon, 09 Sep 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 9: Support Vector Machines</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch09-svm/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch09/</link>
   <description><![CDATA[ 
 
 
@@ -854,24 +854,24 @@ TL;DR - Support Vector Machines
   author = {Bochman, Oren},
   title = {Chapter 9: {Support} {Vector} {Machines}},
   date = {2024-08-10},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch09-svm/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch09/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 9: Support Vector Machines.”</span>
-August 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch09-svm/">https://orenbochman.github.io/notes-islr/posts/ch09-svm/</a>.
+August 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch09/">https://orenbochman.github.io/notes-islr/posts/ch09/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch09-svm/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch09/</guid>
   <pubDate>Fri, 09 Aug 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 6: Linear Model Selection and Regularization</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch06/</link>
   <description><![CDATA[ 
 
 
@@ -1015,21 +1015,21 @@ TL;DR - Linear Model Selection and Regularization
 A method that evaluates all possible subsets of predictor variables to find the model with the lowest training error.
 </dd>
 </dl>
-<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/alg6.1.png" class="img-fluid"></a></p>
+<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.1.png" class="img-fluid"></a></p>
 <dl>
 <dt>Forward Stepwise Selection</dt>
 <dd>
 A method that starts with an empty model and iteratively adds the predictor that most improves the model fit at each step.
 </dd>
 </dl>
-<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/alg6.2.png" class="img-fluid"></a></p>
+<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.2.png" class="img-fluid"></a></p>
 <dl>
 <dt>Backward Stepwise Selection</dt>
 <dd>
 A method that starts with a model containing all predictors and iteratively removes the least significant predictor at each step.
 </dd>
 </dl>
-<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/alg6.3.png" class="img-fluid"></a></p>
+<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.3.png" class="img-fluid"></a></p>
 <dl>
 <dt>Mallow’s Cp</dt>
 <dd>
@@ -1188,24 +1188,24 @@ The square root of the sum of squared elements of a vector.
   author = {Bochman, Oren},
   title = {Chapter 6: {Linear} {Model} {Selection} and {Regularization}},
   date = {2024-07-20},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch06/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 6: Linear Model Selection and
-Regularization.”</span> July 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/">https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</a>.
+Regularization.”</span> July 20, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch06/">https://orenbochman.github.io/notes-islr/posts/ch06/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch06-model-selection-and-regularization/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch06/</guid>
   <pubDate>Fri, 19 Jul 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 5: Resampling Methods</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch05/</link>
   <description><![CDATA[ 
 
 
@@ -1457,24 +1457,24 @@ an alternative to LOOCV that involves randomly dividing the set of observations 
   author = {Bochman, Oren},
   title = {Chapter 5: {Resampling} {Methods}},
   date = {2024-07-10},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch05/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 5: Resampling Methods.”</span> July
-10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/">https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</a>.
+10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch05/">https://orenbochman.github.io/notes-islr/posts/ch05/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch05-resampling-methods/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch05/</guid>
   <pubDate>Tue, 09 Jul 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 4: Classification</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch04-classification/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch04/</link>
   <description><![CDATA[ 
 
 
@@ -1756,24 +1756,24 @@ The phenomenon where the performance of machine learning algorithms degrades as 
   author = {Bochman, Oren},
   title = {Chapter 4: {Classification}},
   date = {2024-07-01},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch04-classification/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch04/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 4: Classification.”</span> July 1,
-2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch04-classification/">https://orenbochman.github.io/notes-islr/posts/ch04-classification/</a>.
+2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch04/">https://orenbochman.github.io/notes-islr/posts/ch04/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch04-classification/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch04/</guid>
   <pubDate>Sun, 30 Jun 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 3: Linear Regression</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch03/</link>
   <description><![CDATA[ 
 
 
@@ -1848,7 +1848,7 @@ TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_tre
 </ul></li>
 <li>There is a lab:
 <ul>
-<li><a href="../../posts/ch03-linear-regression/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
+<li><a href="../../posts/ch03/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
 </ul></li>
 </ul>
 <section id="linear-regression-orientation" class="level2">
@@ -2141,24 +2141,24 @@ Figure&nbsp;6: Regression in R
   author = {Bochman, Oren},
   title = {Chapter 3: {Linear} {Regression}},
   date = {2024-06-21},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch03/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 3: Linear Regression.”</span> June
-21, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/">https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</a>.
+21, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch03/">https://orenbochman.github.io/notes-islr/posts/ch03/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch03-linear-regression/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch03/</guid>
   <pubDate>Thu, 20 Jun 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>
 <item>
   <title>Chapter 2: Statistical Learning</title>
   <dc:creator>Oren Bochman</dc:creator>
-  <link>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</link>
+  <link>https://orenbochman.github.io/notes-islr/posts/ch02/</link>
   <description><![CDATA[ 
 
 
@@ -2256,8 +2256,8 @@ TL;DR - Statistical Learning
 </ul>
 <p>There is also a lab which I split into two parts:</p>
 <ul>
-<li><a href="../../posts/ch02-statistical-learning/Ch02-statlearn-lab.html">Lab: Introduction to Python</a></li>
-<li><a href="../../posts/ch02-statistical-learning/Ch02-statlearn-lab-graphics.html">Lab: Graphics</a></li>
+<li><a href="../../posts/ch02/Ch02-statlearn-lab.html">Lab: Introduction to Python</a></li>
+<li><a href="../../posts/ch02/Ch02-statlearn-lab-graphics.html">Lab: Graphics</a></li>
 </ul>
 <section id="key-terms-in-statistical-learning-and-machine-learning" class="level2">
 <h2 class="anchored" data-anchor-id="key-terms-in-statistical-learning-and-machine-learning">Key Terms in Statistical Learning and Machine Learning</h2>
@@ -2640,17 +2640,17 @@ Q7: Real-life Applications
   author = {Bochman, Oren},
   title = {Chapter 2: {Statistical} {Learning}},
   date = {2024-06-10},
-  url = {https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch02/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas">
 Bochman, Oren. 2024. <span>“Chapter 2: Statistical Learning.”</span>
-June 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/">https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</a>.
+June 10, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch02/">https://orenbochman.github.io/notes-islr/posts/ch02/</a>.
 </div></div></section></div> ]]></description>
   <category>notes</category>
   <category>edx</category>
   <category>podcast</category>
-  <guid>https://orenbochman.github.io/notes-islr/posts/ch02-statistical-learning/</guid>
+  <guid>https://orenbochman.github.io/notes-islr/posts/ch02/</guid>
   <pubDate>Sun, 09 Jun 2024 21:00:00 GMT</pubDate>
   <media:content url="https://orenbochman.github.io/notes-islr/images/nlp-brain-wordcloud.jpg" medium="image" type="image/jpeg"/>
 </item>

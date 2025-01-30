@@ -1,0 +1,1487 @@
+---
+title: Crash Course Statistics Transcripts
+draft: True
+---
+
+## What Is Statistics: Crash Course Statistics #1
+
+Hi, I’m Adriene Hill, and this is Crash Course Statistics.
+Welcome to a world of probabilities, paradoxes and p-values.
+There will be games.
+And thought experiments.
+And coin flipping.
+A lot of coin flipping.
+Statisticians love to talk about coin flipping.
+By the time we finish the course, you’ll know why we use statistics.
+And how.
+And what questions you ought to be asking when you run across statistics in the world.
+Which is ALL THE TIME.
+Statistics can help you make a guess whether or not you’re going to be accepted to Harvard.
+Marketers use them to sell us gold-lame pants.
+Netflix uses stats to predict what show we might want to watch next.
+You use statistics when you look at the weather forecast and decide what to wear--dress or jeans.
+Policy makers use them to decide whether or not to invest in more early childhood education, whether or not to spend more on mental health services.
+Statistics is all about making sense of data--and figuring out how to put that information to use.
+Today, we’re going to answer the question “What IS Statistics?”
+
+### INTRO
+
+The legend says that during a late 1920’s English tea at Cambridge, a woman claimed that a cup of tea with milk added last tasted different than tea where the milk was added first.
+The brilliant minds of the day immediately began to think of ways to test her claim.
+They organized eight cups of tea in all sorts of patterns to see if she really could tell the difference between the milk first and tea first cups.
+But even after they had seen her guesses, how could they really decide?
+Because, she’d get about half the cups right just by randomly guessing either milk or tea.
+And even if she really could tell the difference, it’s completely possible that she would miss a cup or two.
+So how could you tell if this woman was actually a tea-savant?
+What is the line between lucky tea guesser and tea supertaster?
+As fate would have it, future super-statistician and part time potato scientist Ronald A. Fisher
+was in attendance.
+During his lifetime, Fisher began work that set the stage for a large portion of Statistics which is the focus of this series.
+These statistics can help us make decisions in uncertain situations, tea-taste-tests and beyond.
+Fisher’s insights into experimental design helped turn statistics into its own scientific discipline.
+And, although Fisher didn’t publish results of this tea-test...the story has it...the
+woman sorted all the tea cups correctly.
+Just in case you were curious.
+At this point, it’s worth mentioning that there are two related--but separate--meanings of the word statistics.
+We can refer to the field of statistics... which is the study and practice of collecting and analyzing data.
+And we can talk about statistics as in facts about... or summaries... of data.
+
+### Definition of Statistics 
+
+To answer the question “What is statistics?”, we should first...
+...ask the question “What can statistics do?”
+Let's say you wake up at your desk after a long evening studying for finals with a cheeseburger
+wrapper stuck to your face.
+And you wonder... "why do I eat this stuff?
+Is fast food controlling my life?"
+But then you tell yourself, "No.
+It's just super convenient.."
+But you're worried, you're thinking about how great it is that McDonald's serves breakfast
+all day RIGHT NOW.
+But maybe that's normal, finals are this week afterall, so you google the question “Fast
+Food consumption” and you find the results of a fast food survey.
+The first thing you might do is start asking questions that interest you.
+For example, you could ask, Why do people eat fast food?
+Do people eat more fast food on the weekend than on weekdays?
+Does eating fast food stress me out?
+Now that we have some interesting questions, we need to ask ourselves an even more important
+one: Can these questions be answered by statistics?
+Like I mentioned earlier, statistics are tools for us to use, but they can’t do all the
+heavy lifting.
+To answer the question about why people eat fast food, you can ask them to fill out a
+questionnaire, but you can’t know whether their answers truly represent what they’re
+thinking.
+Maybe they answer dishonestly because they don’t want to admit that they scarf McDonalds because they’re too tired to cook dinner, or because they are ashamed to admit they think Del Taco is delicious, or because none of the given answers represented their reasons, or they may not really know why they eat fast food.
+Armed with the results of the survey, you could tell you that the most common reason that people reported eating fast food was convenience, or that the average number of meals they eat out each week is five.
+But you’re not truly measuring why people eat so much fast food.
+
+### Proxy
+
+You’re measuring what we call a “proxy”, something that is related to what we want
+to measure, but isn’t exactly what we want to measure.
+To answer whether people eat more fast food on the weekends, or whether eating it more
+than twice a week increases stress, we’d not only need to know how much people are
+eating fast food, which our questionnaire asked, but also which days they eat it.
+And we’d need an additional measure of “stress”.
+You can use statistics to give a good answer about whether you’re going through the drive-thru
+more on the weekend, but even the question of whether eating fast food is associated
+with higher levels of stress is hard to answer directly.
+What is stress and how can we measure it?
+And are people eating fast food because they are stressed?
+Or does eating all those calories make them stressed?
+It’s often the case that some of the most interesting questions are the ones that can’t
+be directly answered by statistics--like why people eat fast food.
+Instead we find questions that we can answer-- like whether people who eat fast food often
+work more than eighty hours a week.
+
+### Two main types of stat
+
+
+The tools we use to answer these questions are statistics-plural--and there are two main types: Descriptive and Inferential.
+
+### Descriptive stat
+
+Descriptive statistics, well... they describe what the data show!
+Descriptive statistics usually include things like where the middle of the data is--what statisticians call measures of central tendency--and measures of how spread out the data are.
+They take huge amounts of information that may not make much intuitive sense to us, and compress and summarize them to ...hopefully... give us more useful information.
+Let’s go to the the Thought Bubble.
+You’ve been working for two years in the local waffle factory.
+Day in and day out, you create the golden-browny-iest, tastiest frozen waffles ever created.
+The holes are perfectly spaced.
+Screaming for syrup.
+And now you want a raise.
+You deserve a raise.
+No one can make a waffle as well as you can.
+But how much do you ask for?
+An extra thousand dollars?
+An extra 5-thousand dollars?
+You know you’re valuable, but have no idea what other waffle makers get paid.
+So you dig around online and find there’s an entire subreddit devoted to waffle makers.
+And someone username “waffleleaks” has posted a spreadsheet of waffle maker salaries.
+Now with a quick glance at this huge list of numbers, you can see whether the woman
+who works a similar job at the rival frozen waffle company makes more than you.
+You can see how much more you are making than the new guy, who’s just now learning to mix batter.
+But you still don’t know much about the paychecks of your waffle company as a whole.
+Or the industry.
+Cause it turns out there are thousands of waffle makers out there.
+And all you see is a list with data points, not patterns that can help you learn more
+about how much you might be able to convince the boss to pay you.
+Here is where descriptive statistics come in.
+You could calculate the average salary at your company as well as how spread out everyone’s
+salaries are around that average.
+You’d be able to see whether the CEOs’ paychecks are relatively close to the entry-level
+batter makers, or incredibly far away.
+And how your salary compares to both of their salaries.
+You could calculate the average salary of everyone in the industry with your job title.
+And see the high and low end of that pay.
+And then, armed with those descriptive statistics, you could confidently walk into the waffle bosses office and demand to be paid for your talents.
+Thanks, Thought Bubble.
+While descriptive statistics can be great, they only tell us the basics.
+
+### Inferential stat
+
+Inferential statistics allows us to make….inferences.
+(Clever namers, those statisticians.)
+Inferential statistics allow us to make conclusions that extend beyond the data we have in hand.
+Imagine you have a candy barrel full of salt water taffy.
+Some pink, some white, some yellow.
+If you wanted to know how many of each color you have, you could count them.
+One by one by one.
+That’d give you a set of descriptive statistics.
+But who has time for all that?
+Or, you could grab a giant handful of taffy, and count just those you have pulled out, which would be using descriptive statics.
+If your candy was, in fact, mixed pretty evenly throughout the barrel, and you got a big enough handful, you could use inferential statistics on that “sample” to estimate the content of the entire taffy stash.
+We ask inferential statistics to do all sorts of much more complicated work for us.
+Inferential statistics let us test an idea or a hypothesis.
+Like answering whether people in the US under the age of 30 eat more fast food than people over 30.
+We don’t survey EVERY person to answer that question.
+Let’s say someone tells you that their new brain vitamin -- Smartie-vite -- improves your IQ.
+Do you rush out and buy it?
+What if they told you that the average IQ increase for Group A-- twenty people who took
+Smartie-vite for a month--was two IQ points, and the average IQ increase for Group B -- twenty people who took nothing--was one IQ point.
+How about now?
+Still not sure?
+It is a pretty small difference right?
+Inferential statistics give you the ability to test how likely it is that the two populations we sampled actually have different IQ increases.
+However, it’s up to you, as an individual, to decide whether that’s convincing or not.
+And don’t be alarmed if the bar you set isn’t the same in every situation.
+It’s entirely okay to have different standards for the questions “does my cat like Fancy Feast more than Meow Mix?” vs “does this drug cure lung cancer?”.
+It might take more evidence to convince you to take a new supposedly cancer curing drug than to switch cat food brands.
+It should take more evidence to convince you to take a new supposedly cancer curing drug than to switch cat food brands.
+With inferential tests, there will always be some degree of uncertainty since it can only tell you how likely something is or is not.
+Your job is is to take that information and use it to make a decision *despite* that uncertainty.
+
+### If stat were a superhero
+
+If Statistics were a superhero, it’s batcall would be uncertainty, and it’s tagline would be "When you don’t know for sure, but doing nothing isn’t an option."
+
+### Importance of stat
+
+Statistics are tools.
+Statistics help us make sense of the vast amount of information in the world.
+Just like our eyes and ears filter out unnecessary stimuli to just give us the best, most useful stuff, statistics help us filter the loads of data that come at us everyday.
+
+#### Comparison between descriptive and inferential stat
+
+Descriptive statistics make` the data we get more digestible, even though we lose information about individual data points.
+Inferential statistics can help us make decisions about data when there’s uncertainty (like whether Smartie-vite actually will increase your IQ).
+But statistics can’t do all of the work.
+
+### More Importance of stat
+
+They’re here to help us reason, not to reason for us.
+They help us see through uncertainty, but they don’t get rid of that uncertainty.
+To push our tool analogy a step further.
+
+## Continuation of definition of stat
+
+Statistics, like chainsaws , are pretty useless even dangerous without understanding how they work.
+We need to know how to use them and how not to use them.
+As we will see in later episodes, statistics done poorly can lead us to some pretty silly conclusions.
+And, chain sawing done poorly leads to about 36-thousand injuries in the US each year.
+81% of which are lacerations.
+Did you know that almost no one dies because of chainsaw injuries?
+Once in a while, but it's very rare.
+95% of the people who are hurt by chain saws are male.
+This does NOT necessarily tell us that males are significantly worse chain sawers.
+Statistics can help us plan a vacation to Bali in December.
+They can help us optimize our chances of winning our fantasy football league.
+They can help us budget our meal card at college.
+
+Statistics can help us decide whether that additional insurance the guy at Best Buy is trying to sell us on our new blender is worth it.
+Statistics can also help us decide whether or not to go ahead with an invasive heart surgery.
+Statistics can help NGOs optimize the amount of food aid they send to refugee camps.
+They can help policymakers decide if they should spend more or less money on helping students pay back their school loans.
+And can help you decide how much money you should be comfortable borrowing for college in the first place.
+There is a lot statistics can help us with but some things statistics can’t do. Thinking statistically means knowing the difference.
+So, when your brother says he used statistics to prove that your mom loves him more you can rest easy knowing the only question he answered is whether she gives him slightly
+more ice cream each night.
+And you’ve got data suggesting she gives you extra sprinkles.
+Thanks for watching. I'll see you next time.
+
+
+NotebookLM can be inaccurate, please double check its responses.
+
+
+## Mathematical Thinking: Crash Course Statistics #2
+
+
+### Introduction
+
+Hi, I’m Adriene Hill.
+This is Crash Course Statistics.
+In the last video we talked about why we care about statistics.
+How we use statistics.
+And Statistics is math.
+So we thought we’d take a detour from the traditional curriculum to talk about how to
+think about numbers.
+Really, really big numbers.
+Really small numbers.
+And how to make sense of them.
+We’re also going talk about mathematical thinking.
+And fighter jets.
+
+### Mathematical Thinking
+
+Chances are, if you are watching this channel,
+and certainly if you are commenting below, you are literate.
+You understand language and how to use it.
+But--are you equally comfortable with numbers?
+I’m not talking about being able to calculate square roots in your head.
+Or instantly tell whether or not 17321 is prime or not.
+(It is. I looked it up.)
+Numeracy is about being able to wrap your head around what it means when politicians talk about a one-point-five-trillion-dollar budget hole.
+It’s about getting a handle on how much you should really lose sleep over the chance of an Ebola outbreak.
+And how to compare that risk to the chance of being killed by a terrorist.
+Or a snake bite.
+Or dying from an opioid overdose.
+And what those comparisons might tell us about the time and resources we spend trying to
+address those problems.
+Mathematical thinking is about seeing the world in a different way.
+Which means sometimes seeing beyond our intuition or gut feeling.
+Because it turns out most of our guts are good at digesting food and pretty bad at math.
+Infants less than a year old can discern between three objects.
+I am much more advanced than an infant and can pretty easily comprehend the difference
+in one and a hundred.
+Even the difference between a hundred and a thousand or maybe even ten thousand.
+For most of us, once numbers get really big, we lose our ability to have any intuitive
+sense of them.
+The distinction between a million and a billion and a trillion is really hard to visualize.
+There are 100-trillion bacteria in each of our bodies and non-mathematical guts.
+100-trillion.
+There are an estimated 10- quintillion insects that are alive right now.
+And an estimated 300-sextillion stars in the universe.
+So how do you even begin to think about those big numbers and what they mean?
+Let’s go to the THOUGHT BUBBLE.
+Take a minute to visualize the difference between one and one hundred and one thousand
+and a hundred thousand and a million.
+That’s a lot of dots a whole lot of dots.`
+There are other good ways to try to make sense of big numbers.
+You can try to put the number in context.
+The US debt is in the neighborhood of 20-Trillion dollars.
+About 323 million people live in the US.
+So--the debt owed for each person is about sixty-two thousand and five hundred dollars.
+You can turn a big number into a unit of measurement you are more comfortable with.
+The Kola Superdeep Borehole, which is the deepest artificial point on earth is 40,230 ft deep.
+I have no idea how deep that is.
+Until you tell me that it’s 7 and a half miles down.
+And I can start to picture it.
+You can have reference points for big numbers, ready to go.
+There are about 100-thousand words in a 400 page novel.
+About 46-thousand people show up to Dodgers games in Los Angeles.
+I can roughly visualize that.
+A million people taking to the streets to protest--might be easier to think of as 21
+Dodger Stadium’s worth of people.
+Or 14 and a half crowds for a Real Madrid match.
+Time can help us go even bigger.
+A million seconds is a little less than 12 days.
+What about a billion seconds?
+Do you think you are a billion seconds old?
+Are you older than 32?
+It takes 32 YEARS for a billion seconds to pass.
+And what about a trillion seconds?
+Think you or I will be alive after a trillion seconds passes?
+Sorry to break it to you.
+But no.
+We will not.
+Even if you are destined to be the Guinness Book of World Records oldest woman.
+There is a 100% chance, barring massive medical breakthroughs that you will be dead.
+It takes 32-thousand years for a trillion seconds to tick by.
+
+### Scientific Notation
+
+Thanks thought bubble.
+A quick note about scientific notation.
+Scientific notation can be really helpful for calculating with big numbers, but not
+necessarily helpful for understanding them.
+Without context, exponents can be non-intuitive if that’s a word in their own way.
+10 to the 39th and 10 to the 32nd sound like they might be close.
+But 10 to the 39th is 10-MILLION times larger than 10 to the 32nd.
+We’re not going to run the dots on that one.
+There are about 7-point-six billion people on earth.
+7-point-6 BILLION.
+Understanding the sheer number of people out there in the world, can help us make sense
+of the common-ness of coincidences or improbable events.
+Some statisticians call it the “law of truly large numbers”.
+The idea here is that with a large enough group, or sample, unlikely things are completely
+likely to happen.
+Consider this example from statistician David Hand.
+On September 6th, 2009, the Bulgarian lottery randomly selected as the winning numbers
+4, 15, 23, 24, 35, 42.
+And then, four days later, on September 10th, the Bulgarian lottery randomly selected new
+winning numbers.
+4, 15, 23, 24, 35, and 42.
+Exactly the same numbers.
+People freaked out.
+Bulgaria’s sports minister ordered an investigation.Was it fraud?
+Something else?
+Hand says calm down.
+It’s just coincidence.
+He lays out the math to prove it--but part of the argument here is the law of truly large numbers.
+If you consider the number of lotto drawings--every week--around the world--over years and years--
+“it would be amazing” he wrote, “if draws did not occasionally repeat.”
+Speaking of those incredibly unlikely things...we need to talk about the flip side of incredibly
+big numbers….
+The incredibly small numbers--that can also be hard to comprehend.
+Take the likelihood of winning a Mega Millions jackpot in the US.
+Right now it’s about one in 302.6 million.
+The probability that you’d win the jackpot is 0.000-000-003-305.
+Let’s put the teeny-tiny chance of that happening in some perspective 302.6 million
+is the number of seconds in more than 9 and a half years.
+So, to borrow here from a very funny post by Tim Urban on Wait But Why that’s like
+knowing that a hedgehog will sneeze once in the next 9 and a half years and betting on
+the exact second... during those nine and a half years... that the hedgehog will need
+a tissue.
+I’m going with May 2nd, 2:23 and 33 seconds PM, 2021.
+Our inability to judge small numbers does more than just cause us to misjudge our chances
+of winning the lottery.
+It causes us to worry about the wrong things.
+To fear the wrong things.
+Take your chance of dying from Ebola.
+If you live in the US--the chance that you’ll be killed by Ebola in any given year is pretty
+close to your chance of winning the mega millions lottery.
+One in 309.6 million.
+It is, among the very, very least likely ways anybody living in the US will die in a year.
+Though you are, by some accounts, LESS likely to be killed by a terrorist attack in the
+US committed by a refugee.
+In a 2016 study, researchers calculated that at one in 3.64 Billion chance in the US in
+a given year.
+And you far more likely to be die in dozens of other ways.
+There is a one in 6 million chance someone living in the US will be killed in a given
+year by bee sting.
+A one in 708-thousand chance that they’ll die falling from a ladder.
+A one in 538 chance they’ll die in a given year from cancer.
+And...not a big cause of death...but did you know people die in sand holes that they or
+their friends have dug out at the beach.
+They crawl in.
+Looking for a little time in the sand hole.
+And woosh.
+The hole suddenly collapses and they are buried.
+Stay out of sand holes.
+I’m going to stop because it’s stressing me out.
+The point here is that it’s worth taking the time to think through small numbers.
+Cause they can help you figure out what’s actually worth worrying about.
+And what isn’t.
+What you might want to act on and what you might want society to take more and less seriously.
+My personal take away is that I’d be way better off spending more time exercising and
+less time looking around obsessively for poisonous snakes.
+Cause the annual odds of dying from a snake bite in the US are only about one in 34
+million, but the odds of dying from heart disease in any given year are one in 534.
+Thinking mathematically isn’t just about understanding numbers better.
+It’s about asking important questions about the world around us.
+And letting numbers illuminate those questions.
+One of my favorite examples mathematical thinking is the story of Abraham Wald and the missing
+bullet holes.
+Hat tip here to mathematician Jordan Ellenberg for highlighting the story.
+Let’s go to the News Desk.
+
+### News Desk
+
+World War II: Manhattan.
+A group of statisticians and mathematicians are hard at work trying to protect American fighter pilots.
+Their task--trying to figure out how to best armor planes without making them too heavy so our heroes to outrun and outwit the enemy.
+In an effort to figure out how to best protect our planes, the statisticians pour over data of the planes that returned from fighting--looking at where they took damage.
+Where the bullet holes were.
+That data showed there were more bullet holes in the fuselage and fuel system and not as many in the engines.
+So how do we save our American heroes?
+The exceptional statistician Abraham Wald studied the data and came back with the advice...that surprised everyone to put the armor where the bullet holes weren’t.
+Over the engines.
+Wald realized the bullet holes should have been more evenly distributed over the planes.
+If fewer planes were returning with holes in the engines--that meant those planes weren’t returning home.
+Wald has the exceptional realization the data wasn’t a random sample of all planes.
+It only represented the planes that returned.
+He suggested the military add armor to engines.
+American lives were saved!
+Not all mathematical thinking is going to help you save lives.
+But it will help you make better decisions- Mathematical thinking can help you see past coincidence.
+It can help you judge risks.
+It can help you see the broader relationships in the world.
+Thinking mathematically gives us something to go on other than our guts, and their trillions of bacteria.
+Thanks for watching. I'll see you again next time.
+
+
+
+
+## Mean, Median, and Mode: Measures of Central Tendency: Crash Course Statistics #3
+
+
+Search in video
+Hi I’m Adriene Hill, and welcome to Crash Course Statistics.
+In the last video we tried to make sense of ginormous numbers.
+And teeny-tiny numbers.
+Today we’re going to talk about less showy numbers.
+The numbers stuck in the middle.
+The averages.
+The medians.
+The modes.
+They may not seem as mind-blowing.
+Or all that flashy.
+But, turns out they are really, really important.
+Those middle numbers are often the ones that get ALL the press attention.
+Get tossed back in forth in political debate.
+And...they give us this little fun bit of trivia…
+What’s the average...or mean... number of feet people have?
+It’s not 2.
+Turns out the average number of feet people has is a little less than 2.
+Cause the average takes into account the small number of people out there with fewer than
+2 feet.
+So, if you have two feet, you have more than the average number of feet.
+`And wIth that...let’s get what into “measures of central tendency” are, and why they’re useful.
+INTRO
+If your boss asks you for a report on this quarter’s sales numbers but is rushing to
+a meeting and only has time to listen to one piece of information about the data, that
+piece of information you give her should probably be a measure of central tendency.
+The center of a bunch of data points is usually a good example (or summary) of the type of
+data we can expect from the group as a whole.
+One common measure of the middle is the mean.
+You’ve likely heard it called the average--though all of these measures are sometimes called
+“averages”.
+Some people call it the “expectation” of a set of data.
+The mean...or average...takes the sum of all the numbers in a data set, and divides by
+the number of data points.
+So, if 10 pregnant dogs give birth to 50 total puppies--the average litter size is 5 puppies.
+Each data point, in this case each litter of puppies, contributes equally to the calculation.
+Awwwww.
+Here’s another example.
+Say you you have ten dollars and your best friend has 20 dollars, the mean amount of
+cash you two have is 15 dollars.
+Ten-plus-twenty-divided by two.
+But saying that the mean is fifteen dollars--doesn’t mean you each can buy that 12-dollar BFF necklace
+you’ve been eyeing...the one with the half-a-heart that fits together.
+You personally only have ten dollars in your pocket.
+The average of a set of data points tells us something about the data as a whole, but
+it doesn’t tell us about individual data points.
+The mean is good at measuring things that are relatively “normally” distributed.
+“Normal” means a distribution of data that has roughly the same amount of data on
+either side of the middle, and has its most common values around the middle of the data.
+Data that are distributed normally will have a symmetrical bell shape that you’ve probably
+seen before.
+A distribution shows us how often each value occurs in our data set, which is also known
+as their frequency.
+Imagine you are trying to impress your new college dorm mates by guessing how many times
+they’ve each seen Harry Potter and the Sorcerer’s Stone.
+Your mom is in the entertainment industry and you overheard, at her last dinner party,
+that 18 year olds, on average, had seen the movie five times each.
+That’s a lot of quidditch.
+So you should guess your new friends have seen the movie five times each.
+(Unless you can clearly see Slytherin tattoos.)
+You won’t be right each time, but it’s your best guess.
+It might not be the best way to impress them though.
+It’s not a great party trick.
+Sometimes the mean is misleading.
+For instance: life expectancy in the Middle Ages.
+As we explored in Crash Course World History, there was an incredibly high rate of infant
+mortality in the days before modern medicine, but the people who made it to adulthood lived
+relatively long lives.
+Because of the high rate of infant and child mortality, the average life expectancy was
+about thirty years.
+But things weren’t nearly as dire as all that.
+Not if you actually made it to 30.
+In the 13th century a male who lived to 30--was likely to make it into his fifties!
+To give unusually large or small values, also called outliers, less influence on our measure
+of where the center of our data is, we can use the median.
+Unlike the mean, the median doesn’t use the value of every data point in it’s calculation.
+The median is the middle number if we lined up our data from smallest to largest.
+For example, if you have two cats, Julian has one cat, and Erik has three cats, the
+median number of cats in your little cat-loving group would be two.
+When we put the number of cats in order from least to most cats, two is in the middle.
+But what if there’s no middle number?
+You invite Will to join your cat group.
+He has an impressive ...or is it excessive...total of fourteen cats.
+Now there are four cat owners.
+There is no one middle number; both two and three are in the middle.
+In this case there are differing opinions on how to calculate the median, but most often
+we take the mean of the two middle numbers, so our median would be 2.5 cats.
+Meow.
+Meow Me….
+Let’s go to the thought bubble.
+Imagine ten artists have been working for years, together, to come up with a new, fresh
+way to tie macrame knots.
+The standard square knot...just wasn’t inspiring them the way it used to.
+And finally.
+They do.
+Viola!
+The abracadabra-doolittle knot!
+So these 10 artists go out to celebrate.
+And they go to a relatively modestly priced restaurant...cause macrame artists don’t
+make all that much money.
+Each of them pulls in about $20,000 a year.
+So the average...or mean... income in around the table is twenty-thousand dollars.
+And the median income is also twenty-thousand dollars.
+Now, let’s imagine that Elon Musk gets wind of this macrame milestone.
+Turns out...he’s a huge macrame fan himself.
+Beauty in design.
+He couldn’t miss up a chance to celebrate...So he decides to show up at the restaurant.
+Musk’s total annual compensation...including his salary and stock options...is reportedly
+in the neighborhood of 100-million dollars.
+As soon as Musk walks in the door.
+The average income in the room...skyrockets...to a little over 9 million dollars.
+But...nobody else in the room is ACTUALLY richer...nobody feels any richer.
+The median income of the macrame artists and Musk is still $20,000 because most of our
+group is still making $20,000.
+And...this isn’t just the stuff of make-believe macrame world...it happens in REAL life too...the
+“average” is distorted by outliers.
+Thanks Thought Bubble!
+Alright, now say there’s a controversial book on Amazon called Pineapple Belongs on
+Pizza, with 400 reviews; 200 five-star reviews, and 200 one-star reviews.
+The mean number of stars given was 3, but no one in our sample actually gave the book
+3 stars, just like no one could actually have the median of 2.5 cats.
+In both of these situations, it can be useful to look at the mode.
+The word mode comes from the Latin word modus, which means “manner, fashion, or style”
+and gives us the French expression a la mode, meaning fashionable.
+Just like the most popular and fashionable trends, the mode is the most popular value.
+But not popular like Despacito.
+When we refer to the “mode” of our data, we mean the value that appears most in our
+data set.
+For our Amazon book review of Pineapple Belongs on Pizza the modes are both 5 and 1, which
+give us a better understanding of how people feel about the book.
+These reviews are called “bimodal” because there are two values that are most common.
+Bimodal data is an example of “Multimodal” data which has many values that are similarly
+common.
+Usually multimodal data results from two or more underlying groups all being measured
+together.
+In the case of our book, the two groups were the “love it” five-star group, and the
+“hate it” one-star group.
+Or for another example, if we made a graph of the times customers went to IN-N-OUT, we’d
+probably see two peaks because there’s two groups of people: one around lunch time, and
+one around dinnertime.
+The mode is useful here because it’s an actual value that occurs in our data set,
+unlike the median and mean which can give us numbers that wouldn’t actually occur
+and don’t describe our data very well.
+The mean time people come into In-N-Out may very well be 3:30pm, but that doesn't suggest
+you should expect an overflowing restaurant in the middle of the afternoon.
+You should be able to get your animal style burger ...without too much of a wait.
+The mode is most useful when you have a relatively large sample so that you have a large number
+of the popular values.
+One other benefit of the mode is that it can be used with data that isn't numeric.
+Like, if I ask everyone their favorite color, I could have a mode of “blue”.
+There’s no such thing as a “mean” or average favorite color.
+The relationship between the mean, median, and mode can tell us a lot about the distribution
+of data.
+In normal distribution that we mentioned earlier they’re all the same.
+We know that the middle value of the data (the median) is also the most common (the
+mode) and is the peak of the distribution.
+The fact that the median and mean are the same tells us that the distribution is symmetric:
+there’s equal amounts of data on either side of the median, and equal amounts on either
+side of the mean.
+Statisticians say the normal distribution has zero skew, since the mean and median are
+the same.
+When the median and mean are different, a distribution is skewed, which is a way of
+saying that there are some unusually extreme values on one side of our distribution, either
+large or small in our data set.
+With a skewed distribution, the mode will still be the highest point on the distribution,
+and the median will stay in the middle, but the mean will be pulled towards the unusual
+values.
+So, if the mean is a lot higher than the median and mode, that tells you that there’s a
+value (or values) that are relatively large in your data set.
+And a mean that’s a lot lower than your median and mode tells you that there’s a
+value (or values) that are relatively small in your dataset.
+Let’s go to the News Desk.
+The average income of a US family GREW 4 percent between 2010 and 2013.
+Those average paychecks expanded from 84-thousand-dollars to over 87-thousand dollars.
+But not everyone is cheering.
+The median income FELL five percent during those same years.
+Median family income dropped from 49-thousand dollars to just over 46 and a half thousand dollars.
+This really happened, back in the years after the financial crisis.
+The mean income rose at the same time the median income fell.
+That’s because families at the tip-top of the income distribution...we’re making more money.
+And pushing the mean up.
+While many other families were making less.
+And even though unscrupulous politicians could accurately claim “average incomes are rising”--and
+pat themselves on the back--it would be misleading.
+For most Americans during that stretch incomes were flat or falling.
+This points to another really important point about statistics, a point we’ll come back
+to time and time again during this series.
+Statistics can be simultaneously true ...and deceptive.
+And an important part of statistics is understanding which questions you are trying to answer.
+And whether or not the information you have is answering those questions.
+Statistics can help us make decisions.
+But we’ve all gotta use our common sense.
+And a little skepticism.
+Thanks for watching.
+I’ll see you next time.
+
+
+### Measures of Spread: Crash Course Statistics #4
+
+Hi I’m Adriene Hill, and welcome to Crash Course Statistics.
+So in the last episode we talked about the “middle” of sets of data, what statisticians
+call the central tendency.
+Today...we’re heading to the data on both sides of that middle.
+What statisticians call “measures of spread”.
+Not to be confused with how I gauge the quality of my peanut butter and jelly sandwich.
+Measures of spread?
+Get it?
+Cause you spread the peanut butter and jelly.
+Anyway, statistical measures of spread...or dispersion... tell us how data is spread around
+the middle.
+That lets us know how well the mean or median represents the data.
+And how much we trust conclusions based on the mean and median.
+And, I can hear you saying to the screen...come on Adriene...when would anyone use this in
+real life.
+I may or may not have said that too at some point.
+I have no official comment.
+But Measures of spread are all around.
+From test scores.
+Like when you find out you scored in the 99th percentile on the LSAT!
+Economists use measures of spread to study income inequality.
+Investors use them to try to identify price bubbles...bubbles they might want to avoid.
+Gamblers use them to try to figure out how much they might win or lose.
+Pollsters use measures of spread to help calculate margins of error.
+So yeah.
+They come in up real life.
+And, heads up, there is some math coming your way.
+We’re not going to spend a lot of this series doing calculations but for this one it’s important.
+INTRO
+Let’s do a thought experiment to compare
+measures of spread, and since you’re probably watching this on YouTube right now, we’ll
+talk about YouTube viewers and their ages.
+You’re a YouTuber, with big dreams and amazing content, but as a growing channel, you need
+to know more about your audience.
+YouTube will give you some information about this, usually in the form of a fancy chart.
+One of the pieces of information you could calculate is the Range of your audiences’
+age.
+Range takes the largest number in our data set and subtracts the smallest number in the
+set to give us the distance between these two extremes.
+The larger the distance, the more “spread out” our data is.
+With the range we’re able to quantify the distance between our most extreme points.
+We can often sense that groups are different, and our ranges confirm it.
+If we looked at the range of your audience’s age, we’d get a better idea of the full
+spectrum of the people who watch your content.
+If you have 13 year olds watching you might want to limit the ‘adult’ content, but
+if you also have people over 40 watching, you may need to explain some of the slang
+you’re using--#lit #Fam---am I doing that correctly?
+But the range won’t tell you about your *core* audience.
+These are the people who you appeal to the most.
+This might be better summarized by the InterQuartile Range (or IQR) which doesn’t consider extreme
+values.
+The IQR looks at the spread of the middle 50% of your data.
+So in this example the ages of your audience.
+The IQR will give you a better idea who is the primary group watching you.
+A lifestyle guru like Bethany Mota might have an IQR of 13-25, whereas I might guess someone
+like John Oliver has an IQR that’s older.
+Maybe in the range of 22-40.
+Their overall range could be similar.
+I’m sure there are 13 year olds and 60 year olds watching both these channels.
+But the IQR gives us a better idea of their core audience.
+So let’s introduce some numbers so we can do some math.
+Let’s say 10 basketball players have scored the following number of points in the first
+part of a game: 1, 3, 3, 4, 5, 6, 6, 7, 8, and 8.
+The median is 5.5.
+That divides the data set into two halves.
+To divide it further, into quarters, we find the median of each of those halves.
+Which are 3 and 7.
+Q1 and Q3 respectively.
+The four quartiles here are from 1-to-3, 3-to-5.5, 5.5-to-7, and 7-to-8.
+The IQR is the difference between Q3 - Q1.
+Or in this case 7-3...which is 4.
+If the median is closer to one of the ends of the interquartile range, it means that
+quartile has a smaller range.
+Since each quartile has the same number of data points, it means that for that quartile,
+the same amount of points are closer to each other.
+But, we’re still losing a lot of information about how spread out all of the data is since
+only two of the data points are used to calculate both the range and interquartile range.
+There are measures of spread that include all of our data, just like the mean.
+Take the variance ...which can give us a better sense of how spread out the whole data set is.
+Let’s take a scatterplot of all of our data points and draw a straight line across the
+graph at the mean then draw lines from each point straight down to the mean line.
+Those lines represent the deviation--or difference--from each point to the mean.
+Now imagine a square with sides the length of the deviation line.
+The area of all the squares for every point divided by the number of data points is the variance.
+But it turns out that if you use this same formula to calculate the variance of a *sample*,
+it would be “biased”.
+That is, the sample variance would consistently be a *little* smaller than the real variance
+of the population.
+We divide by the number of samples minus 1 in order to get the sample variance to be
+unbiased--or a better guess for the population variance.
+For example, say that the Mets, the Yankees, The Angels, the Dodgers, and the Astros have
+2, 2, 5, 8, and 8 wins each.
+The mean number of wins for the group of teams is 5 (25/5).
+To calculate the variance we take each number and subtract the mean, square this difference,
+then add all of these squared differences together and divide by the number of data
+points minus 1.
+The variance of this set of baseball teams is 9+9+0+9+9 all divided by 4, which equals
+9 squared wins.
+And, yes, I know 9 squared wins doesn’t mean anything but when we square our numbers,
+we’re also squaring our units right along with them.
+Even though squared wins isn’t an understandable unit to us, the variance is still a really
+useful number to have because it tells us how much “variability” is in our data.
+In our baseball example, it tells us roughly how far each team’s win record is from the
+mean.
+We’ll see it pop up quite often once we get to inferential statistics.
+For now, let’s go to the thought bubble.
+Professor Hooch has hired you to analyze students’ broom speeds for the Hogwarts Quidditch teams.
+There are fifteen new Gryffindors, so you measure how long it takes them to fly around
+the field twice.
+And here’s the plot of the times (in seconds) that it takes each student to complete the trip.
+Looks like a few of the muggle-born studentswho didn’t grow up using magic brooms took
+a lot longer than their classmates who grew up in wizarding families.
+Our mean of all students is 36.47 seconds
+but if we take out the muggle-born students,
+the mean is down to 29.67 seconds
+Means are very easily changed by extreme values
+But, the median does not change as much.
+It only goes from 30 seconds to 29.5 seconds when we pull out the muggle-borns
+The range changes greatly, going from 46 seconds
+to 20 because the extreme values
+determine the high number in our range calculation.
+The variance is also greatly affected since
+those slow Muggle-born students inflate our mean.
+If we take out those Muggle-born times, the rest of our data is quite close together,
+reflected in the variance of about 36 seconds squared.
+But once we add those times back in, the variance
+shoots up to about 228 seconds squared, which matches our intuition that the group is now
+more “spread out”.
+You can see that the distance between points and the new mean are much larger than before
+we put the Muggle-born times back in
+These Muggle-born times change our measures of spread and center.
+But that doesn’t necessarily mean these data are *bad*.
+We need to think about whether unusual points belong in our data or not.
+And we’ll talk more about unusual points, or Outliers, later in the series.
+Thanks thought bubble!
+Remember that the units of variance are squared units, like seconds squared for our flying
+broomstick times, or baseball wins squared for our baseball example.
+And yes, variance is valuable, but sometimes we need something with units that make just
+a little more sense.
+Enter, standard deviation.
+The standard deviation is the square root of the variance, which gives back the units
+that we’re comfortable with: seconds or baseball wins!
+The standard deviation of our Quidditch data would be about 6 seconds without the Muggle-born
+data and about 15 seconds with it.
+You can think of the standard deviation as the average amount we expect a point to differ
+(or deviate) from the mean.
+That means that on average, we expect students to deviate from the mean time by 6 seconds.
+When the Muggle-born students raise our mean, our standard deviation goes up as well.
+In part this happens because now the other points are further from the mean, since the
+mean became larger.
+Just like the mean, the standard deviation and variance are heavily affected by unusually
+large or small values.
+So you should still always look out for extreme values in your data and be aware of the influence
+they can have.
+If you see someone reporting a mean number in an article or on tv, you can use the standard deviation -
+if they’re thoughtful enough to give it to you--to get a better understanding
+for how well the mean represents the data.
+If the mean number of murders per state in 2015 was 307 (which it was), then a standard
+deviation of 10 murders shows us that 307 is a pretty good guess for the number of murders
+in any individual state.
+But, if the the standard deviation was 353 murders (which it was), that guess wouldn’t
+be nearly as accurate.
+And this makes some sense, you wouldn’t expect Montana to have nearly as many murders
+as a heavily populated state like New York or California.
+Let’s go back to our YouTube channel.
+So now you have a better idea of who is watching you.
+And you’re getting more and more viewers everyday!
+If you want to grow more, you realize you need to diversify your audience.
+So you look at the standard deviation of the ages of your audience.
+This will give you a better idea of whether your audience have similar ages, or whether
+you’re appealing to many age groups.
+You keep adding new content and collaborating with other YouTubers to try to reach a wider
+audience, and it’s working!
+Your standard deviation is getting larger, which means you’re attracting a more diverse
+(or more “spread out”) audience!
+And congratulations, looks like you just hit one million Subscribers.
+As our YouTube thought experiment showed us, the different measures of spread each give
+us different information about our data, but they all tell us something about how spread
+out the data are.
+Sure, you can use measures of spread to grow your YouTube channel and are important for statisticians.
+But...they are also valuable for us non-statisticians to ponder.
+And I’m going to go a little deep here...try not to veer into the cheesy...but here’s
+my big take away from this episode... we all have a tendency to compare ourselves to the
+“average”.
+We compare our income to the average income.
+We compare our rent to the average rent.
+Our intelligence to average intelligence.
+We compare our weight to the average weight of someone our age.
+And on.
+And on.
+From these “measures of spread” I take away the idea that the “average” whatever,
+on it’s own, can be deeply misleading.
+Comparing ourselves to that single statistic can give us a false sense of failure...or
+success.
+Depending on how the data is spread out.
+So maybe stop comparing yourself to the average… or, if you’re really insistent on ranking
+yourself against everybody else…
+Go calculate the standard deviation too.
+Thanks for watching.
+I'll see you next time.
+
+## Charts Are Like Pasta - Data Visualization Part 1: Crash Course Statistics #5
+
+
+### Intro
+
+Hi, I’m Adriene Hill, and this is Crash Course Statistics.
+So, for the last few episodes we’ve discussed ways to summarize data using numbers.
+We used measures of central tendency and measures of spread.
+But sometimes it can be helpful to actually *see* your data in addition to having numbers
+to describe it.
+Data visualizations are important to understand because you’ll see them everyday.
+In the news, on Facebook, in magazines.
+Maybe I’ll make an infographic of all the places we see data visualizations.
+
+### Categorical Data
+
+There are two main types of data that we might encounter: categorical and quantitative.
+Quantitative data are quantities, numbers that have both order and consistent spacing.
+For example, how many ounces of olive oil are in each American home.
+If three families told you how many ounces of olive oil they have, you could put them
+in a meaningful order--from least to greatest, or greatest to least.
+This order also has consistent spacing, an increase in 1 ounce of olive oil is the same
+whether you go from 0 to 1 ounce, or from 100 to 101 ounces.
+These properties allow us to do simple math with the data--like taking the mean or calculating
+the standard deviation.
+Categorical data doesn’t have a meaningful order or consistent spacing.
+For example, favorite kind of pasta.
+You might like penne, rotini, linguine, or even Angel Hair, but there’s no objective
+way to put those pastas into a meaningful order.
+Is penne truly better than linguine?
+Where does rotini fit in?
+It would be pasta madness to try to put them in order.
+The simplest way to display categorical data is to make a frequency table.
+A frequency table shows you all of the categories and the number of data points that fall in
+that category (in other words, its frequency).
+To change a frequency table into a relative frequency table, we just need to take each
+raw frequency and divide by the number of total points to get a decimal between 0 and 1.
+Some of you may be used to reading decimals as percentages, but if you’re not, just
+multiply by 100 to get the percentage.
+For linguine we have 10/50 which is 0.2 or 20% of the group.
+Relative frequency tables have the benefit of being easy to compare.
+No matter what we’re measuring or how many data points we have, it’s easy to compare
+percentages.
+If 20% of people like linguine, we can see that’s a smaller percent than the 67% of
+people who like pineapple on pizza or greater than the 10% of my family who thinks statistics
+are scary.
+The relative frequency table for favorite pasta might look like this.
+We can also add more than one variable to our frequency table.
+We could ask people to rate their favorite pasta sauce and make a combined frequency
+table, or a contingency table, of both pasta and sauce preference.
+If I were planning a party, and needed to pick some pasta for the group, my best bets
+would be Rotini with Red Sauce and Penne with Red or White sauce.
+And because I’m planning a party and because I’m having food, I did look it up: the chance
+of death by choking on food in the US in a given year is 1 in 100,686
+But, sometimes we don’t want just numbers in our visualization.
+Earlier in the series, I talked about how it can be hard to wrap your head around numbers--especially
+when they get really big or really small.
+There are other more visual ways to represent categorical data.
+One way to do this is with a bar chart.
+A bar chart uses the frequencies that we saw in our frequency table to create bars that
+have a height equal to the frequency.
+That way, we can compare the height of bars instead of looking at raw numbers.
+Here’s a bar chart representing the pasta data we saw in our original frequency table.
+You can see that penne is by *far* the most chosen pasta, and how it compares to Angel Hair.
+Bar charts display a lot of information in a very simple graph, they can also display
+the frequencies of multiple variables.
+Let’s say we want to compare each of these pasta types with either white or red sauce.
+We can either stack frequencies so it gives us the same information as our contingency
+table, or we can have bar charts side by side.
+Pie charts are another way of displaying categorical data.
+They use the relative frequency of categories to portion out pieces of a Circle, just like
+a pie.
+The higher the relative frequency, the bigger the slice of pie a category gets.
+Pie charts are useful because our eyes are pretty good at comparing slices.
+Our pasta data in a pie chart looks like this.
+Pie charts are great at visually displaying one variable.
+But they struggle to effectively display more than one variable, like our pasta and sauces
+contingency table.
+Another way to display categorical data is a pictograph.
+Pictographs represent frequency with pictures.
+A picture, like the ball in this basketball participation graph, will represent some number
+of units, say 100 kids.
+So if Riverdale High had 550 students participate in their basketball programs, then the graph
+would show 5.5 basketballs.
+Sometimes pictographs represent frequencies by increasing the size of the picture instead
+and it’s not wrong, but it’s more difficult for us to visually compare, especially for
+small differences, which can be misleading.
+Plus, at a casual glance, we don’t know what the size difference means.
+Are we comparing the diameter of the basketballs?
+Or are we comparing their areas?
+*BREAKING NEWS*
+
+
+### Quantitative Data
+
+This is Channel 2 News.
+Looks like all you students out there are really hitting the books!
+Data from the US Department of Education shows the graduation rate has been climbing!
+So way to go everybody!
+You’re passing the test of life with flying colors!
+Let’s push that stack of books even higher!
+So, that last pictograph...not at all to scale.
+See how the stacks of books are not proportionate?
+It shows a difference of 5% (from 75% - 80%) with a stack of books that is over *double*
+the height of the 75% stack.
+This makes the difference seem huge because the axis doesn’t start at 0.
+And yet, an increase of 80-81% is shown by two stacks that are BARELY different in height,
+even though the 5% difference looks huge.
+Always keep on eye on those axes.
+Let’s loop back to quantitative data, which as you’ll remember, have a meaningful order
+and consistent spacing.
+Frequency tables can be used to display quantitative data, like age, or height, or ounces of olive
+oil in your house.
+We just have to create categories out of our quantitative data first.
+We do that with a process called “binning”.
+Binning takes a quantitative variable and bins it into categories hthat are either pre-existing
+or made up.
+For example I can say that 0-15 oz of olive oil is “Very Little”, 16-32 oz is “Average”,
+33-49 oz is “A Lot” and 50+ oz is “Excessive”--like suspiciously Excessive.
+Like Will’s 14 cats excessive.
+Why do you need so much olive oil?
+Anyway, once I’ve binned my data, I can create a frequency table or relative frequency
+table, just like with our pasta example.
+It might look something like this.
+Binning is most useful when there’s pre-existing “bins” for our data.
+Like, you can divide age-in-years into the bins “Child”, “Teen”, “Adult”
+and “Older Adult” because those are pre-existing categories.
+We can also take a score on a depression test and create two bins: “clinically depressed”
+and “not clinically depressed”.
+You can see from this example that bins don’t HAVE to be equally spaced, but if you see
+quantitative data that has been binned, make sure that the way it was divided up was appropriate
+for the situation.
+Unequally spaced bins can be misleading unless there’s a real world distinction to back
+it up.
+Say politician X wants to make himself look popular, but it seems like people in their
+30’s really hate him.
+(probably because he said that the reason they can’t afford a house is their brunch
+habit).
+Politician X wants to hide the fact that over 80% of people in their 30’s said they won’t
+vote for him.
+So he does some “re-binning”.
+Traditionally the data are binned roughly by decade 18 years old to 29 years old, 30
+years old to 39 years old, 40 to 49...you get the point.
+But Mr. X needs to hide these hateful 30-somethings in the data.
+The old chart looked like this:
+But Politician X decided to split up the 30-somethings to make his numbers look better:
+He moved the data around to hide the glaring group of 30 year old dissenters.
+Instead of showing the truth that 30-somethings despise him, we see a more...positive view
+of his popularity.
+By splitting the 30-somethings and putting some of them into two other, larger groups,
+he can obscure their political dissatisfaction.
+Looking at this new table, he’d win the popularity vote in each of the 5 new bins.
+If I don’t show you the number of voters per bin, it seems legit...
+Another categorical graphing method we can apply to quantitative data is bar charts.
+When we use bar charts for quantitative data, we squish the bars together so that they’re
+touching and we call them histograms.
+The bars are squished together because the data are ‘continuous’ which means the
+values in one bar flow into the next bar, there’s no separation like in our categorical
+bar charts.
+In histograms, like bar charts, the height of the bars tell us how frequently data in
+a certain range occur.
+A histogram also gives us information about how the data is distributed.
+We can estimate where the mean, median and mode of our data are as well as see how spread
+out the data is.
+Look at this histogram for our olive oil data.
+For this histogram, we can see that the range of the data is approximately 85 since it covers
+value 0-85 ounces and that it’s right skewed (the tail is to the right), and that it’s
+center is around 25 ounces.
+The histogram gives us more information about the data than a frequency table does, but
+they’re still obscuring WHAT the specific data values are.
+If you read the news--or watch the news--you will see these representations over and over
+and over.
+You will likely see far more of these charts and graph than you will create.
+The big take away here, as a consumer of these things, is to look closely at what the visualization
+is actually telling you.
+Or maybe trying to hide from you.
+These charts and graphs give us another way to comprehend numbers--to see the big picture.
+Thanks for watching!
+I’ll see you next week.
+
+
+## Plots, Outliers, and Justin Timberlake: Data Visualization Part 2: Crash Course Statistics #6
+
+
+
+Hi, I’m Adriene Hill and Welcome back to Crash Course Statistics.
+Last time we left off talking about different data visualizations. The ones we encounter every single day.
+Whether it’s a chart on the subway telling us the prevalence of heart disease in different
+age groups, or a histogram on Buzzfeed showing us how many times people use Lyft each week.
+These visualizations allow us to get to know data with our eyes, and today we’ll dive
+deeper into data visualization and make all sorts of beautiful graphs and talk about some
+really extreme situations, like the person who watched Sandy Wexler on Netflix like 400 times.
+Which seems like high.
+
+Last episode we looked at histograms which use the height of a bar to show how frequently
+data occur.
+We can also use this format to make a dot plot.
+A dotplot takes a histogram, and replaces the solid bars which use their height to show
+frequency... with dots.
+There’s one dot for each data point contained in the bar, so we can just count the number
+of dots to find out how many there are.
+The dot plot for our olive oil data looks like this, unsurprisingly similar to the histogram
+for that data.
+Or check out this dot plot of how often this sample of people called their moms this month.
+This gives us a nice way to explore the general shape of our data, but we still lose information
+about the individual data values, just like with the histogram.
+Occasionally we WANT that extra information.
+Enter, the stem and leaf plot.
+A stem and leaf plot is a cousin of the dotplot.
+It also gives us information about data and their frequencies by stacking objects on top
+of each other.
+However, stem and leaf plots use values from the raw data ...instead of dots.
+So we’ll turn our Olive oil dot plot into a stem and leaf plot.
+And no, I’m not going to explain my olive oil fixation...
+First, we need to split each data value into a stem, and a leaf.
+Stems are related to the “bins” or bars in a histogram or dotplot.
+Take our dotplot for example: each stack of dots might represent a range of 5oz, from
+0-4 oz, 5-9oz, all the way up to a bar with all the data in the 80-84 oz range.
+The stem for a “bin” of data is the digits that *all* the values in a “bin” have
+in common.
+For the 10-14 oz range, each value has a 1 at the beginning of the number so the stem
+is ‘1’.
+For the 80-84 oz range, the data all have an “8” at the beginning, so the stem would
+be ‘8’.
+We can have larger stems too!
+If the data went all the way up to 2,006 oz, we could have a stem of “2-0-0”, but that’s
+probably too much for our olive oil example.
+Now that we have all of our stems, we can add the leaves.
+Each stem, like in a real plant, can have multiple leaves.
+They’re stacked on top of each other so that the height of the stack shows you how
+frequently data appear in that bin, just like a dotplot.
+The actual “leaf” is the rest of the digits that are not in the “stem”.
+If one of our data points is 13, and the “stem” for that range is 1, that takes care of the
+“1”, so the leaf is “3”.
+Leaves appear in numerical order, from the stem out, so leaves that are smaller digits
+are closer to the stem.
+From a distance, stem and leaf plots look a lot like a dotplot or histogram.
+If you squint your eyes, the leaves almost look like bars or dots, but unsquinting them
+will allow you to see even more information than a histogram or dotplot will tell you.
+You get to see what the individual values are and *how* they’re spread out within
+a bar.
+Stem and leaf plots are usually flipped on their sides so that the stems are listed vertically
+and leaves extend horizontally.
+Here’s a stem and leaf plot of the number of pieces of gum each of your extended family
+members has chewed in the last month.
+Now let’s talk about boxplots.
+Boxplots use some of our measures of central tendency and spread to visually display our data.
+A boxplot--is also called a “box-and-whiskers-plot” It has two major parts: the box and the whiskers.
+The box is a rectangle that stretches across the inter quartile range of our data (from
+Q1-Q3).
+At the median, there is a line splitting the rectangle into halves.
+If one one of those halves is larger than the other, that quartile is more spread out.
+Since each quartile has the same number of data points, the smaller the quartile, the
+less spread out that portion of the data is.
+Imagine the difference between fitting 20 clowns in a car and fitting 20 clowns in a
+regulation sized football field.
+Same number of “clowns”, more space to make balloon animals.
+Attached to either end of this box are the whiskers-- which help show the minimum and
+maximum of all the data, as long as it's within one and a half times the Interquartile range
+of the median.
+This value sets our “fences.”
+We use one and a half times the InterQuartile Range because *most* of the data will be within
+this range, especially if your data is normally distributed.
+We’ll get into this more in future episodes.
+Most of the data will be inside the fences-- any data outside is flagged as a potential
+“outlier”.
+It can be tempting to think of outliers as data that’s “wrong” somehow, but that’s
+not always the case.
+Values outside the fences are less likely than data near the boxplot, but they’re
+not impossible.
+For example, It’s pretty unlikely that if you dial random numbers into your phone you’ll
+call is a Domino’s Pizza, but it is possible.
+Rare values do happen.
+Keeping these rare-but-possible values can be important.
+When the local news shows you a boxplot of local rents and decides that the bottom 1000
+rent values are “outliers”, the graph they display could be misleading.
+Those rents are real values that you could expect.
+Taking them out will make your visualization less informative, and might lead you to think
+that the average rent is higher than it actually is.
+However, some values that are flagged as “outliers” may not be expected in your data at all.
+Perhaps Neymar snuck into your amateur pick-up soccer game without you knowing.
+His off-the-charts-agility-scores are not representative of the population you are interested
+in since he is Neymar...not an amateur.
+Or maybe you made a typo in your spreadsheet and wrote 500 pounds instead of 5 pounds for
+your data on the weights of pet teacup pigs.
+That’d be a giant teacup… pig.
+The problem is you may not always know the difference between a point that’s valid-but-rare and one that’s
+a mistake.
+Since we still need a way to decide, it is useful to have a pre-set cut-off for when
+we discard data .
+To see how boxplots can help us look for these outliers and compare data from two samples,
+Let’s jump to the Thought Bubble.
+Justin Timberlake has a new album.
+This American born singer and songwriter has had quite the career.
+I mean, he did bring sexy back.
+Our writer, Chelsea wanted wanted to know how going solo affected the songs he wrote,
+specifically, the number of unique words he used per song.
+To satisfy her curiosity she made a boxplot for a sample of Justin Timberlake’s songs
+once he’d gone solo, and one for a sample of songs he sang with *N’SYNC.
+The first thing we might notice, is that the medians-are pretty different.
+The median number of unique words in a Justin Timberlake song is higher than the median
+number of unique words in an *N’SYNC song!
+JT has a median of 129 words vs a median of 89 back in his *N’SYNC days.
+Guess we shouldn’t be surprised coming from a band that had a song titled “Bye Bye Bye.”
+So it seems like JT may have developed a larger lyrical vocabulary when he went solo.
+...Maybe Lance Bass was holding him back…
+Anyway...you might also notice that the box part of the *N’SYNC boxplot is a lot smaller.
+The squished nature of the boxplot shows us that *N’SYNC songs have a relatively similar
+amount of unique words.
+The boxplot also shows you some potential outliers to look at, shown by the points that
+are outside the fences of our boxplot.
+Let’s look at a song that’s marked as a potential outlier in the Justin Timberlake
+Boxplot.
+The song is “Chop Me Up” and it has 257 unique words which is a lot, since the median
+number of unique words for a JT song is 129.
+It’s definitely outside the fences.
+Thanks Thoughtbubble.
+We don’t want to throw out data just because it is extreme.
+And Chop Me Up isn’t part of some super-experimental Christmas album... so it’s hard to tell
+if this is a valid data point.
+To get around this uncertainty, we apply our pre-set rule.
+There isn’t one set rule for handling these extreme values, there are many.
+For now, we’ll use our boxplot method, and get rid of the “Chop Me Up” data because
+it’s outside the fences .
+Remember, statistics is all about uncertainty.
+I’m not sure if the number of unique words in Chop Me Up is just a rare value, or whether
+it’s the lyrical equivalent of Neymar in a pick-up soccer game.
+We still have to make decisions.
+For all the Nerdfighters out there, you may have heard of Hank’s annual Nerdfighteria Census.
+And while you’re interested in taking it, you may wonder how long it takes to fill out...you
+don’t have all day...so you use your new data viz skills to create a boxplot of the
+data...and wahwhah.
+I can’t even see the box or the whiskers through all those extreme values--it looks
+like some Nerdfighters were very thorough...or very distracted by other things.
+8000 minutes is 133 hours.
+This plot isn’t wrong….per se...but it’s not very informative since we can’t get
+much useful information from it.
+We don’t have any better idea of how long it’s gonna take to fill out Hank’s survey.
+When you make or see a data visualization it’s important to remember that its job
+is to actually give you information.
+If it doesn’t do that, its not worthwhile.
+Now, let’s go back to frequency plots and talk about one last method for visualizing
+quantitative data: the cumulative frequency plot.
+Cumulative Frequency Plots are like histograms but instead of the height of a bar telling
+you how much data is in that specific bin, it tells you how much data is in that bin
+AND all previous bins.
+That’s why it’s called “cumulative.”
+It’s the frequency of all the points we’ve accumulated up to this point.
+It’s like a small fish getting eaten by a bigger fish, which gets eaten by an even
+bigger fish, and so on.
+Each fish is now full of the fish it ate.
+And the fish that fish ate.
+And side note.
+Your odds of being killed by a shark--are about one in 3 point 7 million.
+Back to our cumulative frequency plots... these plots have their moment to shine when
+we want to answer a question like “How many JT songs have 160 unique words or fewer?”
+The cumulative frequency plot looks like this:
+Here’s the bar that answers our question.
+We could also get this information by counting all the songs in the bars that are 160 or
+less on our histogram, but that’s more work.
+Now that we’ve seen some good graphs and some bad, we can apply our newfound knowledge
+anytime we see data visualizations...which will be all the time.
+“This I Promise You”.
+I mean...like... "until the End of Time".
+On the bus, in your health app, or during your bosses annual company-wide meeting, you’ll
+know that graphs are only as good as the information they communicate.
+If you see a bad graph out there.
+“Say Something” Ask questions.
+Be skeptical.
+I’m coining a new DFTBA today: DFTBAQ.
+Don’t forget to be asking questions… it’s another way of being awesome.
+“I Want it that way” The world wants it that way.
+And remember...it’s not just gonna be you…”it’s gonna be me” too.
+Allright. I’m “Gone” See you next time.
+And yeah, I know "I want it that way" was Backstreet Boys.
+
+## The Shape of Data: Distributions: Crash Course Statistics #7
+
+
+Hi, I’m Adriene Hill and Welcome to Crash Course Statistics.
+We’ve spent out a lot of time talking about data visualization and different kinds of
+frequency plots--like dot-plots and histograms--that tell us how frequently things occur in data
+we actually have.
+But so far in this series, the data we have talked about usually isn’t ALL the data
+that exists.
+If I want to know about student loan debt in America, I am definitely not going to ask
+over 300 million Americans.
+I’m lazy like that.
+But maybe I can find the time to ask 2,000 of them.
+Samples...and the shapes they give us...are shadows of what all the data would look like.
+We collect samples because we think they’ll give us a glimpse of the bigger picture.
+They’ll tell us something about the shape of all the data.
+Because it turns out we can learn almost everything we need to know about data from its shape.
+Intro
+Picture a histogram of every single person’s height.
+
+## HISTOGRAM OF HEIGHT
+
+Now imagine the bars getting thinner, and thinner, and thinner ...as the bins get smaller
+and smaller.
+Till they are so thin that the outline of our histogram looks like a smooth line ...since
+this is a distribution of continuous numbers.
+And there’s an infinite possibility of heights.
+I am 1.67642… (and on and on) meters tall.
+If we let our bars be infinitely small, we get a smooth curve, also known as the distribution
+of the data.
+A distribution represents all possible values for a set of data...and how often those values
+occur.
+Distributions can also be discrete.
+Like the number of countries people have visited.
+That means they only have a few set values--that they can take on.
+These distributions look a lot more like the histograms we’re used to seeing.
+Like a histogram, the distribution tells us about the shape and spread of data.
+We can think of distributions as a set of instructions for a machine that generates random numbers.
+Let’s say it generates the number of leaves on a tree.
+You may well be wondering why we’d have a tree-leaf-number generating machine.
+The idea here is that EVERYTHING can generate data.
+It’s not just mechanical stuff.
+It’s leaves and animals and even people.
+The distribution is what specifies how the knobs and dials on our machine are set.
+Once the machine is set, every time there’s a new tree, the machine pops out a random number of leaves from the distribution.
+It won’t be the same number each time though.
+That’s because it’s a random selection based on the information the knobs and dials tell us about our distribution of leaves.
+When we look at samples of data generated by our leaf machine, we’re trying to guess the shape of the distribution and how that machine’s knobs and dials are set.
+
+### HEART RATES OBSERVED
+
+But remember, samples of data are not all the data, so when we compare the shapes of two samples of data, we’re really asking whether the same distribution--these two machine settings--could have produced these two different--but sorta similar--shapes.
+If you got an especially expensive electricity bill last month, you may want to look at the histogram of your average daily energy consumption this month, and the same month last year side-by-side.
+It’s not that realistic to expect that you consumed energy at EXACTLY the same rate this month as you did the year before.
+There are probably some differences.
+But your question is whether there’s enough difference to conclude that your energy consuming behaviors have changed.
+When we think about data samples as being just some of the data made using a certain distribution shape, it helps us compare samples in a more meaningful way.
+Because we know that the samples approximate some theoretical shape, we can draw connections between the sample and the theoretical machine that generated it, which is what we really care about.
+While data come in all sorts of shapes, let’s take a look at a few of the most common, starting with the normal distribution.
+We mentioned the Normal distribution when we talked about the different ways to measure the center of data--since the mean, median, and mode of a normal distribution are the same.
+This tells us that the distribution is symmetric, meaning you could fold it in half and those halves would be the same and that it’s unimodal, meaning there’s only one peak.
+
+### NORMAL DISTRIBUTION CURVE
+
+The shape of a normal distribution is set by two familiar statistics: the mean and standard deviation.
+The mean tells us where the center of the distribution is.
+The standard deviation tells us how thin or squished the normal distribution is.
+Since the standard deviation is the average distance between any point and the mean, the smaller it is the closer all the data will be to the mean.
+We’ll have a skinnier normal distribution.
+Most of the data in the normal distribution--about 68%--is within 1 standard deviation of the mean on either side.
+Just like the quartiles in a boxplot, the smaller the range that 68% of the data has to occupy, the more squished it gets.
+Speaking of boxplots here’s what the boxplot for normally distributed data looks like.
+The two halves of our box are exactly the same because the normal distribution is symmetric.
+You’ve probably seen the normal distribution in a lot of different places, it gets called a Bell Curve sometimes.
+Attributes like IQ and the number of Fruit Loops you get in a box are approximately normally distributed.
+Normal distributions come up a lot when we look at groups of things, like the total value rolled after 10 dice rolls, or birth weights.
+We’ll talk more about why the normal distribution is so useful in the future.
+As we’ve seen in this series, data isn’t always normal or symmetric, often times it has some extreme values on one side making it a little bit skewed.
+Age at death during the middle ages is left-skewed...cause lots of people died young while the time it takes to fill out the Nerdfighteria survey was right skewed because some people lolly-gagged.
+
+## BOXPLOT
+
+In a boxplot of data from a skewed distribution, the median will not usually split the box into two even pieces.
+Instead the side with the skewed tail will tend to be stretched out, and often, we’ll see a lot of outliers on that side, just like the boxplot of the Nerdfighteria survey times.
+When we see those features in our sample of data, it suggests that the distribution that generated our data also has some kind of skewed tail.
+Skew can be a useful way to compare data.
+For example, teachers often look at the distribution of scores on a test to see how difficult the test was.
+Really difficult tests tend to generate skewed scores, with most students doing pretty poorly and a few who still ace it.
+Say we flashed pictures of 20 pokemon and asked people to name them.
+Here are their grades.
+Or another sample from a test asking people to list all 195 countries.
+We can compare the shapes and centers of these two groups of tests, as well as any other notable features.
+First of all, these two samples look pretty similar.
+Both have a right skew.
+Both have a pretty low center, but the second test has a more extreme skew.
+Bigger skewed tails usually mean that the data--and therefore the distribution--has both a larger range, and a bigger standard deviation than data with a smaller tail.
+The standard deviation is higher because not only are extreme data further away from the mean, they drag the mean toward them, making most of the other points just a little further from the mean too.
+While the direction of the skew tells you where most of the data is--always on the opposite side of the skewed tail--the extremeness of the skew can help you mentally compare the approximate measures of spread, like range and standard deviation.
+But we compare the shapes of two samples in order to ask whether the shape of the distributions that generated them are different, or whether ONE shape could have randomly created both samples.
+In terms of our machine analogy, we ask whether one machine with its knob settings could have spit out two sets of scores, one that looks like test A, and one that looks like test B. 
+Answering that question get’s complicated, but we’ll get there.
+Now that we’ve examined the tails, let’s look at the middle of some distributions.
+Almost all the distributions we’ve seen so far are unimodal--they only have one peak.
+But there’s many times when data might have two or more peaks.
+We call it bimodal or multimodal data.
+And it looks like the back of a camel, or maybe like two of our unimodal distributions pasted side by side.
+And, that’s probably what’s happening--the unimodal distributions, not the camel thing.
+Often when you see multimodal data in the world it’s because there are two different machines with two different distributions that are both generating data that is being--for some reason or other--measured together.
+One possible example of this is the length in minutes that the geyser Old Faithful erupts.
+
+### ERUPTIONS OF OLD FAITHFUL GEYSER
+
+Most eruptions last either about 2 minutes, or about 4 minutes, with few eruptions around the 3-minute mark, giving us a bimodal distribution.
+It’s entirely possible that there are two different mechanisms behind the data, even though they’re being measured together.
+For example, one set of conditions may lead to an eruption that’s about 2 minutes long, and another--maybe a different temperature or latency--leads to a different kind of eruption which lasts on average 4 minutes.
+Since these two potentially different types of eruptions are being measured together, the data look like they come from one distribution with two bumps, but it is likely that there’s two unimodal distributions being measured at the same time.
+Another example that you don’t need to be a geologist to understand is the race times for some marathons.
+While this data may look like it comes from a unimodal distribution, in reality there’s two big groups of people who run a marathon: those that are competing, and those that do it to prove they can do it.
+There’s usually one peak around the time that all the professional runners cross the finish line, and another when the amateurs do.
+While we don’t know for sure that bimodal data is secretly two distributions disguised
+as one, it is a good reason to look at things more closely.
+We’ll finish today with uniform distribution.
+Even though we haven’t mentioned uniform distributions yet, you’ve probably come
+across them in your everyday life.
+Each value in a uniform distribution has the same frequency, just like each number on a
+die has exactly the same chance of being rolled.
+When you need to decide something fairly, like which of your 6 roomates has to do dishes tonight, or which friend to take to the Jay-Z concert--the best thing you can do is use
+something--like a die--that has a uniform distribution.
+That gives everyone an equal chance of being picked.
+And you can have uniform distributions with any number of outcomes.
+There are 20-sided dice.
+When you’re in Vegas playing a round of roulette the ball is equally likely to land in any of 38 slots.
+There’s a difference between the shape of all the data, and the shape of a sample of the data.
+When we talk about a uniform distribution, we’re talking about the settings of that data generating machine, it doesn’t mean that every sample--or even most samples--
+of our data will have exactly the same frequency for each outcome.
+It’s entirely possible that rolling a die 60 times results in a sample shaped like this:
+
+## DICE ROLLS
+
+Even if we know the theoretical distribution looks like this:
+Using statistics allow us to take the shape of samples that has some randomness and uncertainty, and make a guess about the true distribution that created that sample of data.
+Statistics is all about making decisions when we’re not sure.
+It allows us to look at the shape of 60 dice rolls and figure out whether we believe the die is fair... or whether the die is loaded or whether we need to keep rolling.
+Whether it’s finding the true distribution of eruption times at Old Faithful, or showing evidence that a company is discriminating based on age, gender, or race.
+The shape of data gives us a glimpse into the true nature of what is happening in the world.
+Thanks for watching and DFTBAQ.
+I’ll see you next time.
+
+
+## Correlation Doesn't Equal Causation: Crash Course Statistics #8
+
+
+Hi., I’m Adriene Hill and Welcome back to Crash Course Statistics. Today we’re talking
+about relationships. No, not why you and your bestie are platonic soulmates, or why your
+cat just doesn’t seem to like you, we’re talking about data relationships like how
+you can use one variable to predict another.
+Like if you can predict whether people who write in all capital letters are more likely
+to default on loans. Whether people drive faster after they watch Fast & Furious movies.
+Or whether blink more often when they're lying.
+INTRO
+We’ll start with the simplest data relationship, one between two continuous variables, also
+called bivariate data. But first, we’re going to need to visualize our data using
+a scatter plot. The scatter plot has been called “the most
+versatile, polymorphic, and generally useful invention in the history of statistical graphics.”
+Impressive....And...as such...they are pretty much everywhere.
+Including on your favorite news site...News outlets now have data journalists on staff
+to visualize and make sense of data.
+To make a scatterplot of Old Faithful eruption duration and latency--which is the time between
+eruptions-- we put one variable on the x -axis and the other on the y-axis. Then each data
+point is placed so that it’s in line with both it’s eruption duration, and it’s
+latency.
+Now we can see a relationship. There are clusters, two blob-y looking groups of points, which
+supports our guess that there are likely two kinds of eruptions, one with a longer build
+up and longer duration, and one with a shorter build up and shorter duration.
+Just like the histogram and dot plot, a scatter plot allows us to see the shape and spread of data--but now in two dimensions! This data is clustered, but scatter plots are useful for identifying all kinds of relationships, both linear and nonlinear.
+For now, let’s focus on linear relationships with a classic example--the relationship between the the heights of fathers and sons. 
+It makes sense that a tall father would produce a tall son, but we can do better than just a hand wave-y statement.
+In 1903, the statistician Karl Pearson published an influential paper--in his own journal, Biometrika.
+One section of the paper describes the relationship between the heights of dads and their male children.
+In this paper, Pearson fit a line through the data to describe the relationship, rather than just relying on his eyes to see a pattern. 
+The line--called a regression line--is the line as close as possible to all the points at the same time.
+And note here Pearson used feet and inches in his paper so we will too.
+Lines are a great way to describe a relationship because they have a nice formula, y = mx + b
+just like you learned in algebra. The m --or slope--tells you a lot about your data.
+It tells you that an increase in 1 inch of a father’s height, leads to an increase
+of m in the son’s height (about half an inch in Pearson’s paper).
+So on average dads who are 6’1 tall have sons that are about half an inch taller than
+the sons of fathers who are 6 feet tall. That allowed Pearson to make a prediction about
+the height of the son from the height of the father.
+And this is why these lines are so useful; they allow us to pretty accurately predict one variable based on the value of another.
+The relationship between car weight and gas efficiency allows us to be pretty sure a SMART car gets better mileage than a Hummer. 
+One note of caution: the slope relies heavily on the units of x and y since it’s a measure of how many units y increases with each increase of 1 unit in x. 
+If I decided to measure the Son’s height in meters, the m...or slope... will change, even though the relationship didn’t.
+When we see a non-zero slope--also called a regression coefficient--it’s a sign that
+there’s some kind of relationship between our two variables, but that’s pretty much
+all it tells us. We don’t know how strong that relationship is. For more information,
+we need to look at correlation.
+Correlation measures the way two variables move together, both the direction and closeness
+of their movement. You may have read articles claim that there’s
+a positive correlation between exercise and heart health. That just means if you exercise
+more, your heart tends to be healthier. A positive correlation looks something like
+this on a scatter plot:
+While a negative one, like the correlation between number of cigarettes smoked each day
+and lung health, might look like this. Higher values of cigarettes smoked tend to have lower
+values for lung health:
+We now know what correlations look like in general, but to understand them more deeply, we’re going to take a closer look.
+If two variables have a positive correlation, they move in the same direction. We can see this in our scatter plot if we draw two lines across the graph--one at the mean of each of our variables--to divide the plot into four quadrants.
+When two values are positively correlated--like how many miles you run and the number of calories you burn--most of the points will be in the upper right and lower left quadrants. In these quadrants, the values for miles and calories burned are either both large, or both small.
+The more miles you run, the more calories you burn.
+The opposite happens when the correlation is negative, like the relationship between vaccination rates and the rates of preventable illnesses. Instead of moving together, the variables move in the opposite direction.
+So, the points are mostly in the upper left and lower right quadrants where either vaccination rate is small and rate of illness is large, or visa versa. Since vaccination rate and rate of preventable illness have a negative correlation, as vaccination rates increase, rates of preventable illness decrease.
+The more closely two variables move together... the stronger the relationship will be, positive or negative.
+If the points are in all of the quadrants pretty evenly. You just have a blob or a cloud.
+You don’t have a strong relationship.
+As I mentioned before, the units of your variables can affect the regression coefficient, and
+can also affect the calculation of our correlation. To get around that, we use the standard deviations
+to scale our correlation so that it is always between -1 and 1. This is our correlation coefficient, r.
+Interpreting r involves two things: the sign of the number...that is whether it’s positive or negative and how big the number is. 
+The sign will tell you whether your two variables move together (positive r), or in opposite directions (negative r).
+A correlation of 1 or -1 would be a perfectly straight line, meaning you can exactly predict one value from the other. 
+Say we looked at correlation of the number of hours you’re asleep vs. awake. 
+If I know one of those values I can tell you exactly what the other one is. 
+We all have only 24 hours a day even Beyonce.
+As you get closer and closer to a correlation of 0, the points are more and more spread out around our regression line, and eventually at 0, there’s no linear relationship at all...it’s just dots.
+When you look at a scatterplot, remember that you can’t deduce a correlation just by the
+steepness of the regression line. In our earlier father/son heights example we changed the
+units to meters and our line didn’t look as steep, even though it’s the same data.
+Data with steep lines can have low or high correlations.
+We also use the squared correlation coefficient r^2 .... R^2 is always between 0 and 1, and
+tells us--in decimal form--how much of the variance in one variable is predicted by the
+other. In other words, it tells us how well we can predict one variable if we know the other.
+While they won’t usually give R^2 an explicit mention, you’ll see articles claim things like “ the ounces of soda a person drinks is highly predictive of weight”, which means there’s a large R^2. 
+You can think of R^2 as a measure of how accurate your guesses would be if you used your linear equation to predict one variable from another.
+If you have an R^2 of 0.7 for the cigarettes and lung health data that would mean cigarette usage predicts 70% of the variation in how healthy our lungs are. 
+You could pretty accurately predict someone’s lung health if you knew how many cigarettes they smoked.
+An R^2 of 1 means you can perfectly predict one variable from the other since 100% of the variation is in one variable. 
+This can seem pretty obvious when you think about conversion.
+Like temperature in Fahrenheit can be predicted by temperature in Celsius. 
+In this case we’re not actually measuring the temperature in Farenheit, but it is perfectly predicted by Celcius. So in general, the higher the R^2, the better the fit.
+Crash Course World News 
+Breaking news from city hall today! The mayor has announced a plan to cut down on the number of people who drown every year.
+Sources close to the Mayor tell us that he’s seen some very interesting correlations between
+drownings and air conditioning usage and drownings and Nicolas Cage movies. Or as I like to call it...air cons and Con Airs.
+Both are highly correlated with drownings. Here’s evidence.
+If we look at AC sales data over the past 10 years. And even more proof if we look at Nicolas Cage movies over the same time period. The Nic Cage data was provided to the city by Tyler Vigen.
+So as of today, our mayor has enacted the Cool-Cage act which will prohibit sale of
+air conditioners and create a Nicolas Cage task force who will do everything-- to prevent
+Nicolas Cage from starring in any movies. The Mayor assures us that because of the strong
+correlations she saw, as well as the strong will of our city, we will surely have next
+to no drownings this coming year.
+The Cool Cage act may seem silly, but we’re constantly flooded with messages--that equate
+correlation with causation. And as you’ve heard before: CORRELATION DOESN’T EQUAL
+CAUSATION.
+Just because two variables are related doesn’t mean that one variable causes the other. The
+examples the mayor uses are perfect examples of things that can go wrong when interpreting correlations.
+When one thing (A) is correlated with another (B), there’s a few possible reasons
+A causes B B causes A
+There’s a third Variable C that causes both A and B, even though A and B aren’t related
+Or there’s no relationship at all. it’s just a coincidence.
+The correlation the Mayor saw between air conditioning and drownings is probably caused
+by a third, unmentioned variable: heat! When it’s hot people buy more air conditioners
+and go for a swim leading to a correlation even though there’s no direct link between
+the two.
+And as for Nicholas Cage, he probably shouldn’t feel too guilty about causing world-wide drownings.
+Sometimes two completely unrelated things are correlated just by random chance, with no causal link at all.
+These correlations get called spurious correlations, and they can be hard to catch.
+But when the correlation is between two VERY specific things, like Nicholas Cage movies and all drownings in 3 feet of water when a dog was present you should be suspicious
+that someone tried every weird subset of data until they found a relationship.
+Before we finish with correlation, I just want to warn you: r and R^2 aren’t everything;
+It’s important to look at a scatter plot of data when you can.
+These are the “Datasarus Dozen”... these very different plots all have the same correlation,
+but we can see that the relationships are completely different.
+Correlation is an important piece of the puzzle when you’re looking for a linear relationship
+between two variables. It goes above and beyond the Y=mX + b and gives us information about how well that line explains the data.
+Understanding the relationships between variables and events helps us predict what things are going to happen in the future, and also reflect on why things occured in the past.
+A correlation could help you predict how much money you’ll make after years of working your way up as a lemonade salesperson. Or if watching that next Fast and Furious movie
+in the theater...might encourage people to speed. According to an analysis by a Harvard
+Medical School professor Anupam Jena those two things do look related.
+Relationships are important--the human kind and the data kind.
+Correlation allows us to better understand relationships between data.
+And maybe also the data of our relationships.
+Maybe you can find correlations between the amount of time you spend at work or school
+and with how much affection your cat shows you. Mr. Fluffy misses you.
+Thanks for watching. I’ll see you next time.

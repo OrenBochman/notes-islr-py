@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Oren Bochman">
+<meta name="keywords" content="statistical learning, linear regression, least squares, model assessment, model interpretation, qualitative predictors, interactions, polynomial regression, model diagnostics">
+<meta name="description" content="When the labels are continuous, we are faced with a regression problem. In this chapter we model tabular data using a straight line. THis is the linear regression model, a simple yet powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.">
 
-<title>The Problem – An Introduction to Statistical Learning</title>
+<title>Chapter 3: Linear Regression – An Introduction to Statistical Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-dark-007d2adcd9597ba82898f6769454e788.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +131,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -184,7 +189,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Problem</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch03/index.html">Chapter 3: Linear Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -193,10 +198,19 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The Problem</h1>
-            <p class="subtitle lead">flashcards</p>
-                      </div>
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch03/index.html">Chapter 3: Linear Regression</a></li></ol></nav>
+      <h1 class="title">Chapter 3: Linear Regression</h1>
+                  <div>
+        <div class="description">
+          When the labels are continuous, we are faced with a regression problem. In this chapter we model tabular data using a straight line. THis is the linear regression model, a simple yet powerful statistical technique for modeling the relationship between a predictor variable and a continuous response variable.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">notes</div>
+                <div class="quarto-category">edx</div>
+                <div class="quarto-category">podcast</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -212,13 +226,20 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, March 1, 2027</p>
+        <p class="date">Friday, June 21, 2024</p>
       </div>
     </div>
     
       
     </div>
     
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>statistical learning, linear regression, least squares, model assessment, model interpretation, qualitative predictors, interactions, polynomial regression, model diagnostics</p>
+    </div>
+  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
@@ -248,7 +269,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/ch03/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/ch03/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 3: Linear Regression</span></a>
   </div>
 </li>
@@ -316,223 +337,428 @@ window.Quarto = {
   </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#linear-regression-orientation" id="toc-linear-regression-orientation" class="nav-link active" data-scroll-target="#linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</a></li>
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple linear regression</a>
+  <ul class="collapse">
+  <li><a href="#estimating-the-coefficients" id="toc-estimating-the-coefficients" class="nav-link" data-scroll-target="#estimating-the-coefficients">Estimating the Coefficients</a></li>
+  <li><a href="#assessing-the-accuracy-of-the-coefficient-estimates" id="toc-assessing-the-accuracy-of-the-coefficient-estimates" class="nav-link" data-scroll-target="#assessing-the-accuracy-of-the-coefficient-estimates">Assessing the Accuracy of the Coefficient Estimates</a></li>
+  <li><a href="#assessing-the-accuracy-of-the-model" id="toc-assessing-the-accuracy-of-the-model" class="nav-link" data-scroll-target="#assessing-the-accuracy-of-the-model">Assessing the Accuracy of the Model</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-testing-and-confidence-intervals" id="toc-hypothesis-testing-and-confidence-intervals" class="nav-link" data-scroll-target="#hypothesis-testing-and-confidence-intervals">Hypothesis Testing and Confidence Intervals</a></li>
+  <li><a href="#some-important-questions" id="toc-some-important-questions" class="nav-link" data-scroll-target="#some-important-questions">Some important questions</a></li>
+  <li><a href="#simple-linear-regression-1" id="toc-simple-linear-regression-1" class="nav-link" data-scroll-target="#simple-linear-regression-1">Simple Linear Regression:</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression:</a></li>
+  <li><a href="#qualitative-predictors" id="toc-qualitative-predictors" class="nav-link" data-scroll-target="#qualitative-predictors">Qualitative Predictors:</a></li>
+  <li><a href="#interactions" id="toc-interactions" class="nav-link" data-scroll-target="#interactions">Interactions:</a></li>
+  <li><a href="#polynomial-regression" id="toc-polynomial-regression" class="nav-link" data-scroll-target="#polynomial-regression">Polynomial Regression:</a></li>
+  <li><a href="#model-diagnostics" id="toc-model-diagnostics" class="nav-link" data-scroll-target="#model-diagnostics">Model Diagnostics:</a></li>
+  <li><a href="#key-quotes" id="toc-key-quotes" class="nav-link" data-scroll-target="#key-quotes">Key Quotes:</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#chapter" id="toc-chapter" class="nav-link" data-scroll-target="#chapter">Chapter</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch03/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
+<blockquote class="blockquote">
+<p>“Essentially, all models are wrong, but some are useful” — <a href="https://en.wikipedia.org/wiki/George_E._P._Box">George Box</a></p>
+</blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What does it mean for data to be IID?
+TL;DR - Linear Regression <span class="emoji" data-emoji="chart_with_upwards_trend">📈</span> <span class="emoji" data-emoji="chart_with_downwards_trend">📉</span>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>IID</strong> stands for <strong>independent and identically distributed</strong>. It is a common assumption about data in statistical modeling. The data are comprised of <span class="math inline">n</span> i.i.d. copies of a random variable <span class="math inline">O</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Linear Regression in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Linear Regression in a nutshell"></a></p>
+<figcaption>Linear Regression in a nutshell</figcaption>
+</figure>
+</div>
+<ul>
+<li>Linear regression is the fundamental statistical technique for modeling the relationship between a predictor variable and a response variable. <mark>In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.</mark></li>
+<li>The model’s accuracy is assessed <span class="emoji" data-emoji="see_no_evil">🙈</span> <span class="emoji" data-emoji="hear_no_evil">🙉</span> <span class="emoji" data-emoji="speak_no_evil">🙊</span> via metrics like:
+<ul>
+<li>the <strong>Residual Standard Error</strong> (RSE) <span class="emoji" data-emoji="broken_heart">💔</span></li>
+<li>the adjusted <span class="math inline">R^2</span> <span class="emoji" data-emoji="kiss">💋</span><br>
+</li>
+<li>the fantastic <strong>F-statistic</strong>, <span class="emoji" data-emoji="sparkling_heart">💖</span> and</li>
+<li>the black <span class="emoji" data-emoji="sheep">🐑</span> of statistics - <strong>p-values</strong>. <span class="emoji" data-emoji="scream">😱</span></li>
+</ul></li>
+</ul>
+<p>The <mark>coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant</mark> <span class="emoji" data-emoji="yawning_face">🥱</span> . Qualitative predictors are incorporated using <span class="emoji" data-emoji="dumpling">🥟</span> dummy variables, and interactions between predictors can capture complex relationships.</p>
+<p>Model diagnostics help identify potential issues like <strong>non-linearity</strong> <span class="emoji" data-emoji="vampire">🧛</span>, <strong>heteroscedasticity</strong> <span class="emoji" data-emoji="space_invader">👾</span>, <strong>outliers</strong> <span class="emoji" data-emoji="alien">👽</span>, <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>, and <strong>collinearity</strong> <span class="emoji" data-emoji="zombie">🧟</span>.</p>
+<p>Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. <span class="emoji" data-emoji="headphones">🎧</span></p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>“The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” — <a href="https://en.wikipedia.org/wiki/Frederick_Mosteller">Fred Mosteller</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> and <a href="https://en.wikipedia.org/wiki/John_Tukey">John Tukey</a></p>
+</blockquote>
+<p>The chapter is 64 pages long and covers the following topics:</p>
+<ul>
+<li>Linear Regression
+<ul>
+<li>Simple Linear Regression
+<ul>
+<li>Estimating the Coefficients</li>
+<li>Assessing the Accuracy of the Coefficient Estimates</li>
+<li>Assessing the Accuracy of the Model</li>
+</ul></li>
+<li>Multiple Linear Regression
+<ul>
+<li>Estimating the Regression Coefficients</li>
+<li>Some Important Questions</li>
+</ul></li>
+<li>Other Considerations in the Regression Model
+<ul>
+<li>Qualitative Predictors</li>
+<li>Extensions of the Linear Model</li>
+<li>Potential Problems</li>
+</ul></li>
+<li>The Marketing Plan</li>
+<li>Comparison of Linear Regression with K-Nearest Neighbors</li>
+</ul></li>
+<li>There is a lab:
+<ul>
+<li><a href="../../posts/ch03/Ch03-linreg-lab.html">Lab: Linear Regression</a></li>
+</ul></li>
+</ul>
+<section id="linear-regression-orientation" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-orientation">Linear Regression Orientation :<span class="emoji" data-emoji="old_key">🗝️</span>:</h2>
+<p>There are plenty of big words in this chapter, but don’t worry, we’ll <span class="emoji" data-emoji="muscle">💪</span> break them down together<span class="emoji" data-emoji="palms_up_together">🤲</span>! Here’s a quick overview of the key concepts covered in this chapter:</p>
+<dl>
+<dt>Simple Linear Regression</dt>
+<dd>
+<p>Modeling the relationship between a single input (<em>predictor</em>) variable and an output (<em>response</em>) variable using a straight line.</p>
+</dd>
+<dt>Multiple Linear Regression</dt>
+<dd>
+<p>Extending simple linear regression to accommodate multiple <em>predictor</em> variables.</p>
+</dd>
+<dt>Model Assessment</dt>
+<dd>
+<p>Evaluating the accuracy and fit of linear regression models using metrics like <strong>RSE</strong>, <span class="math inline">R^2</span>, <strong>F-statistic</strong>, and <strong>p-values</strong>.</p>
+</dd>
+<dt>Model Interpretation</dt>
+<dd>
+<p>Understanding the practical meaning of estimated coefficients and their significance in the context of the data.</p>
+</dd>
+<dt>Qualitative Predictors</dt>
+<dd>
+<p>When we want to play with non0numerical predictors, e.g.&nbsp;representing color categories, we can encode them as numerical values or better yet we can use <strong>dummy variables</strong> that track if a category is on <span class="emoji" data-emoji="arrow_forward">▶️</span> or off <span class="emoji" data-emoji="stop_button">⏹️</span>. Incorporating categorical variables into regression models using <em>dummy variables</em>.</p>
+</dd>
+<dt>Interactions</dt>
+<dd>
+<p>Modeling complex relationships by including interaction terms between predictors. If the terms are A and B then the interaction term is <span class="math inline">\beta A \times B</span>. where <span class="math inline">\beta</span> is the coefficient representing thr strength of the interaction.</p>
+</dd>
+<dt>Polynomial Regression</dt>
+<dd>
+<p>Capturing non-linear relationships using polynomial terms of predictor variables.</p>
+</dd>
+<dt>Model Diagnostics <span class="emoji" data-emoji="thermometer">🌡️</span></dt>
+<dd>
+<p>Identifying and addressing potential issues <span class="emoji" data-emoji="face_with_thermometer">🤒</span> like non-linearity, heteroscedasticity, outliers, high leverage points, and collinearity.</p>
+</dd>
+<dt>Heteroscedasticity <span class="emoji" data-emoji="space_invader">👾</span></dt>
+<dd>
+<p>When the response spreads out more as the predictors increase. You can usually eyeball <span class="emoji" data-emoji="roll_eyes">🙄</span> this by looking at the residuals vs.&nbsp;fitted values plot.</p>
+</dd>
+<dt>Outliers <span class="emoji" data-emoji="alien">👽</span></dt>
+<dd>
+<p>Observations that don’t fit the general pattern of the data. If they are mistakes we can toss them out <span class="emoji" data-emoji="wastebasket">🗑️</span>. But is they are for real, we call them <strong>high leverage points</strong> <span class="emoji" data-emoji="ghost">👻</span>.</p>
+</dd>
+<dt>Collinearity <span class="emoji" data-emoji="zombie">🧟</span></dt>
+<dd>
+<p>when <em>predictors</em> are highly correlated, leading to unstable coefficient estimates. The <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</p>
+</dd>
+</dl>
+</section>
+<section id="simple-linear-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple linear regression</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/vCHtY6Me5FI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Simple linear regression
+</figcaption>
+</figure>
+</div></div><ul>
+<li><p><strong>Model</strong>: The relationship between <em>response</em> <span class="math inline">(Y)</span> and <em>predictor</em> <span class="math inline">(X)</span> is represented as <span class="math display">
+Y = β_0 + β_1 X + \epsilon
+</span></p></li>
+<li><p>where</p>
+<ul>
+<li><span class="math inline">β_0</span> is the intercept,</li>
+<li><span class="math inline">β_1</span> is the slope, and</li>
+<li><span class="math inline">\epsilon</span> is the error term.</li>
+</ul></li>
+</ul>
+<p>We have two problems:</p>
+<ol type="1">
+<li><strong>Inference</strong>: how can we find the best values for <span class="math inline">β_0</span> and <span class="math inline">β_1</span> that minimize the difference between the observed and predicted values of <span class="math inline">Y</span>.</li>
+<li><strong>Prediction</strong>: given a value of <span class="math inline">X</span>, and <span class="math inline">\hat{β}_0</span> and <span class="math inline">\hat{β}_1</span> parameters how can we predict the corresponding value of <span class="math inline">\hat{y}</span>.</li>
+</ol>
+<p><span class="math display">
+\hat{y} = \hat{β}_0 + \hat{β}_1 x
+</span></p>
+<p>where <span class="math inline">\hat{y}</span> is the predicted value of <span class="math inline">Y</span> for a given value of <span class="math inline">X</span>.</p>
+<p>and we can define the residuals as:</p>
+<p><span class="math display">
+e_i = y_i - \hat{y}_i
+</span></p>
+<section id="estimating-the-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="estimating-the-coefficients">Estimating the Coefficients</h3>
+<ul>
+<li><p><strong>Least Squares Estimation</strong>: The coefficients <span class="math inline">β_0</span> and <span class="math inline">β_1</span> are estimated by minimizing the <strong>Residual Sum of Squares (RSS)</strong>, which quantifies the difference between observed and predicted values.</p></li>
+<li><p>The RSS is defined as:</p></li>
+</ul>
+<p><span class="math display">
+RSS = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} e_i^2
+</span></p>
+<p>least squares estimates are:</p>
+<p><span class="math display">
+\hat{β}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+</span></p>
+<p><span class="math display">
+\hat{β}_0 = \bar{y} - \hat{β}_1 \bar{x}
+</span></p>
+<p>where <span class="math inline">\bar{x}</span> and <span class="math inline">\bar{y}</span> are the sample means of the predictors and response, respectively.</p>
+</section>
+<section id="assessing-the-accuracy-of-the-coefficient-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="assessing-the-accuracy-of-the-coefficient-estimates">Assessing the Accuracy of the Coefficient Estimates</h3>
+<ul>
+<li><strong>Assessing Accuracy</strong>: The standard errors of the coefficients help construct confidence intervals and perform hypothesis tests to assess the significance of the relationship between <span class="math inline">X</span> and <span class="math inline">Y</span>.</li>
+</ul>
+<p><span class="math display">
+SE(\hat{β}_1)^2 = \frac{\sigma^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+</span></p>
+<p><span class="math display">
+SE(\hat{β}_0)^2 = \sigma^2 \left[ \frac{1}{n} + \frac{\bar{x}^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \right]
+</span></p>
+<p>where <span class="math inline">\sigma^2 = Var[\epsilon]</span></p>
+<ul>
+<li><span class="math inline">R^2</span>: This statistic quantifies the proportion of variability in the response explained by the model, indicating how well the model fits the data.</li>
+</ul>
+<p>We can use these standard errors to compute confidence intervals. A 95% CI is one which will contain the true value of the parameter with a probability of 95%.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is <span class="math inline">P_0</span>?
+Over thinking standard errors <span class="emoji" data-emoji="skull">💀</span><span class="emoji" data-emoji="skull">💀</span><span class="emoji" data-emoji="skull">💀</span>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span class="math inline">P_0</span> is the <strong>true probability distribution</strong> for <span class="math inline">O</span>. <span class="math inline">P_0</span> is also the <strong>data-generating distribution</strong>, which is the true probability distribution that generated the observed data. Statistical models are models for the true data-generating distribution.</p>
+<p>This approach seems strange as we seem to have computed the values precisely using the above estimators. What can possibly change that would give us a different value ?</p>
+<p>This is intimated in the slides which mentions repeated sampling?</p>
+<p>Where is this repeated sampling -</p>
+<p>Some strange Fisherian fantasy that if we repeated the experiment many times we would get different samples each time drawn from some contrafactual distribution that generates the data for each contrafactual version of the experiment.</p>
+<p>Getting back to the book we may rephrase this as follows. Since we know the Data generating rule we can simulate data to our hear’s content. Each time the random number generator spits out different Xs so we get a new data set. For each data set the least square estimator will give us different parameters. Corresponding to a different approximation of the population regression model. (One that has points from all possible experiments). I.e. the point is that we are using <span class="math inline">x</span> and <span class="math inline">\sigma^2</span> from the sample not the population so we will have</p>
+<p>the book says</p>
+<blockquote class="blockquote">
+<p>In other words, in real applications, we have access to a set of observations from which we can compute the least squares line; however, the population regression line is unobserved.</p>
+</blockquote>
+<p>I.e. we don’t know the Data generating rule. Its likely to be non-linear. But we can compare our approximate rule to the data and estimate the error associated with each parameter. That what the standard error means. (it is the normalized distance the estimator from the data.)</p>
 </div>
 </div>
+</section>
+<section id="assessing-the-accuracy-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="assessing-the-accuracy-of-the-model">Assessing the Accuracy of the Model</h3>
+</section>
+</section>
+<section id="hypothesis-testing-and-confidence-intervals" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="hypothesis-testing-and-confidence-intervals">Hypothesis Testing and Confidence Intervals</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/3GiWpRfkSjc?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Hypothesis Testing and Confidence Intervals
+</figcaption>
+</figure>
+</div><div id="fig-v3.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/kr_Be9NVXOM&amp;list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div class="callout-title-container flex-fill">
-What is a statistical model?
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Multiple Linear Regression
+</figcaption>
+</figure>
+</div></div>
+</section>
+<section id="some-important-questions" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="some-important-questions">Some important questions</h2>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/50sv4UTjE90?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Some important questions:
+</figcaption>
+</figure>
+</div></div><ol type="1">
+<li>Is at least one of the predictors <span class="math inline">X_1, X_2, \ldots , X_p</span> useful in predicting the response?</li>
+<li>Do all the predictors help to explain <span class="math inline">Y</span>, or is only a subset of the predictors useful?</li>
+<li>How well does the model fit the data?</li>
+<li>Given a set of predictor values, what response value should we predict, and how accurate is our prediction?</li>
+</ol>
+
+<div class="no-row-height column-margin column-container"><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/dEBQmiXv9fk?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A statistical model <span class="math inline">M</span> is a set of probability distributions that represents what we know about the data-generating distribution <span class="math inline">P_0</span>. <span class="math inline">M</span> is the set of possible probability distributions for <span class="math inline">P_0</span>. The statistical model can be <strong>nonparametric</strong> or <strong>semiparametric</strong>.</p>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Extensions of the Linear Model
+</figcaption>
+</figure>
+</div><div id="fig-v3.5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gNZfqHhq_B4?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v3.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Regression in R
+</figcaption>
+</figure>
+</div></div>
+</section>
+<section id="simple-linear-regression-1" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression-1">Simple Linear Regression:</h2>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression:</h2>
+<ul>
+<li><p><strong>Model</strong>: The model extends to multiple predictors: <span class="math display">
+Y = β_0 + β_1 X_1 + β_2 X_2 + \ldots + β_p X_p + \epsilon
+</span></p></li>
+<li><p><strong>Interpretation</strong>: Each coefficient <span class="math inline">β_j</span> represents the average change in <span class="math inline">Y</span> for a one-unit increase in <span class="math inline">X_j</span>, holding all other predictors constant.</p></li>
+<li><p><strong>F-statistic</strong>: This statistic tests the overall significance of the model, determining whether at least one predictor is useful in predicting the response.</p></li>
+<li><p><strong>Variable Selection</strong>: Techniques like <strong>Mallow’s Cp</strong>, <strong>AIC</strong>, <strong>BIC</strong>, and <strong>adjusted</strong> <span class="math inline">R^2</span> are employed to choose the best subset of predictors for the model.</p></li>
+</ul>
+</section>
+<section id="qualitative-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="qualitative-predictors">Qualitative Predictors:</h2>
+<p>When we have categorical predictors</p>
+<ul>
+<li><strong>Dummy Variables</strong>: Categorical variables are incorporated by creating dummy variables, which take on values of 0 or 1 to represent different categories.</li>
+<li><strong>Baseline Category</strong>: One category is chosen as the baseline, and its coefficient represents the average response for that category. Other dummy variable coefficients represent differences from the baseline.</li>
+</ul>
+</section>
+<section id="interactions" class="level2">
+<h2 class="anchored" data-anchor-id="interactions">Interactions:</h2>
+<ul>
+<li><strong>Interaction Terms</strong>: Including interaction terms like <span class="math inline">X_1 X_2</span> in the model allows the relationship between one predictor and the response to vary depending on the value of another predictor.</li>
+<li><strong>Synergy Effect</strong>: Interactions can capture synergistic effects where the combined impact of two predictors is greater than the sum of their individual impacts.</li>
+</ul>
+</section>
+<section id="polynomial-regression" class="level2">
+<h2 class="anchored" data-anchor-id="polynomial-regression">Polynomial Regression:</h2>
+<ul>
+<li><strong>Non-linear Relationships</strong>: Polynomial terms like <span class="math inline">X^2</span> are used to model non-linear relationships between predictors and the response.</li>
+<li><strong>Overfitting</strong>: Higher-degree polynomials can lead to overfitting, where the model fits the training data too closely but generalizes poorly to new data.</li>
+</ul>
+</section>
+<section id="model-diagnostics" class="level2">
+<h2 class="anchored" data-anchor-id="model-diagnostics">Model Diagnostics:</h2>
+<ul>
+<li><strong>Residual Plots</strong>: Visualizing residuals against fitted values helps assess linearity, homoscedasticity, and the presence of outliers.</li>
+<li><strong>High Leverage Points</strong>: Observations with extreme predictor values can have a disproportionate impact on the model and should be investigated.</li>
+<li><strong>Collinearity</strong>: High correlation among predictors can lead to unstable coefficient estimates and inflated standard errors. <strong>VIF</strong> (Variance Inflation Factor) helps detect collinearity.</li>
+</ul>
+</section>
+<section id="key-quotes" class="level2">
+<h2 class="anchored" data-anchor-id="key-quotes">Key Quotes:</h2>
+<blockquote class="blockquote">
+<p>“The least squares approach chooses <span class="math inline">\hat{\beta}_0</span> and <span class="math inline">\hat{\beta}_1</span> to minimize the RSS.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“We interpret <span class="math inline">β_j</span> as the average effect on <span class="math inline">Y</span> of a one unit increase in <span class="math inline">X_j</span> , holding all other predictors fixed.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“The woes of (interpreting) regression coefficients: … a regression coefficient <span class="math inline">β_j</span> estimates the expected change in <span class="math inline">Y</span> per unit change in <span class="math inline">X_j</span> , with all other predictors held fixed. But predictors usually change together!”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“A 95% confidence interval is defined as a range of values such that with 95% probability, the range will contain the true unknown value of the parameter.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“There will always be one fewer dummy variable than the number of levels. The level with no dummy variable — African American in this example — is known as the baseline.”</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“When levels of either TV or radio are low, then the true sales are lower than predicted by the linear model. But when advertising is split between the two media, then the model tends to underestimate sales.”</p>
+</blockquote>
+</section>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
 </div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a nonparametric model?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>nonparametric model</strong> is a statistical model that does not assume a specific form or shape for the underlying distribution.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a semiparametric model?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>semiparametric model</strong> is a statistical model that has both parametric and nonparametric components.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is the target parameter?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The <strong>target parameter</strong> is a particular feature of the unknown probability distribution <span class="math inline">P_0</span> and is denoted as <span class="math inline">Ψ(P_0)</span>. The explicit definition of this mapping <span class="math inline">Ψ</span> on the statistical model requires that one defines <span class="math inline">Ψ(P)</span> at each <span class="math inline">P</span> in the statistical model. The target parameter has two interpretations: one as a parameter <span class="math inline">Ψ(P_0)</span> of a probability distribution <span class="math inline">P_0</span> and one as a causal parameter under additional (causal) assumptions.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is a Super Learner?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>A <strong>Super Learner</strong> is a flexible ensemble learner used to obtain an initial estimate of the data-generating distribution <span class="math inline">P_0</span>, or the relevant part <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Targeted Maximum Likelihood Estimation (TMLE)?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Targeted Maximum Likelihood Estimation (TMLE)</strong> is a <strong>two-step procedure</strong>. * The first step obtains an estimate of the relevant portion <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>. * The second step updates this initial fit in a step targeted toward making an optimal bias-variance tradeoff for the parameter of interest, instead of the overall density <span class="math inline">P_0</span>. TMLE is <strong>double robust</strong> and can incorporate data-adaptive likelihood-based estimation procedures. TMLE removes all the asymptotic residual bias of the initial estimator for the target parameter, if it uses a consistent estimator of the treatment mechanism.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is causal inference?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Causal inference</strong> is the process of drawing conclusions about cause-and-effect relationships based on observed data.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Estimating Equation Methodology?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Estimating Equation Methodology</strong> is a framework that defines the target parameter as a particular function of the true probability distribution of the data and estimates the target parameter accordingly with a plug-in estimator.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Marschak’s Maxim?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Marschak’s Maxim</strong> is the idea that statisticians should focus on answering questions that researchers truly care about by defining the target parameter of interest, identifying it, and then estimating it.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is double robustness?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Double robustness</strong> is a property of an estimator such that it is consistent if either the initial estimator of the relevant part of the data-generating distribution <span class="math inline">Q_0</span> or the estimator of the treatment mechanism is consistent.</p>
-</div>
-</div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch03.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch03.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
 </div>
 
 
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2027,
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>studied attribution problem of the disputed Federalist Papers and authored the amazing “Fifty Challenging Problems in Probability”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
-  title = {The {Problem}},
-  date = {2027-03-01},
-  url = {https://orenbochman.github.io/notes-islr/posts/test/},
+  title = {Chapter 3: {Linear} {Regression}},
+  date = {2024-06-21},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch03/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2027" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2027. <span>“The Problem.”</span> March 1, 2027. <a href="https://orenbochman.github.io/notes-islr/posts/test/">https://orenbochman.github.io/notes-islr/posts/test/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bochman, Oren. 2024. <span>“Chapter 3: Linear Regression.”</span> June
+21, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch03/">https://orenbochman.github.io/notes-islr/posts/ch03/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1202,7 +1428,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/test/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch03/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with 💛 and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
@@ -1240,6 +1466,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     })(document);
     </script>
   
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

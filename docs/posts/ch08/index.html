@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Oren Bochman">
+<meta name="keywords" content="Trees, Decision Trees, Classification and Regression Trees, CART, Bagging, Boosting, Random Forests, BART, Bayesian Additive Regression Trees">
+<meta name="description" content="About the book, datasets and notation">
 
-<title>The Problem – An Introduction to Statistical Learning</title>
+<title>Chapter 8: Trees – An Introduction to Statistical Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +46,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-dark-007d2adcd9597ba82898f6769454e788.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script src="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.js"></script>
 <link href="../../site_libs/quarto-contrib/pseudocode-2.4.1/pseudocode.min.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,54 +84,11 @@ background-size: cover;
       }
 </style>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -184,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">The Problem</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch08/index.html">Chapter 8: Tree-Based Methods</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -193,10 +155,18 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">The Problem</h1>
-            <p class="subtitle lead">flashcards</p>
-                      </div>
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch08/index.html">Chapter 8: Tree-Based Methods</a></li></ol></nav>
+      <h1 class="title">Chapter 8: Trees</h1>
+                  <div>
+        <div class="description">
+          About the book, datasets and notation
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">notes</div>
+                <div class="quarto-category">edx</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -212,13 +182,20 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Monday, March 1, 2027</p>
+        <p class="date">Thursday, August 1, 2024</p>
       </div>
     </div>
     
       
     </div>
     
+
+  <div>
+    <div class="keywords">
+      <div class="block-title">Keywords</div>
+      <p>Trees, Decision Trees, Classification and Regression Trees, CART, Bagging, Boosting, Random Forests, BART, Bayesian Additive Regression Trees</p>
+    </div>
+  </div>
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
@@ -278,7 +255,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/ch08/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/ch08/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 8: Tree-Based Methods</span></a>
   </div>
 </li>
@@ -316,223 +293,553 @@ window.Quarto = {
   </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#slides-and-chapter" id="toc-slides-and-chapter" class="nav-link active" data-scroll-target="#slides-and-chapter">Slides and Chapter</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch08/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What does it mean for data to be IID?
+TL;DR - Trees
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>IID</strong> stands for <strong>independent and identically distributed</strong>. It is a common assumption about data in statistical modeling. The data are comprised of <span class="math inline">n</span> i.i.d. copies of a random variable <span class="math inline">O</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Trees in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Trees in a nutshell"></a></p>
+<figcaption>Trees in a nutshell</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>Tree-based methods</strong> are supervised learning algorithms that stratify the predictor space to make predictions.</li>
+<li><strong>Decision trees</strong> are simple to interpret but may not be as competitive as other methods in terms of prediction accuracy.</li>
+<li><strong>Ensembles of trees</strong>, such as bagging, boosting, and random forests, can improve prediction performance.</li>
+<li><strong>Classification trees</strong> are used when the response is a categorical variable.</li>
+</ul>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
 </div>
 </div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is <span class="math inline">P_0</span>?
+Tree based methods Video
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p><span class="math inline">P_0</span> is the <strong>true probability distribution</strong> for <span class="math inline">O</span>. <span class="math inline">P_0</span> is also the <strong>data-generating distribution</strong>, which is the true probability distribution that generated the observed data. Statistical models are models for the true data-generating distribution.</p>
+
+<p>Outline of <a href="#fig-8.1">first video</a></p>
+<ol type="1">
+<li>Introduction
+<ul>
+<li>Tree-based methods are supervised learning algorithms that stratify the predictor space to make predictions.</li>
+<li>They are called decision trees because of their branching structure.</li>
+<li>The CART (Classification and Regression Trees) algorithm is a popular example of a tree-based method.</li>
+<li>Trees are simple to interpret but may not be as competitive as other methods in terms of prediction accuracy.</li>
+<li>Ensembles of trees, such as bagging, boosting, and random forests, can improve prediction performance.</li>
+</ul></li>
+<li>Decision Trees
+<ul>
+<li>Example: Predicting baseball player salary based on years in the league and hits per season.</li>
+<li>Process:</li>
+<li>The data is split into regions based on predictor values.</li>
+<li>Each region is assigned a prediction, typically the average response value for observations in that region.</li>
+<li>Splits are chosen to minimize the variation of observations within each region.</li>
+<li>Terminology:</li>
+<li>Internal nodes: Nodes that are further split.</li>
+<li>Terminal nodes (leaves): Nodes that are not further split.</li>
+<li>Interpretation: The tree structure itself represents the model.</li>
+</ul></li>
+<li>Tree Growing Algorithm
+<ul>
+<li>Greedy approach:
+<ul>
+<li>Starts with the full dataset.</li>
+<li>Finds the best split (predictor and split point) to minimize the variation within each resulting region.</li>
+<li>Repeats the process for each resulting region until a stopping criterion is met.</li>
+</ul></li>
+<li>Stopping criteria:
+<ul>
+<li>Predefined number of nodes.</li>
+<li>Minimum number of observations in a node.</li>
+<li>Other criteria based on model complexity or performance.</li>
+</ul></li>
+</ul></li>
+<li>Challenges and Limitations
+<ul>
+<li>Overfitting: Trees can be prone to overfitting the training data, leading to poor generalization performance.</li>
+<li>Instability: Small changes in the training data can lead to large changes in the tree structure.</li>
+<li>Limited flexibility: Trees can struggle to capture complex relationships between predictors and the response.</li>
+</ul></li>
+<li>Ensembles of Trees
+<ul>
+<li>Bagging: Creates multiple trees using bootstrap samples of the training data and averages their predictions.</li>
+<li>Boosting: Creates a sequence of trees, where each tree focuses on correcting the errors of the previous trees.</li>
+<li>Random forests: Creates multiple trees using random subsets of predictors at each split.</li>
+</ul></li>
+<li>Conclusion
+<ul>
+<li>Tree-based methods are versatile and interpretable tools for supervised learning.</li>
+<li>Ensembles of trees can significantly improve prediction accuracy.</li>
+<li>Further research is ongoing to develop more robust and efficient tree-based methods.</li>
+</ul></li>
+</ol>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.1" class="quarto-float quarto-figure quarto-figure-center anchored callout-2-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QNnayf--_yk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Tree based methods
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is a statistical model?
+More details on Trees
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>A statistical model <span class="math inline">M</span> is a set of probability distributions that represents what we know about the data-generating distribution <span class="math inline">P_0</span>. <span class="math inline">M</span> is the set of possible probability distributions for <span class="math inline">P_0</span>. The statistical model can be <strong>nonparametric</strong> or <strong>semiparametric</strong>.</p>
+
+<p>Outline of <a href="#fig-8.2">second video</a></p>
+<ul>
+<li>The process of building a tree and making predictions</li>
+<li>The question of how large should the tree be</li>
+<li>The cost complexity pruning</li>
+<li>The summary of the tree growing algorithm</li>
+<li>The result of cross validation</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.2" class="quarto-float quarto-figure quarto-figure-center anchored callout-3-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JaoTOfTNOVk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: More details on Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is a nonparametric model?
+Classification Trees
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>A <strong>nonparametric model</strong> is a statistical model that does not assume a specific form or shape for the underlying distribution.</p>
+
+<p>Outline of <a href="#fig-8.3">third video</a></p>
+<ul>
+<li>Introduction
+<ul>
+<li>Regression trees are used when the response is quantitative.</li>
+<li>Classification trees are used when the response is a categorical variable.</li>
+<li>The technology is very similar, but the loss function and how to measure good performance are different.</li>
+</ul></li>
+<li>Classification Trees
+<ul>
+<li>Each observation is classified to the most commonly occurring class in the terminal node.</li>
+<li>The tree is grown in the same way as for regression trees.</li>
+<li>The criterion for making the splits is different.</li>
+<li>One criterion is the classification error rate.</li>
+<li>Another criterion is the Gini index, which is a measure of variability across the classes.</li>
+<li>The deviance or cross-entropy is another criterion that is similar to the Gini index.</li>
+</ul></li>
+<li>Example: Heart Data
+<ul>
+<li>The heart data has a binary response called HD.</li>
+<li>There are 303 patients.</li>
+<li>There are 13 predictors.</li>
+<li>A tree was grown using cross-validation.</li>
+<li>The full tree is quite bushy.</li>
+<li>The pruned tree has a size of 6.</li>
+<li>The classification performance of the pruned tree is 25%.</li>
+</ul></li>
+<li>Comparison of Trees and Linear Models
+<ul>
+<li>Trees are not always the best method.</li>
+<li>Linear models are better for some problems.</li>
+<li>Trees are better for other problems.</li>
+<li>Advantages and Disadvantages of Trees</li>
+</ul></li>
+<li>Advantages:
+<ul>
+<li>Simple to understand.</li>
+<li>Can handle qualitative predictors.</li>
+</ul></li>
+<li>Disadvantages:
+<ul>
+<li>Do not predict as well as more state-of-the-art methods.</li>
+</ul></li>
+<li>Ensemble Methods
+<ul>
+<li>Ensemble methods combine trees to improve prediction accuracy.</li>
+<li>One example of an ensemble method is random forests.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.3" class="quarto-float quarto-figure quarto-figure-center anchored callout-4-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/gLcfKSMKOb0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Classification Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is a semiparametric model?
+Bagging
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>A <strong>semiparametric model</strong> is a statistical model that has both parametric and nonparametric components.</p>
+
+<p>Outline of <a href="#fig-8.4">fourth video</a></p>
+<ul>
+<li>Introduction
+<ul>
+<li>Bagging is a method of using trees to improve their prediction error.</li>
+<li>It involves creating multiple trees and averaging their predictions.</li>
+<li>The idea was proposed by Leo Breiman.</li>
+</ul></li>
+<li>Bagging Process
+<ul>
+<li>Bootstrap samples are drawn from the training set with replacement.</li>
+<li>A tree is grown on each bootstrap sample.</li>
+<li>The predictions of all trees are averaged to obtain the final prediction.</li>
+</ul></li>
+<li>Advantages of Bagging
+<ul>
+<li>Reduces variance by averaging multiple trees.</li>
+<li>Can be applied to both regression and classification problems.</li>
+<li>No need to prune trees.</li>
+</ul></li>
+<li>Out-of-Bag Error
+<ul>
+<li>A free method for estimating the test error.</li>
+<li>Uses observations not included in the bootstrap sample to predict their values.</li>
+<li>Provides an estimate of leave-one-out cross-validation.</li>
+</ul></li>
+<li>Random Forests
+<ul>
+<li>An extension of bagging that further reduces correlation between trees.</li>
+<li>At each split, only a random subset of predictors is considered.</li>
+<li>Improves prediction accuracy over bagging.</li>
+</ul></li>
+<li>Example: Heart Data
+<ul>
+<li>Compares the performance of bagging and random forests on the heart data.</li>
+<li>Shows that random forests can slightly improve prediction accuracy over bagging.</li>
+</ul></li>
+<li>Example: Gene Expression Data
+<ul>
+<li>Applies random forests to a high-dimensional gene expression dataset.</li>
+<li>Demonstrates the effectiveness of random forests in classifying cancer types.</li>
+<li>Highlights the importance of pre-screening genes using variance.</li>
+</ul></li>
+<li>Conclusion
+<ul>
+<li>Bagging and random forests are powerful methods for improving tree-based predictions.</li>
+<li>They are widely used in various applications.</li>
+<li>Out-of-bag error provides a convenient way to estimate test error.</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.4" class="quarto-float quarto-figure quarto-figure-center anchored callout-5-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/_cKAxjnInfA?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Bagging
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is the target parameter?
+Boosting
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>The <strong>target parameter</strong> is a particular feature of the unknown probability distribution <span class="math inline">P_0</span> and is denoted as <span class="math inline">Ψ(P_0)</span>. The explicit definition of this mapping <span class="math inline">Ψ</span> on the statistical model requires that one defines <span class="math inline">Ψ(P)</span> at each <span class="math inline">P</span> in the statistical model. The target parameter has two interpretations: one as a parameter <span class="math inline">Ψ(P_0)</span> of a probability distribution <span class="math inline">P_0</span> and one as a causal parameter under additional (causal) assumptions.</p>
+
+<p>Outline of <a href="#fig-8.5">fifth video</a></p>
+<p>Statistical Learning: 8.5 Boosting</p>
+<ul>
+<li>Boosting
+<ul>
+<li>Sequential method</li>
+<li>Builds on previous trees to improve performance</li>
+<li>Fits trees to residuals</li>
+<li>Shrinks trees to avoid overfitting</li>
+<li>Effective with smaller trees</li>
+</ul></li>
+<li>Tuning Parameters
+<ul>
+<li>Depth of the tree (d)
+<ul>
+<li>d=1: stump (single split)</li>
+<li>Larger d: allows interactions between predictors</li>
+</ul></li>
+<li>Number of trees (B)
+<ul>
+<li>Typically not a critical parameter</li>
+</ul></li>
+<li>Shrinkage parameter (lambda)
+<ul>
+<li>Controls the amount each tree is added to the model</li>
+</ul></li>
+</ul></li>
+<li>Variable Importance
+<ul>
+<li>Measures the total drop in RSS for a given predictor over all splits in the tree</li>
+<li>Provides a qualitative ranking of variable importance</li>
+</ul></li>
+<li>Summary
+<ul>
+<li>Ensembles of trees can improve prediction accuracy</li>
+<li>Random forests and boosting are state-of-the-art techniques for supervised learning</li>
+<li>Interpretation can be more challenging with ensembles</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.5" class="quarto-float quarto-figure quarto-figure-center anchored callout-6-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/cdl4C2eCOHk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Boosting
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is a Super Learner?
+BART - Bayesian Additive Regression Trees
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>A <strong>Super Learner</strong> is a flexible ensemble learner used to obtain an initial estimate of the data-generating distribution <span class="math inline">P_0</span>, or the relevant part <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>.</p>
+
+<p>Outline of <a href="#fig-8.6">sixth video</a></p>
+<ul>
+<li><p>Introduction</p>
+<ul>
+<li>What is BART?</li>
+<li>Ensemble method using decision trees as building blocks</li>
+<li>Similar to random forests and boosting</li>
+</ul></li>
+<li><p>BART Algorithm:</p>
+<ul>
+<li><p>Number of Trees (k): Determines the number of trees in the ensemble.</p></li>
+<li><p>Number of Iterations (b): Controls the number of times each tree is perturbed.</p></li>
+<li><p>Perturbations:</p>
+<ul>
+<li><p>Adding branches</p></li>
+<li><p>Deleting branches</p></li>
+<li><p>Changing predicted values at terminal nodes</p></li>
+</ul></li>
+<li><p>Prediction: Averaging predictions from all trees and iterations after a burn-in period.</p></li>
+</ul></li>
+<li><p>Comparison with Other Methods</p>
+<ul>
+<li>Bagging and Random Forests: Similar in using random samples to build trees.</li>
+<li>Boosting: Similar in using residuals to guide tree construction.</li>
+<li>Differences: BART uses perturbations to modify existing trees instead of building new trees from scratch.</li>
+<li>Chain Monte Carlo (MCMC) method</li>
+</ul></li>
+<li><p>Example: Heart Data</p>
+<ul>
+<li>Compare BART with boosting and random forest</li>
+<li>BART shows slower training error but competitive test error</li>
+<li>Less prone to overfitting than boosting</li>
+<li>Choosing Parameters
+<ul>
+<li>Number of trees (k)</li>
+<li>Number of iterations (b)</li>
+<li>Burn-in period (l)</li>
+</ul></li>
+<li>Reasonable choices: k = 200, b = 1000, l = 100</li>
+</ul></li>
+<li><p>Advantages of BART</p>
+<ul>
+<li>Works well out-of-the-box without much tuning</li>
+<li>Provides uncertainty estimates (quantiles)</li>
+</ul></li>
+<li><p>Conclusion</p>
+<ul>
+<li>BART is a powerful ensemble method for regression</li>
+<li>Combines features of random forests and boosting</li>
+<li>Provides a flexible and robust approach to regression problems</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="no-row-height column-margin column-container"><div id="fig-8.6" class="quarto-float quarto-figure quarto-figure-center anchored callout-7-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/xWhPwHZF4c0?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: BART: Bayesian Additive Regression Trees
+</figcaption>
+</figure>
+</div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-What is Targeted Maximum Likelihood Estimation (TMLE)?
+Python lab on Tree-Based Methods
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p><strong>Targeted Maximum Likelihood Estimation (TMLE)</strong> is a <strong>two-step procedure</strong>. * The first step obtains an estimate of the relevant portion <span class="math inline">Q_0</span> of <span class="math inline">P_0</span>. * The second step updates this initial fit in a step targeted toward making an optimal bias-variance tradeoff for the parameter of interest, instead of the overall density <span class="math inline">P_0</span>. TMLE is <strong>double robust</strong> and can incorporate data-adaptive likelihood-based estimation procedures. TMLE removes all the asymptotic residual bias of the initial estimator for the target parameter, if it uses a consistent estimator of the treatment mechanism.</p>
+
+<p>Outline of <a href="#fig-8.7">seventh video</a></p>
+<ul>
+<li>Introduction:
+<ul>
+<li>Overview of tree-based methods</li>
+<li>Focus on random forest and boosting</li>
+<li>Introduction of single tree-based method</li>
+</ul></li>
+<li>Imports:
+<ul>
+<li>Import necessary libraries</li>
+</ul></li>
+<li>Decision Tree Regression
+<ul>
+<li>Fitting a regression decision tree</li>
+<li>Data set: Boston data set</li>
+<li>Pre-processing: feature selection</li>
+<li>Validation: split data into training and test sets</li>
+<li>Visualizing the decision tree</li>
+<li>Evaluating accuracy: mean squared error</li>
+</ul></li>
+<li>Ensemble Methods:
+<ul>
+<li>Bagging and Random Forest</li>
+<li>Difference between bagging and random forest</li>
+<li>Fitting a random forest regressor</li>
+<li>Evaluating accuracy</li>
+<li>Increasing the number of trees</li>
+<li>Feature importance</li>
+</ul></li>
+<li>Boosting:
+<ul>
+<li>Difference between boosting and random forest</li>
+<li>Fitting a boosting regressor</li>
+<li>Evaluating accuracy</li>
+<li>Plotting training and test error</li>
+<li>Tuning parameters</li>
+</ul></li>
+<li>Conclusion:
+<ul>
+<li>Summary of tree-based methods</li>
+<li>Comparison of random forest and boosting</li>
+</ul></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="no-row-height column-margin column-container"><div id="fig-8.7" class="quarto-float quarto-figure quarto-figure-center anchored callout-8-contents callout-collapse collapse show callout-margin-content">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-8.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/AVTfC5WnDTo?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<div class="callout-title-container flex-fill">
-What is causal inference?
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Python lab on Tree-Based Methods
+</figcaption>
+</figure>
+</div></div><section id="slides-and-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Causal inference</strong> is the process of drawing conclusions about cause-and-effect relationships based on observed data.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Estimating Equation Methodology?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Estimating Equation Methodology</strong> is a framework that defines the target parameter as a particular function of the true probability distribution of the data and estimates the target parameter accordingly with a plug-in estimator.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Marschak’s Maxim?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Marschak’s Maxim</strong> is the idea that statisticians should focus on answering questions that researchers truly care about by defining the target parameter of interest, identifying it, and then estimating it.</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is double robustness?
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Double robustness</strong> is a property of an estimator such that it is consistent if either the initial estimator of the relevant part of the data-generating distribution <span class="math inline">Q_0</span> or the estimator of the treatment mechanism is consistent.</p>
-</div>
-</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch08.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch08.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
 </div>
 
 
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2027,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
-  title = {The {Problem}},
-  date = {2027-03-01},
-  url = {https://orenbochman.github.io/notes-islr/posts/test/},
+  title = {Chapter 8: {Trees}},
+  date = {2024-08-01},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch08/},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2027" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2027. <span>“The Problem.”</span> March 1, 2027. <a href="https://orenbochman.github.io/notes-islr/posts/test/">https://orenbochman.github.io/notes-islr/posts/test/</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Bochman, Oren. 2024. <span>“Chapter 8: Trees.”</span> August 1, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch08/">https://orenbochman.github.io/notes-islr/posts/ch08/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1202,7 +1509,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/test/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch08/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with 💛 and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
@@ -1240,6 +1547,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     })(document);
     </script>
   
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

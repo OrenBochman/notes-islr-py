@@ -8,9 +8,9 @@
 
 <meta name="author" content="Oren Bochman">
 <meta name="keywords" content="Introduction, Statistical Learning, ISL, ESL, Statistical Learning vs Machine Learning">
-<meta name="description" content="A better scatter plot matrix (SPLOM) with correlation ellipses and automatic plot selection based on data types.">
+<meta name="description" content="About the book, datasets and notation">
 
-<title>Better SPLOM – An Introduction to Statistical Learning</title>
+<title>Chapter 1: Introduction – An Introduction to Statistical Learning</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +57,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -118,11 +138,54 @@ background-size: cover;
       }
 </style>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -180,7 +243,7 @@ background-size: cover;
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Better SPLOM</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Chapter 1: Introduction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -189,16 +252,16 @@ background-size: cover;
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Better SPLOM</h1>
+    <div class="quarto-title column-body"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Book</a></li><li class="breadcrumb-item"><a href="../../posts/ch01/index.html">Chapter 1: Introduction</a></li></ol></nav>
+      <h1 class="title">Chapter 1: Introduction</h1>
                   <div>
         <div class="description">
-          A better scatter plot matrix (SPLOM) with correlation ellipses and automatic plot selection based on data types.
+          About the book, datasets and notation
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">notes</div>
-                <div class="quarto-category">code</div>
+                <div class="quarto-category">edx</div>
               </div>
                   </div>
   </div>
@@ -247,7 +310,7 @@ background-size: cover;
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/ch01/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/ch01/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 1: Introduction</span></a>
   </div>
 </li>
@@ -327,44 +390,151 @@ background-size: cover;
   </li>
     </ul>
     </div>
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#statistical-learning-problems" id="toc-statistical-learning-problems" class="nav-link active" data-scroll-target="#statistical-learning-problems">Statistical Learning Problems</a>
+  <ul class="collapse">
+  <li><a href="#identify-the-risk-factors-for-prostate-cancer" id="toc-identify-the-risk-factors-for-prostate-cancer" class="nav-link" data-scroll-target="#identify-the-risk-factors-for-prostate-cancer">Identify the risk factors for prostate cancer</a></li>
+  <li><a href="#sec-phonemes-prolem" id="toc-sec-phonemes-prolem" class="nav-link" data-scroll-target="#sec-phonemes-prolem">Phoneme Classifications</a></li>
+  </ul></li>
+  <li><a href="#premises" id="toc-premises" class="nav-link" data-scroll-target="#premises">Premises:</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#chapter" id="toc-chapter" class="nav-link" data-scroll-target="#chapter">Chapter</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch01/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
 
-<p>In the notes on I had some ideas about making a better SPLOMs. A splom is a scatterplot matrix.</p>
-<p>The first batch of ideas involve making scatterplot more infomative by pickinga more suitable plot type based on the data types of the variables being plotted.</p>
-<ol type="1">
-<li>for a continuous vs continuous variable pairs plot a scatter plot.</li>
-<li>for a continuous vs discrete variable pairs plot a violin plot.</li>
-<li>for a discrete vs discrete variable pairs plot a heatmap.</li>
-<li>on the diagonal plot histograms with a density plot overlay.</li>
-<li>for the lower triangle of the plot, plot correlation ellipses. And the correlation ellipses can be overlayed with a number for the correlation coefficient.</li>
-</ol>
-<p>The second batch of ideas involve making the plot more useful for understanding effects in the data and potential regression issues like outliers and high leverage points, heteroscedasticity, and non-linear relationships. And one more issue that I came across is how to handle zero inflation arising from one or the other variable….</p>
-<p>Another thought about SPLOM is to make the cells of the plot three dimensional so we could see the two predictors vs the response variable when we move off the first collumn.</p>
-<ol start="6" type="1">
-<li>Highlight effects in these plots. using a regression line or a loess line for the main effects.</li>
-<li>For the second order effects, we might show the fit a 3d quadratic spline or loess for the two predictors as a surface in a 3d plot. If we were interactive we might also show
+
+<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Opening Remarks
+</figcaption>
+</figure>
+</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Examples and Framework
+</figcaption>
+</figure>
+</div></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+TL;DR - Introduction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Statistical Learning in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Statistical Learning in a nutshell"></a></p>
+<figcaption>Statistical Learning in a nutshell</figcaption>
+</figure>
+</div>
+<p>Statistical learning is a set of tools for understanding data and building models that can be used for prediction or inference. The fundamental goal is to learn a function <span class="math inline">(f)</span> that captures the relationship between input variables (predictors) and an output variable (response). This learned function can then be used to make predictions for new observations or for inference i.e.&nbsp;to understand the underlying relationship between the variables.</p>
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+
+</audio>
+</div>
+</div>
+<p>This chapter is a bit dull. The authors make significant effort to breathe life into it in the course via the talks. But humor and jokes aside. Most of the examples and datasets from the book and make them sound mildly interesting, but my impression of the advertising data and a few others is that this is just data and that they never worked for an advertising company where most of the questions raised are quite divergent to the ones considered in the book. I think that by getting the younger authors to participate we get a better sense of why Statistical learning is more interesting.</p>
 <ul>
-<li>The residuals</li>
-<li>Error surfaces above and below the fit surface. A sort of confidence interval for the fit</li>
-<li>The outliers and high leverage points for the interaction terms. Perhaps as bubbles for the residuals and as points for the outliers and high leverage points.</li>
-<li>The zero inflation points. Perhaps as a different color for the residuals.</li>
+<li><strong>IBM’s Watson</strong> beating the Jeopardy champions was exciting before the advent of LLMs. In reality IBM poured lots of resources into this demonstration of being able to beat some poor humans with a massive database of trivia. Later IBM had a very big headache trying to sell Watson to companies. IT took 10 years for LLM assistant to become both useful and in scale. If we consider the slide from the video we would notice that the project description is indicating the use of reinforcement learning and not statistical learning or ml methods and this is not covered in the book. However the authors do suggests that many methods were used to create Watson and that sounds about true.</li>
+<li><strong>Nates Silver</strong> wrote “The signal and the noise”. Its a well written and fun to read. I think that we can all take lessons from it on how to breathe more life into statistics.
+<ul>
+<li>Another story they mention is Nate Silver’s Five Thirty Eight site for prediction of the presidential and other elections. I find it amusing they mention this as Nate Silver is not a statistician. In reality most people use statistics as a tool to get their job done and are not full time statisticians. I agree that Nate Silver is a “rock star” of statistics. It’s worth mentioning though that predicting elections is isn’t hard mathematically - the challenge is getting the details right and Nate Silver is good at that and thus deserves a lot of respect.</li>
+<li>There is fascinating work by Andrew Gelman and John Tukey before on this topic. In fact John Tukey like Silver gained a lot of recognition, not from his amazing work on EDA, including the boxplot, the JAckknife the Fast Fourier Transform, designing spy planes, naming the bit and software but for running election polls on NBC from 1960 to 1980. And a final point is that the best models as far as I know are using Bayesian methods which are not covered in this book to any great detail.</li>
 </ul></li>
-<li>highlight hetroscedasticity by a residual from a normal distribution….</li>
-<li>make the</li>
-<li>make it interactive.</li>
-</ol>
-<div id="546da4a7" class="cell" data-execution_count="1">
+</ul>
+<section id="statistical-learning-problems" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="statistical-learning-problems">Statistical Learning Problems</h2>
+<ul>
+<li>Identify the risk factors for prostate cancer.</li>
+<li>Classify a recorded phoneme based on a log-periodogram.</li>
+<li>Predict whether someone will have a heart attack on the basis of demographic, diet and clinical measurements.</li>
+<li>Customize an email spam detection system.</li>
+<li>Identify the numbers in a handwritten zip code.</li>
+<li>Classify a tissue sample into one of several cancer classes, based on a gene expression profile.</li>
+<li>Establish the relationship between salary and demographic variables in population survey data.</li>
+<li>Classify the pixels in a LANDSAT image, by usage.</li>
+</ul>
+<section id="identify-the-risk-factors-for-prostate-cancer" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="identify-the-risk-factors-for-prostate-cancer">Identify the risk factors for prostate cancer</h3>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="fig-prostate.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="SPLOM"><img src="fig-prostate.png" class="img-fluid figure-img" alt="SPLOM"></a></p>
+<figcaption>SPLOM</figcaption>
+</figure>
+</div></div><ul>
+<li><p>This is the first example but we have a few issues:</p></li>
+<li><p>Our instructors seem to be familiar with the researcher but they don’t tell what is going on at first. It would only take 3 minutes to explain the variables but they don’t bother to do so. If they did this example might make more sense.</p></li>
+<li><p>IS this a regression, classification, survival analysis, an annova, a clustering problem?</p></li>
+<li><p>So Trevor tells us it is a regression problem and the response is PSA</p></li>
+<li><p>Github co-pilot suggest that the predictors and response are:</p>
+<ul>
+<li>the log of the prostate specific antigen (lpsa).</li>
+<li>lcavol - log cancer volume</li>
+<li>lweight - log prostate weight</li>
+<li>age</li>
+<li>lbph - log of the amount of benign prostatic hyperplasia. aka enlargement of the prostate that is not cancerous but has many issues for the patient.</li>
+<li>svi - seminal vesicle invasion which is a measure of how far the cancer has spread and an indicator that the patient is unlikely to survive.</li>
+<li>pgg45 - a measure of how aggressive the cancer is.</li>
+</ul></li>
+<li><p>They say that these are people with cancer so they are sick. Dr.&nbsp;Google says 80% should survive 10 years or more.</p>
+<ul>
+<li>How long was the study.</li>
+<li>Is there any data on severity of the cancer? (lcavol and svi are indicators of severity)</li>
+<li>But do we have data for a control group? Are there any data for healthy people here?</li>
+</ul></li>
+<li><p>Ever I first learned about them I really, really love scatter plot matrix - I mean you can immediately see the effects and diagnose problems right?</p>
+<ul>
+<li>There are 64/2 = 32 effects to look at. But we really need to consider the predictors vs the response. Where those 8 plots? According to Trevor there are the top 8 plots.</li>
+<li>lpsa vs lcavol seems linear.</li>
+<li>lpsa vs lweight seems affine and heteroskedastic. But might look better if we dropped the outlier.- lpsa vs.&nbsp;age seems like a linear relationship with high variance. Or there may be clusters.</li>
+<li>lpsa vs.&nbsp;lbph looks zero inflated or censored. I mean much of the data is squished to the left.
+<ul>
+<li>The log scale is hard to interpret what is -1 for lbph?</li>
+<li>Should we be alarmed if the plot shows the two predictors with this pattern.</li>
+<li>What if we see this for a predictor and the response?</li>
+</ul></li>
+</ul></li>
+<li><p>Except that:</p>
+<ul>
+<li><p>The scales are there but on the side but they alternate, left right, or up and down. The two labels are also far away easy to misinterpret . So it is not easy to tell at a glance what you are looking at.</p></li>
+<li><p>Eveything is shown twice. And what is worse if you look above or bellow the diagonal the axis are flipped.</p></li>
+<li><p>I prefer to plot something different below to avoid this issue and I like the ellipses form of a corellogram. But this is easier in R I don’t think I quite got it right in Python.</p></li>
+<li><p>For binary and categorical variables it’s the scatter plot is pretty uninformative. And more so when you plot two categorical predictors against each other since the plot lines them up on top of each other. What I like to do us use a violin plot or a box plot.</p></li>
+<li><p>This plot features nine variables and already hard to make sense of.</p></li>
+<li><p>I spent some time as an analyst and this got me used to segmenting things. It’s easy to segment SPLOMs and show lots of interesting relations in one big chart but it a challenge to make sense of and the big point being made is that we should take the time to look at the data.</p></li>
+<li><p>Notice that the massive outlier is very easy to miss. Perhaps we might want to indicate potential outliers/etc in a way that stands out more?</p></li>
+<li><p>But it would be even better if we could interactively zoom into two of the charts and examine them in tandem.</p></li>
+</ul></li>
+<li><p>Trevor Hastie also show us a log transformed version. It seems to be better except that most of the data is already log transformed. So if he advocating for a double log transform. It can help to find so called supper outliers called black swans by Nassim Taleb. But in this case it seems to be a mistake. On the other hand perhaps he showed us the inverse of the log transform which might make more sense. It not clear what he did!-</p></li>
+</ul>
+<div id="109fc4f8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -439,12 +609,12 @@ background-size: cover;
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/cell-2-output-1.png" width="758" height="758" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-2-output-1.png" width="758" height="758" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="283805b5" class="cell" data-execution_count="2">
+<div id="549cbeef" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -557,12 +727,12 @@ background-size: cover;
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/cell-3-output-1.png" width="759" height="759" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-3-output-1.png" width="759" height="759" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="1c100020" class="cell" data-execution_count="3">
+<div id="b00e7cc3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -632,12 +802,12 @@ background-size: cover;
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="index_files/figure-html/cell-4-output-1.png" width="950" height="950" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-4-output-1.png" width="950" height="950" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="bf60c993" class="cell" data-execution_count="4">
+<div id="5cf3d842" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -704,12 +874,12 @@ background-size: cover;
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="index_files/figure-html/cell-5-output-1.png" width="317" height="315" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/cell-5-output-1.png" width="317" height="315" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="145de480" class="cell" data-execution_count="5">
+<div id="591b57c0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.pairplot(df, kind<span class="op">=</span><span class="st">"scatter"</span>, corner<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, row_var <span class="kw">in</span> <span class="bu">enumerate</span>(df.columns):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, col_var <span class="kw">in</span> <span class="bu">enumerate</span>(df.columns):</span>
@@ -719,12 +889,12 @@ background-size: cover;
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="index_files/figure-html/cell-6-output-1.png" width="888" height="947" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="index_files/figure-html/cell-6-output-1.png" width="888" height="947" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="8909bf47" class="cell" data-execution_count="6">
+<div id="9fbdfd4c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -884,23 +1054,95 @@ File <span class="ansi-green-fg">~/work/notes/notes-islr-py/.venv/lib/python3.10
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="index_files/figure-html/cell-7-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="index_files/figure-html/cell-7-output-2.png" width="946" height="947" class="figure-img"></a></p>
+<p><a href="index_files/figure-html/cell-7-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="index_files/figure-html/cell-7-output-2.png" width="946" height="947" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="sec-phonemes-prolem" class="level3">
+<h3 class="anchored" data-anchor-id="sec-phonemes-prolem">Phoneme Classifications</h3>
+<p>I also got interested in this subject at one time or another. It turns out that there are a number of issues involved.</p>
+<ul>
+<li><p>Sound is tricky to record. More so if it is in stereo.</p></li>
+<li><p>Phonemes are usually a wave form that repeats thousands of time with very subtle changes.</p></li>
+<li><p>How can we tell when one phoneme start and another one ends</p></li>
+<li><p>What is the best way to represent the phoneme - it is a number, a distribution, a time series, in image ?</p></li>
+<li><p>What is a log-periodogram</p>
+<ul>
+<li>What kind of preprocessing goes into making one ?</li>
+<li>Is some information dropped in making one?</li>
+</ul></li>
+<li><p>Does it tell the whole picture ?</p></li>
+<li><p>Phonemes are relative things - one person’s vowels might be shifted in terms of frequency compared to another person. By shifted I mean that different phonemes coincide in terms of frequency. So that to make a classifier you might want to train a model that looks can consider</p>
+<ul>
+<li>variations in one person’s phonemes</li>
+<li>variations in phonemes between people</li>
+</ul></li>
+<li><p>Phonemes are notoriously hard to classify individually - even for humans.</p></li>
+<li><p>One generally needs to consider sequences of three or more phonemes to get the context to make decent classifications.</p></li>
+<li><p>The instructors seem to be very clear on using a logistic regression. To telling the two phoneme apart. But we never have just two phonemes. Typically need to deal with 20+ phonemes. So a logistic regression is not going to cut it. :sad:</p></li>
+<li><p><strong>Spam Detection</strong> - is a good example of Statistical Learning. Building a binary classifier using logistic regression is fairly easy to do and the maths is quite straight forward. The devil here is in the details. And spam is a moving target as spammers keep improving. It seems though that the real solution isn’t so much a good filter but to make spamming unprofitable by making it easy to fine/sue spammers.</p></li>
+<li><p><strong>Handwritten Digits</strong> - the teachers say this is a hard problem. Actually most models get to 98% + accuracy. So no longer a hard problem.</p></li>
+<li><p><strong>Gene Expression</strong> - This is actually interesting but the charts are hard to understand. Although they explain it - the lesson on hierarcial clustering explains this better and this leads me to think there is something more to be</p></li>
+<li><p>It covers the three of the datasets used in the book.</p>
+<ol type="1">
+<li>Wage data</li>
+<li>Stock market data</li>
+<li>Gene Expression Data</li>
+</ol></li>
+<li><p>ISL <span class="citation" data-cites="ISL">(<a href="#ref-ISL" role="doc-biblioref">James et al. 2013</a>)</span> is an introduction text. <span class="citation" data-cites="ESL">(<a href="#ref-ESL" role="doc-biblioref">Hastie, Tibshirani, and Friedman 2009</a>)</span> is the more comprehensive text.</p></li>
+<li><p>Statistical learning is the author’s preferred term for machine learning and it is a bit different in that it considers the data originating from a data generating process (DGP) and the main goal is to uncover this process. In traditional ML the focus is on prediction.</p></li>
+</ul>
+</section>
+</section>
+<section id="premises" class="level2">
+<h2 class="anchored" data-anchor-id="premises">Premises:</h2>
+<ul>
+<li>Statistical learning is not a series of black boxes - we need to understand the way the cogs of models come together.</li>
+<li>While it is important to know what job is performed by each cog, it is not necessary to have the skills to construct the machine inside the box!</li>
+<li>The readers are interested in applying the methods to real-world problems.</li>
+</ul>
+</section>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<figcaption>Chapter Slides</figcaption>
+</figure>
+</div>
+</section>
+<section id="chapter" class="level2">
+<h2 class="anchored" data-anchor-id="chapter">Chapter</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="ch01.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Chapter"><embed src="ch01.pdf" class="col-page" width="800" height="1000"></a></p>
+<figcaption>Chapter</figcaption>
+</figure>
+</div>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ESL" class="csl-entry" role="listitem">
+Hastie, T., R. Tibshirani, and J. H. Friedman. 2009. <em>The Elements of Statistical Learning: Data Mining, Inference, and Prediction</em>. Springer Series in Statistics. Springer. <a href="https://books.google.co.il/books?id=eBSgoAEACAAJ">https://books.google.co.il/books?id=eBSgoAEACAAJ</a>.
+</div>
+<div id="ref-ISL" class="csl-entry" role="listitem">
+James, G., D. Witten, T. Hastie, and R. Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer Texts in Statistics. Springer New York. <a href="https://books.google.co.il/books?id=qcI_AAAAQBAJ">https://books.google.co.il/books?id=qcI_AAAAQBAJ</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
-  title = {Better {SPLOM}},
+  title = {Chapter 1: {Introduction}},
   date = {2024-06-01},
-  url = {https://orenbochman.github.io/notes-islr/posts/better-splom/},
+  url = {https://orenbochman.github.io/notes-islr/posts/ch01/},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-bochman2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Bochman, Oren. 2024. <span>“Better SPLOM.”</span> June 1, 2024. <a href="https://orenbochman.github.io/notes-islr/posts/better-splom/">https://orenbochman.github.io/notes-islr/posts/better-splom/</a>.
+Bochman, Oren. 2024. <span>“Chapter 1: Introduction.”</span> June 1,
+2024. <a href="https://orenbochman.github.io/notes-islr/posts/ch01/">https://orenbochman.github.io/notes-islr/posts/ch01/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1570,7 +1812,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/better-splom/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/OrenBochman/notes-islr-py/edit/main/posts/ch01/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/OrenBochman/notes-islr-py/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
 <p>This page is built with 💛 and <a href="https://quarto.org/">Quarto</a>.</p>
 </div>
