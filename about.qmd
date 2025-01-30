@@ -4,14 +4,14 @@ about:
   template: solana
   links:
     - icon: twitter
-      text: Twitter
-      href: https://twitter.com
+      href: https://x.com/orenbochman
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/orenbochman/
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/OrenBochman/notes-islr-py
+
 image: images/tiling.png
 title-block-banner: images/banner_black_3.jpg
 image-placeholder: images/dnn_cover.png

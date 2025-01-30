@@ -17,6 +17,8 @@ website:
         href: https://github.com/OrenBochman/notes-islr-py
       - icon: twitter
         href: https://x.com/orenbochman
+      - icon: linkedin
+        href: https://www.linkedin.com/in/orenbochman/
       - icon: rss
         href: index.xml
   sidebar:
