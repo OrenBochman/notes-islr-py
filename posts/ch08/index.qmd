@@ -27,13 +27,13 @@ date: 2024-08-01
 :::: {.callout-note collapse="false"}
 ## Tree based methods Video {.unnumbered}
 
-::: {#fig-8.1 .column-margin}
+::: {#fig-v8.1 .column-margin}
 {{< video https://youtu.be/QNnayf--_yk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
 
 Tree based methods
 :::
 
-Outline of [first video](#fig-8.1)
+Outline of [first video](@fig-v8.1)
 
 1.  Introduction
     -   Tree-based methods are supervised learning algorithms that stratify the predictor space to make predictions.
@@ -77,13 +77,13 @@ Outline of [first video](#fig-8.1)
 :::: {.callout-note collapse="false"}
 ## More details on Trees {.unnumbered}
 
-::: {#fig-8.2 .column-margin}
+::: {#fig-v8.2 .column-margin}
 {{< video https://youtu.be/JaoTOfTNOVk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ >}}
 
 More details on Trees
 :::
 
-Outline of [second video](#fig-8.2)
+Outline of [second video](#fig-v8.2)
 
 -   The process of building a tree and making predictions
 -   The question of how large should the tree be

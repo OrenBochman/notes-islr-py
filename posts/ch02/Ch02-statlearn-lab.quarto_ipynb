@@ -1,0 +1,900 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Chapter 2: Introduction to Python - Lab\"\n",
+        "categories: [lab,python]\n",
+        "date: 2024-06-11\n",
+        "format:\n",
+        "   html:\n",
+        "      page-layout: full\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# Introduction to Python\n",
+        "\n",
+        "[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch02-statlearn-lab.ipynb) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch02-statlearn-lab.ipynb)\n",
+        "\n",
+        "## Getting Started\n",
+        "\n",
+        "To run the labs in this book, you will need two things:\n",
+        "\n",
+        "* An installation of `Python3`, which is the specific version of `Python`  used in the labs. \n",
+        "* Access to  `Jupyter`, a very popular `Python` interface that runs code through a file called a *notebook*. \n",
+        "\n",
+        "\n",
+        "You can download and install  `Python3`   by following the instructions available at [anaconda.com](http://anaconda.com). \n",
+        "\n",
+        "\n",
+        " There are a number of ways to get access to `Jupyter`. Here are just a few:\n",
+        " \n",
+        " * Using Google's `Colaboratory` service: [colab.research.google.com/](https://colab.research.google.com/). \n",
+        " * Using `JupyterHub`, available at [jupyter.org/hub](https://jupyter.org/hub). \n",
+        " * Using your own `jupyter` installation. Installation instructions are available at [jupyter.org/install](https://jupyter.org/install). \n",
+        " \n",
+        "Please see the `Python` resources page on the book website [statlearning.com](https://www.statlearning.com) for up-to-date information about getting `Python` and `Jupyter` working on your computer. \n",
+        "\n",
+        "You will need to install the `ISLP` package, which provides access to the datasets and custom-built functions that we provide.\n",
+        "Inside a macOS or Linux terminal type `pip install ISLP`; this also installs most other packages needed in the labs. The `Python` resources page has a link to the `ISLP` documentation website.\n",
+        "\n",
+        "To run this lab, download the file `Ch2-statlearn-lab.ipynb` from the `Python` resources page. \n",
+        "Now run the following code at the command line: `jupyter lab Ch2-statlearn-lab.ipynb`.\n",
+        "\n",
+        "If you're using Windows, you can use the `start menu` to access `anaconda`, and follow the links. For example, to install `ISLP` and run this lab, you can run the same code above in an `anaconda` shell.\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Basic Commands\n",
+        "\n",
+        "\n",
+        "\n",
+        "In this lab, we will introduce some simple `Python` commands. \n",
+        " For more resources about `Python` in general, readers may want to consult the tutorial at [docs.python.org/3/tutorial/](https://docs.python.org/3/tutorial/). \n",
+        "\n",
+        "\n",
+        "Like most programming languages, `Python` uses *functions*\n",
+        "to perform operations.   To run a\n",
+        "function called `fun`, we type\n",
+        "`fun(input1,input2)`, where the inputs (or *arguments*)\n",
+        "`input1` and `input2` tell\n",
+        "`Python` how to run the function.  A function can have any number of\n",
+        "inputs. For example, the\n",
+        "`print()`  function outputs a text representation of all of its arguments to the console.\n"
+      ],
+      "id": "a04ac985"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('fit a model with', 11, 'variables')"
+      ],
+      "id": "c67b058d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " The following command will provide information about the `print()` function.\n"
+      ],
+      "id": "bb71a1a2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print?"
+      ],
+      "id": "c093a562",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Adding two integers in `Python` is pretty intuitive.\n"
+      ],
+      "id": "5d73a875"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "3 + 5"
+      ],
+      "id": "8503daa4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "In `Python`, textual data is handled using\n",
+        "*strings*. For instance, `\"hello\"` and\n",
+        "`'hello'`\n",
+        "are strings. \n",
+        "We can concatenate them using the addition `+` symbol.\n"
+      ],
+      "id": "dabc5634"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "\"hello\" + \" \" + \"world\""
+      ],
+      "id": "21ce6657",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " A string is actually a type of *sequence*: this is a generic term for an ordered list. \n",
+        " The three most important types of sequences are lists, tuples, and strings.  \n",
+        "We introduce lists now. \n",
+        "\n",
+        "\n",
+        "The following command instructs `Python` to join together\n",
+        "the numbers 3, 4, and 5, and to save them as a\n",
+        "*list* named `x`. When we\n",
+        "type `x`, it gives us back the list.\n"
+      ],
+      "id": "bdca8b96"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = [3, 4, 5]\n",
+        "x"
+      ],
+      "id": "a343d331",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that we used the brackets\n",
+        "`[]` to construct this list. \n",
+        "\n",
+        "We will often want to add two sets of numbers together. It is reasonable to try the following code,\n",
+        "though it will not produce the desired results.\n"
+      ],
+      "id": "37467230"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "y = [4, 9, 7]\n",
+        "x + y"
+      ],
+      "id": "b8c0009e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The result may appear slightly counterintuitive: why did `Python` not add the entries of the lists\n",
+        "element-by-element? \n",
+        " In `Python`, lists hold *arbitrary* objects, and  are added using  *concatenation*. \n",
+        " In fact, concatenation is the behavior that we saw earlier when we entered `\"hello\" + \" \" + \"world\"`. \n",
+        " \n",
+        " \n",
+        " \n",
+        "This example reflects the fact that \n",
+        " `Python` is a general-purpose programming language. Much of `Python`'s  data-specific\n",
+        "functionality comes from other packages, notably `numpy`\n",
+        "and `pandas`. \n",
+        "In the next section, we will introduce the  `numpy` package. \n",
+        "See [docs.scipy.org/doc/numpy/user/quickstart.html](https://docs.scipy.org/doc/numpy/user/quickstart.html) for more information about `numpy`.\n",
+        "\n",
+        "\n",
+        "\n",
+        "## Introduction to Numerical Python\n",
+        "\n",
+        "As mentioned earlier, this book makes use of functionality   that is contained in the `numpy` \n",
+        " *library*, or *package*. A package is a collection of modules that are not necessarily included in \n",
+        " the base `Python` distribution. The name `numpy` is an abbreviation for *numerical Python*. \n",
+        "  \n",
+        "  \n",
+        "  To access `numpy`, we must first `import` it.\n"
+      ],
+      "id": "8cef8c00"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import numpy as np "
+      ],
+      "id": "bc835435",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "In the previous line, we named the `numpy` *module* `np`; an abbreviation for easier referencing.\n",
+        "\n",
+        "\n",
+        "In `numpy`, an *array* is  a generic term for a multidimensional\n",
+        "set of numbers.\n",
+        "We use the `np.array()` function to define   `x` and `y`, which are one-dimensional arrays, i.e. vectors.\n"
+      ],
+      "id": "06d86c1d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.array([3, 4, 5])\n",
+        "y = np.array([4, 9, 7])"
+      ],
+      "id": "7620625d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Note that if you forgot to run the `import numpy as np` command earlier, then\n",
+        "you will encounter an error in calling the `np.array()` function in the previous line. \n",
+        " The syntax `np.array()` indicates that the function being called\n",
+        "is part of the `numpy` package, which we have abbreviated as `np`. \n",
+        "\n",
+        "\n",
+        "Since `x` and `y` have been defined using `np.array()`, we get a sensible result when we add them together. Compare this to our results in the previous section,\n",
+        " when we tried to add two lists without using `numpy`. \n"
+      ],
+      "id": "8f0e329b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x + y"
+      ],
+      "id": "17c74344",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "In `numpy`, matrices are typically represented as two-dimensional arrays, and vectors as one-dimensional arrays. {While it is also possible to create matrices using  `np.matrix()`, we will use `np.array()` throughout the labs in this book.}\n",
+        "We can create a two-dimensional array as follows. \n"
+      ],
+      "id": "0c7360e4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.array([[1, 2], [3, 4]])\n",
+        "x"
+      ],
+      "id": "05ec0acf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The object `x` has several \n",
+        "*attributes*, or associated objects. To access an attribute of `x`, we type `x.attribute`, where we replace `attribute`\n",
+        "with the name of the attribute. \n",
+        "For instance, we can access the `ndim` attribute of  `x` as follows. \n"
+      ],
+      "id": "281b501a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x.ndim"
+      ],
+      "id": "a3e7d326",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The output indicates that `x` is a two-dimensional array.  \n",
+        "Similarly, `x.dtype` is the *data type* attribute of the object `x`. This indicates that `x` is \n",
+        "comprised of 64-bit integers:\n"
+      ],
+      "id": "701a1371"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x.dtype"
+      ],
+      "id": "3cead17c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Why is `x` comprised of integers? This is because we created `x` by passing in exclusively integers to the `np.array()` function.\n",
+        "  If\n",
+        "we had passed in any decimals, then we would have obtained an array of\n",
+        "*floating point numbers* (i.e. real-valued numbers). \n"
+      ],
+      "id": "abb09d68"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.array([[1, 2], [3.0, 4]]).dtype"
+      ],
+      "id": "1ae5b0e5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Typing `fun?` will cause `Python` to display \n",
+        "documentation associated with the function `fun`, if it exists.\n",
+        "We can try this for `np.array()`. \n"
+      ],
+      "id": "ad0c18cb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.array?"
+      ],
+      "id": "9eeabf05",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "This documentation indicates that we could create a floating point array by passing a `dtype` argument into `np.array()`.\n"
+      ],
+      "id": "189e81c4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.array([[1, 2], [3, 4]], float).dtype"
+      ],
+      "id": "8bcd7416",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The array `x` is two-dimensional. We can find out the number of rows and columns by looking\n",
+        "at its `shape` attribute.\n"
+      ],
+      "id": "8ce19435"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x.shape"
+      ],
+      "id": "79d1f03d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "A *method* is a function that is associated with an\n",
+        "object. \n",
+        "For instance, given an array `x`, the expression\n",
+        "`x.sum()` sums all of its elements, using the `sum()`\n",
+        "method for arrays. \n",
+        "The call `x.sum()` automatically provides `x` as the\n",
+        "first argument to its `sum()` method.\n"
+      ],
+      "id": "b8e5c938"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.array([1, 2, 3, 4])\n",
+        "x.sum()"
+      ],
+      "id": "91bc20a4",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We could also sum the elements of `x` by passing in `x` as an argument to the `np.sum()` function. \n"
+      ],
+      "id": "602e2cc2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.array([1, 2, 3, 4])\n",
+        "np.sum(x)"
+      ],
+      "id": "fcedc032",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " As another example, the\n",
+        "`reshape()` method returns a new array with the same elements as\n",
+        "`x`, but a different shape.\n",
+        " We do this by passing in a `tuple` in our call to\n",
+        " `reshape()`, in this case `(2, 3)`.  This tuple specifies that we would like to create a two-dimensional array with \n",
+        "$2$ rows and $3$ columns. {Like lists, tuples represent a sequence of objects. Why do we need more than one way to create a sequence? There are a few differences between tuples and lists, but perhaps the most important is that elements of a tuple cannot be modified, whereas elements of a list can be.}\n",
+        " \n",
+        "In what follows, the\n",
+        "`\\n` character creates a *new line*.\n"
+      ],
+      "id": "7d981f41"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.array([1, 2, 3, 4, 5, 6])\n",
+        "print('beginning x:\\n', x)\n",
+        "x_reshape = x.reshape((2, 3))\n",
+        "print('reshaped x:\\n', x_reshape)"
+      ],
+      "id": "7e44d4cf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The previous output reveals that `numpy` arrays are specified as a sequence\n",
+        "of *rows*. This is  called *row-major ordering*, as opposed to *column-major ordering*. \n",
+        " \n",
+        "\n",
+        "`Python` (and hence `numpy`) uses 0-based\n",
+        "indexing. This means that to access the top left element of `x_reshape`, \n",
+        "we type in `x_reshape[0,0]`.\n"
+      ],
+      "id": "f3f9ef9a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x_reshape[0, 0] "
+      ],
+      "id": "59b844c5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Similarly, `x_reshape[1,2]` yields the element in the second row and the third column \n",
+        "of `x_reshape`. \n"
+      ],
+      "id": "d7658194"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x_reshape[1, 2] "
+      ],
+      "id": "86eff4b0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Similarly, `x[2]` yields the\n",
+        "third entry of `x`. \n",
+        "\n",
+        "Now, let's modify the top left element of `x_reshape`.  To our surprise, we discover that the first element of `x` has been modified as well!\n"
+      ],
+      "id": "420cda8f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('x before we modify x_reshape:\\n', x)\n",
+        "print('x_reshape before we modify x_reshape:\\n', x_reshape)\n",
+        "x_reshape[0, 0] = 5\n",
+        "print('x_reshape after we modify its top left element:\\n', x_reshape)\n",
+        "print('x after we modify top left element of x_reshape:\\n', x)"
+      ],
+      "id": "e72bc3e1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Modifying `x_reshape` also modified `x` because the two objects occupy the same space in memory.\n",
+        " \n",
+        "\n",
+        "    \n",
+        "\n",
+        " \n",
+        "We just saw that we can modify an element of an array. Can we also modify a tuple? It turns out that we cannot --- and trying to do so introduces\n",
+        "an *exception*, or error.\n"
+      ],
+      "id": "fc68b1fc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "my_tuple = (3, 4, 5)\n",
+        "my_tuple[0] = 2"
+      ],
+      "id": "5723832d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We now briefly mention some attributes of arrays that will come in handy. An array's `shape` attribute contains its dimension; this is always a tuple.\n",
+        "The  `ndim` attribute yields the number of dimensions, and `T` provides its transpose. \n"
+      ],
+      "id": "a5f63e0f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x_reshape.shape, x_reshape.ndim, x_reshape.T"
+      ],
+      "id": "97f1f425",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Notice that the three individual outputs `(2,3)`, `2`, and `array([[5, 4],[2, 5], [3,6]])` are themselves output as a tuple. \n",
+        " \n",
+        "We will often want to apply functions to arrays. \n",
+        "For instance, we can compute the\n",
+        "square root of the entries using the `np.sqrt()` function: \n"
+      ],
+      "id": "334db622"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.sqrt(x)"
+      ],
+      "id": "87537224",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can also square the elements:\n"
+      ],
+      "id": "a526ef0e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x**2"
+      ],
+      "id": "4b68fe9e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can compute the square roots using the same notation, raising to the power of $1/2$ instead of 2.\n"
+      ],
+      "id": "904f8ff2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x**0.5"
+      ],
+      "id": "052ee2f1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Throughout this book, we will often want to generate random data. \n",
+        "The `np.random.normal()`  function generates a vector of random\n",
+        "normal variables. We can learn more about this function by looking at the help page, via a call to `np.random.normal?`.\n",
+        "The first line of the help page  reads `normal(loc=0.0, scale=1.0, size=None)`. \n",
+        " This  *signature* line tells us that the function's arguments are  `loc`, `scale`, and `size`. These are *keyword* arguments, which means that when they are passed into\n",
+        " the function, they can be referred to by name (in any order). {`Python` also uses *positional* arguments. Positional arguments do not need to use a keyword. To see an example, type in `np.sum?`. We see that `a` is a positional argument, i.e. this function assumes that the first unnamed argument that it receives is the array to be summed. By contrast, `axis` and `dtype` are keyword arguments: the position in which these arguments are entered into `np.sum()` does not matter.}\n",
+        " By default, this function will generate random normal variable(s) with mean (`loc`) $0$ and standard deviation (`scale`) $1$; furthermore, \n",
+        " a single random variable will be generated unless the argument to `size` is changed. \n",
+        "\n",
+        "We now generate 50 independent random variables from a $N(0,1)$ distribution. \n"
+      ],
+      "id": "8132876e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x = np.random.normal(size=50)\n",
+        "x"
+      ],
+      "id": "2589942a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We create an array `y` by adding an independent $N(50,1)$ random variable to each element of `x`.\n"
+      ],
+      "id": "51e377e2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "y = x + np.random.normal(loc=50, scale=1, size=50)"
+      ],
+      "id": "25a3a222",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The `np.corrcoef()` function computes the correlation matrix between `x` and `y`. The off-diagonal elements give the \n",
+        "correlation between `x` and `y`. \n"
+      ],
+      "id": "d08999e3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.corrcoef(x, y)"
+      ],
+      "id": "57598de9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "If you're following along in your own `Jupyter` notebook, then you probably noticed that you got a different set of results when you ran the past few \n",
+        "commands. In particular, \n",
+        " each\n",
+        "time we call `np.random.normal()`, we will get a different answer, as shown in the following example.\n"
+      ],
+      "id": "2b6f18f0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(np.random.normal(scale=5, size=2))\n",
+        "print(np.random.normal(scale=5, size=2)) "
+      ],
+      "id": "abf19462",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "In order to ensure that our code provides exactly the same results\n",
+        "each time it is run, we can set a *random seed* \n",
+        "using the \n",
+        "`np.random.default_rng()` function.\n",
+        "This function takes an arbitrary, user-specified integer argument. If we set a random seed before \n",
+        "generating random data, then re-running our code will yield the same results. The\n",
+        "object `rng` has essentially all the random number generating methods found in `np.random`. Hence, to\n",
+        "generate normal data we use `rng.normal()`.\n"
+      ],
+      "id": "ad373d6e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "rng = np.random.default_rng(1303)\n",
+        "print(rng.normal(scale=5, size=2))\n",
+        "rng2 = np.random.default_rng(1303)\n",
+        "print(rng2.normal(scale=5, size=2)) "
+      ],
+      "id": "17cd8615",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Throughout the labs in this book, we use `np.random.default_rng()`  whenever we\n",
+        "perform calculations involving random quantities within `numpy`.  In principle, this\n",
+        "should enable the reader to exactly reproduce the stated results. However, as new versions of `numpy` become available, it is possible\n",
+        "that some small discrepancies may occur between the output\n",
+        "in the labs and the output\n",
+        "from `numpy`.\n",
+        "\n",
+        "The `np.mean()`,  `np.var()`, and `np.std()`  functions can be used\n",
+        "to compute the mean, variance, and standard deviation of arrays.  These functions are also\n",
+        "available as methods on the arrays.\n"
+      ],
+      "id": "9dfc32e5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "rng = np.random.default_rng(3)\n",
+        "y = rng.standard_normal(10)\n",
+        "np.mean(y), y.mean()"
+      ],
+      "id": "a66e3416",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.var(y), y.var(), np.mean((y - y.mean())**2)"
+      ],
+      "id": "c5844be9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Notice that by default `np.var()` divides by the sample size $n$ rather\n",
+        "than $n-1$; see the `ddof` argument in `np.var?`.\n"
+      ],
+      "id": "5bbb500a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "np.sqrt(np.var(y)), np.std(y)"
+      ],
+      "id": "f28fe8a6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The `np.mean()`,  `np.var()`, and `np.std()` functions can also be applied to the rows and columns of a matrix. \n",
+        "To see this, we construct a $10 \\times 3$ matrix of $N(0,1)$ random variables, and consider computing its row sums. \n"
+      ],
+      "id": "ef0e72c3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X = rng.standard_normal((10, 3))\n",
+        "X"
+      ],
+      "id": "d21c9a22",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Since arrays are row-major ordered, the first axis, i.e. `axis=0`, refers to its rows. We pass this argument into the `mean()` method for the object `X`. \n"
+      ],
+      "id": "da3f66e5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X.mean(axis=0)"
+      ],
+      "id": "66d7d206",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The following yields the same result.\n"
+      ],
+      "id": "cb7a1801"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X.mean(0)"
+      ],
+      "id": "3b8e79af",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/oren/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -1,0 +1,398 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Chapter 11: Survival Analysis - Lab Part 3\" \n",
+        "categories: [lab,python]\n",
+        "date: 2024-09-04\n",
+        "format:\n",
+        "   html:\n",
+        "      page-layout: full\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Survival Analysis {#sec-survival-analysis}\n",
+        "\n",
+        "We begin by importing some of our libraries at this top level.\n"
+      ],
+      "id": "d70ed989"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from matplotlib.pyplot import subplots\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "from ISLP.models import ModelSpec as MS\n",
+        "from ISLP import load_data\n",
+        "from lifelines import KaplanMeierFitter, CoxPHFitter\n",
+        "from lifelines.statistics import logrank_test, multivariate_logrank_test\n",
+        "from ISLP.survival import sim_time\n",
+        "\n",
+        "km = KaplanMeierFitter()\n",
+        "coxph = CoxPHFitter"
+      ],
+      "id": "4deda506",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Call Center Data {#sec-call-center}\n",
+        "\n",
+        "In this section, [we will simulate survival data using the relationship between cumulative hazard and the survival function]{.mark} explored in Exercise \\ref{ex:all3}. Our simulated data will represent the observed wait times (in seconds) for 2,000 customers who have phoned a call center.  In this context, censoring occurs if a customer hangs up before his or her call is answered.\n",
+        "\n",
+        "There are three covariates: `Operators` (the number of call center operators available at the time of the call, which can range from $5$ to $15$), `Center` (either A, B, or C), and `Time` of day (Morning, Afternoon, or Evening). We generate data for these covariates so that all possibilities are equally likely: for instance, morning, afternoon and evening calls are equally likely, and any number of operators from $5$ to $15$ is equally likely.\n"
+      ],
+      "id": "93d732cc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "rng = np.random.default_rng(10)\n",
+        "N = 2000\n",
+        "Operators = rng.choice(np.arange(5, 16), N,replace=True)\n",
+        "Center = rng.choice(['A', 'B', 'C'],N,replace=True)\n",
+        "Time = rng.choice(['Morn.', 'After.', 'Even.'],N,replace=True)\n",
+        "D = pd.DataFrame({'Operators': Operators, 'Center': pd.Categorical(Center), 'Time': pd.Categorical(Time)})"
+      ],
+      "id": "89ab0c11",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We then build a model matrix (omitting the intercept)\n"
+      ],
+      "id": "c0d2c8cc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "model = MS(['Operators', 'Center', 'Time'], intercept=False)\n",
+        "X = model.fit_transform(D)"
+      ],
+      "id": "2f4257a7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "It is worthwhile to take a peek at the model matrix `X`, so that we can be sure that we understand how the variables have been coded. By default, the levels of categorical variables are sorted and, as usual, the first column of the one-hot encoding of the variable is dropped.\n"
+      ],
+      "id": "8e2f6ff8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X[:5]"
+      ],
+      "id": "fe7c7e52",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Next, we specify the coefficients and the hazard function.\n"
+      ],
+      "id": "997695c1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "true_beta = np.array([0.04, -0.3, 0, 0.2, -0.2])\n",
+        "true_linpred = X.dot(true_beta)\n",
+        "hazard = lambda t: 1e-5 * t"
+      ],
+      "id": "c55f6272",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Here, we have set the coefficient associated with `Operators` to\n",
+        "equal $0.04$; in other words, each additional operator leads to a\n",
+        "$e^{0.04}=1.041$-fold increase in the “risk” that the call will be\n",
+        "answered, given the `Center` and `Time` covariates. This\n",
+        "makes sense: the greater the number of operators at hand, the shorter\n",
+        "the wait time! The coefficient associated with `Center == B` is\n",
+        "$-0.3$, and `Center == A` is treated as the baseline. This means\n",
+        "that the risk of a call being answered at Center B is 0.74 times the\n",
+        "risk that it will be answered at Center A; in other words, the wait\n",
+        "times are a bit longer at Center B.\n",
+        "\n",
+        "Recall from Section~\\ref{Ch2-statlearn-lab:loading-data} the use of `lambda` for creating short functions on the fly.\n",
+        "We use the function `sim_time()` from the `ISLP.survival` package. This function uses the relationship between the survival function and cumulative hazard $S(t) = \\exp(-H(t))$ and the specific form of the cumulative hazard function in the Cox model to simulate data based on values of the linear predictor\n",
+        "`true_linpred` and the cumulative hazard.  \n",
+        "We need to provide the cumulative hazard function, which we do here.\n"
+      ],
+      "id": "86bb5511"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cum_hazard = lambda t: 1e-5 * t**2 / 2"
+      ],
+      "id": "84d6d8ff",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We are now ready to generate data under the Cox proportional hazards\n",
+        "model. We truncate the maximum time to 1000 seconds to keep\n",
+        "simulated wait times reasonable. The function `sim_time()` takes a linear predictor,\n",
+        "a cumulative hazard function and a random number generator.\n"
+      ],
+      "id": "fc418949"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "W = np.array([sim_time(l, cum_hazard, rng)\n",
+        "              for l in true_linpred])\n",
+        "D['Wait time'] = np.clip(W, 0, 1000)"
+      ],
+      "id": "dd14fa73",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We now simulate our censoring variable, for which we assume\n",
+        "90% of calls were answered (`Failed==1`) before the customer hung up (`Failed==0`).\n"
+      ],
+      "id": "7ae8f0c9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "D['Failed'] = rng.choice([1, 0],\n",
+        "                         N,\n",
+        "                         p=[0.9, 0.1])\n",
+        "D[:5]"
+      ],
+      "id": "ef8f5768",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "D['Failed'].mean()"
+      ],
+      "id": "315b39a6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We now plot  Kaplan-Meier survival curves. First, we stratify by `Center`.\n"
+      ],
+      "id": "29ea0842"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = subplots(figsize=(8,8))\n",
+        "by_center = {}\n",
+        "for center, df in D.groupby('Center',observed=False):\n",
+        "    by_center[center] = df\n",
+        "    km_center = km.fit(df['Wait time'], df['Failed'])\n",
+        "    km_center.plot(label='Center=%s' % center, ax=ax)\n",
+        "ax.set_title(\"Probability of Still Being on Hold\")"
+      ],
+      "id": "4a8ac94e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Next, we stratify by `Time`.\n"
+      ],
+      "id": "8f2f21d6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = subplots(figsize=(8,8))\n",
+        "by_time = {}\n",
+        "for time, df in D.groupby('Time',observed=False):\n",
+        "    by_time[time] = df\n",
+        "    km_time = km.fit(df['Wait time'], df['Failed'])\n",
+        "    km_time.plot(label='Time=%s' % time, ax=ax)\n",
+        "ax.set_title(\"Probability of Still Being on Hold\")"
+      ],
+      "id": "70f6b45a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "It seems that calls at Call Center B take longer to be answered than\n",
+        "calls at Centers A and C. Similarly, it appears that wait times are\n",
+        "longest in the morning and shortest in the evening hours. We can use a\n",
+        "log-rank test to determine whether these differences are statistically\n",
+        "significant using the function `multivariate_logrank_test()`.\n"
+      ],
+      "id": "1d90c564"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "multivariate_logrank_test(D['Wait time'],\n",
+        "                          D['Center'],\n",
+        "                          D['Failed'])"
+      ],
+      "id": "4b9ca64a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Next, we consider the  effect of `Time`.\n"
+      ],
+      "id": "4b19297a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "multivariate_logrank_test(D['Wait time'],\n",
+        "                          D['Time'],\n",
+        "                          D['Failed'])"
+      ],
+      "id": "02a09570",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "As in the case of a categorical variable with 2 levels, these results are similar to the likelihood ratio test from the Cox proportional hazards model. First, we look at the results for  `Center`.\n"
+      ],
+      "id": "48951fbb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X = MS(['Wait time',\n",
+        "        'Failed',\n",
+        "        'Center'],\n",
+        "        intercept=False).fit_transform(D)\n",
+        "F = coxph().fit(X, 'Wait time', 'Failed')\n",
+        "F.log_likelihood_ratio_test()"
+      ],
+      "id": "f9bbcbe2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Next, we look at the results for `Time`.\n"
+      ],
+      "id": "ae5ba08f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X = MS(['Wait time',\n",
+        "        'Failed',\n",
+        "        'Time'],\n",
+        "       intercept=False).fit_transform(D)\n",
+        "F = coxph().fit(X, 'Wait time', 'Failed')\n",
+        "F.log_likelihood_ratio_test()"
+      ],
+      "id": "40caca73",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We find that differences between centers are highly significant, as are differences between times of day. \n",
+        "\n",
+        "Finally, we fit Cox's proportional hazards model to the data.\n"
+      ],
+      "id": "2162a959"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "X = MS(D.columns,\n",
+        "       intercept=False).fit_transform(D)\n",
+        "fit_queuing = coxph().fit(\n",
+        "                  X,\n",
+        "                 'Wait time',\n",
+        "                 'Failed')\n",
+        "fit_queuing.summary[['coef', 'se(coef)', 'p']]"
+      ],
+      "id": "568b4e46",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The $p$-values for Center B and evening time are very small. It is also clear that the hazard --- that is, the instantaneous risk that a call will be answered --- increases with the number of operators. Since we generated the data ourselves, we know that the true coefficients for  `Operators`, `Center = B`, `Center = C`, `Time = Even.` and `Time = Morn.` are $0.04$, $-0.3$, $0$, $0.2$, and $-0.2$, respectively. The coefficient estimates from the fitted Cox model are fairly accurate.\n"
+      ],
+      "id": "fba4f776"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/oren/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

@@ -1,0 +1,452 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Chapter 11: Survival Analysis - Lab Part 1\" \n",
+        "categories: [lab,python]\n",
+        "date: 2024-09-02\n",
+        "format:\n",
+        "   html:\n",
+        "      page-layout: full\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "# Survival Analysis {#sec-survival-analysis}\n",
+        "\n",
+        "<a target=\"_blank\" href=\"https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch11-surv-lab.ipynb\">\n",
+        "<img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/>\n",
+        "</a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch11-surv-lab.ipynb)\n",
+        "\n",
+        "- In this lab, we perform survival analyses on three separate data sets. In @sec-brain-cancer we analyze the  `BrainCancer` data  that was first described in Section~\\ref{sec:KM}. \n",
+        "- In [part 2](Ch11-surv-lab-2.qmd#sec-pub), we examine the  `Publication` data  from Section~\\ref{sec:pub}. \n",
+        "- Finally, in [part 3](Ch11-surv-lab-3.qmd#sec-call-center) we  explore a simulated call-center data set.\n",
+        "\n",
+        "We begin by importing some of our libraries at this top level. This makes the code more readable, as scanning the first few lines of the notebook tell us what libraries are used in this\n",
+        "notebook.\n"
+      ],
+      "id": "f5da8ff1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from matplotlib.pyplot import subplots\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "from ISLP.models import ModelSpec as MS\n",
+        "from ISLP import load_data"
+      ],
+      "id": "38bd6242",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We  also collect the new imports needed for this lab.\n"
+      ],
+      "id": "e2fd4007"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from lifelines import KaplanMeierFitter, CoxPHFitter\n",
+        "from lifelines.statistics import logrank_test, multivariate_logrank_test\n",
+        "from ISLP.survival import sim_time\n",
+        "\n",
+        "km = KaplanMeierFitter()\n",
+        "coxph = CoxPHFitter"
+      ],
+      "id": "a8727875",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Brain Cancer Data {#sec-brain-cancer}\n",
+        "\n",
+        "We begin with the `BrainCancer` data set, contained in the `ISLP` package.\n"
+      ],
+      "id": "1ae70194"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "BrainCancer = load_data('BrainCancer')\n",
+        "BrainCancer.columns"
+      ],
+      "id": "b6b4c418",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The rows index the 88 patients, while the 8 columns contain the predictors and outcome variables.\n",
+        "We first briefly examine the data.\n"
+      ],
+      "id": "9ea7bcd1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "BrainCancer['sex'].value_counts()"
+      ],
+      "id": "32efb508",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "BrainCancer['diagnosis'].value_counts()"
+      ],
+      "id": "3563967a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "BrainCancer['status'].value_counts()"
+      ],
+      "id": "9d6ea755",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Before beginning an analysis, it is important to know how the\n",
+        "`status` variable has been coded.  Most software\n",
+        "uses the convention that a `status` of 1 indicates an\n",
+        "uncensored observation (often death), and a `status` of 0 indicates a censored\n",
+        "observation. But some scientists might use the opposite coding. For\n",
+        "the  `BrainCancer`  data set 35 patients died before the end of\n",
+        "the study, so we are using the conventional coding.\n",
+        "\n",
+        "To begin the analysis, we re-create  the Kaplan-Meier survival curve shown in Figure~\\ref{fig:survbrain}. The main\n",
+        "package we will use for survival analysis\n",
+        "is `lifelines`.\n",
+        "The variable  `time`  corresponds to $y_i$, the time to the $i$th event (either censoring or\n",
+        "death). The first argument to `km.fit` is the event time, and the\n",
+        "second argument is the censoring variable, with a 1 indicating an observed\n",
+        "failure time. The `plot()` method produces a survival curve with pointwise confidence\n",
+        "intervals. By default, these are  90% confidence intervals, but this can be changed\n",
+        "by setting the `alpha` argument to one minus the desired\n",
+        "confidence level.\n"
+      ],
+      "id": "6a666f78"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = subplots(figsize=(8,8))\n",
+        "km = KaplanMeierFitter()\n",
+        "km_brain = km.fit(BrainCancer['time'], BrainCancer['status'])\n",
+        "km_brain.plot(label='Kaplan Meier estimate', ax=ax)"
+      ],
+      "id": "0b8f6b5a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Next we create Kaplan-Meier survival curves that are stratified by\n",
+        "`sex`, in order to reproduce  Figure~\\ref{fig:survbrain2}.\n",
+        "We  do this using the `groupby()` method of  a  dataframe.\n",
+        "This  method returns a generator that can\n",
+        "be  iterated over in the `for` loop. In this case,\n",
+        "the  items  in the `for` loop are  2-tuples  representing\n",
+        "the groups: the first entry is the  value\n",
+        "of the grouping column  `sex` while the  second  value\n",
+        "is the dataframe consisting of all  rows in the\n",
+        "dataframe matching that value of `sex`.\n",
+        "We will want to use this data below\n",
+        "in the log-rank test,  hence we store this\n",
+        "information in the dictionary `by_sex`. Finally,\n",
+        "we have also used the notion of\n",
+        " *string interpolation* to automatically\n",
+        "label the  different lines in the  plot. String\n",
+        "interpolation is a powerful technique to format strings ---\n",
+        "`Python` has many ways to facilitate such operations.\n"
+      ],
+      "id": "054ad8ca"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = subplots(figsize=(8,8))\n",
+        "by_sex = {}\n",
+        "for sex, df in BrainCancer.groupby('sex'):\n",
+        "    by_sex[sex] = df\n",
+        "    km_sex = km.fit(df['time'], df['status'])\n",
+        "    km_sex.plot(label='Sex=%s' % sex, ax=ax)"
+      ],
+      "id": "49f80813",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "As discussed in Section~\\ref{sec:logrank}, we can perform a\n",
+        "log-rank test to compare the survival of males to females. We use\n",
+        "the `logrank_test()` function from the `lifelines.statistics` module.\n",
+        "The first two arguments are the event times, with the second\n",
+        "denoting the corresponding (optional) censoring indicators.\n"
+      ],
+      "id": "b6749708"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "logrank_test(by_sex['Male']['time'],\n",
+        "             by_sex['Female']['time'],\n",
+        "             by_sex['Male']['status'],\n",
+        "             by_sex['Female']['status'])"
+      ],
+      "id": "16593d67",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The resulting $p$-value is $0.23$, indicating no evidence of a\n",
+        "difference in survival between the two sexes.\n",
+        "\n",
+        "Next, we  use the `CoxPHFitter()`  estimator\n",
+        "from `lifelines` to fit Cox proportional hazards models.\n",
+        "To begin, we consider a model that uses  `sex`  as the only predictor.\n"
+      ],
+      "id": "21b9ecc2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "coxph = CoxPHFitter # shorthand\n",
+        "sex_df = BrainCancer[['time', 'status', 'sex']]\n",
+        "model_df = MS(['time', 'status', 'sex'],\n",
+        "              intercept=False).fit_transform(sex_df)\n",
+        "cox_fit = coxph().fit(model_df,\n",
+        "                      'time',\n",
+        "                      'status')\n",
+        "cox_fit.summary[['coef', 'se(coef)', 'p']]"
+      ],
+      "id": "a2742819",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The first argument to `fit` should be a data frame containing\n",
+        "at least the event time (the second argument `time` in this case),\n",
+        "as well as an optional censoring variable (the argument `status` in this case).\n",
+        "Note also that the Cox model does not include an intercept, which is why\n",
+        "we used the `intercept=False` argument to `ModelSpec` above.\n",
+        "The `summary()` method delivers many columns; we chose to abbreviate its output here.\n",
+        "It is possible to obtain the likelihood ratio test comparing this model to the one\n",
+        "with no features as follows:\n"
+      ],
+      "id": "895a7a03"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cox_fit.log_likelihood_ratio_test()"
+      ],
+      "id": "ffd529e5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Regardless of which test we use, we see that there is no clear\n",
+        "evidence for a difference in survival between males and females.  As\n",
+        "we learned in this chapter, the score test from the Cox model is\n",
+        "exactly equal to the log rank test statistic!\n",
+        "\n",
+        "Now we fit a  model that makes use of additional predictors. We first note\n",
+        "that one of our `diagnosis` values is missing, hence\n",
+        "we drop that observation before continuing.\n"
+      ],
+      "id": "513226d0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cleaned = BrainCancer.dropna()\n",
+        "all_MS = MS(cleaned.columns, intercept=False)\n",
+        "all_df = all_MS.fit_transform(cleaned)\n",
+        "fit_all = coxph().fit(all_df,\n",
+        "                      'time',\n",
+        "                      'status')\n",
+        "fit_all.summary[['coef', 'se(coef)', 'p']]"
+      ],
+      "id": "0bf1755f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        " The `diagnosis` variable has been coded so that the baseline\n",
+        "corresponds to HG glioma. The results indicate that the risk associated with HG glioma\n",
+        "is more than eight times (i.e. $e^{2.15}=8.62$) the risk associated\n",
+        "with meningioma. In other words, after adjusting for the other\n",
+        "predictors, patients with HG glioma have much worse survival compared\n",
+        "to those with meningioma.  In addition, larger values of the Karnofsky\n",
+        "index, `ki`, are associated with lower risk, i.e. longer survival.\n",
+        "\n",
+        "Finally, we plot estimated survival curves for each diagnosis category,\n",
+        "adjusting for the other predictors.  To make these plots, we set the\n",
+        "values of the other predictors equal to the mean for quantitative variables\n",
+        "and equal to the mode for categorical. To do this, we use the\n",
+        "`apply()` method across rows (i.e. `axis=0`) with a function\n",
+        "`representative` that checks if a column is categorical\n",
+        "or not.\n"
+      ],
+      "id": "3bc6e059"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "levels = cleaned['diagnosis'].unique()\n",
+        "def representative(series):\n",
+        "    if hasattr(series.dtype, 'categories'):\n",
+        "        return pd.Series.mode(series)\n",
+        "    else:\n",
+        "        return series.mean()\n",
+        "modal_data = cleaned.apply(representative, axis=0)"
+      ],
+      "id": "1c195ab2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We make four\n",
+        "copies of the column means and assign the `diagnosis` column to be the four different\n",
+        "diagnoses.\n"
+      ],
+      "id": "995b32b1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "modal_df = pd.DataFrame(\n",
+        "              [modal_data.iloc[0] for _ in range(len(levels))])\n",
+        "modal_df['diagnosis'] = levels\n",
+        "modal_df"
+      ],
+      "id": "dfdc55b2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We then construct the model matrix based on the model specification `all_MS` used to fit\n",
+        "the model, and name the rows according to the levels of `diagnosis`.\n"
+      ],
+      "id": "7e0f3009"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "modal_X = all_MS.transform(modal_df)\n",
+        "modal_X.index = levels\n",
+        "modal_X"
+      ],
+      "id": "a0acbe54",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "We can use the `predict_survival_function()` method to obtain the estimated survival function.\n"
+      ],
+      "id": "c3e87ca1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "predicted_survival = fit_all.predict_survival_function(modal_X)\n",
+        "predicted_survival"
+      ],
+      "id": "9d6f6389",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "This returns a data frame,\n",
+        "whose plot methods yields the different survival curves. To avoid clutter in\n",
+        "the plots, we do not display confidence intervals.\n"
+      ],
+      "id": "bd191bcb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, ax = subplots(figsize=(8, 8))\n",
+        "predicted_survival.plot(ax=ax);"
+      ],
+      "id": "53a34353",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/home/oren/.local/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

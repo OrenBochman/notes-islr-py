@@ -5,15 +5,21 @@ date: 2024-09-21
 format:
    html:
       page-layout: full
+code-annotations: hover
 ---
 
 # Multiple Testing
 
-<a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch13-multiple-lab.ipynb">
-<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
-</a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch13-multiple-lab.ipynb)
+::: {.callout-tip  collapse="true"}
+## Lab Videos {.unnumbered}
+The videos for the labs cannot be embedded, here are the links
 
-We include our usual imports seen in earlier labs.
+- [Py Multiple Testing 1 2023](https://www.youtube.com/watch?v=SBeMlJvijbQ) 
+- [Py Multiple Testing 2 2023](https://www.youtube.com/watch?v=zvw3AY3Q) 
+- [Py Multiple Testing 3 2023](https://www.youtube.com/watch?v=mMFT44ra) 
+:::
+
+We imports the usual packages
 
 ```{python}
 import numpy as np
@@ -21,23 +27,23 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from ISLP import load_data
-```
- 
-We also collect the new imports
-needed for this lab.
 
-```{python}
-from scipy.stats import \
-    (ttest_1samp,
-     ttest_rel,
-     ttest_ind,
-     t as t_dbn)
-from statsmodels.stats.multicomp import \
-     pairwise_tukeyhsd
-from statsmodels.stats.multitest import \
-     multipletests as mult_test
-
+## Below are the new imports
+from scipy.stats import (
+    ttest_1samp,  # <1>
+    ttest_rel,    # <2>
+    ttest_ind, # <3>
+    t as t_dbn) # <4>
+from statsmodels.stats.multicomp import pairwise_tukeyhsd          # <5>
+from statsmodels.stats.multitest import multipletests as mult_test # <6>
 ```
+
+1. **one sample t test** from the `scipy.stats`
+2. **two related samples t test** functions from the `scipy.stats`
+3. **independent t test** functions from the `scipy.stats`
+4. **t test** functions from the `scipy.stats`
+5. [pairwise Tukey HSD (honestly significant difference) test](https://www.statsmodels.org/dev/generated/statsmodels.stats.multicomp.pairwise_tukeyhsd.html) from `statsmodels`
+6. multipletests from `statsmodels`
 
 
 ## Review of Hypothesis Tests

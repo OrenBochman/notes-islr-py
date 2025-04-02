@@ -363,87 +363,128 @@ Bochman, Oren. 2025. <span>“Data Wrangling Mastery!”</span> January 25,
 
 <section id="multiple-testing" class="level1">
 <h1>Multiple Testing</h1>
-<p><a target="_blank" href="https://colab.research.google.com/github/intro-stat-learning/ISLP_labs/blob/v2.2/Ch13-multiple-lab.ipynb"> <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"> </a> <a href="https://mybinder.org/v2/gh/intro-stat-learning/ISLP_labs/v2.2?labpath=Ch13-multiple-lab.ipynb"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid" alt="Binder"></a></p>
-<p>We include our usual imports seen in earlier labs.</p>
-<div id="342b440c" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lab Videos
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The videos for the labs cannot be embedded, here are the links</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=SBeMlJvijbQ">Py Multiple Testing 1 2023</a></li>
+<li><a href="https://www.youtube.com/watch?v=zvw3AY3Q">Py Multiple Testing 2 2023</a></li>
+<li><a href="https://www.youtube.com/watch?v=mMFT44ra">Py Multiple Testing 3 2023</a></li>
+</ul>
+</div>
+</div>
+</div>
+<p>We imports the usual packages</p>
+<div id="6e39b9f2" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="annotated-cell-1" style="background: #f1f3f5;"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> np</span>
-<span id="cb1-2"><span class="im" style="color: #00769E;
+<span id="annotated-cell-1-2"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> pd</span>
-<span id="cb1-3"><span class="im" style="color: #00769E;
+<span id="annotated-cell-1-3"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> plt</span>
-<span id="cb1-4"><span class="im" style="color: #00769E;
+<span id="annotated-cell-1-4"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> statsmodels.api <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> sm</span>
-<span id="cb1-5"><span class="im" style="color: #00769E;
+<span id="annotated-cell-1-5"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> ISLP <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> load_data</span></code></pre></div>
-</div>
-<p>We also collect the new imports needed for this lab.</p>
-<div id="256ed5ed" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+font-style: inherit;">import</span> load_data</span>
+<span id="annotated-cell-1-6"></span>
+<span id="annotated-cell-1-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## Below are the new imports</span></span>
+<span id="annotated-cell-1-8"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> scipy.stats <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb2-2">    (ttest_1samp,</span>
-<span id="cb2-3">     ttest_rel,</span>
-<span id="cb2-4">     ttest_ind,</span>
-<span id="cb2-5">     t <span class="im" style="color: #00769E;
+font-style: inherit;">import</span> (</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1">1</button><span id="annotated-cell-1-9" class="code-annotation-target">    ttest_1samp,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2">2</button><span id="annotated-cell-1-10" class="code-annotation-target">    ttest_rel,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3">3</button><span id="annotated-cell-1-11" class="code-annotation-target">    ttest_ind,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4">4</button><span id="annotated-cell-1-12" class="code-annotation-target">    t <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> t_dbn)</span>
-<span id="cb2-6"><span class="im" style="color: #00769E;
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="5">5</button><span id="annotated-cell-1-13" class="code-annotation-target"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> statsmodels.stats.multicomp <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb2-7">     pairwise_tukeyhsd</span>
-<span id="cb2-8"><span class="im" style="color: #00769E;
+font-style: inherit;">import</span> pairwise_tukeyhsd</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="6">6</button><span id="annotated-cell-1-14" class="code-annotation-target"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> statsmodels.stats.multitest <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">import</span> <span class="op" style="color: #5E5E5E;
+font-style: inherit;">import</span> multipletests <span class="im" style="color: #00769E;
 background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb2-9">     multipletests <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> mult_test</span></code></pre></div>
+font-style: inherit;">as</span> mult_test</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="9" data-code-annotation="1"><strong>one sample t test</strong> from the <code>scipy.stats</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="10" data-code-annotation="2"><strong>two related samples t test</strong> functions from the <code>scipy.stats</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="11" data-code-annotation="3"><strong>independent t test</strong> functions from the <code>scipy.stats</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="12" data-code-annotation="4"><strong>t test</strong> functions from the <code>scipy.stats</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="13" data-code-annotation="5"><a href="https://www.statsmodels.org/dev/generated/statsmodels.stats.multicomp.pairwise_tukeyhsd.html">pairwise Tukey HSD (honestly significant difference) test</a> from <code>statsmodels</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="6">6</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="14" data-code-annotation="6">multipletests from <code>statsmodels</code></span>
+</dd>
+</dl>
+</div>
 </div>
 <section id="review-of-hypothesis-tests" class="level2">
 <h2 class="anchored" data-anchor-id="review-of-hypothesis-tests">Review of Hypothesis Tests</h2>
 <p>We begin by performing some one-sample <img src="https://latex.codecogs.com/png.latex?t">-tests.</p>
 <p>First we create 100 variables, each consisting of 10 observations. The first 50 variables have mean <img src="https://latex.codecogs.com/png.latex?0.5"> and variance <img src="https://latex.codecogs.com/png.latex?1">, while the others have mean <img src="https://latex.codecogs.com/png.latex?0"> and variance <img src="https://latex.codecogs.com/png.latex?1">.</p>
-<div id="a3ec16d8" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">rng <span class="op" style="color: #5E5E5E;
+<div id="4f0c4696" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">rng <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.random.default_rng(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">12</span>)</span>
-<span id="cb3-2">X <span class="op" style="color: #5E5E5E;
+<span id="cb1-2">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> rng.standard_normal((<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>))</span>
-<span id="cb3-3">true_mean <span class="op" style="color: #5E5E5E;
+<span id="cb1-3">true_mean <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="fl" style="color: #AD0000;
 background-color: null;
@@ -460,35 +501,35 @@ background-color: null;
 font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>)</span>
-<span id="cb3-4">X <span class="op" style="color: #5E5E5E;
+<span id="cb1-4">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+=</span> true_mean[<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,:]</span></code></pre></div>
 </div>
 <p>To begin, we use <code>ttest_1samp()</code> from the <code>scipy.stats</code> module to test <img src="https://latex.codecogs.com/png.latex?H_%7B0%7D:%20%5Cmu_1=0">, the null hypothesis that the first variable has mean zero.</p>
-<div id="9cc0b1ea" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">result <span class="op" style="color: #5E5E5E;
+<div id="d3b289c1" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">result <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_1samp(X[:,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>)</span>
-<span id="cb4-2">result.pvalue</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<span id="cb2-2">result.pvalue</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="93">
 <pre><code>0.9307442156164141</code></pre>
 </div>
 </div>
 <p>The <img src="https://latex.codecogs.com/png.latex?p">-value comes out to 0.931, which is not low enough to reject the null hypothesis at level <img src="https://latex.codecogs.com/png.latex?%5Calpha=0.05">. In this case, <img src="https://latex.codecogs.com/png.latex?%5Cmu_1=0.5">, so the null hypothesis is false. Therefore, we have made a Type II error by failing to reject the null hypothesis when the null hypothesis is false.</p>
 <p>We now test <img src="https://latex.codecogs.com/png.latex?H_%7B0,j%7D:%20%5Cmu_j=0"> for <img src="https://latex.codecogs.com/png.latex?j=1,%5Cldots,100">. We compute the 100 <img src="https://latex.codecogs.com/png.latex?p">-values, and then construct a vector recording whether the <img src="https://latex.codecogs.com/png.latex?j">th <img src="https://latex.codecogs.com/png.latex?p">-value is less than or equal to 0.05, in which case we reject <img src="https://latex.codecogs.com/png.latex?H_%7B0j%7D">, or greater than 0.05, in which case we do not reject <img src="https://latex.codecogs.com/png.latex?H_%7B0j%7D">, for <img src="https://latex.codecogs.com/png.latex?j=1,%5Cldots,100">.</p>
-<div id="1b4f4608" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">p_values <span class="op" style="color: #5E5E5E;
+<div id="a1739105" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">p_values <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>)</span>
-<span id="cb6-2"><span class="cf" style="color: #003B4F;
+<span id="cb4-2"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -499,64 +540,64 @@ background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>):</span>
-<span id="cb6-3">   p_values[i] <span class="op" style="color: #5E5E5E;
+<span id="cb4-3">   p_values[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_1samp(X[:,i], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>).pvalue</span>
-<span id="cb6-4">decision <span class="op" style="color: #5E5E5E;
+<span id="cb4-4">decision <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.cut(p_values,</span>
-<span id="cb6-5">                  [<span class="dv" style="color: #AD0000;
+<span id="cb4-5">                  [<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.05</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>],</span>
-<span id="cb6-6">                  labels<span class="op" style="color: #5E5E5E;
+<span id="cb4-6">                  labels<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Reject H0'</span>,</span>
-<span id="cb6-7">                          <span class="st" style="color: #20794D;
+<span id="cb4-7">                          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Do not reject H0'</span>])</span>
-<span id="cb6-8">truth <span class="op" style="color: #5E5E5E;
+<span id="cb4-8">truth <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.Categorical(true_mean <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb6-9">                       categories<span class="op" style="color: #5E5E5E;
+<span id="cb4-9">                       categories<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>, <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span>],</span>
-<span id="cb6-10">                       ordered<span class="op" style="color: #5E5E5E;
+<span id="cb4-10">                       ordered<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span></code></pre></div>
 </div>
 <p>Since this is a simulated data set, we can create a <img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%202"> table similar to Table~.</p>
-<div id="45cb8baa" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">pd.crosstab(decision,</span>
-<span id="cb7-2">            truth,</span>
-<span id="cb7-3">     rownames<span class="op" style="color: #5E5E5E;
+<div id="8d482636" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">pd.crosstab(decision,</span>
+<span id="cb5-2">            truth,</span>
+<span id="cb5-3">     rownames<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Decision'</span>],</span>
-<span id="cb7-4">     colnames<span class="op" style="color: #5E5E5E;
+<span id="cb5-4">     colnames<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'H0'</span>])</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="95">
 <div>
 
 
@@ -592,8 +633,8 @@ font-style: inherit;">'H0'</span>])</span></code></pre></div>
 </div>
 <p>Therefore, at level <img src="https://latex.codecogs.com/png.latex?%5Calpha=0.05">, we reject 15 of the 50 false null hypotheses, and we incorrectly reject 5 of the true null hypotheses. Using the notation from Section~, we have <img src="https://latex.codecogs.com/png.latex?V=5">, <img src="https://latex.codecogs.com/png.latex?S=15">, <img src="https://latex.codecogs.com/png.latex?U=45"> and <img src="https://latex.codecogs.com/png.latex?W=35">. We have set <img src="https://latex.codecogs.com/png.latex?%5Calpha=0.05">, which means that we expect to reject around 5% of the true null hypotheses. This is in line with the <img src="https://latex.codecogs.com/png.latex?2%20%5Ctimes%202"> table above, which indicates that we rejected <img src="https://latex.codecogs.com/png.latex?V=5"> of the <img src="https://latex.codecogs.com/png.latex?50"> true null hypotheses.</p>
 <p>In the simulation above, for the false null hypotheses, the ratio of the mean to the standard deviation was only <img src="https://latex.codecogs.com/png.latex?0.5/1%20=%200.5">. This amounts to quite a weak signal, and it resulted in a high number of Type II errors. Let’s instead simulate data with a stronger signal, so that the ratio of the mean to the standard deviation for the false null hypotheses equals <img src="https://latex.codecogs.com/png.latex?1">. We make only 10 Type II errors.</p>
-<div id="e780608a" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">true_mean <span class="op" style="color: #5E5E5E;
+<div id="bb351242" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">true_mean <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -610,19 +651,19 @@ background-color: null;
 font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">50</span>)</span>
-<span id="cb8-2">X <span class="op" style="color: #5E5E5E;
+<span id="cb6-2">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> rng.standard_normal((<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>))</span>
-<span id="cb8-3">X <span class="op" style="color: #5E5E5E;
+<span id="cb6-3">X <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+=</span> true_mean[<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">None</span>,:]</span>
-<span id="cb8-4"><span class="cf" style="color: #003B4F;
+<span id="cb6-4"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -633,61 +674,61 @@ background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>):</span>
-<span id="cb8-5">   p_values[i] <span class="op" style="color: #5E5E5E;
+<span id="cb6-5">   p_values[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_1samp(X[:,i], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>).pvalue</span>
-<span id="cb8-6">decision <span class="op" style="color: #5E5E5E;
+<span id="cb6-6">decision <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.cut(p_values,</span>
-<span id="cb8-7">                  [<span class="dv" style="color: #AD0000;
+<span id="cb6-7">                  [<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.05</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>],</span>
-<span id="cb8-8">                  labels<span class="op" style="color: #5E5E5E;
+<span id="cb6-8">                  labels<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Reject H0'</span>,</span>
-<span id="cb8-9">                          <span class="st" style="color: #20794D;
+<span id="cb6-9">                          <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Do not reject H0'</span>])</span>
-<span id="cb8-10">truth <span class="op" style="color: #5E5E5E;
+<span id="cb6-10">truth <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.Categorical(true_mean <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>,</span>
-<span id="cb8-11">                       categories<span class="op" style="color: #5E5E5E;
+<span id="cb6-11">                       categories<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>, <span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span>],</span>
-<span id="cb8-12">                       ordered<span class="op" style="color: #5E5E5E;
+<span id="cb6-12">                       ordered<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span>
-<span id="cb8-13">pd.crosstab(decision,</span>
-<span id="cb8-14">            truth,</span>
-<span id="cb8-15">            rownames<span class="op" style="color: #5E5E5E;
+<span id="cb6-13">pd.crosstab(decision,</span>
+<span id="cb6-14">            truth,</span>
+<span id="cb6-15">            rownames<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Decision'</span>],</span>
-<span id="cb8-16">            colnames<span class="op" style="color: #5E5E5E;
+<span id="cb6-16">            colnames<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'H0'</span>])</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="96">
 <div>
 
 
@@ -725,19 +766,19 @@ font-style: inherit;">'H0'</span>])</span></code></pre></div>
 <section id="family-wise-error-rate" class="level2">
 <h2 class="anchored" data-anchor-id="family-wise-error-rate">Family-Wise Error Rate</h2>
 <p>Recall from that if the null hypothesis is true for each of <img src="https://latex.codecogs.com/png.latex?m"> independent hypothesis tests, then the FWER is equal to <img src="https://latex.codecogs.com/png.latex?1-(1-%5Calpha)%5Em">. We can use this expression to compute the FWER for <img src="https://latex.codecogs.com/png.latex?m=1,%5Cldots,%20500"> and <img src="https://latex.codecogs.com/png.latex?%5Calpha=0.05">, <img src="https://latex.codecogs.com/png.latex?0.01">, and <img src="https://latex.codecogs.com/png.latex?0.001">. We plot the FWER for these values of <img src="https://latex.codecogs.com/png.latex?%5Calpha"> in order to reproduce Figure~.</p>
-<div id="a71f5fa2" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">m <span class="op" style="color: #5E5E5E;
+<div id="e7ab42f6" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">m <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.linspace(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">501</span>)</span>
-<span id="cb9-2">fig, ax <span class="op" style="color: #5E5E5E;
+<span id="cb7-2">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots()</span>
-<span id="cb9-3">[ax.plot(m,</span>
-<span id="cb9-4">         <span class="dv" style="color: #AD0000;
+<span id="cb7-3">[ax.plot(m,</span>
+<span id="cb7-4">         <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -748,7 +789,7 @@ background-color: null;
 font-style: inherit;">-</span> alpha)<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">**</span>m,</span>
-<span id="cb9-5">         label<span class="op" style="color: #5E5E5E;
+<span id="cb7-5">         label<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="vs" style="color: #20794D;
 background-color: null;
@@ -761,7 +802,7 @@ background-color: null;
 font-style: inherit;">%</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">str</span>(alpha))</span>
-<span id="cb9-6">         <span class="cf" style="color: #003B4F;
+<span id="cb7-6">         <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> alpha <span class="kw" style="color: #003B4F;
@@ -774,17 +815,17 @@ background-color: null;
 font-style: inherit;">0.01</span>, <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.001</span>]]</span>
-<span id="cb9-7">ax.set_xscale(<span class="st" style="color: #20794D;
+<span id="cb7-7">ax.set_xscale(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log'</span>)</span>
-<span id="cb9-8">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb7-8">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Number of Hypotheses'</span>)</span>
-<span id="cb9-9">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb7-9">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Family-Wise Error Rate'</span>)</span>
-<span id="cb9-10">ax.legend()</span>
-<span id="cb9-11">ax.axhline(<span class="fl" style="color: #AD0000;
+<span id="cb7-10">ax.legend()</span>
+<span id="cb7-11">ax.axhline(<span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.05</span>, c<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -800,7 +841,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch13-multiple-lab_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-9-output-1.png" width="589" height="431" class="figure-img"></a></p>
+<p><a href="Ch13-multiple-lab_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-8-output-1.png" width="589" height="431" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -808,23 +849,23 @@ font-style: inherit;">;</span></span></code></pre></div>
 <p>As discussed previously, even for moderate values of <img src="https://latex.codecogs.com/png.latex?m"> such as <img src="https://latex.codecogs.com/png.latex?50">, the FWER exceeds <img src="https://latex.codecogs.com/png.latex?0.05"> unless <img src="https://latex.codecogs.com/png.latex?%5Calpha"> is set to a very low value, such as <img src="https://latex.codecogs.com/png.latex?0.001">. Of course, the problem with setting <img src="https://latex.codecogs.com/png.latex?%5Calpha"> to such a low value is that we are likely to make a number of Type II errors: in other words, our power is very low.</p>
 <p>We now conduct a one-sample <img src="https://latex.codecogs.com/png.latex?t">-test for each of the first five managers in the<br>
 <code>Fund</code> dataset, in order to test the null hypothesis that the <img src="https://latex.codecogs.com/png.latex?j">th fund manager’s mean return equals zero, <img src="https://latex.codecogs.com/png.latex?H_%7B0,j%7D:%20%5Cmu_j=0">.</p>
-<div id="ccb37ec2" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">Fund <span class="op" style="color: #5E5E5E;
+<div id="f891d32e" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">Fund <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> load_data(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Fund'</span>)</span>
-<span id="cb10-2">fund_mini <span class="op" style="color: #5E5E5E;
+<span id="cb8-2">fund_mini <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> Fund.iloc[:,:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>]</span>
-<span id="cb10-3">fund_mini_pvals <span class="op" style="color: #5E5E5E;
+<span id="cb8-3">fund_mini_pvals <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)</span>
-<span id="cb10-4"><span class="cf" style="color: #003B4F;
+<span id="cb8-4"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> i <span class="kw" style="color: #003B4F;
@@ -835,21 +876,21 @@ background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>):</span>
-<span id="cb10-5">    fund_mini_pvals[i] <span class="op" style="color: #5E5E5E;
+<span id="cb8-5">    fund_mini_pvals[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_1samp(fund_mini.iloc[:,i], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>).pvalue</span>
-<span id="cb10-6">fund_mini_pvals</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<span id="cb8-6">fund_mini_pvals</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="98">
 <pre><code>array([0.00620236, 0.91827115, 0.01160098, 0.6005396 , 0.75578151])</code></pre>
 </div>
 </div>
 <p>The <img src="https://latex.codecogs.com/png.latex?p">-values are low for Managers One and Three, and high for the other three managers. However, we cannot simply reject <img src="https://latex.codecogs.com/png.latex?H_%7B0,1%7D"> and <img src="https://latex.codecogs.com/png.latex?H_%7B0,3%7D">, since this would fail to account for the multiple testing that we have performed. Instead, we will conduct Bonferroni’s method and Holm’s method to control the FWER.</p>
 <p>To do this, we use the <code>multipletests()</code> function from the <code>statsmodels</code> module (abbreviated to <code>mult_test()</code>). Given the <img src="https://latex.codecogs.com/png.latex?p">-values, for methods like Holm and Bonferroni the function outputs adjusted <img src="https://latex.codecogs.com/png.latex?p">-values, which can be thought of as a new set of <img src="https://latex.codecogs.com/png.latex?p">-values that have been corrected for multiple testing. If the adjusted <img src="https://latex.codecogs.com/png.latex?p">-value for a given hypothesis is less than or equal to <img src="https://latex.codecogs.com/png.latex?%5Calpha">, then that hypothesis can be rejected while maintaining a FWER of no more than <img src="https://latex.codecogs.com/png.latex?%5Calpha">. In other words, for such methods, the adjusted <img src="https://latex.codecogs.com/png.latex?p">-values resulting from the <code>multipletests()</code> function can simply be compared to the desired FWER in order to determine whether or not to reject each hypothesis. We will later see that we can use the same function to control FDR as well.</p>
 <p>The <code>mult_test()</code> function takes <img src="https://latex.codecogs.com/png.latex?p">-values and a <code>method</code> argument, as well as an optional <code>alpha</code> argument. It returns the decisions (<code>reject</code> below) as well as the adjusted <img src="https://latex.codecogs.com/png.latex?p">-values (<code>bonf</code>).</p>
-<div id="36011468" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">reject, bonf <span class="op" style="color: #5E5E5E;
+<div id="28b05fa4" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">reject, bonf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mult_test(fund_mini_pvals, method <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -858,29 +899,29 @@ background-color: null;
 font-style: inherit;">"bonferroni"</span>)[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]</span>
-<span id="cb12-2">reject</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<span id="cb10-2">reject</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="99">
 <pre><code>array([ True, False, False, False, False])</code></pre>
 </div>
 </div>
 <p>The <img src="https://latex.codecogs.com/png.latex?p">-values <code>bonf</code> are simply the <code>fund_mini_pvalues</code> multiplied by 5 and truncated to be less than or equal to 1.</p>
-<div id="7182a47f" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">bonf, np.minimum(fund_mini_pvals <span class="op" style="color: #5E5E5E;
+<div id="35929705" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">bonf, np.minimum(fund_mini_pvals <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="100">
 <pre><code>(array([0.03101178, 1.        , 0.05800491, 1.        , 1.        ]),
  array([0.03101178, 1.        , 0.05800491, 1.        , 1.        ]))</code></pre>
 </div>
 </div>
 <p>Therefore, using Bonferroni’s method, we are able to reject the null hypothesis only for Manager One while controlling FWER at <img src="https://latex.codecogs.com/png.latex?0.05">.</p>
 <p>By contrast, using Holm’s method, the adjusted <img src="https://latex.codecogs.com/png.latex?p">-values indicate that we can reject the null hypotheses for Managers One and Three at a FWER of <img src="https://latex.codecogs.com/png.latex?0.05">.</p>
-<div id="6ce825bf" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">mult_test(fund_mini_pvals, method <span class="op" style="color: #5E5E5E;
+<div id="09b23385" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">mult_test(fund_mini_pvals, method <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
@@ -891,15 +932,15 @@ background-color: null;
 font-style: inherit;">0.05</span>)[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="101">
 <pre><code>(array([ True, False,  True, False, False]),
  array([0.03101178, 1.        , 0.04640393, 1.        , 1.        ]))</code></pre>
 </div>
 </div>
 <p>As discussed previously, Manager One seems to perform particularly well, whereas Manager Two has poor performance.</p>
-<div id="eb69d8d7" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">fund_mini.mean()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div id="05ea7c7e" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">fund_mini.mean()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="102">
 <pre><code>Manager1    3.0
 Manager2   -0.1
 Manager3    2.8
@@ -909,21 +950,21 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Is there evidence of a meaningful difference in performance between these two managers? We can check this by performing a paired <img src="https://latex.codecogs.com/png.latex?t">-test using the <code>ttest_rel()</code> function from <code>scipy.stats</code>:</p>
-<div id="1973ca0e" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">ttest_rel(fund_mini[<span class="st" style="color: #20794D;
+<div id="58ec4359" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">ttest_rel(fund_mini[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Manager1'</span>],</span>
-<span id="cb20-2">          fund_mini[<span class="st" style="color: #20794D;
+<span id="cb18-2">          fund_mini[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Manager2'</span>]).pvalue</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="103">
 <pre><code>0.038391072368079586</code></pre>
 </div>
 </div>
 <p>The test results in a <img src="https://latex.codecogs.com/png.latex?p">-value of 0.038, suggesting a statistically significant difference.</p>
 <p>However, we decided to perform this test only after examining the data and noting that Managers One and Two had the highest and lowest mean performances. In a sense, this means that we have implicitly performed <img src="https://latex.codecogs.com/png.latex?%7B5%20%5Cchoose%202%7D%20=%205(5-1)/2=10"> hypothesis tests, rather than just one, as discussed in Section~. Hence, we use the <code>pairwise_tukeyhsd()</code> function from <code>statsmodels.stats.multicomp</code> to apply Tukey’s method in order to adjust for multiple testing. This function takes as input a fitted <em>ANOVA</em> regression model, which is essentially just a linear regression in which all of the predictors are qualitative. In this case, the response consists of the monthly excess returns achieved by each manager, and the predictor indicates the manager to which each return corresponds.</p>
-<div id="ab35e32b" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">returns <span class="op" style="color: #5E5E5E;
+<div id="74bfe0ca" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">returns <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.hstack([fund_mini.iloc[:,i] <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -936,7 +977,7 @@ background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)])</span>
-<span id="cb22-2">managers <span class="op" style="color: #5E5E5E;
+<span id="cb20-2">managers <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.hstack([[i<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -957,10 +998,10 @@ background-color: null;
 font-style: inherit;">range</span>(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)])</span>
-<span id="cb22-3">tukey <span class="op" style="color: #5E5E5E;
+<span id="cb20-3">tukey <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pairwise_tukeyhsd(returns, managers)</span>
-<span id="cb22-4"><span class="bu" style="color: null;
+<span id="cb20-4"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(tukey.summary())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -982,8 +1023,8 @@ group1 group2 meandiff p-adj   lower  upper  reject
 </div>
 </div>
 <p>The <code>pairwise_tukeyhsd()</code> function provides confidence intervals for the difference between each pair of managers (<code>lower</code> and <code>upper</code>), as well as a <img src="https://latex.codecogs.com/png.latex?p">-value. All of these quantities have been adjusted for multiple testing. Notice that the <img src="https://latex.codecogs.com/png.latex?p">-value for the difference between Managers One and Two has increased from <img src="https://latex.codecogs.com/png.latex?0.038"> to <img src="https://latex.codecogs.com/png.latex?0.186">, so there is no longer clear evidence of a difference between the managers’ performances. We can plot the confidence intervals for the pairwise comparisons using the <code>plot_simultaneous()</code> method of <code>tukey</code>. Any pair of intervals that don’t overlap indicates a significant difference at the nominal level of 0.05. In this case, no differences are considered significant as reported in the table above.</p>
-<div id="b67cf01b" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="bb6184e2" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -992,7 +1033,7 @@ background-color: null;
 font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb24-2">tukey.plot_simultaneous(ax<span class="op" style="color: #5E5E5E;
+<span id="cb22-2">tukey.plot_simultaneous(ax<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ax)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1000,7 +1041,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch13-multiple-lab_files/figure-html/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-17-output-1.png" width="781" height="505" class="figure-img"></a></p>
+<p><a href="Ch13-multiple-lab_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-16-output-1.png" width="781" height="505" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1009,13 +1050,13 @@ font-style: inherit;">;</span></span></code></pre></div>
 <section id="false-discovery-rate" class="level2">
 <h2 class="anchored" data-anchor-id="false-discovery-rate">False Discovery Rate</h2>
 <p>Now we perform hypothesis tests for all 2,000 fund managers in the <code>Fund</code> dataset. We perform a one-sample <img src="https://latex.codecogs.com/png.latex?t">-test of <img src="https://latex.codecogs.com/png.latex?H_%7B0,j%7D:%20%5Cmu_j=0">, which states that the <img src="https://latex.codecogs.com/png.latex?j">th fund manager’s mean return is zero.</p>
-<div id="564d4c14" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">fund_pvalues <span class="op" style="color: #5E5E5E;
+<div id="6c0d07b5" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">fund_pvalues <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2000</span>)</span>
-<span id="cb25-2"><span class="cf" style="color: #003B4F;
+<span id="cb23-2"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> i, manager <span class="kw" style="color: #003B4F;
@@ -1024,15 +1065,15 @@ font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">enumerate</span>(Fund.columns):</span>
-<span id="cb25-3">    fund_pvalues[i] <span class="op" style="color: #5E5E5E;
+<span id="cb23-3">    fund_pvalues[i] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_1samp(Fund[manager], <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>).pvalue</span></code></pre></div>
 </div>
 <p>There are far too many managers to consider trying to control the FWER. Instead, we focus on controlling the FDR: that is, the expected fraction of rejected null hypotheses that are actually false positives. The <code>multipletests()</code> function (abbreviated <code>mult_test()</code>) can be used to carry out the Benjamini–Hochberg procedure.</p>
-<div id="36fe317a" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">fund_qvalues <span class="op" style="color: #5E5E5E;
+<div id="720b7157" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">fund_qvalues <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> mult_test(fund_pvalues, method <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1041,32 +1082,32 @@ background-color: null;
 font-style: inherit;">"fdr_bh"</span>)[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>]</span>
-<span id="cb26-2">fund_qvalues[:<span class="dv" style="color: #AD0000;
+<span id="cb24-2">fund_qvalues[:<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>]</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="107">
 <pre><code>array([0.08988921, 0.991491  , 0.12211561, 0.92342997, 0.95603587,
        0.07513802, 0.0767015 , 0.07513802, 0.07513802, 0.07513802])</code></pre>
 </div>
 </div>
 <p>The <em>q-values</em> output by the Benjamini–Hochberg procedure can be interpreted as the smallest FDR threshold at which we would reject a particular null hypothesis. For instance, a <img src="https://latex.codecogs.com/png.latex?q">-value of <img src="https://latex.codecogs.com/png.latex?0.1"> indicates that we can reject the corresponding null hypothesis at an FDR of 10% or greater, but that we cannot reject the null hypothesis at an FDR below 10%.</p>
 <p>If we control the FDR at 10%, then for how many of the fund managers can we reject <img src="https://latex.codecogs.com/png.latex?H_%7B0,j%7D:%20%5Cmu_j=0">?</p>
-<div id="eca546b9" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">(fund_qvalues <span class="op" style="color: #5E5E5E;
+<div id="a1fa2b34" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">(fund_qvalues <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.1</span>).<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="108">
 <pre><code>146</code></pre>
 </div>
 </div>
 <p>We find that 146 of the 2,000 fund managers have a <img src="https://latex.codecogs.com/png.latex?q">-value below 0.1; therefore, we are able to conclude that 146 of the fund managers beat the market at an FDR of 10%. Only about 15 (10% of 146) of these fund managers are likely to be false discoveries.</p>
 <p>By contrast, if we had instead used Bonferroni’s method to control the FWER at level <img src="https://latex.codecogs.com/png.latex?%5Calpha=0.1">, then we would have failed to reject any null hypotheses!</p>
-<div id="e0d86d0d" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">(fund_pvalues <span class="op" style="color: #5E5E5E;
+<div id="e799b0aa" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">(fund_pvalues <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
@@ -1077,26 +1118,26 @@ background-color: null;
 font-style: inherit;">2000</span>).<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="109">
 <pre><code>0</code></pre>
 </div>
 </div>
 <p>Figure~ displays the ordered <img src="https://latex.codecogs.com/png.latex?p">-values, <img src="https://latex.codecogs.com/png.latex?p_%7B(1)%7D%20%5Cleq%20p_%7B(2)%7D%20%5Cleq%20%5Ccdots%20%5Cleq%20p_%7B(2000)%7D">, for the <code>Fund</code> dataset, as well as the threshold for rejection by the Benjamini–Hochberg procedure. Recall that the Benjamini–Hochberg procedure identifies the largest <img src="https://latex.codecogs.com/png.latex?p">-value such that <img src="https://latex.codecogs.com/png.latex?p_%7B(j)%7D%3Cqj/m">, and rejects all hypotheses for which the <img src="https://latex.codecogs.com/png.latex?p">-value is less than or equal to <img src="https://latex.codecogs.com/png.latex?p_%7B(j)%7D">. In the code below, we implement the Benjamini–Hochberg procedure ourselves, in order to illustrate how it works. We first order the <img src="https://latex.codecogs.com/png.latex?p">-values. We then identify all <img src="https://latex.codecogs.com/png.latex?p">-values that satisfy <img src="https://latex.codecogs.com/png.latex?p_%7B(j)%7D%3Cqj/m"> (<code>sorted_set_</code>). Finally, <code>selected_</code> is a boolean array indicating which <img src="https://latex.codecogs.com/png.latex?p">-values are less than or equal to the largest <img src="https://latex.codecogs.com/png.latex?p">-value in <code>sorted_[sorted_set_]</code>. Therefore, <code>selected_</code> indexes the <img src="https://latex.codecogs.com/png.latex?p">-values rejected by the Benjamini–Hochberg procedure.</p>
-<div id="557e3c26" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">sorted_ <span class="op" style="color: #5E5E5E;
+<div id="77713c7a" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">sorted_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.sort(fund_pvalues)</span>
-<span id="cb32-2">m <span class="op" style="color: #5E5E5E;
+<span id="cb30-2">m <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> fund_pvalues.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb32-3">q <span class="op" style="color: #5E5E5E;
+<span id="cb30-3">q <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.1</span></span>
-<span id="cb32-4">sorted_set_ <span class="op" style="color: #5E5E5E;
+<span id="cb30-4">sorted_set_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.where(sorted_ <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1109,7 +1150,7 @@ background-color: null;
 font-style: inherit;">/</span> m)[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb32-5"><span class="cf" style="color: #003B4F;
+<span id="cb30-5"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> sorted_set_.shape[<span class="dv" style="color: #AD0000;
@@ -1119,35 +1160,35 @@ background-color: null;
 font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>:</span>
-<span id="cb32-6">    selected_ <span class="op" style="color: #5E5E5E;
+<span id="cb30-6">    selected_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> fund_pvalues <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> sorted_[sorted_set_].<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">max</span>()</span>
-<span id="cb32-7">    sorted_set_ <span class="op" style="color: #5E5E5E;
+<span id="cb30-7">    sorted_set_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.arange(sorted_set_.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">max</span>())</span>
-<span id="cb32-8"><span class="cf" style="color: #003B4F;
+<span id="cb30-8"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">else</span>:</span>
-<span id="cb32-9">    selected_ <span class="op" style="color: #5E5E5E;
+<span id="cb30-9">    selected_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> []</span>
-<span id="cb32-10">    sorted_set_ <span class="op" style="color: #5E5E5E;
+<span id="cb30-10">    sorted_set_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> []</span></code></pre></div>
 </div>
 <p>We now reproduce the middle panel of Figure~.</p>
-<div id="2e68113a" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="cecdeb50" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots()</span>
-<span id="cb33-2">ax.scatter(np.arange(<span class="dv" style="color: #AD0000;
+<span id="cb31-2">ax.scatter(np.arange(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, sorted_.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1156,24 +1197,24 @@ background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>,</span>
-<span id="cb33-3">           sorted_, s<span class="op" style="color: #5E5E5E;
+<span id="cb31-3">           sorted_, s<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10</span>)</span>
-<span id="cb33-4">ax.set_yscale(<span class="st" style="color: #20794D;
+<span id="cb31-4">ax.set_yscale(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log'</span>)</span>
-<span id="cb33-5">ax.set_xscale(<span class="st" style="color: #20794D;
+<span id="cb31-5">ax.set_xscale(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'log'</span>)</span>
-<span id="cb33-6">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb31-6">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'P-Value'</span>)</span>
-<span id="cb33-7">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb31-7">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Index'</span>)</span>
-<span id="cb33-8">ax.scatter(sorted_set_<span class="op" style="color: #5E5E5E;
+<span id="cb31-8">ax.scatter(sorted_set_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1186,7 +1227,7 @@ background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">20</span>)</span>
-<span id="cb33-9">ax.axline((<span class="dv" style="color: #AD0000;
+<span id="cb31-9">ax.axline((<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1212,7 +1253,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch13-multiple-lab_files/figure-html/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-23-output-1.png" width="599" height="431" class="figure-img"></a></p>
+<p><a href="Ch13-multiple-lab_files/figure-html/cell-22-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-22-output-1.png" width="599" height="431" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1221,20 +1262,20 @@ font-style: inherit;">;</span></span></code></pre></div>
 <section id="a-re-sampling-approach" class="level2">
 <h2 class="anchored" data-anchor-id="a-re-sampling-approach">A Re-Sampling Approach</h2>
 <p>Here, we implement the re-sampling approach to hypothesis testing using the <code>Khan</code> dataset, which we investigated in Section~. First, we merge the training and testing data, which results in observations on 83 patients for 2,308 genes.</p>
-<div id="b4f84efa" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">Khan <span class="op" style="color: #5E5E5E;
+<div id="fe29137a" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">Khan <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> load_data(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Khan'</span>)      </span>
-<span id="cb34-2">D <span class="op" style="color: #5E5E5E;
+<span id="cb32-2">D <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> pd.concat([Khan[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'xtrain'</span>], Khan[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'xtest'</span>]])</span>
-<span id="cb34-3">D[<span class="st" style="color: #20794D;
+<span id="cb32-3">D[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Y'</span>] <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1243,10 +1284,10 @@ background-color: null;
 font-style: inherit;">'ytrain'</span>], Khan[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'ytest'</span>]])</span>
-<span id="cb34-4">D[<span class="st" style="color: #20794D;
+<span id="cb32-4">D[<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Y'</span>].value_counts()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="112">
 <pre><code>Y
 2    29
 4    25
@@ -1257,8 +1298,8 @@ Name: count, dtype: int64</code></pre>
 </div>
 <p>There are four classes of cancer. For each gene, we compare the mean expression in the second class (rhabdomyosarcoma) to the mean expression in the fourth class (Burkitt’s lymphoma). Performing a standard two-sample <img src="https://latex.codecogs.com/png.latex?t">-test<br>
 using <code>ttest_ind()</code> from <code>scipy.stats</code> on the <img src="https://latex.codecogs.com/png.latex?11">th gene produces a test-statistic of -2.09 and an associated <img src="https://latex.codecogs.com/png.latex?p">-value of 0.0412, suggesting modest evidence of a difference in mean expression levels between the two cancer types.</p>
-<div id="c02891f0" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1">D2 <span class="op" style="color: #5E5E5E;
+<div id="16258f8a" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">D2 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> D[<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1270,7 +1311,7 @@ background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>]</span>
-<span id="cb36-2">D4 <span class="op" style="color: #5E5E5E;
+<span id="cb34-2">D4 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> D[<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1282,47 +1323,47 @@ background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">4</span>]</span>
-<span id="cb36-3">gene_11 <span class="op" style="color: #5E5E5E;
+<span id="cb34-3">gene_11 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'G0011'</span></span>
-<span id="cb36-4">observedT, pvalue <span class="op" style="color: #5E5E5E;
+<span id="cb34-4">observedT, pvalue <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_ind(D2[gene_11],</span>
-<span id="cb36-5">                              D4[gene_11],</span>
-<span id="cb36-6">                              equal_var<span class="op" style="color: #5E5E5E;
+<span id="cb34-5">                              D4[gene_11],</span>
+<span id="cb34-6">                              equal_var<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span>
-<span id="cb36-7">observedT, pvalue</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<span id="cb34-7">observedT, pvalue</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="113">
 <pre><code>(-2.0936330736768185, 0.04118643782678394)</code></pre>
 </div>
 </div>
 <p>However, this <img src="https://latex.codecogs.com/png.latex?p">-value relies on the assumption that under the null hypothesis of no difference between the two groups, the test statistic follows a <img src="https://latex.codecogs.com/png.latex?t">-distribution with <img src="https://latex.codecogs.com/png.latex?29+25-2=52"> degrees of freedom. Instead of using this theoretical null distribution, we can randomly split the 54 patients into two groups of 29 and 25, and compute a new test statistic. Under the null hypothesis of no difference between the groups, this new test statistic should have the same distribution as our original one. Repeating this process 10,000 times allows us to approximate the null distribution of the test statistic. We compute the fraction of the time that our observed test statistic exceeds the test statistics obtained via re-sampling.</p>
-<div id="625d6b11" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1">B <span class="op" style="color: #5E5E5E;
+<div id="a41a6870" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1">B <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10000</span></span>
-<span id="cb38-2">Tnull <span class="op" style="color: #5E5E5E;
+<span id="cb36-2">Tnull <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty(B)</span>
-<span id="cb38-3">D_ <span class="op" style="color: #5E5E5E;
+<span id="cb36-3">D_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.hstack([D2[gene_11], D4[gene_11]])</span>
-<span id="cb38-4">n_ <span class="op" style="color: #5E5E5E;
+<span id="cb36-4">n_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> D2[gene_11].shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb38-5">D_null <span class="op" style="color: #5E5E5E;
+<span id="cb36-5">D_null <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> D_.copy()</span>
-<span id="cb38-6"><span class="cf" style="color: #003B4F;
+<span id="cb36-6"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
@@ -1331,33 +1372,33 @@ font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(B):</span>
-<span id="cb38-7">    rng.shuffle(D_null)</span>
-<span id="cb38-8">    ttest_ <span class="op" style="color: #5E5E5E;
+<span id="cb36-7">    rng.shuffle(D_null)</span>
+<span id="cb36-8">    ttest_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_ind(D_null[:n_],</span>
-<span id="cb38-9">                       D_null[n_:],</span>
-<span id="cb38-10">                       equal_var<span class="op" style="color: #5E5E5E;
+<span id="cb36-9">                       D_null[n_:],</span>
+<span id="cb36-10">                       equal_var<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span>
-<span id="cb38-11">    Tnull[b] <span class="op" style="color: #5E5E5E;
+<span id="cb36-11">    Tnull[b] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_.statistic</span>
-<span id="cb38-12">(np.<span class="bu" style="color: null;
+<span id="cb36-12">(np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">abs</span>(Tnull) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">abs</span>(observedT)).mean()</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="25">
+<div class="cell-output cell-output-display" data-execution_count="114">
 <pre><code>0.9602</code></pre>
 </div>
 </div>
 <p>This fraction, 0.0398, is our re-sampling-based <img src="https://latex.codecogs.com/png.latex?p">-value. It is almost identical to the <img src="https://latex.codecogs.com/png.latex?p">-value of 0.0412 obtained using the theoretical null distribution. We can plot a histogram of the re-sampling-based test statistics in order to reproduce Figure~.</p>
-<div id="337d2ce1" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="094aaff0" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots(figsize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1366,28 +1407,28 @@ background-color: null;
 font-style: inherit;">8</span>,<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">8</span>))</span>
-<span id="cb40-2">ax.hist(Tnull,</span>
-<span id="cb40-3">        bins<span class="op" style="color: #5E5E5E;
+<span id="cb38-2">ax.hist(Tnull,</span>
+<span id="cb38-3">        bins<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>,</span>
-<span id="cb40-4">        density<span class="op" style="color: #5E5E5E;
+<span id="cb38-4">        density<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>,</span>
-<span id="cb40-5">        facecolor<span class="op" style="color: #5E5E5E;
+<span id="cb38-5">        facecolor<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'y'</span>,</span>
-<span id="cb40-6">        label<span class="op" style="color: #5E5E5E;
+<span id="cb38-6">        label<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Null'</span>)</span>
-<span id="cb40-7">xval <span class="op" style="color: #5E5E5E;
+<span id="cb38-7">xval <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.linspace(<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1398,32 +1439,32 @@ background-color: null;
 font-style: inherit;">4.2</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1001</span>)</span>
-<span id="cb40-8">ax.plot(xval,</span>
-<span id="cb40-9">        t_dbn.pdf(xval, D_.shape[<span class="dv" style="color: #AD0000;
+<span id="cb38-8">ax.plot(xval,</span>
+<span id="cb38-9">        t_dbn.pdf(xval, D_.shape[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>),</span>
-<span id="cb40-10">        c<span class="op" style="color: #5E5E5E;
+<span id="cb38-10">        c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'r'</span>)</span>
-<span id="cb40-11">ax.axvline(observedT,</span>
-<span id="cb40-12">           c<span class="op" style="color: #5E5E5E;
+<span id="cb38-11">ax.axvline(observedT,</span>
+<span id="cb38-12">           c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'b'</span>,</span>
-<span id="cb40-13">           label<span class="op" style="color: #5E5E5E;
+<span id="cb38-13">           label<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'Observed'</span>)</span>
-<span id="cb40-14">ax.legend()</span>
-<span id="cb40-15">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb38-14">ax.legend()</span>
+<span id="cb38-15">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Null Distribution of Test Statistic"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1431,22 +1472,22 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch13-multiple-lab_files/figure-html/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-27-output-1.png" width="653" height="651" class="figure-img"></a></p>
+<p><a href="Ch13-multiple-lab_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-26-output-1.png" width="653" height="651" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The re-sampling-based null distribution is almost identical to the theoretical null distribution, which is displayed in red.</p>
 <p>Finally, we implement the plug-in re-sampling FDR approach outlined in Algorithm~. Depending on the speed of your computer, calculating the FDR for all 2,308 genes in the <code>Khan</code> dataset may take a while. Hence, we will illustrate the approach on a random subset of 100 genes. For each gene, we first compute the observed test statistic, and then produce 10,000 re-sampled test statistics. This may take a few minutes to run. If you are in a rush, then you could set <code>B</code> equal to a smaller value (e.g.&nbsp;<code>B=500</code>).</p>
-<div id="6a5569de" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1">m, B <span class="op" style="color: #5E5E5E;
+<div id="d7ca769e" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1">m, B <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">10000</span></span>
-<span id="cb41-2">idx <span class="op" style="color: #5E5E5E;
+<span id="cb39-2">idx <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> rng.choice(Khan[<span class="st" style="color: #20794D;
 background-color: null;
@@ -1455,14 +1496,14 @@ background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">False</span>)</span>
-<span id="cb41-3">T_vals <span class="op" style="color: #5E5E5E;
+<span id="cb39-3">T_vals <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty(m)</span>
-<span id="cb41-4">Tnull_vals <span class="op" style="color: #5E5E5E;
+<span id="cb39-4">Tnull_vals <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty((m, B))</span>
-<span id="cb41-5"></span>
-<span id="cb41-6"><span class="cf" style="color: #003B4F;
+<span id="cb39-5"></span>
+<span id="cb39-6"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> j <span class="kw" style="color: #003B4F;
@@ -1471,25 +1512,25 @@ font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(m):</span>
-<span id="cb41-7">    col <span class="op" style="color: #5E5E5E;
+<span id="cb39-7">    col <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> idx[j]</span>
-<span id="cb41-8">    T_vals[j] <span class="op" style="color: #5E5E5E;
+<span id="cb39-8">    T_vals[j] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_ind(D2[col],</span>
-<span id="cb41-9">                          D4[col],</span>
-<span id="cb41-10">                          equal_var<span class="op" style="color: #5E5E5E;
+<span id="cb39-9">                          D4[col],</span>
+<span id="cb39-10">                          equal_var<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>).statistic</span>
-<span id="cb41-11">    D_ <span class="op" style="color: #5E5E5E;
+<span id="cb39-11">    D_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.hstack([D2[col], D4[col]])</span>
-<span id="cb41-12">    D_null <span class="op" style="color: #5E5E5E;
+<span id="cb39-12">    D_null <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> D_.copy()</span>
-<span id="cb41-13">    <span class="cf" style="color: #003B4F;
+<span id="cb39-13">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> b <span class="kw" style="color: #003B4F;
@@ -1498,33 +1539,33 @@ font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(B):</span>
-<span id="cb41-14">        rng.shuffle(D_null)</span>
-<span id="cb41-15">        ttest_ <span class="op" style="color: #5E5E5E;
+<span id="cb39-14">        rng.shuffle(D_null)</span>
+<span id="cb39-15">        ttest_ <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_ind(D_null[:n_],</span>
-<span id="cb41-16">                           D_null[n_:],</span>
-<span id="cb41-17">                           equal_var<span class="op" style="color: #5E5E5E;
+<span id="cb39-16">                           D_null[n_:],</span>
+<span id="cb39-17">                           equal_var<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="va" style="color: #111111;
 background-color: null;
 font-style: inherit;">True</span>)</span>
-<span id="cb41-18">        Tnull_vals[j,b] <span class="op" style="color: #5E5E5E;
+<span id="cb39-18">        Tnull_vals[j,b] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> ttest_.statistic</span></code></pre></div>
 </div>
 <p>Next, we compute the number of rejected null hypotheses <img src="https://latex.codecogs.com/png.latex?R">, the estimated number of false positives <img src="https://latex.codecogs.com/png.latex?%5Cwidehat%7BV%7D">, and the estimated FDR, for a range of threshold values <img src="https://latex.codecogs.com/png.latex?c"> in Algorithm~. The threshold values are chosen using the absolute values of the test statistics from the 100 genes.</p>
-<div id="60e46df8" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1">cutoffs <span class="op" style="color: #5E5E5E;
+<div id="87160e25" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1">cutoffs <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.sort(np.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">abs</span>(T_vals))</span>
-<span id="cb42-2">FDRs, Rs, Vs <span class="op" style="color: #5E5E5E;
+<span id="cb40-2">FDRs, Rs, Vs <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.empty((<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>, m))</span>
-<span id="cb42-3"><span class="cf" style="color: #003B4F;
+<span id="cb40-3"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">for</span> j <span class="kw" style="color: #003B4F;
@@ -1533,7 +1574,7 @@ font-weight: bold;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">range</span>(m):</span>
-<span id="cb42-4">   R <span class="op" style="color: #5E5E5E;
+<span id="cb40-4">   R <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.<span class="bu" style="color: null;
 background-color: null;
@@ -1542,7 +1583,7 @@ background-color: null;
 font-style: inherit;">abs</span>(T_vals) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;=</span> cutoffs[j])</span>
-<span id="cb42-5">   V <span class="op" style="color: #5E5E5E;
+<span id="cb40-5">   V <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.<span class="bu" style="color: null;
 background-color: null;
@@ -1553,13 +1594,13 @@ background-color: null;
 font-style: inherit;">&gt;=</span> cutoffs[j]) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span> B</span>
-<span id="cb42-6">   Rs[j] <span class="op" style="color: #5E5E5E;
+<span id="cb40-6">   Rs[j] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> R</span>
-<span id="cb42-7">   Vs[j] <span class="op" style="color: #5E5E5E;
+<span id="cb40-7">   Vs[j] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> V</span>
-<span id="cb42-8">   FDRs[j] <span class="op" style="color: #5E5E5E;
+<span id="cb40-8">   FDRs[j] <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> V <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1567,8 +1608,8 @@ font-style: inherit;">/</span> R</span></code></pre></div>
 </div>
 <p>Now, for any given FDR, we can find the genes that will be rejected. For example, with FDR controlled at 0.1, we reject 15 of the 100 null hypotheses. On average, we would expect about one or two of these genes (i.e.&nbsp;10% of 15) to be false discoveries. At an FDR of 0.2, we can reject the null hypothesis for 28 genes, of which we expect around six to be false discoveries.</p>
 <p>The variable <code>idx</code> stores which genes were included in our 100 randomly-selected genes. Let’s look at the genes whose estimated FDR is less than 0.1.</p>
-<div id="3d06f538" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><span class="bu" style="color: null;
+<div id="33b98643" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sorted</span>(idx[np.<span class="bu" style="color: null;
 background-color: null;
@@ -1581,7 +1622,7 @@ background-color: null;
 font-style: inherit;">0.1</span>].<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">min</span>()])</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="118">
 <pre><code>['G0097',
  'G0129',
  'G0182',
@@ -1604,8 +1645,8 @@ font-style: inherit;">min</span>()])</span></code></pre></div>
 </div>
 </div>
 <p>At an FDR threshold of 0.2, more genes are selected, at the cost of having a higher expected proportion of false discoveries.</p>
-<div id="a1a5abff" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><span class="bu" style="color: null;
+<div id="35227781" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sorted</span>(idx[np.<span class="bu" style="color: null;
 background-color: null;
@@ -1618,7 +1659,7 @@ background-color: null;
 font-style: inherit;">0.2</span>].<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">min</span>()])</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div class="cell-output cell-output-display" data-execution_count="119">
 <pre><code>['G0097',
  'G0129',
  'G0158',
@@ -1653,21 +1694,21 @@ font-style: inherit;">min</span>()])</span></code></pre></div>
 </div>
 </div>
 <p>The next line generates Figure~, which is similar to Figure~, except that it is based on only a subset of the genes.</p>
-<div id="7a25a7dc" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1">fig, ax <span class="op" style="color: #5E5E5E;
+<div id="26ceef2b" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1">fig, ax <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> plt.subplots()</span>
-<span id="cb47-2">ax.plot(Rs, FDRs, <span class="st" style="color: #20794D;
+<span id="cb45-2">ax.plot(Rs, FDRs, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">'b'</span>, linewidth<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span>
-<span id="cb47-3">ax.set_xlabel(<span class="st" style="color: #20794D;
+<span id="cb45-3">ax.set_xlabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Number of Rejections"</span>)</span>
-<span id="cb47-4">ax.set_ylabel(<span class="st" style="color: #20794D;
+<span id="cb45-4">ax.set_ylabel(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"False Discovery Rate"</span>)<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1675,7 +1716,7 @@ font-style: inherit;">;</span></span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="Ch13-multiple-lab_files/figure-html/cell-32-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-32-output-1.png" width="589" height="429" class="figure-img"></a></p>
+<p><a href="Ch13-multiple-lab_files/figure-html/cell-31-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="https://orenbochman.github.io/notes-islr/posts/ch13/Ch13-multiple-lab_files/figure-html/cell-31-output-1.png" width="589" height="429" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
