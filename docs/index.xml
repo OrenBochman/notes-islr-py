@@ -8464,6 +8464,33 @@ Bochman, Oren. 2024. <span>“Chapter 11: Survival Analysis - Lab Part
 
 
 
+<p>The chapter is divided into the following sections:</p>
+<ul>
+<li>Survival and Censoring Times
+<ul>
+<li>A Closer Look at Censoring</li>
+<li>The Kaplan–Meier Survival Curve</li>
+<li>The Log-Rank Test</li>
+<li>Regression Models With a Survival Response
+<ul>
+<li>11.5.1 The Hazard Function</li>
+<li>11.5.2 Proportional Hazards</li>
+<li>11.5.3 Example: Brain Cancer Data</li>
+<li>11.5.4 Example: Publication Data</li>
+</ul></li>
+<li>Shrinkage for the Cox Model</li>
+<li>Additional Topics
+<ul>
+<li>11.7.1 Area Under the Curve for Survival Analysis</li>
+<li>11.7.2 Choice of Time Scale</li>
+<li>11.7.3 Time-Dependent Covariates</li>
+<li>11.7.4 Checking the Proportional Hazards Assumption</li>
+<li>11.7.5 Survival Trees</li>
+</ul></li>
+<li>Lab: Survival Analysis</li>
+</ul></li>
+<li>Exercises</li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -8586,19 +8613,6 @@ Predictor variables whose values can change over time. The proportional hazards 
 A modification of classification and regression trees for use in survival analysis. They use a split criterion that maximizes the difference between survival curves in resulting nodes.
 </dd>
 </dl>
-<p>The chapter is divided into the following sections:</p>
-<ul>
-<li>Survival and Censoring Times</li>
-<li>A Closer Look at Censoring</li>
-<li>The Kaplan–Meier Survival Curve</li>
-<li>The Log-Rank Test</li>
-<li>Regression Models With a Survival Response</li>
-<li>Shrinkage for the Cox Model</li>
-<li>Additional Topics</li>
-<li>Lab: Survival Analysis</li>
-<li>Exercises</li>
-<li>References</li>
-</ul>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <ul>
@@ -15971,6 +15985,47 @@ Figure&nbsp;2: Examples and Framework
 </figcaption>
 </figure>
 </div></div>
+<ul>
+<li>10 Deep Learning
+<ul>
+<li>10.1 Single Layer Neural Networks</li>
+<li>10.2 Multilayer Neural Networks</li>
+<li>10.3 Convolutional Neural Networks
+<ul>
+<li>10.3.1 Convolution Layers</li>
+<li>10.3.2 Pooling Layers</li>
+<li>10.3.3 Architecture of a Convolutional Neural Network</li>
+<li>10.3.4 Data Augmentation</li>
+<li>10.3.5 Results Using a Pretrained Classifier</li>
+</ul></li>
+<li>10.4 Document Classification</li>
+<li>10.5 Recurrent Neural Networks
+<ul>
+<li>10.5.1 Sequential Models for Document Classification</li>
+<li>10.5.2 Time Series Forecasting</li>
+<li>10.5.3 Summary of RNNs</li>
+</ul></li>
+<li>10.6 When to Use Deep Learning</li>
+<li>10.7 Fitting a Neural Network
+<ul>
+<li>10.7.1 Backpropagation</li>
+<li>10.7.2 Regularization and Stochastic Gradient Descent</li>
+<li>10.7.3 Dropout Learning</li>
+<li>10.7.4 Network Tuning</li>
+</ul></li>
+<li>10.8 Interpolation and Double Descent</li>
+<li>10.9 Lab: Deep Learning
+<ul>
+<li>10.9.1 Single Layer Network on Hitters Data</li>
+<li>10.9.2 Multilayer Network on the MNIST Digit Data</li>
+<li>10.9.3 Convolutional Neural Networks</li>
+<li>10.9.4 Using Pretrained CNN Models</li>
+<li>10.9.5 IMDB Document Classification</li>
+<li>10.9.6 Recurrent Neural Networks</li>
+</ul></li>
+<li>10.10 Exercises</li>
+</ul></li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -15994,6 +16049,228 @@ TL;DR - Deep Learning
 </audio>
 </div>
 </div>
+<section id="glossary" class="level2">
+<h2 class="anchored" data-anchor-id="glossary">Glossary</h2>
+<dl>
+<dt>Activation Function</dt>
+<dd>
+A nonlinear function applied to the weighted sum of inputs in a neural network unit. It introduces nonlinearity, allowing the network to model complex relationships. Common examples include sigmoid and ReLU.
+</dd>
+<dt>Bag-of-Words</dt>
+<dd>
+A simple method for featurizing text data by representing a document as a collection of its words, disregarding grammar and word order but keeping track of word frequency (or just presence/absence).
+</dd>
+<dt>Bag-of-n-grams</dt>
+<dd>
+An extension of the bag-of-words model that considers sequences of n consecutive words (n-grams) as features, capturing some local context within the text.
+</dd>
+<dt>Backpropagation</dt>
+<dd>
+An algorithm used to efficiently compute the gradient of the loss function with respect to the weights of a neural network. It uses the chain rule to propagate error backwards through the network layers.
+</dd>
+<dt>Dropout</dt>
+<dd>
+A regularization technique where, during training, a randomly selected proportion of neurons are “dropped out” (ignored) in each forward pass. This helps prevent overfitting by reducing co-adaptation of neurons.
+</dd>
+<dt>Epoch</dt>
+<dd>
+One complete pass of the entire training dataset through the learning algorithm.
+</dd>
+<dt>Featurize</dt>
+<dd>
+The process of transforming raw data into a set of features that can be used by a machine learning model.
+</dd>
+<dt>Hidden Layer</dt>
+<dd>
+A layer in a neural network between the input and output layers. It consists of neurons that perform computations and pass their activations to the next layer.
+</dd>
+<dt>Lag</dt>
+<dd>
+In time series analysis, the number of time units between an observation and a previous observation. It’s used to consider past values as predictors.
+</dd>
+<dt>Learning Rate</dt>
+<dd>
+A hyperparameter that controls the step size at each iteration while moving towards a minimum of a loss function during gradient descent.
+</dd>
+<dt>Linear Unit (ReLU)</dt>
+<dd>
+Rectified Linear Unit, an activation function defined as g(z) = max(0, z). It is popular for its efficiency and ability to alleviate the vanishing gradient problem.
+</dd>
+<dt>Local Minimum</dt>
+<dd>
+A point in the optimization landscape where the loss function is lower than at any nearby points, but not necessarily the global minimum.
+</dd>
+<dt>MNIST</dt>
+<dd>
+A widely used dataset of handwritten digits, commonly used for training and testing image classification models.
+</dd>
+</dl>
+<p>Recurrent Neural Network (RNN): A type of neural network designed for processing sequential data. It has feedback connections that allow it to maintain a hidden state, enabling it to learn temporal dependencies.</p>
+<dl>
+<dt>Ridge Regularization</dt>
+<dd>
+A regularization technique that adds a penalty term to the loss function proportional to the square of the magnitude of the weights. This encourages smaller weights and helps prevent overfitting.
+</dd>
+<dt>Sigmoid Function</dt>
+<dd>
+A type of activation function that maps any input to a value between 0 and 1. It was historically popular but has been largely replaced by ReLU in hidden layers.
+</dd>
+<dt>Softmax Activation Function</dt>
+<dd>
+An activation function typically used in the output layer of a multi-class classification model. It converts a vector of raw scores into a probability distribution over the classes.
+</dd>
+<dt>Sparse Matrix Format</dt>
+<dd>
+A way of storing matrices where most of the elements are zero. It only stores the non-zero elements and their indices, saving memory and computation.
+</dd>
+<dt>Word Embedding</dt>
+<dd>
+A dense vector representation of a word in a continuous vector space, where semantically similar words are located close to each other. Techniques like word2vec and GloVe are used to create these embeddings.
+</dd>
+</dl>
+</section>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<p>Briefing Document: Deep Learning Concepts and Applications This briefing document summarizes key concepts and applications of deep learning as presented in the provided excerpts from “ch10.pdf” and “slides.pdf”. The main themes covered include the architecture of neural networks, activation functions, training methods, regularization techniques, recurrent neural networks for sequence data, and the phenomenon of double descent.</p>
+<ol type="1">
+<li>Single Layer and Multilayer Neural Networks The sources introduce neural networks as a way to create transformations of input data to achieve tasks like classification.</li>
+</ol>
+<p>Single Layer Networks: A single layer network derives new features by computing linear combinations of the input features (<img src="https://latex.codecogs.com/png.latex?X">) and then applying a nonlinear activation function (<img src="https://latex.codecogs.com/png.latex?g(z)">). The output is then a linear combination of these derived features. The general form is given by:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA_k%20=%20h_k(X)%20=%20g(w_%7Bk0%7D%20+%20%5Csum_%7Bj=1%7D%5E%7Bp%7D%20w_%7Bkj%7DX_j)%0A"></p>
+<p>Activation Functions: These functions introduce non-linearity into the network. Two popular examples highlighted are the sigmoid function and the Rectified Linear Unit (ReLU) function. &gt; “FIGURE 10.2. Activation functions. The piecewise-linear ReLU function is pop-ular for its efficiency and computability. We have scaled it down by a factor of five for ease of comparison.”</p>
+<blockquote class="blockquote">
+<p>“Activation functions in hidden layers are typically nonlinear, otherwise the model collapses to a linear model.” (“slides.pdf”) ReLU is noted for its efficiency compared to sigmoid. “A ReLU activation can be computed and stored more efficiently than a sigmoid activation.”</p>
+</blockquote>
+<p>Multilayer Networks: These networks consist of multiple “hidden layers” where the activations of one layer serve as the input for the next. This allows for learning more complex and hierarchical representations of the data.</p>
+<blockquote class="blockquote">
+<p>“The model depicted in Figure 10.1 derives five new features by computing five different linear combinations of X, and then squashes each through an activation function g(·) to transform it. The final model is linear in these derived variables.” (“ch10.pdf” - referring to a single layer, but the principle extends) Equation 10.10 and 10.11 illustrate the computation of activations in the first and second hidden layers respectively:</p>
+</blockquote>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA%5E%7B(1)%7Dk%20=%20h%5E%7B(1)%7Dk%20(X)%20=%20g(w%5E%7B(1)%7D%7Bk0%7D%20+%20%5Csum%7Bj=1%7D%5E%7Bp%7D%20w%5E%7B(1)%7D%7Bkj%7D%20X_j)$%20(%22ch10.pdf%22)%20$A%5E%7B(2)%7D$%20=%20h%5E%7B(2)%7D$%20(X)%20=%20g(w%5E%7B(2)%7D%7B$0%7D%20+%20%5Csum_%7Bk=1%7D%5E%7BK_1%7D%20w%5E%7B(2)%7D_%7B$k%7D%20A%5E%7B(1)%7D_k%20)%0A"></p>
+<p>Output Layer for Classification: For multi-class classification, a softmax activation function is used in the output layer to produce probabilities for each class.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af_m(X)%20=%20Pr(Y%20=%20m%7CX)%20=%20%5Cfrac%7Be%5E%7BZ_m%7D%7D%7B%5Csum_%7Bl=0%7D%5E%7B9%7D%20e%5E%7BZ_l%7D%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?Z_m"> is a linear combination of the activations from the last hidden layer.</p>
+<ol start="2" type="1">
+<li>Application: MNIST Handwritten Digit Classification The MNIST dataset is used as an example of a classification task using a large dense network.</li>
+</ol>
+<p>The dataset consists of <img src="https://latex.codecogs.com/png.latex?28%20%5Ctimes%2028%20=%20784"> pixel grayscale images of digits 0-9.</p>
+<p>A two-layer network with 256 units in the first hidden layer and 128 units in the second hidden layer, followed by a 10-unit output layer (for the 10 digits), is described in the slides. as an example. This network has 235,146 parameters (weights and biases).</p>
+<blockquote class="blockquote">
+<p>“We build a two-layer network with 256 units at first layer, 128 units at second layer, and 10 units at output layer. Along with intercepts (called biases) there are 235,146 parameters (referred to as weights)”</p>
+</blockquote>
+<p>The training process involves using a loss function tailored for multiclass classification.</p>
+<ol start="3" type="1">
+<li>Application: IMDB Document Sentiment Classification This section focuses on classifying movie reviews as positive or negative sentiment.</li>
+</ol>
+<p>Featurization: Bag-of-Words: A common method to represent text documents as feature vectors is the bag-of-words model. This involves creating a binary vector for each document based on the presence or absence of words from a predefined dictionary (e.g., the 10,000 most frequent words).</p>
+<blockquote class="blockquote">
+<p>“The simplest and most common featurization is the bag-of-words model. We score each document for the presence or absence of each of the words in a language dictionary… If the dictionary contains M words, that means for each document we create a binary feature vector of length M, and score a 1 for every word present, and 0 otherwise.”</p>
+</blockquote>
+<p>The resulting feature matrix is often sparse due to the relatively small number of unique words in each document compared to the dictionary size.</p>
+<blockquote class="blockquote">
+<p>“The resulting training feature matrix X has dimension 25,000!10,000, but only 1.3% of the binary entries are non-zero. We call such a matrix sparse, because most of the values are the same (zero in this case)”</p>
+</blockquote>
+<p>The bag-of-words model ignores the order and context of words. Bag-of-n-grams is mentioned as a way to capture some context by considering co-occurrences of <img src="https://latex.codecogs.com/png.latex?n"> consecutive words.</p>
+<blockquote class="blockquote">
+<p>“The bag-of-words model summarizes a document by the words present, and ignores their context. There are at least two popular ways to take the context into account: * The bag-of-n-grams model. For example, a bag of 2-grams records the consecutive co-occurrence of every distinct pair of words.”</p>
+</blockquote>
+<p>The performance of a lasso logistic regression model is compared to a two-hidden-layer neural network (with ReLU units) on this task. The “slides.pdf” visually presents this comparison, showing accuracy over different levels of lasso regularization (<img src="https://latex.codecogs.com/png.latex?%5Clambda">) and training epochs for the neural network.</p>
+<ol start="4" type="1">
+<li>Recurrent Neural Networks (RNNs) for Sequence Data RNNs are introduced as models designed to handle sequential data where the order of elements is important, such as text documents, time series, and speech.</li>
+</ol>
+<p>Sequential Processing: RNNs process input sequences one element at a time, maintaining a hidden state that is updated at each step based on the current input and the previous hidden state.</p>
+<blockquote class="blockquote">
+<p>“The network processes the input sequence X sequentially; each X$ feeds into the hidden layer, which also has as input the activation vector A<img src="https://latex.codecogs.com/png.latex?#1%20from%20the%20previous%20element%20in%20the%20sequence,%20and%20produces%20the%20current%20activation%20vector%20A">.”</p>
+</blockquote>
+<p>Shared Weights: A key characteristic of simple RNNs is the use of the same set of weights (<img src="https://latex.codecogs.com/png.latex?W">, <img src="https://latex.codecogs.com/png.latex?U">, and <img src="https://latex.codecogs.com/png.latex?B">) at each step of the sequence processing, hence the term “recurrent”.</p>
+<blockquote class="blockquote">
+<p>“The same collections of weights W, U and B are used as each element of the sequence is processed.”</p>
+</blockquote>
+<p>The hidden layer activations <img src="https://latex.codecogs.com/png.latex?A%5E">$ evolve over time, representing a “memory” of the sequence processed so far.</p>
+<blockquote class="blockquote">
+<p>“The A$ sequence represents an evolving model for the response that is updated as each element X$ is processed.”</p>
+</blockquote>
+<p>The output <img src="https://latex.codecogs.com/png.latex?O%5E">$ is produced at each step, but often only the last output <img src="https://latex.codecogs.com/png.latex?O%5EL"> is relevant for tasks like document classification.</p>
+<p>The detailed computation for the <img src="https://latex.codecogs.com/png.latex?k%5E%7Bth%7D"> unit in the hidden layer at time step $$$ is given by:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA%5E$_k%20=%20g%20(%20w_%7Bk_0%7D%20+%20%5Csum_%7Bj=1%7D%5E%7Bp%7D%20w_%7Bkj%7DX%5Es_j%20+%20%5Csum_%7Bs=1%7D%5E%7BK%7D%20u_%7Bks%7DA%5E%7Bs-1%7D_s%20)%0A"></p>
+<p>Word Embeddings: For processing text with RNNs, one-hot encoding of words (resulting in very sparse input vectors) is often replaced by lower-dimensional, dense word embeddings. These embeddings capture semantic relationships between words.</p>
+<blockquote class="blockquote">
+<p>“This results in an extremely sparse feature representation, and would not work well. Instead we use a lower-dimensional pretrained word embedding matrix E (<img src="https://latex.codecogs.com/png.latex?m%20%5Ctimes%2010K">, next slide). This reduces the binary feature vector of length 10K to a real feature vector of dimension <img src="https://latex.codecogs.com/png.latex?m%20%5Ctimes%2010K"> (e.g.&nbsp;<img src="https://latex.codecogs.com/png.latex?m"> in the low hundreds.)” (“slides.pdf”) Examples of pretrained word embeddings mentioned are word2vec and GloVe. “These are built from a very large corpus of documents by a variant of principal components analysis… The idea is that the positions of words in the embedding space preserve semantic meaning; e.g.&nbsp;synonyms should appear near each other.”</p>
+</blockquote>
+<ol start="5" type="1">
+<li>Application: Time Series Forecasting with RNNs RNNs can also be used for forecasting time series data. The example provided is predicting the log trading volume of the NYSE.</li>
+</ol>
+<p>Problem Formulation: A time series of log trading volume (<img src="https://latex.codecogs.com/png.latex?v_t">), Dow Jones return (<img src="https://latex.codecogs.com/png.latex?r_t">), and log volatility (<img src="https://latex.codecogs.com/png.latex?z_t">) is used. The goal is to predict <img src="https://latex.codecogs.com/png.latex?v_t"> based on past values of these three series.</p>
+<p>Mini-Series Input: Short sequences (mini-series) of length <img src="https://latex.codecogs.com/png.latex?L"> (the lag) are extracted from the time series to serve as input to the RNN. Each input vector <img src="https://latex.codecogs.com/png.latex?X%5E">$ at time step $$$ contains the lagged values of <img src="https://latex.codecogs.com/png.latex?v">, <img src="https://latex.codecogs.com/png.latex?r">, and <img src="https://latex.codecogs.com/png.latex?z">. The corresponding target <img src="https://latex.codecogs.com/png.latex?Y"> is the value of <img src="https://latex.codecogs.com/png.latex?v"> at the next time step.</p>
+$$ X_1 =
+<img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Bpmatrix%7D%0A%20%20%20v_%7Bt-L%7D%20%5C%5C%20r_%7Bt-L%7D%20%5C%5C%20z_%7Bt-L%7D%0A%5Cend%7Bpmatrix%7D">
+<p>,</p>
+X_2 =
+<img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Bpmatrix%7D%0A%20%20v_%7Bt-L+1%7D%20%5C%5C%20r_%7Bt-L+1%7D%20%5C%5C%20z_%7Bt-L+1%7D%0A%5Cend%7Bpmatrix%7D">
+<p>,</p>
+<p>,</p>
+X_L =
+<img src="https://latex.codecogs.com/png.latex?%5Cbegin%7Bpmatrix%7D%0A%20%20v_%7Bt-1%7D%20%5C%5C%20r_%7Bt-1%7D%20%5C%5C%20z_%7Bt-1%7D%0A%5Cend%7Bpmatrix%7D">
+<p>, and Y = v_t $$</p>
+<p>The autocorrelation function of log trading volume shows significant correlation at various lags, suggesting that past values are informative for prediction.</p>
+<blockquote class="blockquote">
+<p>“Figure 10.15 shows the autocorrelation function for all lags up to 37, and we see considerable correlation.”</p>
+</blockquote>
+<p>The performance of an RNN forecaster is compared to a “straw man” method (using yesterday’s log trading volume as today’s prediction) and autoregression models.</p>
+<ol start="6" type="1">
+<li>Fitting Neural Networks and Optimization The process of training neural networks involves minimizing a loss function by adjusting the network’s parameters (weights and biases).</li>
+</ol>
+<p>Non-convex Optimization: The objective function for fitting neural networks is generally non-convex, meaning there can be multiple local minima.</p>
+<blockquote class="blockquote">
+<p>“The objective in (10.23) looks simple enough, but because of the nested arrangement of the parameters and the symmetry of the hidden units, it is not straightforward to minimize. The problem is nonconvex in the param-eters, and hence there are multiple solutions.”</p>
+</blockquote>
+<p>Gradient Descent: A common optimization algorithm is gradient descent, which iteratively updates the parameters in the direction opposite to the gradient of the loss function. “<img src="https://latex.codecogs.com/png.latex?%5Ctheta%5E%7Bm+1%7D%20%5Cleftarrow%20%5Ctheta%5E%7Bm%7D%20-%20%5Crho%20%5Cnabla%20R(%5Ctheta%5E%7Bm%7D)">” (“slides.pdf”) where <img src="https://latex.codecogs.com/png.latex?%5Crho"> is the learning rate. Backpropagation: The gradients of the loss function with respect to the network’s parameters are efficiently computed using the chain rule of differentiation, a process known as backpropagation.</p>
+<blockquote class="blockquote">
+<p>“So the act of differentiation assigns a fraction of the residual to each of the parameters via the chain rule — a process known as backpropagation in the neural network backprop-”</p>
+</blockquote>
+<p>The authors provide the formulas for the derivatives with respect to the output layer weights (<img src="https://latex.codecogs.com/png.latex?#k">) and the input layer weights (<img src="https://latex.codecogs.com/png.latex?w%7Bkj%7D">). “<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20R_i(%5Ctheta)%7D%7B%5Cpartial%20%5Cbeta_k%7D%20=%20-(y_i%20-%20f_%5Ctheta(x_i))%20%5Ccdot%20g(z_%7Bik%7D)">” (“slides.pdf” - using <img src="https://latex.codecogs.com/png.latex?%5Cbeta_k"> notation) “<img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B%5Cpartial%20R_i(%5Ctheta)%7D%7B%5Cpartial%20w_%7Bkj%7D%7D%20=%20-(y_i%20-%20f_%5Ctheta(x_i))%20%5Ccdot%20%5Cbeta_k%20%5Ccdot%20g'(z_%7Bik%7D)%20%5Ccdot%20x_%7Bij%7D">” (“slides.pdf” - using <img src="https://latex.codecogs.com/png.latex?%5Cbeta_k"> notation)</p>
+<p>Stochastic Gradient Descent (SGD): Instead of computing the gradient over the entire dataset, SGD uses small random minibatches of data to update the parameters, which can be more efficient and help escape local minima.</p>
+<blockquote class="blockquote">
+<p>“Stochastic gradient descent. Rather than compute the gradient using all the data, use a small minibatch drawn at random at each step. E.g. for MNIST data, with n = 60K, we use minibatches of 128 observations.”</p>
+</blockquote>
+<ol start="7" type="1">
+<li>Regularization Techniques</li>
+</ol>
+<p>Regularization methods are used to prevent overfitting, where the model learns the training data too well and performs poorly on unseen data.</p>
+<p>Ridge and Lasso Regularization: These techniques add a penalty term to the loss function based on the magnitude of the weights, encouraging smaller weights and simpler models. Ridge uses the squared <img src="https://latex.codecogs.com/png.latex?L_2"> norm, while Lasso uses the <img src="https://latex.codecogs.com/png.latex?L_1"> norm.</p>
+<blockquote class="blockquote">
+<p>“The first row in Table 10.1 uses ridge regularization on the weights. This is achieved by augmenting the objective function (10.14) with a penalty term: <img src="https://latex.codecogs.com/png.latex?%0AR(%5Ctheta;%20%5Clambda)%20=%20...%20+%20%5Clambda%20%5Csum_j%20%7C%7C%5Ctheta_j%7C%7C_2%5E2%0A"></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“Lasso regularization is also popular as an additional form of regularization, or as an alternative to ridge.”</p>
+</blockquote>
+<p>Dropout: During training, dropout randomly “removes” (sets to zero) a fraction of the neurons in a layer with a certain probability (<img src="https://latex.codecogs.com/png.latex?%5Cphi">). The weights of the remaining neurons are scaled up. This prevents co-adaptation of neurons and acts as a form of regularization.</p>
+<blockquote class="blockquote">
+<p>“At each SGD update, randomly remove units with probability <img src="https://latex.codecogs.com/png.latex?%5Cphi">, and scale up the weights of those retained by <img src="https://latex.codecogs.com/png.latex?1/(1-%20%5Cphi)"> to compensate.”</p>
+</blockquote>
+<p>Early Stopping: Monitoring the performance of the model on a validation set during training and stopping when the validation error starts to increase is another common regularization technique.</p>
+<blockquote class="blockquote">
+<p>“We see that the value of the validation objective actually starts to increase by 30 epochs, so early stopping can also be used as an additional early” (“ch10.pdf” - referring to MNIST training).</p>
+</blockquote>
+<ol start="8" type="1">
+<li>Interpolation and Double Descent</li>
+</ol>
+<p>The authors touch upon the phenomenon of “double descent,” where the test error of a model can initially increase as model complexity increases (the usual overfitting behavior), but then decrease again as complexity is further increased, even beyond the point where the model perfectly fits the training data (interpolation threshold).</p>
+<p>This is illustrated with a natural spline fitting example where the number of degrees of freedom (<img src="https://latex.codecogs.com/png.latex?d">) controls the model complexity.</p>
+<p>When <img src="https://latex.codecogs.com/png.latex?d"> equals the number of training points (<img src="https://latex.codecogs.com/png.latex?n=20"> in the example), the training error becomes zero as the spline interpolates the data. The test error typically peaks around this point.</p>
+<p>However, as <img src="https://latex.codecogs.com/png.latex?d"> is increased further (<img src="https://latex.codecogs.com/png.latex?d%20%3E%20n">), the test error can decrease again, leading to the “double descent” curve.</p>
+<blockquote class="blockquote">
+<p>“The training error hits zero when the degrees of freedom coincides with the sample size n = 20, the “interpolation threshold”, and remains zero thereafter. The test error increases dramatically at this threshold, but then descends again to a reasonable value before finally increasing again.”</p>
+</blockquote>
+<p>The reason for the descent after interpolation is related to finding minimum-norm solutions in over-parameterized models.</p>
+<blockquote class="blockquote">
+<p>“When d &gt; 20, the least squares regression of Y onto d basis functions is not unique: there are an infinite number of least squares coefficient es-timates that achieve zero error. To select among them, we choose the one with the smallest sum of squared coefficients,” (“ch10.pdf”) “Increasing the number of units or layers and again training till zero error sometimes gives even better out-of-sample error. What happened to overfitting and the usual bias-variance trade-off?”</p>
+</blockquote>
+<ol start="9" type="1">
+<li>Practical Implementation with PyTorch</li>
+</ol>
+<p>The chapter includes a “Lab: Deep Learning” section demonstrating the implementation of neural networks using the PyTorch library for tasks like predicting baseball player salaries, classifying MNIST digits, classifying CIFAR-100 images, and performing sentiment analysis on the IMDB dataset, as well as time series forecasting on NYSE data. This section details the creation of model architectures, data loading, training loops, and evaluation using PyTorch modules like nn.Module, DataLoader, and Trainer from pytorch_lightning.</p>
+<p>This briefing provides a high-level overview of the key concepts and applications of deep learning discussed in the provided sources. It highlights the fundamental building blocks of neural networks, common training and regularization strategies, and their application to various types of data, including image, text, and time series. The mention of the double descent phenomenon challenges traditional understanding of the bias-variance trade-off in modern deep learning.</p>
+</section>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -18269,25 +18546,42 @@ Lab.”</span> August 11, 2024. <a href="https://orenbochman.github.io/notes-isl
 
 
 
-<div class="no-row-height column-margin column-container"><div id="fig-v1.1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="no-row-height column-margin column-container"><div id="vid-1.1" class="">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LvySJGj-88U?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Opening Remarks
-</figcaption>
-</figure>
-</div><div id="fig-v1.2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p>Opening Remarks</p>
+</div><div id="vid-1.2" class="">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/B9s8rpdNxU0?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v1.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Examples and Framework
-</figcaption>
-</figure>
+<p>Examples and Framework</p>
 </div></div>
+<ul>
+<li>9 Support Vector Machines</li>
+<li>9.1 Maximal Margin Classifier</li>
+<li>9.1.1 What Is a Hyperplane?</li>
+<li>9.1.2 Classification Using a Separating Hyperplane</li>
+<li>9.1.3 The Maximal Margin Classifier</li>
+<li>9.1.4 Construction of the Maximal Margin Classifier</li>
+<li>9.1.5 The Non-separable Case</li>
+<li>9.2 Support Vector Classifiers</li>
+<li>9.2.1 Overview of the Support Vector Classifier</li>
+<li>9.2.2 Details of the Support Vector Classifier</li>
+<li>9.3 Support Vector Machines</li>
+<li>9.3.1 Classification with Non-Linear Decision Boundaries</li>
+<li>9.3.2 The Support Vector Machine</li>
+<li>9.3.3 An Application to the Heart Disease Data</li>
+<li>9.4 SVMs with More than Two Classes</li>
+<li>9.4.1 One-Versus-One Classification</li>
+<li>9.4.2 One-Versus-All Classification</li>
+<li>9.5 Relationship to Logistic Regression</li>
+<li>9.6 Lab: Support Vector Machines</li>
+<li>9.6.1 Support Vector Classifier</li>
+<li>9.6.2 Support Vector Machine</li>
+<li>9.6.3 ROC Curves</li>
+<li>9.6.4 SVM with Multiple Classes</li>
+<li>9.6.5 Application to Gene Expression Data</li>
+<li>9.7 Exercises</li>
+</ul>
+<p>SVM are cool. I never used them very much as most problems involve more than two classes and the extension are not as easy to understand as other methods of multivariate classification.</p>
+<p>However SVM are very popular and also useful for intuition. about data. Kernels are a very powerful concept and will arise in gaussian processes and many other methods.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -18318,17 +18612,248 @@ TL;DR - Support Vector Machines
 </audio>
 </div>
 </div>
+<dl>
+<dt>Hyperplane</dt>
+<dd>
+A flat affine subspace of dimension p-1 in a p-dimensional space, used as a decision boundary.
+</dd>
+<dt>Separating Hyperplane</dt>
+<dd>
+A hyperplane that perfectly divides the training data into distinct classes.
+</dd>
+<dt>Maximal Margin Classifier</dt>
+<dd>
+A linear classifier that finds the separating hyperplane with the largest margin (distance to the nearest data points).
+</dd>
+<dt>Margin</dt>
+<dd>
+The perpendicular distance between the maximal margin hyperplane and the closest training observations (support vectors).
+</dd>
+<dt>Support Vectors</dt>
+<dd>
+The training data points that lie closest to the decision boundary and directly influence the position and orientation of the maximal margin hyperplane or support vector classifier.
+</dd>
+<dt>Support Vector Classifier</dt>
+<dd>
+An extension of the maximal margin classifier that allows for some misclassifications (soft margin) to handle non-separable data.
+</dd>
+<dt>Slack Variable</dt>
+<dd>
+A variable introduced in the support vector classifier’s optimization problem to allow training observations to violate the margin or the hyperplane.
+</dd>
+<dt>Tuning Parameter (C)</dt>
+<dd>
+A non-negative parameter in the support vector classifier that controls the trade-off between maximizing the margin and minimizing the training error (number of margin violations).
+</dd>
+<dt>Feature Expansion</dt>
+<dd>
+The process of transforming the original features into a higher-dimensional space by adding non-linear functions or combinations of the original features.
+</dd>
+<dt>Kernel</dt>
+<dd>
+A function that quantifies the similarity between two data points and implicitly computes the inner product in a potentially high-dimensional feature space without explicitly performing the transformation.
+</dd>
+<dt>Linear Kernel</dt>
+<dd>
+A kernel function that computes the standard dot product between two feature vectors, resulting in a linear decision boundary.
+</dd>
+<dt>Polynomial Kernel</dt>
+<dd>
+A kernel function that uses a polynomial of the features to compute similarity, enabling non-linear decision boundaries of a polynomial form.
+</dd>
+<dt>Radial Kernel (RBF)</dt>
+<dd>
+A kernel function that measures similarity based on the distance between data points, often using an exponential decay, allowing for complex, non-linear decision boundaries.
+</dd>
+<dt>Kernel Trick</dt>
+<dd>
+The technique of using kernel functions in SVMs to operate in high-dimensional spaces efficiently without explicitly computing the coordinates of the data in that space.
+</dd>
+<dt>One-Versus-One (OVO)</dt>
+<dd>
+A strategy for multi-class classification using SVMs by training a binary classifier for every pair of classes.
+</dd>
+<dt>One-Versus-All (OVA) / One-Versus-Rest</dt>
+<dd>
+A strategy for multi-class classification using SVMs by training a binary classifier for each class against all other classes.
+</dd>
+<dt>Hinge Loss</dt>
+<dd>
+The loss function used in the formulation of the support vector classifier, which penalizes misclassified points and points within the margin on the wrong side.
+</dd>
+<dt>Support Vector Machine (SVM)</dt>
+<dd>
+A powerful supervised learning algorithm for classification (and regression) that extends the support vector classifier by using kernel methods to handle non-linear decision boundaries.
+</dd>
+<dt>Support Vector Regression</dt>
+<dd>
+An extension of SVMs to handle regression problems with a focus on minimizing errors outside a certain margin.
+</dd>
+<dt>Decision Function</dt>
+<dd>
+The function learned by an SVM that outputs a real value for a given input, whose sign determines the predicted class label.
+</dd>
+<dt>ROC Curve (Receiver Operating Characteristic Curve)</dt>
+<dd>
+A graphical plot that illustrates the diagnostic ability of a binary classifier as its discrimination threshold is varied.
+</dd>
+</dl>
+<p>The following are some of the functions and methods used in the code:</p>
+<dl>
+<dt><code>RocCurveDisplay.from_estimator()</code></dt>
+<dd>
+A function in scikit-learn used to plot ROC curves from a fitted estimator.
+</dd>
+<dt><code>SupportVectorClassifier() / SVC()</code></dt>
+<dd>
+A function in scikit-learn used to implement support vector classification.
+</dd>
+<dt><code>decision_function()</code></dt>
+<dd>
+A method of a fitted SVM estimator in scikit-learn that returns the decision function values for the input data.
+</dd>
+<dt><code>confusion_table()</code></dt>
+<dd>
+A function (from the ISLP package) that displays the confusion matrix, showing the counts of true positives, true negatives, false positives, and false negatives.
+</dd>
+<dt><code>SupportVectorRegression()</code></dt>
+<dd>
+A function in scikit-learn used to implement support vector regression.
+</dd>
+<dt><code>GridSearchCV()</code></dt>
+<dd>
+A function in scikit-learn used for systematic hyperparameter tuning by searching over a specified parameter grid and evaluating performance using cross-validation.
+</dd>
+<dt><code>KFold()</code></dt>
+<dd>
+A cross-validation iterator in scikit-learn that provides train/test indices to split data in k consecutive folds.
+</dd>
+</dl>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<p>Support Vector Machines (SVMs) are a powerful and popular approach for classification, developed in the 1990s. They are particularly effective for high-dimensional data and have gained popularity in various fields, including bioinformatics, text classification, and image recognition.</p>
+<p>The key idea behind SVMs is to find a hyperplane that separates the data points of different classes with the maximum margin.</p>
+<p>In the podcast we use a couple of analogies like separating potato chips from pretzels which is what seems to be going on when we look at a svm on a scatterplot.</p>
+<p>The other analogy is a fence between rival fans in a football game. Here we would like to keep the fans of the two teams apart with a margin separating them. The wider the margin the better. If we cant actually separate the fans we would like the fence to have as many fans on the right sides as possible.</p>
+<ol type="1">
+<li>Introduction and Overview of Support Vector Machines:</li>
+</ol>
+<p>The authors introduce SVMs as a powerful and popular approach for classification. In the chapter they notes that SVMs</p>
+<blockquote class="blockquote">
+<p>“have been shown to perform well in a variety of settings, and are often considered one of the best ‘out of the box’ classifiers.”</p>
+</blockquote>
+<p>In the slides they frame the approach as directly tackling the two-class classification problem by finding a separating plane in feature space, and then getting creative by</p>
+<blockquote class="blockquote">
+<p>“soften[ing] what we mean by ‘separates’” and “enrich[ing] and enlarge[ing] the feature space so that separation is possible.”</p>
+</blockquote>
+<p>They distinguishing between the <em>maximal margin classifier</em> in (Section 9.1), the <em>support vector classifier</em> (Section 9.2), and the <em>support vector machine</em> (Section 9.3), emphasizing the importance of careful distinction to avoid common confusion.</p>
+<p>Hyperplanes as Decision Boundaries: (Section 9.1.2)</p>
+<p>The authors define a hyperplane as a <em>flat affine subspace of dimension <img src="https://latex.codecogs.com/png.latex?p%E2%80%931"> in a p-dimensional space</em>.</p>
+<p>In two dimensions, it’s a line, and in three dimensions, it’s a plane.</p>
+<p>The mathematical definition of a hyperplane is given by the linear equation:</p>
+<p><span id="eq-9.2"><img src="https://latex.codecogs.com/png.latex?%0A%CE%B2_0%20+%20%CE%B2_1%20X_1%20+%20%CE%B2_2%20X_2%20+%20%C2%B7%20%C2%B7%20%C2%B7+%20%CE%B2_p%20X_p%20=%200%20%5Cqquad%0A%5Ctag%7B1%7D"></span></p>
+<p>The sources explain that a hyperplane divides the p-dimensional space into two halves. The sign of the expression <img src="https://latex.codecogs.com/png.latex?%CE%B2_0%20+%20%CE%B2_1%20X_1%20+%20%C2%B7%20%C2%B7%20%C2%B7+%20%CE%B2_p%20X_p"> for a given point <img src="https://latex.codecogs.com/png.latex?X"> determines which side of the hyperplane it lies on. This forms the basis for classification: a test observation is assigned a class based on which side of the separating hyperplane it falls.</p>
+<p>we can see how this happens mathematically</p>
+<p>point lying off the line satisfy either:</p>
+<p><span id="eq-9.3"><img src="https://latex.codecogs.com/png.latex?%0A%CE%B2_0%20+%20%CE%B2_1%20X_1%20+%20%CE%B2_2%20X_2%20+%20%C2%B7%20%C2%B7%20%C2%B7+%20%CE%B2_p%20X_p%20%3E%200%20%5Cqquad%0A%5Ctag%7B2%7D"></span> or</p>
+<p><span id="eq-9.4"><img src="https://latex.codecogs.com/png.latex?%0A%CE%B2_0%20+%20%CE%B2_1%20X_1%20+%20%CE%B2_2%20X_2%20+%20%C2%B7%20%C2%B7%20%C2%B7+%20%CE%B2_p%20X_p%20%3C%200%20%5Cqquad%0A%5Ctag%7B3%7D"></span></p>
+<p>So we understand the geometry of the hyperplane used as a decision boundary, but we still need to understand how to learn the parameters <img src="https://latex.codecogs.com/png.latex?%CE%B2_0,%20%CE%B2_1,%20%C2%B7%20%C2%B7%20%C2%B7,%20%CE%B2_p">. that gives us the best decision boundary.</p>
+</section>
+<section id="maximal-margin-classifier-the-optimal-separator-section-9.1.3" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="maximal-margin-classifier-the-optimal-separator-section-9.1.3">Maximal Margin Classifier – the Optimal Separator (Section 9.1.3)</h2>
+<p>The chapter introduces the maximal margin classifier as a natural choice when the classes are linearly separable. It highlights that while “there will in fact exist an infinite number of such hyperplanes,” the maximal margin hyperplane (also known as the optimal separating hyperplane) is the one that is “farthest from the training observations.”</p>
+<p>The margin is defined as the smallest perpendicular distance from any of the training observations to the hyperplane. The maximal margin classifier aims to maximize this margin.</p>
+<blockquote class="blockquote">
+<p>“The maximal margin hyperplane is the separating hyperplane for which the margin is largest—that is, it is the hyperplane that has the farthest minimum distance to the training observations.”</p>
+</blockquote>
+<p>The slides visually and mathematically represent this <em>constrained optimization problem</em>, aiming to maximize M (the margin) subject to the constraints that all data points are correctly classified and at least a distance M from the hyperplane.</p>
+
+<div class="no-row-height column-margin column-container"><div id="fig-9.3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-9.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="fig_9.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1: There are two classes of observations, shown in blue and in purple. The maximal margin hyperplane is shown as a solid line. The margin is the distance from the solid line to either of the dashed lines. The two blue points and the purple point that lie on the dashed lines are the support vectors, and the distance from those points to the hyperplane is indicated by arrows. The purple and blue grid indicates the decision rule made by a classifier based on this separating hyperplane."><img src="https://orenbochman.github.io/notes-islr/posts/ch09/fig_9.3.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-9.3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: There are two classes of observations, shown in blue and in purple. The maximal margin hyperplane is shown as a solid line. The margin is the distance from the solid line to either of the dashed lines. The two blue points and the purple point that lie on the dashed lines are the support vectors, and the distance from those points to the hyperplane is indicated by arrows. The purple and blue grid indicates the decision rule made by a classifier based on this separating hyperplane.
+</figcaption>
+</figure>
+</div></div><p>Support Vectors: The chapter introduces the concept of support vectors as the training observations that lie on the boundary of the margin (the dashed lines in Figure&nbsp;1). These points are crucial because “if these points were moved slightly then the maximal margin hyperplane would move as well.” The classifier depends directly on these support vectors and not on other observations further away from the boundary.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Limitations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The authors both point out a significant limitation of the maximal margin classifier: <mark>it requires the classes to be perfectly separable by a linear boundary</mark>, which is a hard assumption to make for any real-world datasets.</p>
+<p>Additionally, <mark>even with separable data, it can be sensitive to noisy data and outliers</mark>, potentially leading to overfitting (as illustrated in Figure 9.5 in the chapter).</p>
+</div>
+</div>
+<p>Given these two problems we would like to have a more flexible approach that allows for some misclassification and is less sensitive to outliers.</p>
+<ol start="4" type="1">
+<li>Support Vector Classifier: Allowing for Errors (Soft Margin):</li>
+</ol>
+<p>To address the issue of non-separable data and sensitivity to outliers, the chapter introduces the support vector classifier. This is an extension that allows for some training observations to be misclassified or to lie within the margin. This is achieved by introducing slack variables (<img src="https://latex.codecogs.com/png.latex?%CE%B5_i"> in the slides, <img src="https://latex.codecogs.com/png.latex?%CE%BE_i"> conceptually similar to <img src="https://latex.codecogs.com/png.latex?%CE%B5_i"> in the context of the chapter though denoted differently in the optimization problem).</p>
+<p>The optimization problem for the support vector classifier (Equation 9.12-9.15 in the chapter) aims to maximize the margin while penalizing violations using these slack variables. The tuning parameter C (or <img src="https://latex.codecogs.com/png.latex?%CE%BB"> inversely related in the hinge loss formulation) controls the trade-off between maximizing the margin and minimizing the number of margin violations.</p>
+<blockquote class="blockquote">
+<p>“As the budget C increases, we become more tolerant of violations to the margin, and so the margin will widen. Conversely, as C decreases, we become less tolerant of violations to the margin and so the margin narrows.” (chapter)</p>
+</blockquote>
+<p>The slides also illustrates this with varying values of C, showing how the decision boundary and margin change. Importantly, similar to the maximal margin classifier, the decision boundary of the support vector classifier is still linear in the original feature space, and the classifier is still determined by support vectors (observations that lie on or violate the margin).</p>
+<ol start="5" type="1">
+<li>Support Vector Machines: Handling Non-Linear Boundaries with Kernels:</li>
+</ol>
+<p>To tackle problems with non-linear class boundaries, authors introduce the support vector machine (SVM). The key idea is to enlarge the feature space by using non-linear transformations of the original features. A support vector classifier is then fit in this higher-dimensional space, resulting in a non-linear decision boundary in the original space.</p>
+<p>The computationally efficient way to achieve this feature space enlargement is through the use of kernels. A kernel function <img src="https://latex.codecogs.com/png.latex?K(x_i,%20x_%7Bi'%7D)"> quantifies the similarity between two observations and can be thought of as an inner product in the enlarged feature space without explicitly computing the transformations.</p>
+<blockquote class="blockquote">
+<p>“The support vector machine (SVM) is an extension of the support vector classifier that results from enlarging the feature space in a specific way, using kernels.” (book)</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“If we can compute inner-products between observations, we can fit a SV classifier. Can be quite abstract! Some special kernel functions can do this for us.” (slides)</p>
+</blockquote>
+<p>Some examples of common kernel functions:</p>
+<p>Linear Kernel:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AK(x_i,%20x_%7Bi'%7D)%20=%20%20%5Csum%5Ep_%7Bj=1%7D%20x_%7Bji%7Dx_%7Bi'j%7D%0A"></p>
+<p>(simply the standard inner product, equivalent to the support vector classifier). Polynomial Kernel: <img src="https://latex.codecogs.com/png.latex?%0AK(x_i,%20x_%7Bi'%7D)%20=%20(1%20+%20%5Csum%5Ep_%7Bj=1%7D%20x_%7Bij%7Dx_%7Bi'j%7D)%5Ed%0A"></p>
+<p>(allows for polynomial decision boundaries of degree d). Radial Kernel (RBF): K(xi, xi’) = exp(-γ ∑ (xji - x’ji)^2) (creates more flexible, potentially local decision boundaries, where γ controls the influence of nearby points). The solution for an SVM with a kernel takes the form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?f(x)%20=%20%CE%B2_0%20+%20%5Csum_%7Bi%5Cin%20S%7D%20%5Chat%7B%5Calpha_i%7D%20K(x,%20x_i)"></p>
+<p>where S is the set of support vectors.</p>
+<p>The chapter highlights that using kernels avoids the computational burden of explicitly working in the potentially very high or even infinite-dimensional enlarged feature space.</p>
+<p>9.4 SVMs for More Than Two Classes:</p>
+<p>We briefly discuss extending SVMs to handle multi-class classification (K &gt; 2 classes). Two common approaches are mentioned:</p>
+<p><strong>One-Versus-All (OVA) / One-Versus-Rest (OVR)</strong>: Train K binary SVM classifiers, each comparing one class against all the others. A new observation is assigned to the class whose classifier outputs the highest confidence score.</p>
+<p><strong>One-Versus-One (OVO)</strong>: Train K(K-1)/2 binary SVM classifiers, one for each pair of classes. A new observation is classified based on a voting scheme, where it’s assigned to the class that wins the most pairwise competitions. The slides suggest that OVO is preferred if K is not too large.</p>
+<ol start="7" type="1">
+<li>Relationship to Logistic Regression:</li>
+</ol>
+<p>The (Section 9.5) discusses the close connections between SVMs and other statistical methods like logistic regression. It shows that the support vector classifier optimization can be rewritten in a “Loss + Penalty” form:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aminimize%20%CE%B2_0,%CE%B2_1,...,%CE%B2_p%20%7B%20%5Csum%20%5Cmax%20%5B0,%201%E2%88%92%20y%20if(x_i)%5D%20+%20%CE%BB%20%5Csum%20%CE%B2%5E2_j%20%7D%20%5Ctext%7B(hinge%20loss%20+%20L2%20penalty)%7D%0A"></p>
+<p>The loss function used in SVMs is the hinge loss, which is compared to the loss function used in logistic regression (negative log-likelihood) in Figure 9.12 (“ch09.pdf”). The hinge loss is exactly zero for observations correctly classified beyond the margin, contributing to the sparsity of the solution (reliance on support vectors). While the logistic loss is never exactly zero, it becomes very small for well-classified points.</p>
+<p>The comparison:</p>
+<p>When classes are nearly separable, SVMs tend to perform better than logistic regression. When classes overlap more significantly, logistic regression (often with a ridge penalty) and SVMs often yield similar results.</p>
+<p>If probability estimates are required, logistic regression is the preferred choice. Kernel SVMs are popular for non-linear boundaries, and while kernels can be used with logistic regression and LDA, the computations can be more expensive.</p>
+<ol start="8" type="1">
+<li>Practical Implementation (from Lab Section):</li>
+</ol>
+<p>The lab section demonstrates the use of the SVC() function from the sklearn.svm library in Python. It covers:</p>
+<p>Fitting linear SVMs with different values of the cost parameter C and observing the impact on the decision boundary and support vectors.</p>
+<p>Handling linearly separable and non-linearly separable data. Using non-linear kernels (“poly” and “rbf”) and tuning their parameters (degree, gamma, and C) using cross-validation (GridSearchCV).</p>
+<p>Generating and interpreting ROC curves using RocCurveDisplay.from_estimator() and the decision_function() method to evaluate classifier performance at different thresholds. Briefly illustrating multi-class classification with decision_function_shape.</p>
+<p>Applying a linear SVM to a high-dimensional gene expression dataset (Khan data), noting the suitability of a linear kernel when the number of features is much larger than the number of observations.</p>
+</section>
 <section id="slides-and-chapter" class="level2">
 <h2 class="anchored" data-anchor-id="slides-and-chapter">Slides and Chapter</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
+<p><a href="slides.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter Slides"><embed src="slides.pdf" class="col-page" style="width:5in;height:3.8in"></a></p>
 <figcaption>Chapter Slides</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="ch09.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Chapter"><embed src="ch09.pdf" class="col-page" width="800" height="1000"></a></p>
+<p><a href="ch09.pdf" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Chapter"><embed src="ch09.pdf" class="col-page" width="800" height="1000"></a></p>
 <figcaption>Chapter</figcaption>
 </figure>
 </div>
@@ -21127,7 +21652,7 @@ Tree based methods Video
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 
-<p>Outline of first video</p>
+<p>Outline of <a href="@fig-v8.1">first video</a></p>
 <ol type="1">
 <li>Introduction
 <ul>
@@ -21186,12 +21711,12 @@ Tree based methods Video
 </div>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fig-8.1" class="quarto-float quarto-figure quarto-figure-center anchored callout-2-contents callout-collapse collapse show callout-margin-content">
+<div class="no-row-height column-margin column-container"><div id="fig-v8.1" class="quarto-float quarto-figure quarto-figure-center anchored callout-2-contents callout-collapse collapse show callout-margin-content">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-v8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/QNnayf--_yk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v8.1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Tree based methods
 </figcaption>
 </figure>
@@ -21219,12 +21744,12 @@ More details on Trees
 </div>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fig-8.2" class="quarto-float quarto-figure quarto-figure-center anchored callout-3-contents callout-collapse collapse show callout-margin-content">
+<div class="no-row-height column-margin column-container"><div id="fig-v8.2" class="quarto-float quarto-figure quarto-figure-center anchored callout-3-contents callout-collapse collapse show callout-margin-content">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-v8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/JaoTOfTNOVk?list=PLoROMvodv4rPP6braWoRt5UCXYZ71GZIQ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-v8.2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: More details on Trees
 </figcaption>
 </figure>
@@ -24369,6 +24894,31 @@ Figure&nbsp;2: Examples and Framework
 </figcaption>
 </figure>
 </div></div>
+<ul>
+<li>7 Moving Beyond Linearity 289</li>
+<li>7.1 Polynomial Regression . . . . . . . . . . . . . . . . . . . . . 290</li>
+<li>7.2 Step Functions . . . . . . . . . . . . . . . . . . . . . . . . . 292</li>
+<li>7.3 Basis Functions . . . . . . . . . . . . . . . . . . . . . . . . 293</li>
+<li>7.4 Regression Splines . . . . . . . . . . . . . . . . . . . . . . . 294</li>
+<li>7.4.1 Piecewise Polynomials . . . . . . . . . . . . . . . . 294</li>
+<li>7.4.2 Constraints and Splines . . . . . . . . . . . . . . . 296</li>
+<li>7.4.3 The Spline Basis Representation . . . . . . . . . . 296</li>
+<li>7.4.4 Choosing the Number and Locations of the Knots . . . . . . 297</li>
+<li>7.4.5 Comparison to Polynomial Regression . . . . . . . 299</li>
+<li>7.5 Smoothing Splines . . . . . . . . . . . . . . . . . . . . . . . 300</li>
+<li>7.5.1 An Overview of Smoothing Splines . . . . . . . . . 300</li>
+<li>7.5.2 Choosing the Smoothing Parameter λ. . . . . . . 301</li>
+<li>7.6 Local Regression . . . . . . . . . . . . . . . . . . . . . . . . 303</li>
+<li>7.7 Generalized Additive Models . . . . . . . . . . . . . . . . . 305</li>
+<li>7.7.1 GAMs for Regression Problems . . . . . . . . . . . 306</li>
+<li>7.7.2 GAMs for Classification Problems . . . . . . . . . . 308</li>
+<li>7.8 Lab: Non-Linear Modeling . . . . . . . . . . . . . . . . . . 309</li>
+<li>7.8.1 Polynomial Regression and Step Functions . . . . . 310</li>
+<li>7.8.2 Splines . . . . . . . . . . . . . . . . . . . . . . . . . 315</li>
+<li>7.8.3 Smoothing Splines and GAMs . . . . . . . . . . . . 317</li>
+<li>7.8.4 Local Regression . . . . . . . . . . . . . . . . . . . 324</li>
+<li>7.9 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . 325</li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -36657,28 +37207,71 @@ Figure&nbsp;10: Principal Components Regression and Partial Least Squares
 
 
 
+<blockquote class="blockquote">
+<p>Entities should not be multiplied without necessity. – William of Ockham</p>
+</blockquote>
+<p>The chapter is 60 pages long and covers the following topics:</p>
+<ul>
+<li>Linear Model Selection and Regularization
+<ul>
+<li>Subset Selection
+<ul>
+<li>Best Subset Selection</li>
+<li>Stepwise Selection</li>
+<li>Choosing the Optimal Model</li>
+</ul></li>
+<li>Shrinkage Methods
+<ul>
+<li>Ridge Regression</li>
+<li>The Lasso</li>
+<li>Selecting the Tuning Parameter</li>
+</ul></li>
+<li>Dimension Reduction Methods
+<ul>
+<li>Principal Components Regression</li>
+<li>Partial Least Squares</li>
+</ul></li>
+<li>Considerations in High Dimensions
+<ul>
+<li>High-Dimensional Data</li>
+<li>What Goes Wrong in High Dimensions?</li>
+<li>Regression in High Dimensions</li>
+<li>Interpreting Results in High Dimensions</li>
+</ul></li>
+<li>Lab: Linear Models and Regularization Methods
+<ul>
+<li>Subset Selection Methods</li>
+<li>Ridge Regression and the Lasso</li>
+<li>PCR and PLS Regression</li>
+</ul></li>
+<li>Exercises</li>
+</ul></li>
+</ul>
+<p>There is lots of material in this chapter. Looking over it all I have a couple of pointers that seem to be outside of the scope of the book.</p>
+<p>Model Selection makes more sense to me when we are in a Bayesian setting c.f. <span class="citation" data-cites="probmods2">(Goodman, Tenenbaum, and Contributors 2016)</span> where the authors explain about the <a href="http://probmods.org/chapters/occams-razor.html">bayesian occam’s razor</a>. The more complex the model, the more data we need to fit it. In a Bayesian setting, we can use the posterior predictive distribution to evaluate how well a model fits the data. This is not covered in this chapter.</p>
+<p>The authors treat Shrinkage is a way to regularize the model. This is a way to reduce the variance of the model. However there are some additional facets or benefits to shrinkage. In hierarchical models, shrinkage is a way to borrow strength from the data and we can also use prior distributions to shrink the model. Priors and the ability to transfer probability mass from known to unknown parameters in a hierarchical model can become a form of <em>transfer learning</em>. As we develop insights into the data generating process, we may wish to add in out subjective beliefs about its behavior. USing an inductive bias, as embodied in hierarchical models, can help us to build models that can generalize faster or give useful predictions with fewer data points. This is called few-shot learning. Finally real world data is often sparse and unbalanced. Shrinkage can help us make more educated guesses what is going on in the regions of the data we have less observation.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-TL;DR - Linear Model Selection and Regularization
+TL;DR - Model Selection
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Model Selection and Regularization in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Model Selection and Regularization in a nutshell"></a></p>
-<figcaption>Model Selection and Regularization in a nutshell</figcaption>
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Model Selection in a nutshell"><img src="https://orenbochman.github.io/notes-islr/images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Model Selection in a nutshell"></a></p>
+<figcaption>Model Selection in a nutshell</figcaption>
 </figure>
 </div>
 <p>We cover four main topics in this chapter:</p>
 <ol type="1">
-<li>Model selection is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy).</li>
-<li>Shrinkage Methods are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as ridge regression and lasso, help control overfitting by shrinking coefficient estimates towards zero.</li>
-<li>Dimension Reduction Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization.</li>
-<li>Cross-validation is a powerful tool for selecting tuning parameters and comparing different models.</li>
+<li><strong>Model selection</strong> is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy).</li>
+<li><strong>Shrinkage Methods</strong> are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as <em>ridge regression</em> and <em>lasso</em>, help control overfitting by shrinking coefficient estimates towards zero.</li>
+<li><strong>Dimension Reduction</strong> Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization.</li>
+<li><strong>Cross-validation</strong> is a powerful tool for selecting tuning parameters and comparing different models.</li>
 </ol>
 <audio controls="1">
 <source src="podcast.mp3" data-external="1" type="audio/mpeg">
@@ -36686,7 +37279,7 @@ TL;DR - Linear Model Selection and Regularization
 </audio>
 </div>
 </div>
-<section id="terminology-for-model-selection-and-regularization" class="level2">
+<section id="terminology-for-model-selection-and-regularization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="terminology-for-model-selection-and-regularization">Terminology for Model Selection and Regularization</h2>
 <dl>
 <dt>Best Subset Selection</dt>
@@ -36694,22 +37287,37 @@ TL;DR - Linear Model Selection and Regularization
 A method that evaluates all possible subsets of predictor variables to find the model with the lowest training error.
 </dd>
 </dl>
-<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.1.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Best Subset Selection"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.1.png" class="img-fluid figure-img" alt="Best Subset Selection"></a></p>
+<figcaption>Best Subset Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Forward Stepwise Selection</dt>
 <dd>
 A method that starts with an empty model and iteratively adds the predictor that most improves the model fit at each step.
 </dd>
 </dl>
-<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.2.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Forward Stepwise Selection"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.2.png" class="img-fluid figure-img" alt="Forward Stepwise Selection"></a></p>
+<figcaption>Forward Stepwise Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Backward Stepwise Selection</dt>
 <dd>
 A method that starts with a model containing all predictors and iteratively removes the least significant predictor at each step.
 </dd>
 </dl>
-<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.3.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Backward Stepwise Selection"><img src="https://orenbochman.github.io/notes-islr/posts/ch06/alg6.3.png" class="img-fluid figure-img" alt="Backward Stepwise Selection"></a></p>
+<figcaption>Backward Stepwise Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Mallow’s Cp</dt>
 <dd>
 A statistic used to assess the fit of a model, taking into account both the residual sum of squares and the number of parameters.
@@ -36861,9 +37469,14 @@ The square root of the sum of squared elements of a vector.
 </div>
 
 
+
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-probmods2" class="csl-entry">
+Goodman, Noah D, Joshua B. Tenenbaum, and The ProbMods Contributors. 2016. <span>“<span class="nocase">Probabilistic Models of Cognition</span>.”</span> <a href="http://probmods.org/v2" class="uri">http://probmods.org/v2</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
   title = {Chapter 6: {Linear} {Model} {Selection} and {Regularization}},
   date = {2024-07-20},

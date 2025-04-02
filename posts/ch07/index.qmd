@@ -21,6 +21,31 @@ Examples and Framework
 :::
 
 
+
+- 7 Moving Beyond Linearity 289
+- 7.1 Polynomial Regression . . . . . . . . . . . . . . . . . . . . . 290
+- 7.2 Step Functions . . . . . . . . . . . . . . . . . . . . . . . . . 292
+- 7.3 Basis Functions . . . . . . . . . . . . . . . . . . . . . . . . 293
+- 7.4 Regression Splines . . . . . . . . . . . . . . . . . . . . . . . 294
+- 7.4.1 Piecewise Polynomials . . . . . . . . . . . . . . . . 294
+- 7.4.2 Constraints and Splines . . . . . . . . . . . . . . . 296
+- 7.4.3 The Spline Basis Representation . . . . . . . . . . 296
+- 7.4.4 Choosing the Number and Locations of the Knots . . .  . . . 297
+- 7.4.5 Comparison to Polynomial Regression . . . . . . . 299
+- 7.5 Smoothing Splines . . . . . . . . . . . . . . . . . . . . . . . 300
+- 7.5.1 An Overview of Smoothing Splines . . . . . . . . . 300
+- 7.5.2 Choosing the Smoothing Parameter λ. . . . . . . 301
+- 7.6 Local Regression . . . . . . . . . . . . . . . . . . . . . . . . 303
+- 7.7 Generalized Additive Models . . . . . . . . . . . . . . . . . 305
+- 7.7.1 GAMs for Regression Problems . . . . . . . . . . . 306
+- 7.7.2 GAMs for Classification Problems . . . . . . . . . . 308
+- 7.8 Lab: Non-Linear Modeling . . . . . . . . . . . . . . . . . . 309
+- 7.8.1 Polynomial Regression and Step Functions . . . . . 310
+- 7.8.2 Splines . . . . . . . . . . . . . . . . . . . . . . . . . 315
+- 7.8.3 Smoothing Splines and GAMs . . . . . . . . . . . . 317
+- 7.8.4 Local Regression . . . . . . . . . . . . . . . . . . . 324
+- 7.9 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . 325
+
 ::: {.callout-tip}  
 
 ## TL;DR - Beyond Linearity  {.unnumbered}

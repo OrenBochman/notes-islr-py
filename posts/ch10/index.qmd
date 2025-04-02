@@ -19,6 +19,39 @@ Opening Remarks
 Examples and Framework
 :::
 
+
+- 10 Deep Learning 
+  - 10.1 Single Layer Neural Networks 
+  - 10.2 Multilayer Neural Networks
+  - 10.3 Convolutional Neural Networks 
+    - 10.3.1 Convolution Layers
+    - 10.3.2 Pooling Layers 
+    - 10.3.3 Architecture of a Convolutional Neural Network
+    - 10.3.4 Data Augmentation 
+    - 10.3.5 Results Using a Pretrained Classifier 
+  - 10.4 Document Classification 
+  - 10.5 Recurrent Neural Networks 
+    - 10.5.1 Sequential Models for Document Classification 
+    - 10.5.2 Time Series Forecasting 
+    - 10.5.3 Summary of RNNs 
+  - 10.6 When to Use Deep Learning 
+  - 10.7 Fitting a Neural Network
+    - 10.7.1 Backpropagation
+    - 10.7.2 Regularization and Stochastic Gradient Descent
+    - 10.7.3 Dropout Learning 
+    - 10.7.4 Network Tuning 
+  - 10.8 Interpolation and Double Descent 
+  - 10.9 Lab: Deep Learning 
+    - 10.9.1 Single Layer Network on Hitters Data 
+    - 10.9.2 Multilayer Network on the MNIST Digit Data 
+    - 10.9.3 Convolutional Neural Networks 
+    - 10.9.4 Using Pretrained CNN Models 
+    - 10.9.5 IMDB Document Classification 
+    - 10.9.6 Recurrent Neural Networks 
+  - 10.10 Exercises
+
+
+
 ::: {.callout-tip}  
 
 ## TL;DR - Deep Learning {.unnumbered}
@@ -34,6 +67,246 @@ Deep learning is a subfield of machine learning that is concerned with algorithm
 
 :::
 
+## Glossary
+
+Activation Function
+: A nonlinear function applied to the weighted sum of inputs in a neural network unit. It introduces nonlinearity, allowing the network to model complex relationships. Common examples include sigmoid and ReLU.
+
+Bag-of-Words
+: A simple method for featurizing text data by representing a document as a collection of its words, disregarding grammar and word order but keeping track of word frequency (or just presence/absence).
+
+Bag-of-n-grams
+: An extension of the bag-of-words model that considers sequences of n consecutive words (n-grams) as features, capturing some local context within the text.
+
+Backpropagation
+: An algorithm used to efficiently compute the gradient of the loss function with respect to the weights of a neural network. It uses the chain rule to propagate error backwards through the network layers.
+
+Dropout
+: A regularization technique where, during training, a randomly selected proportion of neurons are "dropped out" (ignored) in each forward pass. This helps prevent overfitting by reducing co-adaptation of neurons.
+
+Epoch
+: One complete pass of the entire training dataset through the learning algorithm.
+
+Featurize
+: The process of transforming raw data into a set of features that can be used by a machine learning model.
+
+Hidden Layer
+: A layer in a neural network between the input and output layers. It consists of neurons that perform computations and pass their activations to the next layer.
+
+Lag
+: In time series analysis, the number of time units between an observation and a previous observation. It's used to consider past values as predictors.
+
+Learning Rate
+: A hyperparameter that controls the step size at each iteration while moving towards a minimum of a loss function during gradient descent.
+
+Linear Unit (ReLU)
+: Rectified Linear Unit, an activation function defined as g(z) = max(0, z). It is popular for its efficiency and ability to alleviate the vanishing gradient problem.
+
+Local Minimum
+: A point in the optimization landscape where the loss function is lower than at any nearby points, but not necessarily the global minimum.
+
+MNIST
+: A widely used dataset of handwritten digits, commonly used for training and testing image classification models.
+
+Recurrent Neural Network (RNN): A type of neural network designed for processing sequential data. It has feedback connections that allow it to maintain a hidden state, enabling it to learn temporal dependencies.
+
+Ridge Regularization
+: A regularization technique that adds a penalty term to the loss function proportional to the square of the magnitude of the weights. This encourages smaller weights and helps prevent overfitting.
+
+Sigmoid Function
+: A type of activation function that maps any input to a value between 0 and 1. It was historically popular but has been largely replaced by ReLU in hidden layers.
+
+Softmax Activation Function
+: An activation function typically used in the output layer of a multi-class classification model. It converts a vector of raw scores into a probability distribution over the classes.
+
+Sparse Matrix Format
+: A way of storing matrices where most of the elements are zero. It only stores the non-zero elements and their indices, saving memory and computation.
+
+Word Embedding
+: A dense vector representation of a word in a continuous vector space, where semantically similar words are located close to each other. Techniques like word2vec and GloVe are used to create these embeddings.
+
+## Outline
+
+Briefing Document: Deep Learning Concepts and Applications
+This briefing document summarizes key concepts and applications of deep learning as presented in the provided excerpts from "ch10.pdf" and "slides.pdf". The main themes covered include the architecture of neural networks, activation functions, training methods, regularization techniques, recurrent neural networks for sequence data, and the phenomenon of double descent.
+
+1. Single Layer and Multilayer Neural Networks
+The sources introduce neural networks as a way to create transformations of input data to achieve tasks like classification.
+
+Single Layer Networks: A single layer network derives new features by computing linear combinations of the input features ($X$) and then applying a nonlinear activation function ($g(z)$). The output is then a linear combination of these derived features. The general form is given by:
+
+$$
+A_k = h_k(X) = g(w_{k0} + \sum_{j=1}^{p} w_{kj}X_j)
+$$ 
+
+Activation Functions: These functions introduce non-linearity into the network. Two popular examples highlighted are the sigmoid function and the Rectified Linear Unit (ReLU) function.
+> "FIGURE 10.2. Activation functions. The piecewise-linear ReLU function is pop-ular for its efficiency and computability. We have scaled it down by a factor of five for ease of comparison." 
+
+> "Activation functions in hidden layers are typically nonlinear, otherwise the model collapses to a linear model." ("slides.pdf") ReLU is noted for its efficiency compared to sigmoid. "A ReLU activation can be computed and stored more efficiently than a sigmoid activation." 
+
+Multilayer Networks: These networks consist of multiple "hidden layers" where the activations of one layer serve as the input for the next. This allows for learning more complex and hierarchical representations of the data.
+
+> "The model depicted in Figure 10.1 derives five new features by computing five different linear combinations of X, and then squashes each through an activation function g(·) to transform it. The final model is linear in these derived variables." ("ch10.pdf" - referring to a single layer, but the principle extends) Equation 10.10 and 10.11 illustrate the computation of activations in the first and second hidden layers respectively:
+
+$$
+A^{(1)}k = h^{(1)}k (X) = g(w^{(1)}{k0} + \sum{j=1}^{p} w^{(1)}{kj} X_j)$ ("ch10.pdf") $A^{(2)}$ = h^{(2)}$ (X) = g(w^{(2)}{$0} + \sum_{k=1}^{K_1} w^{(2)}_{$k} A^{(1)}_k )
+$$ 
+
+Output Layer for Classification: For multi-class classification, a softmax activation function is used in the output layer to produce probabilities for each class.
+
+$$
+f_m(X) = Pr(Y = m|X) = \frac{e^{Z_m}}{\sum_{l=0}^{9} e^{Z_l}}
+$$
+
+where $Z_m$ is a linear combination of the activations from the last hidden layer.
+
+2. Application: MNIST Handwritten Digit Classification
+The MNIST dataset is used as an example of a classification task using a large dense network.
+
+The dataset consists of $28 \times 28 = 784$ pixel grayscale images of digits 0-9.
+
+A two-layer network with 256 units in the first hidden layer and 128 units in the second hidden layer, followed by a 10-unit output layer (for the 10 digits), is described in the slides. as an example. This network has 235,146 parameters (weights and biases).
+
+> "We build a two-layer network with 256 units at first layer, 128 units at second layer, and 10 units at output layer. Along with intercepts (called biases) there are 235,146 parameters (referred to as weights)"
+
+The training process involves using a loss function tailored for multiclass classification.
+
+3. Application: IMDB Document Sentiment Classification
+This section focuses on classifying movie reviews as positive or negative sentiment.
+
+Featurization: Bag-of-Words: A common method to represent text documents as feature vectors is the bag-of-words model. This involves creating a binary vector for each document based on the presence or absence of words from a predefined dictionary (e.g., the 10,000 most frequent words).
+
+> "The simplest and most common featurization is the bag-of-words model. We score each document for the presence or absence of each of the words in a language dictionary... If the dictionary contains M words, that means for each document we create a binary feature vector of length M, and score a 1 for every word present, and 0 otherwise." 
+
+The resulting feature matrix is often sparse due to the relatively small number of unique words in each document compared to the dictionary size.
+
+> "The resulting training feature matrix X has dimension 25,000!10,000, but only 1.3% of the binary entries are non-zero. We call such a matrix sparse, because most of the values are the same (zero in this case)"
+
+The bag-of-words model ignores the order and context of words. Bag-of-n-grams is mentioned as a way to capture some context by considering co-occurrences of $n$ consecutive words.
+
+> "The bag-of-words model summarizes a document by the words present, and ignores their context. There are at least two popular ways to take the context into account: * The bag-of-n-grams model. For example, a bag of 2-grams records the consecutive co-occurrence of every distinct pair of words."
+
+The performance of a lasso logistic regression model is compared to a two-hidden-layer neural network (with ReLU units) on this task. The "slides.pdf" visually presents this comparison, showing accuracy over different levels of lasso regularization ($\lambda$) and training epochs for the neural network.
+
+4. Recurrent Neural Networks (RNNs) for Sequence Data
+RNNs are introduced as models designed to handle sequential data where the order of elements is important, such as text documents, time series, and speech.
+
+Sequential Processing: RNNs process input sequences one element at a time, maintaining a hidden state that is updated at each step based on the current input and the previous hidden state.
+
+> "The network processes the input sequence X sequentially; each X$ feeds into the hidden layer, which also has as input the activation vector A$#1 from the previous element in the sequence, and produces the current activation vector A$." 
+
+Shared Weights: A key characteristic of simple RNNs is the use of the same set of weights ($W$, $U$, and $B$) at each step of the sequence processing, hence the term "recurrent".
+
+> "The same collections of weights W, U and B are used as each element of the sequence is processed." 
+
+The hidden layer activations $A^$$ evolve over time, representing a "memory" of the sequence processed so far.
+
+> "The A$ sequence represents an evolving model for the response that is updated as each element X$ is processed."
+
+The output $O^$$ is produced at each step, but often only the last output $O^L$ is relevant for tasks like document classification.
+
+The detailed computation for the $k^{th}$ unit in the hidden layer at time step $$$ is given by:
+
+$$
+A^$_k = g ( w_{k_0} + \sum_{j=1}^{p} w_{kj}X^s_j + \sum_{s=1}^{K} u_{ks}A^{s-1}_s )
+$$
+
+Word Embeddings: For processing text with RNNs, one-hot encoding of words (resulting in very sparse input vectors) is often replaced by lower-dimensional, dense word embeddings. These embeddings capture semantic relationships between words.
+
+> "This results in an extremely sparse feature representation, and would not work well. Instead we use a lower-dimensional pretrained word embedding matrix E ($m \times 10K$, next slide). This reduces the binary feature vector of length 10K to a real feature vector of dimension $m \times 10K$ (e.g. $m$ in the low hundreds.)" ("slides.pdf") Examples of pretrained word embeddings mentioned are word2vec and GloVe. "These are built from a very large corpus of documents by a variant of principal components analysis... The idea is that the positions of words in the embedding space preserve semantic meaning; e.g. synonyms should appear near each other."
+
+5. Application: Time Series Forecasting with RNNs
+RNNs can also be used for forecasting time series data. The example provided is predicting the log trading volume of the NYSE.
+
+Problem Formulation: A time series of log trading volume ($v_t$), Dow Jones return ($r_t$), and log volatility ($z_t$) is used. The goal is to predict $v_t$ based on past values of these three series.
+
+Mini-Series Input: Short sequences (mini-series) of length $L$ (the lag) are extracted from the time series to serve as input to the RNN. Each input vector $X^$$ at time step $$$ contains the lagged values of $v$, $r$, and $z$. The corresponding target $Y$ is the value of $v$ at the next time step.
+
+$$
+X_1 = 
+\begin{pmatrix}
+   v_{t-L} \\ r_{t-L} \\ z_{t-L} 
+\end{pmatrix}, 
+
+X_2 = \begin{pmatrix}
+  v_{t-L+1} \\ r_{t-L+1} \\ z_{t-L+1} 
+\end{pmatrix}, 
+
+\cdots,
+
+X_L = 
+\begin{pmatrix} 
+  v_{t-1} \\ r_{t-1} \\ z_{t-1} 
+\end{pmatrix}, and Y = v_t
+$$
+
+The autocorrelation function of log trading volume shows significant correlation at various lags, suggesting that past values are informative for prediction.
+
+> "Figure 10.15 shows the autocorrelation function for all lags up to 37, and we see considerable correlation."
+
+The performance of an RNN forecaster is compared to a "straw man" method (using yesterday's log trading volume as today's prediction) and autoregression models.
+
+6. Fitting Neural Networks and Optimization
+The process of training neural networks involves minimizing a loss function by adjusting the network's parameters (weights and biases).
+
+Non-convex Optimization: The objective function for fitting neural networks is generally non-convex, meaning there can be multiple local minima.
+
+> "The objective in (10.23) looks simple enough, but because of the nested arrangement of the parameters and the symmetry of the hidden units, it is not straightforward to minimize. The problem is nonconvex in the param-eters, and hence there are multiple solutions."
+
+Gradient Descent: A common optimization algorithm is gradient descent, which iteratively updates the parameters in the direction opposite to the gradient of the loss function.
+"$\theta^{m+1} \leftarrow \theta^{m} - \rho \nabla R(\theta^{m})$" ("slides.pdf") where $\rho$ is the learning rate.
+Backpropagation: The gradients of the loss function with respect to the network's parameters are efficiently computed using the chain rule of differentiation, a process known as backpropagation.
+
+> "So the act of differentiation assigns a fraction of the residual to each of the parameters via the chain rule — a process known as backpropagation in the neural network backprop-" 
+
+The authors provide the formulas for the derivatives with respect to the output layer weights ($#k$) and the input layer weights ($w{kj}$). "$\frac{\partial R_i(\theta)}{\partial \beta_k} = -(y_i - f_\theta(x_i)) \cdot g(z_{ik})$" ("slides.pdf" - using $\beta_k$ notation) "$\frac{\partial R_i(\theta)}{\partial w_{kj}} = -(y_i - f_\theta(x_i)) \cdot \beta_k \cdot g'(z_{ik}) \cdot x_{ij}$" ("slides.pdf" - using $\beta_k$ notation)
+
+Stochastic Gradient Descent (SGD): Instead of computing the gradient over the entire dataset, SGD uses small random minibatches of data to update the parameters, which can be more efficient and help escape local minima.
+
+> "Stochastic gradient descent. Rather than compute the gradient using all the data, use a small minibatch drawn at random at each step. E.g. for MNIST data, with n = 60K, we use minibatches of 128 observations." 
+
+7. Regularization Techniques
+
+Regularization methods are used to prevent overfitting, where the model learns the training data too well and performs poorly on unseen data.
+
+Ridge and Lasso Regularization: These techniques add a penalty term to the loss function based on the magnitude of the weights, encouraging smaller weights and simpler models. Ridge uses the squared $L_2$ norm, while Lasso uses the $L_1$ norm.
+
+> "The first row in Table 10.1 uses ridge regularization on the weights. This is achieved by augmenting the objective function (10.14) with a penalty term: 
+$$
+R(\theta; \lambda) = ... + \lambda \sum_j ||\theta_j||_2^2
+$$
+
+> "Lasso regularization is also popular as an additional form of regularization, or as an alternative to ridge." 
+
+Dropout: During training, dropout randomly "removes" (sets to zero) a fraction of the neurons in a layer with a certain probability ($\phi$). The weights of the remaining neurons are scaled up. This prevents co-adaptation of neurons and acts as a form of regularization.
+
+> "At each SGD update, randomly remove units with probability $\phi$, and scale up the weights of those retained by $1/(1- \phi)$ to compensate."
+
+Early Stopping: Monitoring the performance of the model on a validation set during training and stopping when the validation error starts to increase is another common regularization technique.
+
+> "We see that the value of the validation objective actually starts to increase by 30 epochs, so early stopping can also be used as an additional early" ("ch10.pdf" - referring to MNIST training).
+
+8. Interpolation and Double Descent
+
+The authors touch upon the phenomenon of "double descent," where the test error of a model can initially increase as model complexity increases (the usual overfitting behavior), but then decrease again as complexity is further increased, even beyond the point where the model perfectly fits the training data (interpolation threshold).
+
+This is illustrated with a natural spline fitting example where the number of degrees of freedom ($d$) controls the model complexity.
+
+When $d$ equals the number of training points ($n=20$ in the example), the training error becomes zero as the spline interpolates the data. The test error typically peaks around this point.
+
+However, as $d$ is increased further ($d > n$), the test error can decrease again, leading to the "double descent" curve.
+
+> "The training error hits zero when the degrees of freedom coincides with the sample size n = 20, the “interpolation threshold”, and remains zero thereafter. The test error increases dramatically at this threshold, but then descends again to a reasonable value before finally increasing again." 
+
+The reason for the descent after interpolation is related to finding minimum-norm solutions in over-parameterized models.
+
+> "When d > 20, the least squares regression of Y onto d basis functions is not unique: there are an infinite number of least squares coefficient es-timates that achieve zero error. To select among them, we choose the one with the smallest sum of squared coefficients," ("ch10.pdf") "Increasing the number of units or layers and again training till zero error sometimes gives even better out-of-sample error. What happened to overfitting and the usual bias-variance trade-off?"
+
+9. Practical Implementation with PyTorch
+
+The chapter includes a "Lab: Deep Learning" section demonstrating the implementation of neural networks using the PyTorch library for tasks like predicting baseball player salaries, classifying MNIST digits, classifying CIFAR-100 images, and performing sentiment analysis on the IMDB dataset, as well as time series forecasting on NYSE data. This section details the creation of model architectures, data loading, training loops, and evaluation using PyTorch modules like nn.Module, DataLoader, and Trainer from pytorch_lightning.
+
+This briefing provides a high-level overview of the key concepts and applications of deep learning discussed in the provided sources. It highlights the fundamental building blocks of neural networks, common training and regularization strategies, and their application to various types of data, including image, text, and time series. The mention of the double descent phenomenon challenges traditional understanding of the bias-variance trade-off in modern deep learning.
 
 ## Slides and Chapter
 

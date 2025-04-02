@@ -6,7 +6,6 @@ categories: [notes,edx,podcast]
 date: 2024-07-20
 ---
 
-
 ::: {#fig-v6.1 .column-margin}
 {{< video https://youtu.be/nsv5rEV3mVI?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e >}}
 
@@ -67,18 +66,54 @@ Dimension Reduction Methods
 Principal Components Regression and Partial Least Squares
 :::
 
+> Entities should not be multiplied without necessity. -- William of Ockham
+
+
+
+The chapter is 60 pages long and covers the following topics:
+
+- Linear Model Selection and Regularization
+    - Subset Selection 
+        - Best Subset Selection 
+        - Stepwise Selection 
+        - Choosing the Optimal Model 
+    - Shrinkage Methods
+        - Ridge Regression 
+        - The Lasso
+        - Selecting the Tuning Parameter
+    - Dimension Reduction Methods 
+        - Principal Components Regression 
+        - Partial Least Squares 
+    - Considerations in High Dimensions 
+        - High-Dimensional Data 
+        - What Goes Wrong in High Dimensions? 
+        - Regression in High Dimensions 
+        - Interpreting Results in High Dimensions 
+    - Lab: Linear Models and Regularization Methods 
+        - Subset Selection Methods 
+        - Ridge Regression and the Lasso 
+        - PCR and PLS Regression 
+    - Exercises 
+
+There is lots of material in this chapter. Looking over it all I have a couple of pointers that seem to be outside of the scope of the book.
+
+Model Selection makes more sense to me when we are in a Bayesian setting c.f. [@probmods2] where the authors explain
+about the [bayesian occam's razor](http://probmods.org/chapters/occams-razor.html). The more complex the model, the more data we need to fit it. In a Bayesian setting, we can use the posterior predictive distribution to evaluate how well a model fits the data. This is not covered in this chapter.
+
+The authors treat Shrinkage is a way to regularize the model. This is a way to reduce the variance of the model. However there are some additional facets or benefits to shrinkage. In hierarchical models, shrinkage is a way to borrow strength from the data and we can also use prior distributions to shrink the model. Priors and the ability to transfer probability mass from known to unknown parameters in a hierarchical model can become a form of *transfer learning*. As we develop insights into the data generating process, we may wish to add in out subjective beliefs about its behavior. USing an inductive bias, as embodied in hierarchical models, can help us to build models that can generalize faster or give useful predictions with fewer data points. This is called few-shot learning. Finally real world data is often sparse and unbalanced. Shrinkage can help us make more educated guesses what is going on in the regions of the data we have less observation.
+
 ::: {.callout-tip}  
 
-## TL;DR - Linear Model Selection and Regularization {.unnumbered}
+## TL;DR - Model Selection {.unnumbered}
 
-![Model Selection and Regularization in a nutshell](/images/in_a_nutshell.jpg)
+![Model Selection in a nutshell](/images/in_a_nutshell.jpg)
 
 We cover four main topics in this chapter: 
 
-1. Model selection is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy). 
-2. Shrinkage Methods are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as ridge regression and lasso, help control overfitting by shrinking coefficient estimates towards zero. 
-3. Dimension Reduction Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization. 
-4. Cross-validation is a powerful tool for selecting tuning parameters and comparing different models.
+1. **Model selection** is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy). 
+2. **Shrinkage Methods** are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as *ridge regression* and *lasso*, help control overfitting by shrinking coefficient estimates towards zero. 
+3. **Dimension Reduction** Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization. 
+4. **Cross-validation** is a powerful tool for selecting tuning parameters and comparing different models.
 
 <audio controls="1">
   <source src="podcast.mp3" data-external="1" type="audio/mpeg">
@@ -92,18 +127,17 @@ We cover four main topics in this chapter:
 Best Subset Selection
 : A method that evaluates all possible subsets of predictor variables to find the model with the lowest training error.
 
-
-![](alg6.1.png)
+![Best Subset Selection](alg6.1.png){.column-margin}
 
 Forward Stepwise Selection
 : A method that starts with an empty model and iteratively adds the predictor that most improves the model fit at each step.
 
-![](alg6.2.png)
+![Forward Stepwise Selection](alg6.2.png){.column-margin}
 
 Backward Stepwise Selection
 : A method that starts with a model containing all predictors and iteratively removes the least significant predictor at each step.
 
-![](alg6.3.png)
+![Backward Stepwise Selection](alg6.3.png){.column-margin}
 
 Mallow's Cp
 : A statistic used to assess the fit of a model, taking into account both the residual sum of squares and the number of parameters.

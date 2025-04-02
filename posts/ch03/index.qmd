@@ -8,36 +8,6 @@ date: 2024-06-21
 
 > “Essentially, all models are wrong, but some are useful” --- [George Box](https://en.wikipedia.org/wiki/George_E._P._Box)
 
-::: callout-tip
-## TL;DR - Linear Regression :chart_with_upwards_trend: :chart_with_downwards_trend: {.unnumbered}
-
-![Linear Regression in a nutshell](/images/in_a_nutshell.jpg)
-
--   Linear regression is the fundamental statistical technique for modeling the relationship between a predictor variable and a response variable. [In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.]{.mark}
--   The model's accuracy is assessed :see_no_evil: :hear_no_evil: :speak_no_evil: via metrics like:
-    -   the **Residual Standard Error** (RSE) :broken_heart:
-    -   the adjusted $R^2$ :kiss:\
-    -   the fantastic **F-statistic**, :sparkling_heart: and
-    -   the black :sheep: of statistics - **p-values**. :scream:
-
-The [coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant]{.mark} :yawning_face: . Qualitative predictors are incorporated using :dumpling: dummy variables, and interactions between predictors can capture complex relationships.
-
-Model diagnostics help identify potential issues like **non-linearity** :vampire:, **heteroscedasticity** :space_invader:, **outliers** :alien:, **high leverage points** :ghost:, and **collinearity** :zombie:.
-
-Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. :headphones:
-
-<audio controls="1">
-
-<source src="podcast.mp3" data-external="1" type="audio/mpeg">
-
-</source>
-
-</audio>
-:::
-
-> “The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” --- [Fred Mosteller](https://en.wikipedia.org/wiki/Frederick_Mosteller)[^1] and [John Tukey](https://en.wikipedia.org/wiki/John_Tukey)
-
-[^1]: studied attribution problem of the disputed Federalist Papers and authored the amazing "Fifty Challenging Problems in Probability"
 
 The chapter is 64 pages long and covers the following topics:
 
@@ -57,6 +27,35 @@ The chapter is 64 pages long and covers the following topics:
     -   Comparison of Linear Regression with K-Nearest Neighbors
 -   There is a lab:
     -   [Lab: Linear Regression](Ch03-linreg-lab.qmd)
+
+
+::: callout-tip
+## TL;DR - Linear Regression :chart_with_upwards_trend: :chart_with_downwards_trend: {.unnumbered}
+
+![Linear Regression in a nutshell](/images/in_a_nutshell.jpg)
+
+-   Linear regression is the fundamental statistical technique for modeling the relationship between a predictor variable and a response variable. [In this model we assume a linear relationship between the predictor and the response, represented by a straight line. The goal is to estimate the coefficients of the model that minimize the difference between observed and predicted values.]{.mark}
+-   The model's accuracy is assessed :see_no_evil: :hear_no_evil: :speak_no_evil: via metrics like:
+    -   the **Residual Standard Error** (RSE) :broken_heart:
+    -   the adjusted $R^2$ :kiss:\
+    -   the fantastic **F-statistic**, :sparkling_heart: and
+    -   the black :sheep: of statistics - **p-values**. :scream:
+
+The [coefficients are interpreted as the average change in the response for a one-unit increase in the predictor, holding all other variables constant]{.mark} :yawning_face: . Qualitative predictors are incorporated using :dumpling: dummy variables, and interactions between predictors can capture complex relationships.
+
+Model diagnostics help identify potential issues like **non-linearity** :vampire:, **heteroscedasticity** :space_invader:, **outliers** :alien:, **high leverage points** :ghost:, and **collinearity** :zombie:.
+
+Here is a light-hearted deep dive into regression to help you ease into this chapter on linear regression. :headphones:
+
+<audio controls="1">
+<source src="podcast.mp3" data-external="1" type="audio/mpeg">
+</source>
+</audio>
+:::
+
+> “The only way to find out what will happen when a complex system is disturbed is to disturb the system, not merely to observe it passively” --- [Fred Mosteller](https://en.wikipedia.org/wiki/Frederick_Mosteller)[^1] and [John Tukey](https://en.wikipedia.org/wiki/John_Tukey)
+
+[^1]: studied attribution problem of the disputed Federalist Papers and authored the amazing "Fifty Challenging Problems in Probability"
 
 ## Linear Regression Orientation ::old_key::
 

@@ -48,6 +48,22 @@ Lab: Cross Validation
 Lab: Bootstrap
 :::
 
+The chapter is 28 pages long and covers the following topics:
+
+- Resampling Methods
+    - 5.1 Cross-Validation 
+        - 5.1.1 The Validation Set Approach 
+        - 5.1.2 Leave-One-Out Cross-Validation 
+        - 5.1.3 k-Fold Cross-Validation 
+        - 5.1.4 Bias-Variance Trade-Off for k-Fold Cross-Validation 
+        - 5.1.5 Cross-Validation on Classification Problems 
+    - 5.2 The Bootstrap 
+    - 5.3 Lab: Cross-Validation and the Bootstrap 
+        - 5.3.1 The Validation Set Approach 
+        - 5.3.2 Cross-Validation 
+        - 5.3.3 The Bootstrap 
+    - 5.4 Exercises 
+
 ::: {.callout-tip}  
 
 ## TL;DR - Resampling Methods {.unnumbered}
@@ -61,7 +77,6 @@ Resampling methods are indispensable tools for data scientists. Cross-validation
 > "LOOCV sometimes useful, but typically doesn’t shake up the data enough. The estimates from each fold are highly correlated and hence their average can have high variance."
 
 > "In cross-validation, each of the K validation folds is distinct from the other K − 1 folds used for training: there is no overlap. This is crucial for its success."
-
 
 <audio controls="1">
   <source src="podcast.mp3" data-external="1" type="audio/mpeg">
@@ -81,7 +96,7 @@ Test error rate
 : the average error that results from using a ml method to predict the response on a new observation— that is, a measurement that was not used in training the method.
 
 Training error rate 
-: the error calculated by applying the ml method to the observations used in its training. This is often dramaticaly less then the test error rate.
+: the error calculated by applying the ml method to the observations used in its training. This is often dramatically less then the test error rate.
 
 
 Cross-validation 
@@ -113,26 +128,24 @@ k-fold CV
 
 ## rethinking test train and validation sets {.unnumbered}
 
-The definition I took away from this course were confused. I want to clarify things abit here.
+The definition I took away from this course were confused. I want to clarify things a bit here.
 In the ML world, we have do a three way split as follows.
 
-1. training set - used to learn the papemeters.
+1. training set - used to learn the parameters.
 2. test set - used to evaluate the model capacity to generalize to new data.
 3. validation set - used to tune the hyperparameters of the model.
 
 Once we are finished tuning the hyperparameters we will train the model on all the data using our best hyperparameters and use that for production.
 
-In statitical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.
+In statistical learning we learned about a number of approaches to do the same thing. The validation set approach, LOOCV, and k-fold CV.
 
-The validation set approach is the simplest but can suffer from if the split underrepresents classes of the data.
+The validation set approach is the simplest but can suffer from if the split underrepresented classes of the data.
 
 LOOCV is computationally expensive for any but the smallest datasets - unless you use a clever trick to estimate it using a single training run. Using such tricks is quite common for work for bayesian hierarchical models. However as the chapter suggests there is also problem of correlation in LOOCV that can lead to high variance in the test error estimate. 
 
 k-fold CV is the most common approach and is used in most ML libraries. It is a good balance between computational cost and accuracy. However it is still useful to consider how to pick the k-folds so that they faithfully represent all the classes in the data.
 
 :::
-
-
 
 
 ## Outline of Resampling Methods

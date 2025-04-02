@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -566,28 +586,71 @@ Figure&nbsp;10: Principal Components Regression and Partial Least Squares
 
 
 
+<blockquote class="blockquote">
+<p>Entities should not be multiplied without necessity. – William of Ockham</p>
+</blockquote>
+<p>The chapter is 60 pages long and covers the following topics:</p>
+<ul>
+<li>Linear Model Selection and Regularization
+<ul>
+<li>Subset Selection
+<ul>
+<li>Best Subset Selection</li>
+<li>Stepwise Selection</li>
+<li>Choosing the Optimal Model</li>
+</ul></li>
+<li>Shrinkage Methods
+<ul>
+<li>Ridge Regression</li>
+<li>The Lasso</li>
+<li>Selecting the Tuning Parameter</li>
+</ul></li>
+<li>Dimension Reduction Methods
+<ul>
+<li>Principal Components Regression</li>
+<li>Partial Least Squares</li>
+</ul></li>
+<li>Considerations in High Dimensions
+<ul>
+<li>High-Dimensional Data</li>
+<li>What Goes Wrong in High Dimensions?</li>
+<li>Regression in High Dimensions</li>
+<li>Interpreting Results in High Dimensions</li>
+</ul></li>
+<li>Lab: Linear Models and Regularization Methods
+<ul>
+<li>Subset Selection Methods</li>
+<li>Ridge Regression and the Lasso</li>
+<li>PCR and PLS Regression</li>
+</ul></li>
+<li>Exercises</li>
+</ul></li>
+</ul>
+<p>There is lots of material in this chapter. Looking over it all I have a couple of pointers that seem to be outside of the scope of the book.</p>
+<p>Model Selection makes more sense to me when we are in a Bayesian setting c.f. <span class="citation" data-cites="probmods2">(<a href="#ref-probmods2" role="doc-biblioref">Goodman, Tenenbaum, and Contributors 2016</a>)</span> where the authors explain about the <a href="http://probmods.org/chapters/occams-razor.html">bayesian occam’s razor</a>. The more complex the model, the more data we need to fit it. In a Bayesian setting, we can use the posterior predictive distribution to evaluate how well a model fits the data. This is not covered in this chapter.</p>
+<p>The authors treat Shrinkage is a way to regularize the model. This is a way to reduce the variance of the model. However there are some additional facets or benefits to shrinkage. In hierarchical models, shrinkage is a way to borrow strength from the data and we can also use prior distributions to shrink the model. Priors and the ability to transfer probability mass from known to unknown parameters in a hierarchical model can become a form of <em>transfer learning</em>. As we develop insights into the data generating process, we may wish to add in out subjective beliefs about its behavior. USing an inductive bias, as embodied in hierarchical models, can help us to build models that can generalize faster or give useful predictions with fewer data points. This is called few-shot learning. Finally real world data is often sparse and unbalanced. Shrinkage can help us make more educated guesses what is going on in the regions of the data we have less observation.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-TL;DR - Linear Model Selection and Regularization
+TL;DR - Model Selection
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Model Selection and Regularization in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Model Selection and Regularization in a nutshell"></a></p>
-<figcaption>Model Selection and Regularization in a nutshell</figcaption>
+<p><a href="../../images/in_a_nutshell.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Model Selection in a nutshell"><img src="../../images/in_a_nutshell.jpg" class="img-fluid figure-img" alt="Model Selection in a nutshell"></a></p>
+<figcaption>Model Selection in a nutshell</figcaption>
 </figure>
 </div>
 <p>We cover four main topics in this chapter:</p>
 <ol type="1">
-<li>Model selection is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy).</li>
-<li>Shrinkage Methods are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as ridge regression and lasso, help control overfitting by shrinking coefficient estimates towards zero.</li>
-<li>Dimension Reduction Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization.</li>
-<li>Cross-validation is a powerful tool for selecting tuning parameters and comparing different models.</li>
+<li><strong>Model selection</strong> is the process of choosing the best model from a set of candidate models. It involves evaluating trade-offs between model complexity (number of predictors) and model fit (accuracy).</li>
+<li><strong>Shrinkage Methods</strong> are techniques that constrain or regularize coefficient estimates, effectively shrinking them towards zero. This helps reduce variance and improve prediction accuracy, particularly in high-dimensional datasets. Regularization techniques, such as <em>ridge regression</em> and <em>lasso</em>, help control overfitting by shrinking coefficient estimates towards zero.</li>
+<li><strong>Dimension Reduction</strong> Methods like principal component regression and partial least squares, reduce the number of predictors used in a model, thus simplifying it and potentially improving performance. Understanding the bias-variance trade-off is essential for selecting the appropriate level of model complexity and regularization.</li>
+<li><strong>Cross-validation</strong> is a powerful tool for selecting tuning parameters and comparing different models.</li>
 </ol>
 <audio controls="1">
 <source src="podcast.mp3" data-external="1" type="audio/mpeg">
@@ -595,7 +658,7 @@ TL;DR - Linear Model Selection and Regularization
 </audio>
 </div>
 </div>
-<section id="terminology-for-model-selection-and-regularization" class="level2">
+<section id="terminology-for-model-selection-and-regularization" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="terminology-for-model-selection-and-regularization">Terminology for Model Selection and Regularization</h2>
 <dl>
 <dt>Best Subset Selection</dt>
@@ -603,22 +666,37 @@ TL;DR - Linear Model Selection and Regularization
 A method that evaluates all possible subsets of predictor variables to find the model with the lowest training error.
 </dd>
 </dl>
-<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="alg6.1.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Best Subset Selection"><img src="alg6.1.png" class="img-fluid figure-img" alt="Best Subset Selection"></a></p>
+<figcaption>Best Subset Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Forward Stepwise Selection</dt>
 <dd>
 A method that starts with an empty model and iteratively adds the predictor that most improves the model fit at each step.
 </dd>
 </dl>
-<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="alg6.2.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Forward Stepwise Selection"><img src="alg6.2.png" class="img-fluid figure-img" alt="Forward Stepwise Selection"></a></p>
+<figcaption>Forward Stepwise Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Backward Stepwise Selection</dt>
 <dd>
 A method that starts with a model containing all predictors and iteratively removes the least significant predictor at each step.
 </dd>
 </dl>
-<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="alg6.3.png" class="img-fluid"></a></p>
-<dl>
+
+<div class="no-row-height column-margin column-container"><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="alg6.3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Backward Stepwise Selection"><img src="alg6.3.png" class="img-fluid figure-img" alt="Backward Stepwise Selection"></a></p>
+<figcaption>Backward Stepwise Selection</figcaption>
+</figure>
+</div></div><dl>
 <dt>Mallow’s Cp</dt>
 <dd>
 A statistic used to assess the fit of a model, taking into account both the residual sum of squares and the number of parameters.
@@ -770,9 +848,14 @@ The square root of the sum of squared elements of a vector.
 </div>
 
 
+
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-probmods2" class="csl-entry" role="listitem">
+Goodman, Noah D, Joshua B. Tenenbaum, and The ProbMods Contributors. 2016. <span>“<span class="nocase">Probabilistic Models of Cognition</span>.”</span> <a href="http://probmods.org/v2" class="uri">http://probmods.org/v2</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC SA BY-NC-ND</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{bochman2024,
   author = {Bochman, Oren},
   title = {Chapter 6: {Linear} {Model} {Selection} and {Regularization}},
   date = {2024-07-20},

@@ -6,6 +6,28 @@ keywords: [survival analysis, censored data, Kaplan-Meier, Cox Proportional Haza
 date: 2024-09-01
 ---
 
+
+The chapter is divided into the following sections:
+
+- [Survival and Censoring Times](#sec-11-1)    
+    - [A Closer Look at Censoring](#sec-11-2)
+    - [The Kaplan–Meier Survival Curve](#sec-11-3)
+    - [The Log-Rank Test](#sec-11-4)
+    - [Regression Models With a Survival Response](#sec-11-5)    
+        - 11.5.1 The Hazard Function 
+        - 11.5.2 Proportional Hazards
+        - 11.5.3 Example: Brain Cancer Data 
+        - 11.5.4 Example: Publication Data 
+    - [Shrinkage for the Cox Model](#sec-11-6)
+    - [Additional Topics](#sec-11-7)
+        - 11.7.1 Area Under the Curve for Survival Analysis
+        - 11.7.2 Choice of Time Scale 
+        - 11.7.3 Time-Dependent Covariates 
+        - 11.7.4 Checking the Proportional Hazards Assumption 
+        - 11.7.5 Survival Trees 
+    - [Lab: Survival Analysis](#sec-11-8)
+- [Exercises](#sec-11-9)
+
 ::: {.callout-tip}  
 
 ## TL;DR - Survival Analysis  {.unnumbered}
@@ -95,20 +117,6 @@ Time-Dependent Covariates
 
 Survival Trees
 : A modification of classification and regression trees for use in survival analysis. They use a split criterion that maximizes the difference between survival curves in resulting nodes.
-
-
-The chapter is divided into the following sections:
-
-- [Survival and Censoring Times](#sec-11-1)
-- [A Closer Look at Censoring](#sec-11-2)
-- [The Kaplan–Meier Survival Curve](#sec-11-3)
-- [The Log-Rank Test](#sec-11-4)
-- [Regression Models With a Survival Response](#sec-11-5)
-- [Shrinkage for the Cox Model](#sec-11-6)
-- [Additional Topics](#sec-11-7)
-- [Lab: Survival Analysis](#sec-11-8)
-- [Exercises](#sec-11-9)
-- [References](#sec-11-10)
 
 ## Introduction
 
